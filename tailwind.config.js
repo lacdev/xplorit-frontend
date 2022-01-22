@@ -15,9 +15,10 @@ module.exports = {
       },
       minHeight:{
         cardHeight:'200px',
+        heroHeight:'50.875rem',
       },
       width:{
-        cardWidth:'29rem',
+        cardWidth:'21rem',
       },
     },
   },

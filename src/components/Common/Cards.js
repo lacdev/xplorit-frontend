@@ -35,6 +35,7 @@ function cards() {
             <label className={classes.label}>Aventura</label>
             <label className={classes.label}>Familiar</label>
             <label className={classes.label}>Entretenimiento</label>
+            <label className={classes.label}>Aire Libre</label>
           </div>
           <div className={classes.btncontainer} >
             <Btncards className="drop-shadow-lg" />
