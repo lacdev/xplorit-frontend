@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Titles({menu}) {
   return <div>
-      <h3 className='py-4 px-4 text-[30px] font-Poppins'>
+      <h3 className='my-4 mx-10'>
         <a href='#' >{menu}</a>
       </h3>
   </div>;
