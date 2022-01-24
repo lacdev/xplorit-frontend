@@ -38,7 +38,7 @@ function cards() {
             <label className={classes.label}>Aire Libre</label>
           </div>
           <div className={classes.btncontainer} >
-            <Btncards className="drop-shadow-lg" />
+            <Btncards className="drop-shadow-lg"/>
           </div>
         </div>
       </div>
