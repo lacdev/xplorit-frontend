@@ -6,7 +6,7 @@ import FirstBannerImage from 'components/FirstBannerImage';
 import SecondBannerImage from 'components/SecondBannerImage';
 
 export default function Home() {
-  return <div className='justify-center'> 
+  return <div className='justify-center align-middle'> 
         <HeroBanner className="App-header"/>
         <BigTitle/>
         <Cards/>
