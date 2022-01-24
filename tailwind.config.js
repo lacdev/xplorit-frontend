@@ -11,7 +11,8 @@ module.exports = {
        secondary:"#4377FF",
        tertiary:"#B9FFF2",
        quartiary:"#3EA7E2",
-       tagscolor:"#C0E2F6"
+       tagscolor:"#C0E2F6",
+       bannertitles:"#575A89",
       },
       minHeight:{
         cardHeight:'200px',
@@ -19,6 +20,9 @@ module.exports = {
       },
       width:{
         cardWidth:'21rem',
+      },
+      fontSize:{
+       'h1':'4rem',
       },
     },
   },
