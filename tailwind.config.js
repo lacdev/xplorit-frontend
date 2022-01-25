@@ -24,6 +24,9 @@ module.exports = {
       fontSize:{
        'h1':'4rem',
       },
+      fontFamily: {
+        primary: ['Poppins'],
+      }
     },
   },
   plugins: [],

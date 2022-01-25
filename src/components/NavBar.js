@@ -4,7 +4,7 @@ import NavBarLogo from './NavBarComponents/NavBarLogo';
 import Titles from './NavBarComponents/Titles';
 
 export default function NavBar() {
-  return <div className='inline-flex w-full justify-around mx-8 fixed bg-none mt-4'>
+  return <div className='inline-flex w-full justify-around mx-8 fixed bg-none mt-4 z-10'>
       <NavBarLogo/>
       <Titles menu="Home"/>
       <Titles menu="Rutas"/>
