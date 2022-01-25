@@ -19,11 +19,11 @@ module.exports = {
         heroHeight:'50.875rem',
       },
       width:{
-        cardWidth:'21rem',
-        testimonialWidth:'21.25rem',
+        cardWidth:'26rem',
+        testimonialWidth:'19rem',
       },
       height:{
-        testimonialHeight:'25.813rem',
+        testimonialHeight:'24rem',
       },
       fontSize:{
        'h1':'4rem',
