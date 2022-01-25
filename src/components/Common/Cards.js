@@ -2,6 +2,7 @@ import React from 'react'
 import  StarHalf from 'assets/icons/startHalf'
 import Btncards from './Btncards'
 
+
 const classes={
     container:'font-Poppins bg-white w-cardWidth h-auto rounded-3xl m-4 drop-shadow-md flex flex-col',
     imgcont:'h-auto min-w-full  min-h-cardHeight',
@@ -31,14 +32,17 @@ function cards() {
             <p className={classes.qualification}>4.5</p>
           </div>
 
-          <div className={classes.wraplabel} >
-            <label className={classes.label}>Aventura</label>
+
+         <div className={classes.wraplabel} >
+           <label className={classes.label}>Aventura</label>
             <label className={classes.label}>Familiar</label>
             <label className={classes.label}>Entretenimiento</label>
             <label className={classes.label}>Aire Libre</label>
-          </div>
+
+            </div>
+           
           <div className={classes.btncontainer} >
-            <Btncards className="drop-shadow-lg"/>
+            <Btncards className="w-32 h-10" name="Visitar"/>
           </div>
         </div>
       </div>

@@ -20,9 +20,16 @@ module.exports = {
       },
       width:{
         cardWidth:'21rem',
+        testimonialWidth:'21.25rem',
+      },
+      height:{
+        testimonialHeight:'25.813rem',
       },
       fontSize:{
        'h1':'4rem',
+      },
+      dropShadow:{
+        testimonialShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)',
       },
     },
   },
