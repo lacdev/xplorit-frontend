@@ -9,7 +9,7 @@ import Input from 'components/Common/Input'
 export default function Home() {
   return <div className='justify-center align-middle'> 
         <HeroBanner className="App-header"/>
-        <BigTitle/>
+        <BigTitle bigTitleText="Lugares más visitados"/>
         <Input/>
         <Cards/>
         <FirstBannerImage/>
