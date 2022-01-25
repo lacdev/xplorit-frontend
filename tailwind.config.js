@@ -17,13 +17,18 @@ module.exports = {
       minHeight:{
         cardHeight:'200px',
         heroHeight:'50.875rem',
+        
       },
       width:{
         cardWidth:'26rem',
         testimonialWidth:'19rem',
       },
+      minWidth:{
+        footerBannerW:'85.063rem',
+      },
       height:{
         testimonialHeight:'24rem',
+        footerBannerH:'20.5rem',
       },
       fontSize:{
        'h1':'4rem',

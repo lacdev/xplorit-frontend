@@ -2,10 +2,11 @@ import React from 'react';
 import HeroBanner from "components/Common/HeroBanner"
 import Cards from "components/Common/Cards"
 import BigTitle from 'components/Common/BigTitle';
-import FirstBannerImage from 'components/FirstBannerImage';
-import SecondBannerImage from 'components/SecondBannerImage';
+import FirstBannerImage from 'components/LandingComponents/FirstBannerImage';
+import SecondBannerImage from 'components/LandingComponents/SecondBannerImage';
 import Testimonials from 'components/LandingComponents/Testimonials';
 import Input from 'components/Common/Input'
+import FooterBanner from 'components/LandingComponents/FooterBanner';
 
 export default function Home() {
   return <div className='justify-center align-middle'> 
@@ -19,5 +20,6 @@ export default function Home() {
         <SecondBannerImage/>
         <BigTitle/>
         <Testimonials/>
+        <FooterBanner/>
   </div>;
 }
