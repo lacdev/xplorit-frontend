@@ -25,10 +25,12 @@ module.exports = {
       },
       minWidth:{
         footerBannerW:'85.063rem',
+        commentsW:'83.313rem',
       },
       height:{
         testimonialHeight:'24rem',
         footerBannerH:'20.5rem',
+        commentsH:'17.25rem',
       },
       fontSize:{
        'h1':'4rem',

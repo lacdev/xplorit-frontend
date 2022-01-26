@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import NotFoundPage from 'pages/NotFoundPage'
 import Home from 'pages/Home'
 import Footer from 'components/Footer'
+import RoutePage from 'pages/RoutePage'
   
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/" element={<Home />} />
+        <Route path="/RoutePage" element={<RoutePage/>}/>
       </Routes>
       <Footer />
 
