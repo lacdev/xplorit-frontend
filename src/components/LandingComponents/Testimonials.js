@@ -1,11 +1,11 @@
 import React from 'react';
 import Avatar from 'components/Common/Avatar';
-import StarComplete from 'assets/icons/starComplete'
+import StarComplete from 'assets/icons/StarComplete'
 
 
 const classes={
-    container:'flex flex-col bg-white font-Poppins w-testimonialWidth h-testimonialHeight m-4 drop-shadow-testimonialShadow rounded rounded-2xl ',
-    avatarcon:'flex place-content-center justify-center',
+    container:'flex flex-col bg-white font-Poppins w-testimonialWidth h-testimonialHeight m-4 drop-shadow-testimonialShadow rounded rounded-2xl',
+    avatarcon:'flex place-content-center justify-center rounded-full',
     name:' text-xl fond-bold text-black justify-center text-center',
     text:'text-base text-black break-all px-10 text-left mt-5',
     iconcon:'flex flex-row justify-center m-1 mt-10'
@@ -13,7 +13,10 @@ const classes={
 function Testimonials() {
   return (
   <div className={classes.container}>
-      <Avatar width="6rem" height="6rem"></Avatar>
+      <div className={classes.avatarcon} >
+      <Avatar width='58' height='58'/>
+      </div>
+     
       <div>
           <h1 className={classes.name} >Juanita Rosales</h1>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import  StarHalf from 'assets/icons/startHalf'
+import  StarHalf from 'assets/icons/StartHalf'
 import Btncards from './Btncards'
 
 
@@ -28,7 +28,7 @@ function cards() {
         <div className={classes.contcontainer} >
           <h4 className={classes.title}>Nombre de Lugar</h4>
           <div className={classes.qualicontainer} >
-            <StarHalf width="28" height="28" />
+            <StarHalf width='28' height='28' />
             <p className={classes.qualification}>4.5</p>
           </div>
 
