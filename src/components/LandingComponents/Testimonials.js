@@ -13,7 +13,7 @@ const classes={
 function Testimonials() {
   return (
   <div className={classes.container}>
-      <Avatar></Avatar>
+      <Avatar width="6rem" height="6rem"></Avatar>
       <div>
           <h1 className={classes.name} >Juanita Rosales</h1>
       </div>
