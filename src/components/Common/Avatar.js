@@ -3,7 +3,7 @@ import ImaAvatar from 'assets/img/avatar1.jpg'
 
 const classes={
     container:'flex bg-transparent p-6 justify-center rounded-full',
-    img:'rounded rounded-full place-content-center'
+    img:'rounded-full place-content-center'
 }
 function Avatar({width, height}) {
   return (

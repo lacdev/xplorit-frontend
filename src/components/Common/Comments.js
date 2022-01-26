@@ -3,8 +3,8 @@ import Avatar from 'components/Common/Avatar';
 import StartHalf from 'assets/icons/StartHalf';
 const classes={
   container:' font-primary min-w-commentsW h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow mt-20',
-  maincon:'flex flex-col m-2',
-  avatarcon:'flex',
+  maincon:'flex flex-row m-2',
+  avatarcon:'flex rounded-full',
   detailscon:'flex flex-col mt-4',
   titleh3:'text-2xl fond-normal',
   qualificationcon:'flex',
