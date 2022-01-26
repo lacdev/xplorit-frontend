@@ -1,7 +1,7 @@
 import React from 'react'
 import  StarHalf from 'assets/icons/StartHalf'
 import Btncards from './Btncards'
-
+import { Labels } from './Labels'
 
 const classes={
     container:'font-Poppins bg-white w-cardWidth h-auto rounded-3xl m-4 drop-shadow-md flex flex-col',
@@ -12,7 +12,7 @@ const classes={
     qualicontainer:'flex items-center py-2',
     qualification:'text-md px-2 mt-1',
     wraplabel:'flex flex-wrap',
-    label:'bg-tagscolor text-sm px-2 p-1 mr-2 my-2 rounded-full',
+   // label:'bg-tagscolor text-sm px-2 p-1 mr-2 my-2 rounded-full',
     btncontainer:'py-4',
 }
 function cards() {
@@ -34,10 +34,10 @@ function cards() {
 
 
          <div className={classes.wraplabel} >
-           <label className={classes.label}>Aventura</label>
-            <label className={classes.label}>Familiar</label>
-            <label className={classes.label}>Entretenimiento</label>
-            <label className={classes.label}>Aire Libre</label>
+           <Labels LabelText='Aventura'></Labels>
+            <Labels LabelText='Familiar'></Labels>
+            <Labels LabelText='Entretenimiento'></Labels>
+            <Labels LabelText='Aire Libre'></Labels>
 
             </div>
            
