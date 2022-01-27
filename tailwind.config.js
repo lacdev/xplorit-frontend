@@ -17,12 +17,26 @@ module.exports = {
       minHeight:{
         cardHeight:'200px',
         heroHeight:'50.875rem',
+        
       },
       width:{
-        cardWidth:'21rem',
+        cardWidth:'26rem',
+        testimonialWidth:'19rem',
+      },
+      minWidth:{
+        footerBannerW:'85.063rem',
+        commentsW:'83.313rem',
+      },
+      height:{
+        testimonialHeight:'24rem',
+        footerBannerH:'20.5rem',
+        commentsH:'17.25rem',
       },
       fontSize:{
        'h1':'4rem',
+      },
+      dropShadow:{
+        testimonialShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)',
       },
       fontFamily: {
         primary: ['Poppins'],

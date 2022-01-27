@@ -1,5 +1,9 @@
-import React from 'react';
-
+import Comments from "components/Common/Comments";
 export default function RoutePage() {
-  return <div></div>;
+  return (
+  <div >
+   <Comments/>
+  </div>
+    
+  );
 }

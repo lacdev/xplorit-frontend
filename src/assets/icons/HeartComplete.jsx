@@ -1,11 +1,11 @@
 import React from 'react';
 
-function heartComplet() {
+function heartComplet({width, height}) {
   return (
     <div>
       <svg
-        width="33"
-        height="30"
+        width={width}
+        height={height}
         viewBox="0 0 33 30"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

@@ -1,6 +1,7 @@
 import React from 'react'
-import  StarHalf from 'assets/icons/startHalf'
+import  StarHalf from 'assets/icons/StartHalf'
 import Btncards from './Btncards'
+import { Labels } from './Labels'
 
 const classes={
     container:'font-Poppins bg-white w-cardWidth h-auto rounded-3xl m-4 drop-shadow-md flex flex-col',
@@ -11,7 +12,7 @@ const classes={
     qualicontainer:'flex items-center py-2',
     qualification:'text-md px-2 mt-1',
     wraplabel:'flex flex-wrap',
-    label:'bg-tagscolor text-sm px-2 p-1 mr-2 my-2 rounded-full',
+   // label:'bg-tagscolor text-sm px-2 p-1 mr-2 my-2 rounded-full',
     btncontainer:'py-4',
 }
 function cards() {
@@ -27,18 +28,21 @@ function cards() {
         <div className={classes.contcontainer} >
           <h4 className={classes.title}>Nombre de Lugar</h4>
           <div className={classes.qualicontainer} >
-            <StarHalf width="28" height="28" />
+            <StarHalf width='28' height='28' />
             <p className={classes.qualification}>4.5</p>
           </div>
 
-          <div className={classes.wraplabel} >
-            <label className={classes.label}>Aventura</label>
-            <label className={classes.label}>Familiar</label>
-            <label className={classes.label}>Entretenimiento</label>
-            <label className={classes.label}>Aire Libre</label>
-          </div>
+
+         <div className={classes.wraplabel} >
+           <Labels LabelText='Aventura'></Labels>
+            <Labels LabelText='Familiar'></Labels>
+            <Labels LabelText='Entretenimiento'></Labels>
+            <Labels LabelText='Aire Libre'></Labels>
+
+            </div>
+           
           <div className={classes.btncontainer} >
-            <Btncards className="drop-shadow-lg"/>
+            <Btncards className="w-32 h-10" name="Visitar"/>
           </div>
         </div>
       </div>
