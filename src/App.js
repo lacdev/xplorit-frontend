@@ -5,7 +5,7 @@ import NotFoundPage from 'pages/NotFoundPage'
 import Home from 'pages/Home'
 import Footer from 'components/Footer'
 import RoutePage from 'pages/RoutePage'
-  
+
 function App() {
   return (
     <div className="App">

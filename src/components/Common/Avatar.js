@@ -2,14 +2,14 @@ import React from 'react';
 import ImaAvatar from 'assets/img/avatar1.jpg'
 
 const classes={
-    container:'flex bg-transparent p-6 justify-center rounded-full',
-    img:'rounded-full place-content-center'
+    container:'inline-block h-20 w-20 overflow-hidden rounded-full',
+    img:'rounded-full'
 }
 function Avatar({width, height}) {
   return (
-  <div className={classes.container} >
-    <img src={ImaAvatar} className={classes.img} alt="*" width={width} height={height}></img>
-  </div>
+  <span className={classes.container} >
+    <img src={ImaAvatar} className={classes.img} alt="*" ></img>
+  </span>
    
    );
 }
