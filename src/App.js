@@ -5,16 +5,21 @@ import NotFoundPage from 'pages/NotFoundPage'
 import Home from 'pages/Home'
 import Footer from 'components/Footer'
 import LogIn from "pages/LogIn"
+import RoutePage from 'pages/RoutePage'
   
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-          <Routes>
-            <Route path="*" element={<NotFoundPage />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LogIn/>}/>
-          </Routes>
+      <LogIn/>
+      <NavBar/>
+      <Routes>
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/Routes" element={<RoutePage/>}/>
+      </Routes>
+      <Footer />
+
     </BrowserRouter>
     </div>
   )

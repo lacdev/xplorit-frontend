@@ -1,9 +1,12 @@
 import React from 'react'
 
-function Btncards({className, buttonText}) {
+const classes={
+    btn:'bg-secondary font-Poppins text-white rounded-full hover:bg-blue-400 px-10 drop-shadow-lg',
+}
+function Btncards({className,name, buttonText}) {
     return (
-        <button className={`bg-secondary font-Poppins text-white rounded-full hover:bg-blue-400 px-10 ${className}`}>
-            {buttonText}
+        <button className={`${classes.btn} ${className}`}>
+         {name}   {buttonText}
         </button>
     )
 }

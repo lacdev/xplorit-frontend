@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Footer() {
   return <div>
-      <footer className='bg-quartiary text-white pt-4 mt-2'>
+      <footer className='bg-quartiary text-white pt-4 mt-20'>
           <div className='inline-flex w-full px-10 justify-around '>
             <div>
                 <span>Home</span>
