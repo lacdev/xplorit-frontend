@@ -14,5 +14,7 @@ export default function NavBar() {
       <Link to="/LogIn" >
         <Btncards buttonText="Iniciar sesión"/>
       </Link>
+
+      <Outlet/>
   </div>;
 }

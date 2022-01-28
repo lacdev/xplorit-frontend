@@ -1,5 +1,4 @@
 import React from 'react';
-import LogInPic from 'assets/img/LogInPicture.png'
 import Inputs from 'components/Common/Inputs';
 import BigTitle from 'components/Common/BigTitle';
 import Btncards from 'components/Common/Btncards';
