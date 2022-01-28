@@ -26,6 +26,9 @@ module.exports = {
       },
       fontFamily: {
         primary: ['Poppins'],
+      },
+      backgroundImage: {
+        'img-01': "url('assets/img/LogInPicture.png')",
       }
     },
   },
