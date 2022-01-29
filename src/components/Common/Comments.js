@@ -4,7 +4,7 @@ import StartHalf from 'assets/icons/StartHalf';
 const classes={
   container:' font-primary min-w-commentsW h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow mt-20',
   maincon:'flex flex-row m-2',
-  avatarcon:'flex rounded-full',
+  avatarcon:'flex rounded-full p-2.5',
   detailscon:'flex flex-col mt-4',
   titleh3:'text-2xl fond-normal',
   qualificationcon:'flex',
@@ -16,9 +16,7 @@ function Comments() {
   return (
     <div className={classes.container}>
       <div className={classes.maincon}>
-        <div className={classes.avatarcon}>
-          <Avatar width="48" height="48" />
-        </div>
+         <Avatar width="38" height="38" />
         <div className={classes.detailscon}>
           <h3 className={classes.titleh3}>Lupita Florencia</h3>
           <p>Fecha de Publicación</p>
