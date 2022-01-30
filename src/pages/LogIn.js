@@ -2,6 +2,7 @@ import React from 'react';
 import Inputs from 'components/Common/Inputs';
 import BigTitle from 'components/Common/BigTitle';
 import Btncards from 'components/Common/Btncards';
+import { Link } from 'react-router-dom';
 
 export default function LogIn() {
   return <div className='inline-flex w-full h-screen items-center'>
@@ -15,14 +16,16 @@ export default function LogIn() {
         <BigTitle className='p-6' bigTitleText='Xplorit'/>
         <BigTitle className='' bigTitleText='Iniciar Sesión'/>
         <p className='text-center px-10 mb-4'>Únete a nuestra comunidad de viajeros como tú que buscan planear, descubrir y compartir las mejores experiencias</p>
-        <div className='flex-col w-full content-center'>
+        <div className='flex-col w-full content-center mt-10 mb-24'>
           <h4>Nombre de usuario</h4>
           <Inputs className='w-full h-auto' placeholderText="Escribe tu nombre de usuario"/>
           <h4>Contraseña</h4>
           <Inputs className='w-full h-auto' placeholderText="Escribe tu nombre contraseña"/>
         </div>
-        <Btncards className='flex py-2' buttonText='Iniciar sesión'/><br></br>
-        <span className='text-sm underline'>No tienes una cuenta? Regístrate</span>
+        <Btncards className='flex py-2 m-auto' buttonText='Iniciar sesión'/><br></br>
+        <Link to="/signup">
+          <p className='text-sm underline text-center'>No tienes una cuenta? Regístrate</p>
+        </Link>
       </div>
     </div>
   </div>;

@@ -7,16 +7,19 @@ import Footer from 'components/Footer'
 import LogIn from "pages/LogIn"
 import SignUp from "pages/SignUp"
 import RoutePage from 'pages/RoutePage'
+import Dashboard from "pages/Dashboard"
   
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
           <Routes>
-            <Route path="*" element={<NotFoundPage />} />
-            <Route path="/" element={<Home />} />
             <Route path="/login" element={<LogIn/>}/>
             <Route path="/signup" element={<SignUp/>}/>
+
+            <Route path="*" element={<NotFoundPage />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Dashboard/>}/>
           </Routes>
     </BrowserRouter>
     </div>

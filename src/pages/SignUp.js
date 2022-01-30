@@ -2,6 +2,7 @@ import React from 'react';
 import Inputs from 'components/Common/Inputs';
 import BigTitle from 'components/Common/BigTitle';
 import Btncards from 'components/Common/Btncards';
+import { Link } from 'react-router-dom';
 
 export default function SignUp() {
   return <div className='inline-flex w-full h-screen items-center'>
@@ -25,8 +26,10 @@ export default function SignUp() {
           <h4>Confirma tu contraseña</h4>
           <Inputs className='w-full h-auto' placeholderText="Escribe de nuevo tu contraseña"/>
         </div>
-        <Btncards className='flex py-2' buttonText='Regístrate'/><br></br>
-        <span className='text-sm underline'>Ya tienes cuenta? Inicia sesión aquí</span>
+        <Btncards className='flex py-2 m-auto' buttonText='Regístrate'/><br></br>
+        <Link to='/login'>
+          <p className='text-sm underline text-center'>Ya tienes cuenta? Inicia sesión aquí</p>
+        </Link>
       </div>
     </div>
   </div>;
