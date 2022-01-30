@@ -5,6 +5,7 @@ import BigTitle from 'components/Common/BigTitle';
 import FirstBannerImage from 'components/LandingComponents/FirstBannerImage';
 import SecondBannerImage from 'components/LandingComponents/SecondBannerImage';
 import Testimonials from 'components/LandingComponents/Testimonials';
+
 import FooterBanner from 'components/LandingComponents/FooterBanner';
 
 export default function Home() {
