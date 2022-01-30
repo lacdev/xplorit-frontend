@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 const Labels =({LabelText=' '}) =>{
 const classes={
     wraplabels:'flex flex-wrap',
-    labels:'bg-tagscolor text-sm px-2 p-1 mr-2 my-2 rounded-full'
+    labels:'bg-tagscolor text-sm px-2 p-1 mr-4 my-2 rounded-full'
 } 
  
     return (

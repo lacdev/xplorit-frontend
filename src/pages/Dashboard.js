@@ -1,5 +1,8 @@
 import React from 'react';
+import DashboardCard from 'components/DashboardCard';
 
 export default function Dashboard() {
-  return <div></div>;
+  return <div>
+    <DashboardCard/>
+  </div>;
 }
