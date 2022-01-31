@@ -19,7 +19,9 @@ function App() {
 
             <Route path="*" element={<NotFoundPage />} />
             <Route path="/" element={<Home />} />
+            <Route path="/routes" element={<RoutePage/>} />
             <Route path="/profile" element={<Dashboard/>}/>
+          
           </Routes>
     </BrowserRouter>
     </div>

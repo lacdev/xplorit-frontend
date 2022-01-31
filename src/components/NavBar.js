@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import Btncards from './Common/Btncards';
 import NavBarLogo from './NavBarComponents/NavBarLogo';
 import Titles from './NavBarComponents/Titles';
