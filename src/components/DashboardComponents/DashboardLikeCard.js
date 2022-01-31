@@ -1,6 +1,6 @@
 import React from 'react';
 import playa from 'assets/img/playa.jpg'
-import { Labels } from './Common/Labels';
+import { Labels } from '../Common/Labels';
 import Edit from 'assets/icons/Edit';
 import Trash from 'assets/icons/Trash';
 import HeartComplet from 'assets/icons/HeartComplete';

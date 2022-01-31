@@ -1,10 +1,10 @@
+import DashboardCard from 'components/DashboardComponents/DashboardCard';
+import DashboardLikeCard from 'components/DashboardComponents/DashboardLikeCard';
 import React from 'react';
-import DashboardCard from 'components/DashboardCard';
-import DashboardLikeCard from 'components/DashboardLikeCard';
 
 export default function Dashboard() {
   return <div>
-    <DashboardCard/>
     <DashboardLikeCard/>
+    <DashboardCard/>
   </div>;
 }

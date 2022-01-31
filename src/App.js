@@ -1,12 +1,8 @@
-
-import NavBar from "components/NavBar"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import NotFoundPage from 'pages/NotFoundPage'
 import Home from 'pages/Home'
-import Footer from 'components/Footer'
 import LogIn from "pages/LogIn"
 import SignUp from "pages/SignUp"
-import RoutePage from 'pages/RoutePage'
 import Dashboard from "pages/Dashboard"
 import PageLayout from "PageLayout"
   
