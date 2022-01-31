@@ -12,13 +12,25 @@ export default function Home() {
   return <div className='justify-center align-middle'> 
         <HeroBanner className="App-header"/>
         <BigTitle bigTitleText="Lugares más visitados"/>
-        <Cards/>
+        <div className='flex w-2/3 justify-around m-auto'>
+          <Cards/>
+          <Cards/>
+          <Cards/>
+        </div >
         <FirstBannerImage/>
         <BigTitle/>
-        <Cards/>
+        <div className='flex w-2/3 justify-around m-auto'>
+          <Cards/>
+          <Cards/>
+          <Cards/>
+        </div>
         <SecondBannerImage/>
-        <BigTitle/>
-        <Testimonials/>
+        <BigTitle bigTitleText="Lo que dicen de nosotros"/>
+        <div className='flex w-2/3 justify-around m-auto'>
+          <Testimonials/>
+          <Testimonials/>
+          <Testimonials/>
+        </div>
         <FooterBanner/>
   </div>;
 }
