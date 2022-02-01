@@ -43,7 +43,11 @@ module.exports = {
       },
       backgroundImage: {
         'img-01': "url('assets/img/LogInPicture.png')",
-      }
+      },
+      inset:{
+        '30rem':'30rem',
+        '62.5rem':'62.5rem',
+      },
     },
   },
   plugins: [],
