@@ -8,7 +8,8 @@ import { SliderElements } from "components/Common/SliderElements";
 import Titles from "components/Titles";
 
 const classes={
-  tilteicon:'flex flex-col p-2',
+  tilteicon:'flex flex-row p-2',
+  iconscon:'flex flex-row m-2'
 }
 function RoutePage() {
   return (
@@ -16,7 +17,7 @@ function RoutePage() {
     <ImageSlider slides={SliderElements}/>
     <div className={classes.tilteicon} >
       <Titles tag="h3" titleText="Nombre de Ruta"></Titles>
-      <div>
+      <div className={classes.iconscon} >
        <HeartFillOut width='28' height='28' className=''/>
        <StarComplete width='28' height='28' className=''/>
        <ThreePoints width='58' height='28' className=''/>

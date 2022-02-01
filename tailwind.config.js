@@ -1,4 +1,4 @@
-const colors = require('tailwindcss/colors')
+require('tailwindcss/colors')
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
@@ -48,7 +48,13 @@ module.exports = {
         '30rem':'30rem',
         '62.5rem':'62.5rem',
       },
+      transitionProperty:{
+       transitionOpSlider:'opacity ease-in-out 0.4s',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio')
+   
+  ],
 }

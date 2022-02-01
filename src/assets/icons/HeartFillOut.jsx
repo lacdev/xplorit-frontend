@@ -2,7 +2,7 @@ import React from 'react';
 
 function HeartFillOut({width,height,className}) {
   return (
-    <div>
+    
       <svg
         width={width}
         height={height}
@@ -19,7 +19,7 @@ function HeartFillOut({width,height,className}) {
           strokeLinejoin="round"
         />
       </svg>
-    </div>
+
   );
 }
 
