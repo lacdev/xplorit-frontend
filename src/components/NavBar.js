@@ -12,9 +12,7 @@ export default function NavBar() {
       <Titles menu="Lugares"/>
       <Titles menu="Acerca de"/>
       <Link to="/LogIn" >
-        <Btncards buttonText="Iniciar sesión"/>
+        <Btncards className='mt-4 py-2'buttonText="Iniciar sesión"/>
       </Link>
-
-      <Outlet/>
   </div>;
 }

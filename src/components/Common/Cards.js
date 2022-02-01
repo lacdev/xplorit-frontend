@@ -4,9 +4,9 @@ import Btncards from './Btncards'
 import { Labels } from './Labels'
 
 const classes={
-    container:'font-Poppins bg-white w-cardWidth h-auto rounded-3xl m-4 drop-shadow-md flex flex-col',
-    imgcont:'h-auto min-w-full  min-h-cardHeight',
-    img:'rounded-t-lg  min-w-full min-h-cardHeight object-cover',
+    container:'font-Poppins bg-white w-full rounded-3xl m-4 drop-shadow-md flex flex-col',
+    imgcont:'h-auto w-full',
+    img:'rounded-t-lg  w-full object-cover',
     contcontainer:'p-4',
     title:'text-lg font-bold py-2',
     qualicontainer:'flex items-center py-2',

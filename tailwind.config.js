@@ -43,6 +43,8 @@ module.exports = {
       },
       backgroundImage: {
         'img-01': "url('assets/img/LogInPicture.png')",
+        'waterfall': "url('assets/img/waterfall.jpg')",
+        'footerBanner': "url('assets/img/img3.jpg')",
       },
       inset:{
         '30rem':'30rem',
