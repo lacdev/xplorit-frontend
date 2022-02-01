@@ -1,10 +1,11 @@
 import React from 'react';
 
-function ArrowLeft({width, height}) {
+function ArrowLeft({ width, height, className }) {
   return (
     <svg
-      width={width}
-      height={height}
+      width="56px"
+      height="46px"
+      className={className}
       viewBox="0 0 107 107"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

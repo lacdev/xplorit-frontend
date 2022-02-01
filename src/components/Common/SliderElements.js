@@ -19,5 +19,5 @@ export const SliderElements = [
         image: Slide4   
     },
 
-]
+];
    

@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from 'components/Common/Avatar';
-import StarComplete from 'assets/icons/starComplete'
+import StarComplete from 'assets/icons/StarComplete'
 
 
 const classes={
