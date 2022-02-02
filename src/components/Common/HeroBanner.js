@@ -11,7 +11,7 @@ import Btncards from './Btncards';
 // }
 function HeroBanner() {
   return (
-    <div className='w-full h-screen bg-waterfall bg-no-repeat bg-cover'>
+    <div className='w-full h-screen max-h-[700px] bg-waterfall bg-no-repeat bg-cover'>
     <section className='flex h-full justify-center items-center bg-black/50'>
       <div className='w-2/3 m-auto content-center'>
         <p className='font-primary font-bold  text-white text-4xl text-center m-10'>Explora lugares cercanos a ti</p>

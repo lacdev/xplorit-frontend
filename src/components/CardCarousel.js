@@ -1,8 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import Slider from "react-slick";
 import Cards from "./Common/Cards";
 
-export default function CardCarousel() {
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "../customCss.css";
+
+export default function CardCarousel({children}) {
     const settings = {
         dots: true,
         infinite: false,
@@ -39,18 +43,24 @@ export default function CardCarousel() {
       };
     return <div className="w-full">
         <Slider {...settings}>
-            <div>
-                <Cards/>
-            </div>
-            <div>
-                <Cards/>
-            </div>
-            <div>
-                <Cards/>
-            </div>
-            <div>
-                <Cards/>
-            </div>
+          <Cards/>
+          <Cards/>  
+          <Cards/>
+          <Cards/>
+          <Cards/>
+          <Cards/>       
         </Slider>
   </div>
 }
+{/* <div>
+    <Cards/>
+</div>
+<div>
+    <Cards/>
+</div>
+<div>
+    <Cards/>
+</div>
+<div>
+    <Cards/>
+</div> */}
