@@ -50,8 +50,14 @@ module.exports = {
         '30rem':'30rem',
         '62.5rem':'62.5rem',
       },
-      transitionProperty:{
-       transitionOpSlider:'opacity ease-in-out 0.4s',
+      transitionDelay:{
+       '05ms':'0.5s',
+      },
+      keyframes:{
+       slides:{
+         '0':{transform:'opacity 0'},
+         '100':{transform:'opacity 100'},
+       }
       },
     },
   },

@@ -6,18 +6,10 @@ import Slide4 from 'assets/img/Slide4.jpg';
 
 
 export const SliderElements = [
-    {
-        image: Slide1
-    },
-    {
-       image: Slide2
-    },
-    {
-        image: Slide3
-    },
-    {
-        image: Slide4   
-    },
+    Slide1,
+    Slide2,
+    Slide3,
+    Slide4,
 
 ];
    
