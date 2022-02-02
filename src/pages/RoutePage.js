@@ -35,9 +35,7 @@ const classes={
 }
 function RoutePage() {
   return (
-   
-    (
-      <div className={classes.parentcon}>
+  <div className={classes.parentcon}>
         <ImageSlider slides={SliderElements} />
         <div className={classes.tilteicon}>
           <Titles tag="h3" titleText="Nombre de Ruta"></Titles>
@@ -139,8 +137,8 @@ function RoutePage() {
         <Comments />
         </div>
         
-      </div>
-    )
+  </div>
+    
   );
 }
 
