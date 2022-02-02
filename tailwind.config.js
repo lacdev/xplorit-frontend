@@ -31,7 +31,9 @@ module.exports = {
         testimonialHeight:'24rem',
         footerBannerH:'20.5rem',
         commentsH:'17.25rem',
+        sliderH:'100vh',
       },
+    
       fontSize:{
        'h1':'4rem',
       },
@@ -62,7 +64,6 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/aspect-ratio')
-   
+    
   ],
 }
