@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import NotFoundPage from 'pages/NotFoundPage'
 import Home from 'pages/Home'
+import RoutePage from 'pages/RoutePage'
+import PlacePage from 'pages/PlacePage'
 import LogIn from "pages/LogIn"
 import SignUp from "pages/SignUp"
 import Dashboard from "pages/Dashboard"
@@ -24,10 +26,10 @@ function App() {
               <Route path="routes" element={<DashboardCard/>} />
               <Route path="likes" element={<DashboardLikeCard/>} />
             </Route>
+            <Route path ="/route" element={<RoutePage/>}/>
+            <Route path="/place" element={<PlacePage/>}/>
           </Route>
-        </Routes>
-
-         
+        </Routes>         
     </BrowserRouter>
     </div>
   )

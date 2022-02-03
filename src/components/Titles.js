@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 
 const classes={
-    h1:'text-h1 fond-bold text-white',
-    h2:'text-5xl fond-semibold',
-    h3:'text-5xl fond-normal',
-    h4:'text-4xl fond-normal',
-    h5:'text-3xl fond-normal',
+    h1:'font-primary text-h1 fond-bold text-white',
+    h2:'font-primary text-5xl fond-semibold',
+    h3:'font-primary text-5xl fond-normal',
+    h4:'font-primary text-4xl fond-normal',
+    h5:'font-primary text-3xl fond-normal',
     }
 function Titles({titleText="", tag=""}) {
     switch(tag) {
