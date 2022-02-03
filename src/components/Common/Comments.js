@@ -1,15 +1,16 @@
 import React from 'react';
 import Avatar from 'components/Common/Avatar';
 import StartHalf from 'assets/icons/StarHalf';
+import Titles from "components/Titles";
 const classes={
   container:' font-primary min-w-commentsW h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow mt-20',
-  maincon:'flex flex-row m-2',
+  maincon:'flex flex-row m-2 pt-4',
   avatarcon:'flex rounded-full p-2.5',
   detailscon:'flex flex-col mt-4',
   titleh3:'text-2xl fond-normal',
   qualificationcon:'flex',
   number:'mx-2',
-  text:'p-5 font-base',
+  text:'p-5 font-base break-words',
 }
 
 function Comments() {
@@ -18,7 +19,7 @@ function Comments() {
       <div className={classes.maincon}>
          <Avatar width="38" height="38" />
         <div className={classes.detailscon}>
-          <h3 className={classes.titleh3}>Lupita Florencia</h3>
+          <Titles tag="h5" titleText='Lupita Rosales'></Titles>
           <p>Fecha de Publicación</p>
           <div className={classes.qualificationcon}>
             <StartHalf width="1.375rem" height="1.375rem" />

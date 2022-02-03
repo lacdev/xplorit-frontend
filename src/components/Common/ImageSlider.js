@@ -4,11 +4,11 @@ import ArrowLeft from 'assets/icons/ArrowLeft';
 import ArrowRight from 'assets/icons/ArrowRight';
 
 const classes ={
-    secction:'flex relative w-full h-screen justify-center items-center',
-    iconleft:'absolute inset-x-0 bottom-0 left-[30rem] justify-end inline-flex items-start cursor-pointer h-9 w-12',
-    iconright:'absolute bottom-0 left-[62.5rem] justify-end inline-flex items-center cursor-pointer h-9 w-12',
+    secction:'relative w-full h-screen 2xl:w-screen 2xl:h-screen md:w-screen md:h-screen sm:w-screen sm:h:full',
+    iconleft:'absolute right-0 bottom-bottom7.5 left-80 justify-end inline-flex items-start cursor-pointer h-9 w-12',
+    iconright:'absolute bottom-bottom7.5 left-2/3 justify-end inline-flex items-center cursor-pointer h-9 w-12',
     imgcont:'w-screen h-full max-h-screen overflow-hidden ',
-    img:'object-contain w-full h-full',
+    img:'object-cover object-center w-full h-full 2xl:w-screen 2xl:h-full md:w-screen md:h-full sm:w-screen sm:h:full',
     animation:'delay-05ms ease-out animate-slides'
 }
 

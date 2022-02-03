@@ -15,22 +15,23 @@ import Btncards from 'components/Common/Btncards';
 const classes={
   parentcon:'font-primary',
   tilteicon:'flex flex-row p-2 mt-4 justify-between',
-  iconscon:'flex flex-row m-2',
+  iconscon:'flex flex-row p-2 items-end',
   hearticon:'mr-28',
   staricon:'mr-28',
-  inforcon:'flex flex-row p-2 justify-between',
+  inforcon:'flex flex-row p-1 justify-between',
   avausercon:'flex',
   usercon:'flex flex-col justify-center items-center',
   likequalcon:'flex flex-row mr-32 justify-center items-start text-center',
   spanlike:'mr-14',
   spanquali:'mr-2',
-  tagsdiv:'flex justify-start ml-16',
+  tagsdiv:'flex justify-start ml-16 mt-4',
   tags:'mr-8',
   decriptioncon:'m-8',
-  text:'mt-8',
+  text:'mt-8 break-words',
   mapcon:'mx-8 my-10',
   ubicationcon:'flex flex-col m-4',
   divubications:'flex flex-row items-center p-4',
+  commentcon:'mr-16 ml-6',
   btn:'ml-9 py-2',
 }
 function RoutePage() {
@@ -68,6 +69,9 @@ function RoutePage() {
             </span>
           </div>
         </div>
+        <div className="m-1 px-6">
+            <p>Fecha de publicación</p>
+          </div>
         <div className={classes.tagsdiv}>
           <Labels LabelText="Actividades" className={classes.tags}></Labels>
           <Labels LabelText="Restaurante" className={classes.tags}></Labels>
@@ -132,7 +136,7 @@ function RoutePage() {
           </div>
         </div>
         <Btncards className={classes.btn} buttonText="Reseñar"/>
-        <div>
+        <div className={classes.commentcon} >
         <Comments />
         <Comments />
         </div>

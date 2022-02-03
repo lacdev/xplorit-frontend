@@ -25,12 +25,12 @@ module.exports = {
       },
       minWidth:{
         footerBannerW:'85.063rem',
-        commentsW:'83.313rem',
+        commentsW:'50rem',
       },
       height:{
         testimonialHeight:'24rem',
         footerBannerH:'20.5rem',
-        commentsH:'17.25rem',
+        commentsH:'18.75rem',
         sliderH:'100vh',
       },
     
@@ -51,6 +51,7 @@ module.exports = {
       inset:{
         '30rem':'30rem',
         '62.5rem':'62.5rem',
+        'bottom7.5':'1.875rem',
       },
       transitionDelay:{
        '05ms':'0.5s',
@@ -61,6 +62,7 @@ module.exports = {
          '100':{transform:'opacity 100'},
        }
       },
+      
     },
   },
   plugins: [
