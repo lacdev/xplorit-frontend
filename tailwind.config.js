@@ -1,4 +1,4 @@
-const colors = require('tailwindcss/colors')
+require('tailwindcss/colors')
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
@@ -25,13 +25,15 @@ module.exports = {
       },
       minWidth:{
         footerBannerW:'85.063rem',
-        commentsW:'83.313rem',
+        commentsW:'50rem',
       },
       height:{
         testimonialHeight:'24rem',
         footerBannerH:'20.5rem',
-        commentsH:'17.25rem',
+        commentsH:'18.75rem',
+        sliderH:'100vh',
       },
+    
       fontSize:{
        'h1':'4rem',
       },
@@ -45,8 +47,25 @@ module.exports = {
         'img-01': "url('assets/img/LogInPicture.png')",
         'waterfall': "url('assets/img/waterfall.jpg')",
         'footerBanner': "url('assets/img/img3.jpg')",
-      }
+      },
+      inset:{
+        '30rem':'30rem',
+        '62.5rem':'62.5rem',
+        'bottom7.5':'1.875rem',
+      },
+      transitionDelay:{
+       '05ms':'0.5s',
+      },
+      keyframes:{
+       slides:{
+         '0':{transform:'opacity 0'},
+         '100':{transform:'opacity 100'},
+       }
+      },
+      
     },
   },
-  plugins: [],
+  plugins: [
+    
+  ],
 }
