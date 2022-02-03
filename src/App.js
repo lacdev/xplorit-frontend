@@ -17,17 +17,17 @@ function App() {
           <Route path="/signup" element={<SignUp/>}/>
         </Routes>
         <Routes>
-          <Route path="profile" element={<Dashboard/>}>
-            <Route path="routes" element={<DashboardCard/>} />
-            <Route path="likes" element={<DashboardLikeCard/>} />
+          <Route path="/" element={<PageLayout/>}>
+            <Route path="*" element={<NotFoundPage />} />
+            <Route index element={<Home />} />
+            <Route path="/profile" element={<Dashboard/>}>
+              <Route path="routes" element={<DashboardCard/>} />
+              <Route path="likes" element={<DashboardLikeCard/>} />
+            </Route>
           </Route>
         </Routes>
-          <Routes>
-            <Route path="/" element={<PageLayout/>}>
-              <Route path="*" element={<NotFoundPage />} />
-              <Route index element={<Home />} />
-            </Route>
-          </Routes>
+
+         
     </BrowserRouter>
     </div>
   )
