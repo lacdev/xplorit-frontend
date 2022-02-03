@@ -26,7 +26,7 @@ function ImageSlider({slides}) {
     useEffect(() => {
         slideRef.current.addEventListener
         ('animationend',removeAnimation )
-    //   startSlider();
+      startSlider();
      
     }, []);
     

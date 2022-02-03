@@ -1,6 +1,6 @@
 import React from 'react';
 import HeroBanner from "components/Common/HeroBanner"
-import Cards from "components/Common/Cards"
+//import Cards from "components/Common/Cards"
 import BigTitle from 'components/Common/BigTitle';
 import FirstBannerImage from 'components/LandingComponents/FirstBannerImage';
 import SecondBannerImage from 'components/LandingComponents/SecondBannerImage';
