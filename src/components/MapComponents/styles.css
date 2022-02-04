@@ -1,0 +1,25 @@
+.pageContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex: 1 300px;
+    background-color: #e3e3e3;
+    height: 100%;
+}
+
+.filters {
+    background-color: #e3e3e3;
+    height: 150px;
+    width: 100%;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+}

@@ -9,30 +9,31 @@ import Dashboard from "pages/Dashboard"
 import PageLayout from "PageLayout"
 import DashboardCard from 'components/DashboardComponents/DashboardCard'
 import DashboardLikeCard from 'components/DashboardComponents/DashboardLikeCard'
-  
+import CustomGoogleMap from 'components/MapComponents/CustomGoogleMap'
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<LogIn/>}/>
-          <Route path="/signup" element={<SignUp/>}/>
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
         <Routes>
-          <Route path="profile" element={<Dashboard/>}>
-            <Route path="routes" element={<DashboardCard/>} />
-            <Route path="likes" element={<DashboardLikeCard/>} />
+          <Route path="profile" element={<Dashboard />}>
+            <Route path="routes" element={<DashboardCard />} />
+            <Route path="likes" element={<DashboardLikeCard />} />
           </Route>
         </Routes>
-          <Routes>
-            <Route path="/" element={<PageLayout/>}>
-              <Route path="*" element={<NotFoundPage />} />
-              <Route index element={<Home />} />
-              <Route path ="/route" element={<RoutePage/>}/>
-              <Route path="/place" element={<PlacePage/>}/>
-            </Route>
-          </Routes>
-    </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<PageLayout />}>
+            <Route path="*" element={<NotFoundPage />} />
+            <Route index element={<Home />} />
+            <Route path="/route" element={<RoutePage />} />
+            <Route path="/place" element={<PlacePage />} />
+            <Route path="/search" element={<CustomGoogleMap />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }
