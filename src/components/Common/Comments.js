@@ -1,9 +1,9 @@
 import React from 'react';
 import Avatar from 'components/Common/Avatar';
-import StartHalf from 'assets/icons/starHalf';
-import Titles from "components/Titles";
+import StartHalf from 'assets/icons/starHalf.jsx';
+import Titles from "components/Common/Titles";
 const classes={
-  container:' font-primary min-w-commentsW h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow mt-20',
+  container:' font-primary min-w-commentsW h-commentsH bg-white rounded-3xl drop-shadow-testimonial Shadow mt-20',
   maincon:'flex flex-row m-2 pt-4',
   avatarcon:'flex rounded-full p-2.5',
   detailscon:'flex flex-col mt-4',
