@@ -10,14 +10,14 @@ export default function Dashboard() {
     <div className='w-full col-span-10 bg-top'>
       <DashboardBanner/>
     </div>
-    <div className='w-full h-[100vh] col-span-2'>
+    <div className='w-full h-full col-span-2'>
       <DashboardSideBar/>
     </div>
     <div className='flex-col col-span-8 min-h-[100vh]'>
       <div >
         <BigTitle className='flex justify-start' bigTitleText='Rutas creadas'/>
       </div>
-      <div className='w-full row-start-2'>
+      <div className=' flex w-5/6 mx-auto my-4'>
         <Outlet/>
       </div>
     </div>

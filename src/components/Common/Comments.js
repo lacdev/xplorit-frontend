@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from 'components/Common/Avatar';
-import StartHalf from 'assets/icons/StarHalf';
+import StartHalf from 'assets/icons/starHalf';
 import Titles from "components/Titles";
 const classes={
   container:' font-primary min-w-commentsW h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow mt-20',

@@ -1,6 +1,6 @@
 import React from 'react';
 import HeartFillOut from "assets/icons/HeartFillOut";
-import StarComplete from "assets/icons/StarComplete";
+import StarComplete from "assets/icons/starComplete";
 import ThreePoints from "assets/icons/ThreePoints";
 import Avatar from "components/Common/Avatar";
 import Comments from "components/Common/Comments";

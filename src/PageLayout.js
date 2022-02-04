@@ -22,8 +22,7 @@ function setRenderFooter(location){
   const {pathname} = location;
   const noFooterRoute = [
     '/profile/routes',
-    '/login',
-    '/signup'
+    '/profile/likes',
   ]
 
   const routeFound = noFooterRoute.indexOf(pathname?.toLowerCase()) 

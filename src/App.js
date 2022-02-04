@@ -7,7 +7,7 @@ import LogIn from "pages/LogIn"
 import SignUp from "pages/SignUp"
 import Dashboard from "pages/Dashboard"
 import PageLayout from "PageLayout"
-import DashboardCard from 'components/DashboardComponents/DashboardCard'
+import DashboardCardContainer from 'components/DashboardComponents/DashboardCardContainer'
 import DashboardLikeCard from 'components/DashboardComponents/DashboardLikeCard'
   
 function App() {
@@ -17,17 +17,21 @@ function App() {
         <Routes>
           <Route path="/login" element={<LogIn/>}/>
           <Route path="/signup" element={<SignUp/>}/>
-        </Routes>
-        <Routes>
+          
+          {/* <Route path="/profile" element={<Dashboard/>}>
+            <Route path="routes" element={<DashboardCardContainer/>} />
+            <Route path="likes" element={<DashboardLikeCard/>} />
+          </Route> */}
+  
           <Route path="/" element={<PageLayout/>}>
-            <Route path="*" element={<NotFoundPage />} />
             <Route index element={<Home />} />
-            <Route path="/profile" element={<Dashboard/>}>
-              <Route path="routes" element={<DashboardCard/>} />
+            <Route path ="route" element={<RoutePage/>}/>
+            <Route path="place" element={<PlacePage/>}/>
+            <Route path="profile" element={<Dashboard/>}>
+              <Route path="routes" element={<DashboardCardContainer/>} />
               <Route path="likes" element={<DashboardLikeCard/>} />
             </Route>
-            <Route path ="/route" element={<RoutePage/>}/>
-            <Route path="/place" element={<PlacePage/>}/>
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>         
     </BrowserRouter>
