@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function Titles({menu}) {
+export default function Titles({menu, textColors}) {
   return <div>
-      <h3 className='my-4 mx-10 font-semibold text-[20px] hover:underline text-white'>
+      <h3 className={textColors}>
         <a href='#' >{menu}</a>
       </h3>
   </div>;
