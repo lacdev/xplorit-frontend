@@ -13,7 +13,9 @@ export default function SignUp() {
     </div>
     <div className='flex w-1/2 justify-center h-screen items-center'>
       <div className='flex-col w-1/2 justify-center'>
-        <BigTitle className='p-6' bigTitleText='Xplorit'/>
+        <Link to='/'>
+          <BigTitle className='p-6' bigTitleText='Xplorit'/>
+        </Link>
         <BigTitle className='' bigTitleText='Crear cuenta'/>
         <p className='text-center px-10 mb-4'>Únete a nuestra comunidad de viajeros como tú que buscan planear, descubrir y compartir las mejores experiencias</p>
         <div className='flex-col w-full content-center'>

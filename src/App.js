@@ -9,6 +9,8 @@ import Dashboard from "pages/Dashboard"
 import PageLayout from "PageLayout"
 import DashboardCardContainer from 'components/DashboardComponents/DashboardCardContainer'
 import DashboardLikeCard from 'components/DashboardComponents/DashboardLikeCard'
+import OneRoute from 'pages/OneRoute'
+import OnePlace from 'pages/OnePlace'
   
 function App() {
   return (
@@ -17,15 +19,14 @@ function App() {
         <Routes>
           <Route path="/login" element={<LogIn/>}/>
           <Route path="/signup" element={<SignUp/>}/>
-          
-          {/* <Route path="/profile" element={<Dashboard/>}>
-            <Route path="routes" element={<DashboardCardContainer/>} />
-            <Route path="likes" element={<DashboardLikeCard/>} />
-          </Route> */}
-  
+
+          <Route path="/particularroute" element={<OneRoute/>}/>
+          <Route path="/particularplace" element={<OnePlace/>}/>
+
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Home />} />
-            <Route path ="route" element={<RoutePage/>}/>
+            <Route path ="route" element={<RoutePage/>}>
+          </Route>
             <Route path="place" element={<PlacePage/>}/>
             <Route path="profile" element={<Dashboard/>}>
               <Route path="routes" element={<DashboardCardContainer/>} />

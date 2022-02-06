@@ -1,11 +1,11 @@
 import React from 'react';
 
 export default function Footer() {
-  return <div className='font-primary' >
+  return <div className='font-primary text-center' >
       <footer className='bg-quartiary text-white pt-4 mt-20'>
-          <div className='inline-flex w-full px-10 justify-around '>
+          <div className='flex-col md:justify-around w-full px-10'>
             <div>
-                <span>Home</span>
+                <p>Home</p>
             </div>
             <div>
                 <ul>
@@ -26,14 +26,14 @@ export default function Footer() {
                 </ul>
             </div>
             <div>
-                <span>FAQ</span>
+                <p>FAQ</p>
             </div>
           </div>
-          <div className='inline-flex w-full h-auto justify-around mt-10 text-[12px] align-bottom'>
-              <div className='flex'>
-                  <span>© 2022 Xplorit  Todos los derechos resenvados</span>
+          <div className='flex w-full h-auto justify-around mt-10 text-[12px] align-bottom'>
+              <div className='flex w-1/3'>
+                  <p>© 2022 Xplorit  Todos los derechos resenvados</p>
               </div>
-              <div className='inline-flex w-1/3 justify-around'>
+              <div className='flex w-2/3 justify-around'>
                   <ul>
                       <li>Declaración de privacidad y cookies</li>
                       <li>Documentación del sitio</li>

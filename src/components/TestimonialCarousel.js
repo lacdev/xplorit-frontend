@@ -1,12 +1,12 @@
 import React from "react";
 import Slider from "react-slick";
-import Cards from "./Common/Cards";
+import Testimonials from "./LandingComponents/Testimonials";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../customCss.css";
 
-export default function CardCarousel({}) {
+export default function TestimonialCarousel({}) {
     const settings = {
         dots: true,
         infinite: false,
@@ -16,7 +16,7 @@ export default function CardCarousel({}) {
         initialSlide: 0,
         responsive: [
           {
-            breakpoint: 1024,
+            breakpoint: 1400,
             settings: {
               slidesToShow: 3,
               slidesToScroll: 3,
@@ -25,7 +25,7 @@ export default function CardCarousel({}) {
             }
           },
           {
-            breakpoint: 800,
+            breakpoint: 1024,
             settings: {
               slidesToShow: 2,
               slidesToScroll: 2,
@@ -33,7 +33,7 @@ export default function CardCarousel({}) {
             }
           },
           {
-            breakpoint: 480,
+            breakpoint: 600,
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1
@@ -41,14 +41,12 @@ export default function CardCarousel({}) {
           }
         ]
       };
-    return <div className="w-full">
+    return <div className="w-full mb-8">
         <Slider {...settings}>
-          <Cards name='Playa del Carmen' labels='Aventura' score='3.8'/>
-          <Cards/>  
-          <Cards/>
-          <Cards/>
-          <Cards/>
-          <Cards/>       
+          <Testimonials testimonialName="Lupita González" testimonialText="Gracias a Xplorit, encontré cosas que no esperaba cuando visité Pátzcuaro!" />
+          <Testimonials/>  
+          <Testimonials/>     
+           
         </Slider>
   </div>
 }
