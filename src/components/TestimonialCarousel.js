@@ -46,7 +46,6 @@ export default function TestimonialCarousel({}) {
           <Testimonials testimonialName="Lupita González" testimonialText="Gracias a Xplorit, encontré cosas que no esperaba cuando visité Pátzcuaro!" />
           <Testimonials testimonialName="Claudia Garza" testimonialText="Crear lugares está muy fácil. Se siente bien compartir experiencias"/>  
           <Testimonials testimonialName="Noemí Reyes" testimonialText="Me encanta la facilidad de poder seguir rutas con cosas increíbles"/>     
-           
         </Slider>
   </div>
 }
