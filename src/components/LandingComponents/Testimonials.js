@@ -8,7 +8,7 @@ const classes={
     avatarcon:'flex place-content-center justify-center rounded-full pt-12 pb-5',
     name:' text-xl fond-bold text-black justify-center text-center',
     text:'text-base text-black text-center px-auto text-left mt-5',
-    iconcon:'flex flex-row justify-center m-1 mt-10',
+    iconcon:'flex flex-row justify-center m-1 mt-10 px-10',
     starclass:'mx-auto'
 }
 function Testimonials({testimonialText, testimonialName}) {
@@ -21,7 +21,7 @@ function Testimonials({testimonialText, testimonialName}) {
       <div>
           <h1 className={classes.name} >{testimonialName}</h1>
       </div>
-      <div>
+      <div className='px-6'>
           <p className={classes.text} >{testimonialText}</p>
       </div>
       <div className={classes.iconcon} >
