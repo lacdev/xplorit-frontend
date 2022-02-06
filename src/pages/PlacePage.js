@@ -43,7 +43,7 @@ function PlacePage() {
         <select className={classes.select} >
           <option selected>Selecciona una opción</option>
           <option value='1'>Reciente</option>
-          <option value='2'>Alfabeticamente</option>
+          <option value='2'>Alfabéticamente</option>
           <option value='3'>Popular</option>
         </select>
         </div>

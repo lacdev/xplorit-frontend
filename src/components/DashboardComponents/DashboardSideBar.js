@@ -1,7 +1,6 @@
 import React from 'react';
 import DashboardAvatar from './DashboardAvatar';
 import DashboardSideButton from './DashboardSideButton';
-import ProfileUsername from './ProfileUsername';
 
 import Comments from 'assets/icons/Comments';
 import Heart from 'assets/icons/Heart';
@@ -11,18 +10,17 @@ import Rutas from 'assets/icons/Rutas';
 import Settings from 'assets/icons/Settings';
 
 export default function DashboardSideBar() {
-  return <div className='w-full bg-secondary'>
+  return <div className='w-full h-full bg-secondary'>
     <div className='w-full'>
-      <DashboardAvatar class/>
-      <ProfileUsername username="Jessica Johnson"/>
+      <DashboardAvatar/>
     </div>
-    <div>
+    <div className='flex-col relative h-2/3 justify-start top-[200px]'>
       <DashboardSideButton  SvgIcon={Rutas} DashboardButtonText="Rutas creadas"/>
       <DashboardSideButton  SvgIcon={Lugares} DashboardButtonText="Lugares agregados"/>
       <DashboardSideButton  SvgIcon={Comments} DashboardButtonText="Comentarios"/>
       <DashboardSideButton  SvgIcon={Heart} DashboardButtonText="Likes"/>
       <DashboardSideButton  SvgIcon={Settings} DashboardButtonText="Editar perfil"/>
-      <DashboardSideButton  SvgIcon={LogOut} DashboardButtonText="Cerrar sesión"/>
+      <DashboardSideButton className='' SvgIcon={LogOut} DashboardButtonText="Cerrar sesión"/>
     </div>
 
     

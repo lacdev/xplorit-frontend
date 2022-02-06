@@ -1,5 +1,5 @@
 import React from 'react'
-import  StarHalf from 'assets/icons/StarHalf'
+import  StarHalf from 'assets/icons/starHalf.jsx'
 import Btncards from './Btncards'
 import { Labels } from './Labels'
 
@@ -15,7 +15,7 @@ const classes={
    // label:'bg-tagscolor text-sm px-2 p-1 mr-2 my-2 rounded-full',
     btncontainer:'py-4',
 }
-function cards() {
+function cards({name, score, labels}) {
     return (
       <div className={classes.container}>
         <div className={classes.imgcont}>
@@ -26,15 +26,15 @@ function cards() {
           />
         </div>
         <div className={classes.contcontainer} >
-          <h4 className={classes.title}>Nombre de Lugar</h4>
+          <h4 className={classes.title}>{name}</h4>
           <div className={classes.qualicontainer} >
             <StarHalf width='28' height='28' />
-            <p className={classes.qualification}>4.5</p>
+            <p className={classes.qualification}>{score}</p>
           </div>
 
 
          <div className={classes.wraplabel} >
-           <Labels LabelText='Aventura'></Labels>
+           <Labels LabelText={labels}></Labels>
             <Labels LabelText='Familiar'></Labels>
             <Labels LabelText='Entretenimiento'></Labels>
             <Labels LabelText='Aire Libre'></Labels>
