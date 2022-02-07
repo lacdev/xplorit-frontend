@@ -12,6 +12,7 @@ import DashboardLikeCard from 'components/DashboardComponents/DashboardLikeCard'
 import OneRoute from 'pages/OneRoute'
 import OnePlace from 'pages/OnePlace'
 import CreatePlace from 'pages/CreatePlace'
+import CreateRoute from 'pages/CreateRoute'
   
 function App() {
   return (
@@ -29,7 +30,8 @@ function App() {
             <Route path ="route" element={<RoutePage/>}>
           </Route>
             <Route path="place" element={<PlacePage/>}/>
-            <Route path="createPlace" element={<CreatePlace/>}/>
+            <Route path="createplace" element={<CreatePlace/>}/>
+            <Route path="createroute" element={<CreateRoute/>}/>
             <Route path="profile" element={<Dashboard/>}>
               <Route path="routes" element={<DashboardCardContainer/>} />
               <Route path="likes" element={<DashboardLikeCard/>} />
