@@ -4,8 +4,14 @@ import BigTile from 'components/Common/BigTitle'
 import Inputs from 'components/Common/Inputs'
 import AddImage from '../assets/icons/AddImage'
 import TextEditor from '../components/TextEditor'
+import TagSelector from 'components/TagSelector';
 
-export default function CreatePlace() {
+export default function CreatePlace({}) {
+  const [tags, setTags] = useState([]);
+
+  const setTagValues = (tagOptions) => {
+    setTags(tagOptions)
+}
   return <div>
     <BigTile bigTitleText='Publica un nuevo lugar para la comunidad'/>
     <form className='w-5/6 mx-auto'>
@@ -21,7 +27,7 @@ export default function CreatePlace() {
         <TextEditor/>
       </div>
       <label>Elige hasta 4 tags relacionados al lugar</label>
-      
+      <TagSelector setTagValues={setTagValues} tags={tags} />
     </form>
   </div>;
 }

@@ -1,19 +1,15 @@
 import React from 'react';
 import Select from 'react-select'
+//Aire libre, familiar, aventura, comida, artesanías, cultural, entretenimiento, playa
 
 const options = [
-    {value:"Javascript", label:"Javascript"},
-    {value:"ReactJS", label:"ReactJS"},
-    {value:"HTML", label:"HTML"},
-    {value:"Sass", label:"Sass"},
-    {value:"WebDev", label:"WebDev"},
-    {value:"Programming", label:"Programming"},
-    {value:"CSS", label:"CSS"},
-    {value:"Node", label:"Node"},
-    {value:"Java", label:"Java"},
-    {value:"AWS", label:"AWS"},
-    {value:"Phyton", label:"Phyton"},
-    {value:"Linux", label:"Linux"},
+    {value:"Aire Libre", label:"Aire Libre"},
+    {value:"Artesanías", label:"Artesanías"},
+    {value:"Aventura", label:"Aventura"},
+    {value:"Comida", label:"Comida"},
+    {value:"Cultural", label:"Cultural"},
+    {value:"Entretenimiento", label:"Entretenimiento"},
+    {value:"Playa", label:"Playa"},
 ]
 
 const TagSelector = ({tags, setTagValues}) => {
@@ -35,4 +31,4 @@ const TagSelector = ({tags, setTagValues}) => {
         );
     }
 
-export default Selector
+export default TagSelector
