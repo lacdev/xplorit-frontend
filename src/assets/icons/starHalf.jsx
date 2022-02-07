@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function StartHalf({width, height}) {
+export default function StarHalf({width, height}) {
   return (
     <>
       <svg
