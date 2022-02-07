@@ -5,6 +5,8 @@ import Inputs from 'components/Common/Inputs'
 import AddImage from '../assets/icons/AddImage'
 import TextEditor from '../components/TextEditor'
 import TagSelector from 'components/TagSelector';
+import MapSample from '../assets/img/mapsample.png'
+import Btncards from 'components/Common/Btncards';
 
 export default function CreatePlace({}) {
   const [tags, setTags] = useState([]);
@@ -27,7 +29,15 @@ export default function CreatePlace({}) {
         <TextEditor/>
       </div>
       <label>Elige hasta 4 tags relacionados al lugar</label>
-      <TagSelector setTagValues={setTagValues} tags={tags} />
+      <div className='my-4'>
+        <TagSelector setTagValues={setTagValues} tags={tags} />
+      </div>
+      <label>¿En qué dirección se ubica el lugar?</label>
+      <Inputs placeholderText='Escribe la dirección aquí'/>
+      <img src={MapSample}></img>
+      <div className='flex justify-end my-6'>
+        <Btncards className='py-1' buttonText='Publicar' />
+      </div>
     </form>
   </div>;
 }
