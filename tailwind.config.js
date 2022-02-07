@@ -22,6 +22,7 @@ module.exports = {
       width:{
         cardWidth:'26rem',
         testimonialWidth:'19rem',
+        
       },
       minWidth:{
         footerBannerW:'85.063rem',
@@ -32,6 +33,7 @@ module.exports = {
         footerBannerH:'20.5rem',
         commentsH:'18.75rem',
         sliderH:'100vh',
+        
       },
     
       fontSize:{
