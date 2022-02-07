@@ -23,7 +23,7 @@ export default function NavBar() {
   }, [])
 
   const listenScrollEvent = (event) => {
-    if (window.scrollY > 600) {
+    if (window.scrollY > 500) {
       setNavBarColor(navStyle.afterScroll)
       setNavBarText(navStyle.textAfter)
     } else {
@@ -59,7 +59,7 @@ export default function NavBar() {
       </Link>
       <Titles textColors={navBarText} menu="Acerca de"/>
       <Link to="/LogIn" >
-        <Btncards className='mt-4 py-2'buttonText="Iniciar sesión"/>
+        <Btncards className='mt-3 py-2'buttonText="Iniciar sesión"/>
       </Link>
   </div>;
 }
