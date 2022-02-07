@@ -6,8 +6,8 @@ export default function DashboardCardContainer() {
     <DashboardCard/>
     <DashboardCard/>
     <DashboardCard/>
-    {/* <DashboardCard/>
     <DashboardCard/>
-    <DashboardCard/> */}
+    <DashboardCard/>
+    <DashboardCard/>
   </div>;
 }

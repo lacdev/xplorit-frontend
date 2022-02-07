@@ -12,7 +12,7 @@ export default function DashboardCard() {
       </div>
       <div className='w-full'>
         <div className='w-full inline-flex justify-start content-center'>
-            <h2 className='text-3xl font-bold m-8'>Costa de Playa del Carmen</h2>
+            <h2 className='text-2xl font-bold m-8'>Costa de Playa del Carmen</h2>
             <div className='flex-col items-center justify-center mt-6 ml-4 text-center'>
                 <StarHalf width='28' height='28'/> 
                 <p className='text-md mt-1'>4.5</p>
@@ -23,6 +23,7 @@ export default function DashboardCard() {
                 <Labels LabelText="Playa"/>
                 <Labels LabelText="Aire Libre"/>
                 <Labels LabelText="Aventura"/>
+                <Labels LabelText="Familiar"/>
             </div>
             <div className='flex w-1/3 justify-evenly'>
                 <div className='inline-flex w-full justify-center'>
