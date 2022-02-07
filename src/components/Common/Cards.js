@@ -1,5 +1,5 @@
 import React from 'react'
-import  StarHalf from 'assets/icons/StarHalf.jsx'
+import  StarHalf from 'assets/icons/starHalf.jsx'
 import Btncards from './Btncards'
 import { Labels } from './Labels'
 
