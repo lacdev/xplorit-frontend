@@ -7,6 +7,7 @@ import TextEditor from '../components/TextEditor'
 import TagSelector from 'components/TagSelector';
 import MapSample from '../assets/img/mapsample.png'
 import Btncards from 'components/Common/Btncards';
+import PlaceSample from '../assets/img/playa.jpg'
 
 export default function CreatePlace({}) {
   const [tags, setTags] = useState([]);
@@ -15,6 +16,7 @@ export default function CreatePlace({}) {
     setTags(tagOptions)
 }
   return <div>
+    <img className='w-full max-h-[300px] object-cover brightness-50' src={PlaceSample}></img>
     <BigTile bigTitleText='Publica un nuevo lugar para la comunidad'/>
     <form className='w-5/6 mx-auto'>
       <label className=''>Título</label>

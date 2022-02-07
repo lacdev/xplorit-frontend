@@ -7,6 +7,7 @@ import TextEditor from '../components/TextEditor'
 import TagSelector from 'components/TagSelector';
 import MapSample from '../assets/img/mapsample.png'
 import Btncards from 'components/Common/Btncards';
+import PlaceSample from '../assets/img/playa.jpg'
 
 export default function CreateRoute({}) {
   const [tags, setTags] = useState([]);
@@ -15,12 +16,13 @@ export default function CreateRoute({}) {
     setTags(tagOptions)
 }
   return <div>
-    <BigTile bigTitleText='Publica una nueva ruta para la comunidad'/>
-    <form className='w-5/6 mx-auto'>
+    <img className='w-full max-h-[300px] object-cover brightness-50' src={PlaceSample}></img>
+    <BigTile className='mt-10' bigTitleText='Publica una nueva ruta para la comunidad'/>
+    <form className='w-5/6 md:w-2/3 mx-auto'>
       <label className=''>Título</label>
       <Inputs placeholderText="Escribe aquí el nombre de la ruta"/>
       <label>Agrega las imágenes de la ruta</label>
-      <div className='flex w-full justify-center items-center h-16 my-3 bg-gray-200 rounded'>
+      <div className='flex w-full justify-center items-center h-16 md:h-32 my-3 bg-gray-200 rounded'>
         <AddImage/>
         <p >Seleccionar imágenes</p>
       </div>

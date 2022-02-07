@@ -3,7 +3,6 @@ import HeroBanner from "components/Common/HeroBanner"
 import BigTitle from 'components/Common/BigTitle';
 import FirstBannerImage from 'components/LandingComponents/FirstBannerImage';
 import SecondBannerImage from 'components/LandingComponents/SecondBannerImage';
-import Testimonials from 'components/LandingComponents/Testimonials';
 import FooterBanner from 'components/LandingComponents/FooterBanner';
 import CardCarousel from 'components/CardCarousel';
 import Btncards from 'components/Common/Btncards';
