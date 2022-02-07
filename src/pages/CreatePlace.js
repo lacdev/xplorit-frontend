@@ -3,6 +3,7 @@ import {useState} from 'react';
 import BigTile from 'components/Common/BigTitle'
 import Inputs from 'components/Common/Inputs'
 import AddImage from '../assets/icons/AddImage'
+import TextEditor from '../components/TextEditor'
 
 export default function CreatePlace() {
   return <div>
@@ -12,10 +13,14 @@ export default function CreatePlace() {
       <Inputs placeholderText="Escribe aquí el nombre del lugar"/>
       <label>Agrega las imágenes del lugar</label>
       <div className='flex w-full justify-center items-center h-16 my-3 bg-gray-200 rounded'>
-        <AddImage className=''/>
-        <p className=''>Seleccionar imágenes</p>
+        <AddImage/>
+        <p >Seleccionar imágenes</p>
       </div>
-      <label>Danos una descripción del lugar</label>
+      <label >Danos una descripción del lugar</label>
+      <div  className='my-4'>
+        <TextEditor/>
+      </div>
+      <label>Elige hasta 4 tags relacionados al lugar</label>
       
     </form>
   </div>;
