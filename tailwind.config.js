@@ -37,12 +37,15 @@ module.exports = {
       },
       margin:{
         '15':'3.75rem',
+        '17':'4.25rem',
+        '22':'5.50rem',
         '27':'6.875rem',
         '29':'7.25rem',
       },
     
       fontSize:{
        'h1':'4rem',
+       'xxs':'0.65rem',
       },
       dropShadow:{
         testimonialShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)',
@@ -71,8 +74,11 @@ module.exports = {
        }
       },
       screens:{
-        'phone':'546px',
-        // => @media (min-width: 546px) {...}
+        'phone':'360px',
+        // => @media (min-width: 360px) {...}
+        'sphone':'359px',
+        'xsphone':'450px',
+
       },
     },
   },

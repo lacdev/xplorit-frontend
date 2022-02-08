@@ -3,7 +3,7 @@ import Avatar from 'components/Common/Avatar';
 import StarHalf from 'assets/icons/StarHalf.jsx';
 import Titles from "components/Common/Titles";
 const classes={
-  container:' font-primary w-auto h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow mt-20 overflow-hidden sm:h-auto',
+  container:' font-primary w-auto h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow mt-20 overflow-hidden phone:h-auto',
   maincon:'flex flex-row m-2 pt-4',
   avatarcon:'flex rounded-full p-2.5',
   detailscon:'flex flex-col mt-4',
