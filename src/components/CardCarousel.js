@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "../customCss.css";
 
 export default function CardCarousel({cardsData}) {
+  console.log("4: ",cardsData)
     const settings = {
         dots: true,
         infinite: false,
@@ -41,10 +42,16 @@ export default function CardCarousel({cardsData}) {
           }
         ]
       };
+      
     return <div className="w-full">
         <Slider {...settings}>
         {cardsData && cardsData.map((item)=> {
-                return <Cards key={item._id} name= {item.name} labels={'Aventura'} score='3.8'/>
+                return <Cards 
+                  key={item._id} 
+                  name= {item.name} 
+                  labels={item.tags} 
+                  score='3.8' 
+                  images={item?.images}/>
               })}           
         </Slider>
   </div>
