@@ -13,6 +13,7 @@ import OneRoute from 'pages/OneRoute'
 import OnePlace from 'pages/OnePlace'
 import CreatePlace from 'pages/CreatePlace'
 import CreateRoute from 'pages/CreateRoute'
+import AboutUsPage from 'pages/AboutUs'
   
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
 
           <Route path="/particularroute" element={<OneRoute/>}/>
           <Route path="/particularplace" element={<OnePlace/>}/>
+          <Route path="/about" element={<AboutUsPage/>}/>
 
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Home />} />
