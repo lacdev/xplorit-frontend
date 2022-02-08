@@ -5,5 +5,7 @@ console.log(base_url)
 
 export const endpoints = {
 
-    getAllPlaces : `${base_url}/places/`
+    getAllPlaces : `${base_url}/places/`,
+
+    getAllRoutes :  `${base_url}/routes/`
 }

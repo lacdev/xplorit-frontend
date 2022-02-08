@@ -2,9 +2,9 @@ import  axios from "axios";
 import { endpoints } from 'endpoints/endpoints'
 
 export async function  getAllPlaces() {
-    //const getAllPlacesPromise = await axios.get(endpoints.getAllPlaces)
-    //return  getAllPlacesPromise.data
+    const getAllPlacesPromise = await axios.get(endpoints.getAllPlaces)
+    const cardsDataPlaces = getAllPlacesPromise.data.data.places
+    console.log("cardsDataPlaces: ", cardsDataPlaces)
+    return  cardsDataPlaces
 
-    const getAllPlacesPromise = await fetch(endpoints.getAllPlaces)
-    return getAllPlacesPromise.json()
 } 
