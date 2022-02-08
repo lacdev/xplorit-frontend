@@ -2,7 +2,7 @@ import React from 'react';
 
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
-import StarComplete from "assets/icons/StarComplete";
+import StarComplete from "assets/icons/starComplete";
 import ThreePoints from "assets/icons/ThreePoints";
 import Map from "assets/img/mapsample.png";
 import PinMap from "assets/icons/PinMap";

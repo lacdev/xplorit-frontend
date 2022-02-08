@@ -1,5 +1,5 @@
 import React from 'react'
-import  StarHalf from 'assets/icons/StarHalf.jsx'
+import  StarHalf from 'assets/icons/starHalf.jsx'
 import Btncards from './Btncards'
 import { Labels } from './Labels'
 
@@ -15,16 +15,23 @@ const classes={
    // label:'bg-tagscolor text-sm px-2 p-1 mr-2 my-2 rounded-full',
     btncontainer:'py-4',
 }
-function cards({name, score, labels}) {
+function cards({name, score, labels, images=[]}) {
+
+  console.log("aa:", images)
+
+
     return (
       <div className={classes.container}>
+        
         <div className={classes.imgcont}>
-          <img
-            className={classes.img}
-            src="https://placekitten.com/408/287"
-            alt="imagen_sample"
-          />
+           <img
+               className={classes.img}
+              src={images[0]}
+              alt=""  
+             />
+          
         </div>
+
         <div className={classes.contcontainer} >
           <h4 className={classes.title}>{name}</h4>
           <div className={classes.qualicontainer} >
@@ -32,13 +39,13 @@ function cards({name, score, labels}) {
             <p className={classes.qualification}>{score}</p>
           </div>
 
-
+          
          <div className={classes.wraplabel} >
-           <Labels LabelText={labels}></Labels>
-            <Labels LabelText='Familiar'></Labels>
-            <Labels LabelText='Entretenimiento'></Labels>
-            <Labels LabelText='Aire Libre'></Labels>
-
+           {labels.map((label) => {
+                  return <Labels LabelText={`#${label}`}/>
+           })}
+           
+      
             </div>
            
           <div className={classes.btncontainer} >

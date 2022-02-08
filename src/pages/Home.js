@@ -7,14 +7,37 @@ import FooterBanner from 'components/LandingComponents/FooterBanner';
 import CardCarousel from 'components/CardCarousel';
 import Btncards from 'components/Common/Btncards';
 import TestimonialCarousel from 'components/TestimonialCarousel';
-
+import { useQuery } from 'react-query';
+import { getCardsPlacesHome } from 'services/places.services'
+import { getAllRoutes } from 'services/routes.services'
 
 export default function Home() {
+  //const { data, isLoading, isError, status } = useQuery('getAllRoutes', getAllPlaces)
+  
+  const useQueryMultiple = () => {
+    //places
+  const cardsForPlacesInHome = useQuery('getAllPlaces',getCardsPlacesHome,{
+    onSuccess: () => console.log('data fetch with success'),
+  } ) 
+
+    //Routes
+  const cardsForRoutesInHome = useQuery('getAllRoutes', getAllRoutes, {
+    onSuccess: () => console.log('data fetch with success'),
+  })  
+ 
+  return { cardsForPlacesInHome, cardsForRoutesInHome };
+  };
+
+  const {cardsForPlacesInHome, cardsForRoutesInHome} = useQueryMultiple()
+
+  const { data:placesData, isLoading:loadingPlace, isError:errorPlaces, status:statusPlace } = cardsForPlacesInHome
+  const { data:routesData, isLoading:loadingRoute, isError:errorRoutes, status:statusRoute } = cardsForRoutesInHome
+
   return <div className='justify-center align-middle'> 
         <HeroBanner className="App-header"/>
         <BigTitle bigTitleText="Lugares mejor valorados"/>
         <div className='flex w-5/6 m-auto justify-center'>
-          <CardCarousel/>
+          {loadingPlace === true?<span>Loading...</span>:<CardCarousel cardsData={placesData} />}
         </div >
         <div className='flex w-full justify-center'>
           <Btncards className='py-2 mt-8 mb-4' buttonText='Ver más'/>
@@ -22,7 +45,7 @@ export default function Home() {
         <FirstBannerImage/>
         <BigTitle bigTitleText="Rutas más recorridas"/>
         <div className='flex w-5/6 m-auto justify-center'>
-          <CardCarousel/>
+          {loadingRoute === true?<span>Loading...</span>:<CardCarousel cardsData={routesData}/>}
         </div >
         <div className='flex w-full justify-center'>
           <Btncards className='py-2 mt-8 mb-4' buttonText='Ver más'/>
