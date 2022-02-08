@@ -34,10 +34,10 @@ const classes={
   tags:'mr-8',
   decriptioncon:'mt-8 mb-8',
   text:'mt-8 break-words',
-  mapcon:'',
+ // mapcon:'',
   ubicationcon:'flex flex-col my-6',
   divubications:'flex flex-row items-center',
-  commentcon:'',
+ // commentcon:'',
   btn:'ml-9 py-2',
 }
 
