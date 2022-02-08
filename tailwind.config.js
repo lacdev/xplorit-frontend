@@ -35,6 +35,11 @@ module.exports = {
         sliderH:'100vh',
         
       },
+      margin:{
+        '15':'3.75rem',
+        '27':'6.875rem',
+        '29':'7.25rem',
+      },
     
       fontSize:{
        'h1':'4rem',
@@ -65,7 +70,10 @@ module.exports = {
          '100':{transform:'opacity 100'},
        }
       },
-      
+      screens:{
+        'phone':'546px',
+        // => @media (min-width: 546px) {...}
+      },
     },
   },
   plugins: [
