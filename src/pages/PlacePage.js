@@ -45,9 +45,9 @@ function PlacePage() {
 
   const { cardsTopPlaces, cardsNearPlaces, cardsRecentlySharedPlaces } = useQueryMultiple()
 
-  const {data:topPlacesData, isLoading:loadingTopPlaces, isError:ErrorTopPlaces, status:statusTopPlaces } = cardsTopPlaces
-  const {data:nearPlacesData, isLoading:loadingNearPlaces, isError:ErrorNearPlaces, status:statusNearPlaces } = cardsNearPlaces
-  const {data:recentlyPlacesData, isLoading:loadingRecentlyPlaces, isError:ErrorRecentlyPlaces, status:statusRecentlyPlaces } = cardsRecentlySharedPlaces
+  const {data:topPlacesData, isLoading:loadingTopPlaces, } = cardsTopPlaces
+  const {data:nearPlacesData, isLoading:loadingNearPlaces } = cardsNearPlaces
+  const {data:recentlyPlacesData, isLoading:loadingRecentlyPlaces } = cardsRecentlySharedPlaces
 
 
   return (

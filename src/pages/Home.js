@@ -7,6 +7,7 @@ import FooterBanner from 'components/LandingComponents/FooterBanner';
 import CardCarousel from 'components/CardCarousel';
 import Btncards from 'components/Common/Btncards';
 import TestimonialCarousel from 'components/TestimonialCarousel';
+
 import { useQuery } from 'react-query';
 import { getCardsPlacesHome } from 'services/places.services'
 import { getCardsRoutesHome } from 'services/routes.services'
@@ -29,8 +30,8 @@ export default function Home() {
 
   const {cardsForPlacesInHome, cardsForRoutesInHome} = useQueryMultiple()
 
-  const { data:placesData, isLoading:loadingPlace, isError:errorPlaces, status:statusPlace } = cardsForPlacesInHome
-  const { data:routesData, isLoading:loadingRoute, isError:errorRoutes, status:statusRoute } = cardsForRoutesInHome
+  const { data:placesData, isLoading:loadingPlace, } = cardsForPlacesInHome
+  const { data:routesData, isLoading:loadingRoute,  } = cardsForRoutesInHome
   
 
   return <div className='justify-center align-middle'> 

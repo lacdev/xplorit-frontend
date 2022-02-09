@@ -13,5 +13,11 @@ export const endpoints = {
 
     getRecentlySharedPlaces : `${base_url}/places/`,
 
-    getAllRoutes :  `${base_url}/routes/`
+    getAllRoutes :  `${base_url}/routes/`,
+
+    getTopRoutes :  `${base_url}/routes/`,
+
+    getNearRoutes : `${base_url}/routes/`,
+
+    getSharedRoutes : `${base_url}/routes/`,
 }
