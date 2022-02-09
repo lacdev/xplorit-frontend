@@ -15,6 +15,10 @@ import { SliderElements } from 'components/Common/SliderElements';
 import Titles from 'components/Common/Titles';
 import Btncards from 'components/Common/Btncards';
 
+//useQuery
+import { useQuery } from 'react-query';
+import { getSinglePlaceData } from 'services/places.services';
+
 const classes={
   parentcon:'font-primary overflow-x-hidden',
   divsectioncon:'w-full',
@@ -40,103 +44,120 @@ const classes={
  // mapcon:'',
   ubicationcon:'flex flex-col my-6',
   divubications:'flex flex-row items-center',
+  ubication: 'ml-15 my-2',
  // commentcon:'',
   btn:'ml-9 py-2',
 }
 function OnePlace() {
-  return (
-  <div className={classes.parentcon}>
-    <ImageSlider slides={SliderElements} />
-    <div className='w-full'>
-      <section className='px-8'>
-      <div className={classes.titleicon}>
-        <Titles tag="h3" titleText="Nombre del lugar"></Titles>
-        <div className={classes.iconscon}>
-         <div className='flex flex-row'>
-         <HeartFillOut width="28" height="28" className={classes.hearticon} />
-          
-          <StarComplete width="28" height="28" className={classes.staricon} />
-         
-          <ThreePoints width="40" height="28" />
-          
-         </div> 
-           <div className={classes.likequalcon} >
-             <div className={classes.liketext} >
-               <p>7</p>
-               <p>Me gusta</p>
-             </div>
-              <div className={classes.qualitext} > 
-               <p>5</p>
-               <p>Calificación</p>
-             </div>
-           </div>  
-            
-          </div>
-          
-        </div>
-       
-        <div className={classes.inforcon}>
-            <div className={classes.avausercon}>
-              <Avatar />
-              <div className={classes.usercon}>
-                <p>Agregado por</p>
-                <p>Nombre de Usuario</p>
-              </div>
-            </div>
-            
-          </div>
-          <div className={classes.datecon}>
-            <p>Fecha de publicación</p>
-          </div>
-        
-        <div className={classes.tagsdiv}>
-          <Labels LabelText="Actividades" className={classes.tags}></Labels>
-          <Labels LabelText="Restaurante" className={classes.tags}></Labels>
-          <Labels LabelText="Música" className={classes.tags}></Labels>
-          <Labels LabelText="Familiar"></Labels>
-        </div>
-      
-          
-      </section>
-    </div>
-    <div className='w-full'>     
-      <section className='px-8'> 
-      <div className={classes.decriptioncon}>
-              <Titles tag="h4" titleText="Descripción"></Titles>
-              <p className={classes.text}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis
-                consectetur quidem nesciunt impedit reiciendis suscipit quia nam
-                tempora excepturi quo, omnis provident, totam porro repellat esse,
-                quod nihil aspernatur perspiciatis. Ducimus perspiciatis est repellat
-                voluptas culpa adipisci! Dolorem sunt commodi voluptate repudiandae
-                reiciendis vero et labore dolor, sapiente autem. Sit iure ratione
-                provident a sequi autem tempore vero praesentium cumque. Illo placeat
-                corrupti nobis autem, explicabo doloremque quis est sequi debitis
-                quaerat, natus voluptatum harum voluptate ab, laboriosam dignissimos
-                nulla facilis. Quibusdam doloribus in qui blanditiis quia doloremque!
-               
-              </p>
-            </div>
-            <div className={classes.mapcon}>
-              <img src={Map} alt="ejemplo de mapa" />
-            </div>
-            <div className={classes.ubicationcon}>
-              <div className={classes.divubications}>
-                <PinMap width="50" height="50" />
-                <p>Dirección de la Ubicación</p>
+
+
+  const singlePlace = useQuery('getSinglePlaceData', getSinglePlaceData, {
+    onSuccess : () => console.log('getSinglePlaceData fetch with success')
+  })
+  
+  const {data, isLoading, status } = singlePlace
+
+  if(status === 'loading') {
+    return <p> Loading...</p>
+  }
+
+  if (status === 'success') {
+    console.log(data) 
+    return (
+      <div className={classes.parentcon}>
+        <ImageSlider slides={data.images} />
+        <div className='w-full'>
+          <section className='px-8'>
+          <div className={classes.titleicon}>
+            <Titles tag="h3" titleText={data.name}></Titles>
+            <div className={classes.iconscon}>
+             <div className='flex flex-row'>
+             <HeartFillOut width="28" height="28" className={classes.hearticon} />
+              
+              <StarComplete width="28" height="28" className={classes.staricon} />
+             
+              <ThreePoints width="40" height="28" />
+              
+             </div> 
+               <div className={classes.likequalcon} >
+                 <div className={classes.liketext} >
+                   <p>7</p>
+                   <p>Me gusta</p>
+                 </div>
+                  <div className={classes.qualitext} > 
+                   <p>5</p>
+                   <p>Calificación</p>
+                 </div>
+               </div>  
+                
               </div>
               
             </div>
-            <Btncards className={classes.btn} buttonText="Reseñar" />
-            <div className={classes.commentcon}>
-              <Comments />
-              <Comments />
+           
+            <div className={classes.inforcon}>
+                <div className={classes.avausercon}>
+                  <Avatar />
+                  <div className={classes.usercon}>
+                    <p>Agregado por</p>
+                    <p>Nombre de Usuario</p>
+                  </div>
+                </div>
+                
+              </div>
+              <div className={classes.datecon}>
+                <p>Fecha de publicación</p>
+              </div>
+            
+            <div className={classes.tagsdiv}>
+              {data.tags.map((tag) => {
+                return <Labels LabelText={tag} className={classes.tags}></Labels>
+              })}
+              
+              
             </div>
-      </section>     
-    </div> 
-    
-  </div>
-  );
+          
+              
+          </section>
+        </div>
+        <div className='w-full'>     
+          <section className='px-8'> 
+          <div className={classes.decriptioncon}>
+                  <Titles tag="h4" titleText="Descripción"></Titles>
+                  <p className={classes.text}>
+                    {data.description}                   
+                  </p>
+                </div>
+                <div className={classes.mapcon}>
+                  <img src={Map} alt="ejemplo de mapa" />
+                </div>
+                <div className={classes.ubicationcon}>
+                  <div className={classes.divubications}>
+                    <PinMap width="50" height="50" />
+                    <p>Dirección de la Ubicación</p>
+                  </div>
+                  <div className={classes.ubication}>Ciudad: {data.address.city}</div>
+                  <div className={classes.ubication}>Estado: {data.address.state}</div>
+                  <div className={classes.ubication}>Calle: {data.address.street}</div>
+                  <div className={classes.ubication}>C.P: {data.address.zipcode}</div>
+                  
+                </div>
+                <Btncards className={classes.btn} buttonText="Reseñar" />
+                <div className={classes.commentcon}>
+                  <Comments />
+                  <Comments />
+                </div>
+          </section>     
+        </div> 
+        
+      </div>
+      );
+  }
+  
+  
+  
+
+
+  
 }
 
 export default OnePlace;

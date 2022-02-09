@@ -1,9 +1,11 @@
 
 
 const base_url = `${process.env.REACT_APP_SERVER_URL}/v1`
-console.log(base_url)
+
 
 export const endpoints = {
+
+    getSinglePlace : `${base_url}/places/6201dc77326d2c5c74344e77`,
 
     getAllPlaces : `${base_url}/places/`,
 

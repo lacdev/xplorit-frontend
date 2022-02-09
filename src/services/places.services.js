@@ -26,3 +26,9 @@ export async function getRecentlySharedPlaces() {
     const cardsRecentlySharedPlaces = getRecentlySharedPlacesPromise.data.data.places
     return cardsRecentlySharedPlaces
 }
+
+export async function getSinglePlaceData() {
+    const getSinglePlaceDataPromise = await axios.get(endpoints.getSinglePlace)
+    const singlePlaceData = getSinglePlaceDataPromise.data.data
+    return singlePlaceData
+}
