@@ -6,9 +6,9 @@ import CardCarousel from 'components/CardCarousel';
 
 const classes = {
   parentcon:' font-primary justify-center align-middle',
-  titlecon:'flex break-words w-full justify-around p-4',
-  container:'w-full h-screen max-h-[700px] bg-waterfall bg-no-repeat bg-cover',
+  container:'w-full h-screen max-h-[700px] bg-routeplaceimg bg-no-repeat bg-cover',
   section:'flex h-full justify-center items-center bg-black/50',
+  titlecon:'flex break-words w-full justify-around p-4',
   maincon:'w-5/6 justify-center inline-align-top text-center',
   titlescon:'mb-10',
   btn:'py-1',

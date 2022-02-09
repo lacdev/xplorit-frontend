@@ -43,6 +43,7 @@ function OnePlace() {
   return (
     <div className={classes.parentcon}>
     <ImageSlider slides={SliderElements} />
+  <div>
     <div className={classes.tilteicon}>
       <Titles tag="h3" titleText="Nombre del Lugar"></Titles>
       <div className={classes.iconscon}>
@@ -77,6 +78,8 @@ function OnePlace() {
     <div className={classes.datecon} >
             <p>Fecha de publicación</p>
           </div>
+  </div>
+  
     <div className={classes.tagsdiv}>
       <Labels LabelText="Actividades" className={classes.tags}></Labels>
       <Labels LabelText="Restaurante" className={classes.tags}></Labels>

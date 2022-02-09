@@ -1,9 +1,9 @@
 import React from 'react';
 import Avatar from 'components/Common/Avatar';
-import StartHalf from 'assets/icons/starHalf.jsx';
+import StarHalf from 'assets/icons/StarHalf.jsx';
 import Titles from "components/Common/Titles";
 const classes={
-  container:' font-primary min-w-commentsW h-commentsH bg-white rounded-3xl drop-shadow-testimonial Shadow mt-20',
+  container:' font-primary w-auto h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow mt-20 overflow-hidden phone:h-auto',
   maincon:'flex flex-row m-2 pt-4',
   avatarcon:'flex rounded-full p-2.5',
   detailscon:'flex flex-col mt-4',
@@ -22,7 +22,7 @@ function Comments() {
           <Titles tag="h5" titleText='Lupita Rosales'></Titles>
           <p>Fecha de Publicación</p>
           <div className={classes.qualificationcon}>
-            <StartHalf width="1.375rem" height="1.375rem" />
+            <StarHalf width="1.375rem" height="1.375rem" />
             <p className={classes.number}>4.8</p>
           </div>
         </div>
