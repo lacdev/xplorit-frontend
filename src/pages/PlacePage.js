@@ -3,6 +3,10 @@ import React from 'react';
 import Inputs from 'components/Common/Inputs';
 import Btncards from 'components/Common/Btncards';
 import CardCarousel from 'components/CardCarousel';
+import { useQuery } from 'react-query';
+import { getTopPlaces } from 'services/places.services';
+import { getNearPlaces } from 'services/places.services';
+import { getRecentlySharedPlaces } from 'services/places.services';
 
 const classes = {
   parentcon:' font-primary justify-center align-middle',
@@ -20,6 +24,32 @@ const classes = {
   textcarru:'ml-20 my-8',
 }
 function PlacePage() {
+  const useQueryMultiple = () => {
+    //Top Places
+    const cardsTopPlaces = useQuery('getTopPlaces', getTopPlaces, {
+      onSuccess: () => console.log('topPlaces fetch with success'),
+    })
+
+    //Near Places
+    const cardsNearPlaces = useQuery('getNearPlaces', getNearPlaces, {
+      onSuccess: () => console.log('nearPlaces fetch with success'),
+    })
+
+    //Recently shared Places
+    const cardsRecentlySharedPlaces = useQuery('getRecentlySharedPlaces', getRecentlySharedPlaces, {
+      onSuccess: () => console.log('getRecentlySharedPlaces fetch with success')
+    })
+
+    return { cardsTopPlaces, cardsNearPlaces, cardsRecentlySharedPlaces };
+  }
+
+  const { cardsTopPlaces, cardsNearPlaces, cardsRecentlySharedPlaces } = useQueryMultiple()
+
+  const {data:topPlacesData, isLoading:loadingTopPlaces, isError:ErrorTopPlaces, status:statusTopPlaces } = cardsTopPlaces
+  const {data:nearPlacesData, isLoading:loadingNearPlaces, isError:ErrorNearPlaces, status:statusNearPlaces } = cardsNearPlaces
+  const {data:recentlyPlacesData, isLoading:loadingRecentlyPlaces, isError:ErrorRecentlyPlaces, status:statusRecentlyPlaces } = cardsRecentlySharedPlaces
+
+
   return (
     <div className={classes.parentcon}>
       <div className={classes.container}>
@@ -52,19 +82,19 @@ function PlacePage() {
         <Titles tag='h4' titleText='Top de lugares populares' />
       </div>
       <div className={classes.carruselcon} >
-          <CardCarousel/>
+          {loadingTopPlaces === true?<span>Loading...</span>:<CardCarousel cardsData={topPlacesData}/>}
         </div>
         <div className={classes.textcarru}>
         <Titles tag='h4' titleText='Lugares cerca de ti' />
       </div>
       <div className={classes.carruselcon} >
-          <CardCarousel/>
+          {loadingNearPlaces === true?<span>Loading...</span>:<CardCarousel cardsData={nearPlacesData}/>}
         </div>
         <div className={classes.textcarru}>
         <Titles tag='h4' titleText='Lugares compartidos recientemente' />
       </div>
       <div className={classes.carruselcon} >
-          <CardCarousel/>
+          {loadingRecentlyPlaces === true?<span>Loading...</span>:<CardCarousel cardsData={recentlyPlacesData}/>}
         </div>
     </div>
   );

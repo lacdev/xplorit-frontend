@@ -7,7 +7,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "../customCss.css";
 
 export default function CardCarousel({cardsData}) {
-  console.log("4: ",cardsData)
     const settings = {
         dots: true,
         infinite: false,

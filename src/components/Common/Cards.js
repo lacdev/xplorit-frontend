@@ -17,9 +17,6 @@ const classes={
 }
 function cards({name, score, labels, images=[]}) {
 
-  console.log("aa:", images)
-
-
     return (
       <div className={classes.container}>
         

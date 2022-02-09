@@ -7,5 +7,11 @@ export const endpoints = {
 
     getAllPlaces : `${base_url}/places/`,
 
+    getTopPlaces : `${base_url}/places/`,
+
+    getNearPlaces : `${base_url}/places/`,
+
+    getRecentlySharedPlaces : `${base_url}/places/`,
+
     getAllRoutes :  `${base_url}/routes/`
 }

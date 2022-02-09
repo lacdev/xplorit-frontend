@@ -9,10 +9,9 @@ import Btncards from 'components/Common/Btncards';
 import TestimonialCarousel from 'components/TestimonialCarousel';
 import { useQuery } from 'react-query';
 import { getCardsPlacesHome } from 'services/places.services'
-import { getAllRoutes } from 'services/routes.services'
+import { getCardsRoutesHome } from 'services/routes.services'
 
 export default function Home() {
-  //const { data, isLoading, isError, status } = useQuery('getAllRoutes', getAllPlaces)
   
   const useQueryMultiple = () => {
     //places
@@ -21,7 +20,7 @@ export default function Home() {
   } ) 
 
     //Routes
-  const cardsForRoutesInHome = useQuery('getAllRoutes', getAllRoutes, {
+  const cardsForRoutesInHome = useQuery('getAllRoutes', getCardsRoutesHome, {
     onSuccess: () => console.log('data fetch with success'),
   })  
  
@@ -32,6 +31,7 @@ export default function Home() {
 
   const { data:placesData, isLoading:loadingPlace, isError:errorPlaces, status:statusPlace } = cardsForPlacesInHome
   const { data:routesData, isLoading:loadingRoute, isError:errorRoutes, status:statusRoute } = cardsForRoutesInHome
+  
 
   return <div className='justify-center align-middle'> 
         <HeroBanner className="App-header"/>
