@@ -1,7 +1,7 @@
 import React from 'react';
 import playa from 'assets/img/playa.jpg'
 import { Labels } from '../Common/Labels';
-import StarHalf from 'assets/icons/starHalf';
+import StarHalf from 'assets/icons/StarHalf';
 import Edit from 'assets/icons/Edit';
 import Trash from 'assets/icons/Trash';
 

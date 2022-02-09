@@ -1,7 +1,7 @@
 import React from 'react';
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
-import StarComplete from "assets/icons/starComplete";
+import StarComplete from "assets/icons/StarComplete";
 import ThreePoints from "assets/icons/ThreePoints";
 import Map from "assets/img/mapsample.png";
 import PinMap from "assets/icons/PinMap";
@@ -47,12 +47,12 @@ function OnePlace() {
   return (
   <div className={classes.parentcon}>
     <ImageSlider slides={SliderElements} />
-    <div className='w-full'>
-      <section className='px-8'>
+    <div className={classes.divsectioncon} >
+      <section className={classes.section} >
       <div className={classes.titleicon}>
         <Titles tag="h3" titleText="Nombre del lugar"></Titles>
         <div className={classes.iconscon}>
-         <div className='flex flex-row'>
+         <div className={classes.auxiconcon} >
          <HeartFillOut width="28" height="28" className={classes.hearticon} />
           
           <StarComplete width="28" height="28" className={classes.staricon} />
@@ -99,8 +99,8 @@ function OnePlace() {
           
       </section>
     </div>
-    <div className='w-full'>     
-      <section className='px-8'> 
+    <div className={classes.divsectioncon} >     
+      <section className={classes.section} > 
       <div className={classes.decriptioncon}>
               <Titles tag="h4" titleText="Descripción"></Titles>
               <p className={classes.text}>
