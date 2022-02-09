@@ -10,7 +10,7 @@ const containerStyle = {
 
 const center = {
   lat: -3.745,
-  lng: -38.523
+  lng: -38.52
 };
 
 const mapLibraries = ['places'];

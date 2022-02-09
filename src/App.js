@@ -8,11 +8,13 @@ import SignUp from "pages/SignUp"
 import Dashboard from "pages/Dashboard"
 import PageLayout from "PageLayout"
 import DashboardCardContainer from 'components/DashboardComponents/DashboardCardContainer'
-import DashboardLikeCard from 'components/DashboardComponents/DashboardLikeCard'
 import OneRoute from 'pages/OneRoute'
 import OnePlace from 'pages/OnePlace'
 import CreatePlace from 'pages/CreatePlace'
 import CreateRoute from 'pages/CreateRoute'
+import DashboardComment from 'components/DashboardComponents/DashboardComment'
+import DashboardLikeContainer from 'components/DashboardComponents/DeshboardLikeContainer'
+import DashboardEdit from 'components/DashboardComponents/DashboardEdit'
   
 function App() {
   return (
@@ -34,7 +36,10 @@ function App() {
             <Route path="createroute" element={<CreateRoute/>}/>
             <Route path="profile" element={<Dashboard/>}>
               <Route path="routes" element={<DashboardCardContainer/>} />
-              <Route path="likes" element={<DashboardLikeCard/>} />
+              <Route path="places" element={<DashboardCardContainer/>} />
+              <Route path="likes" element={<DashboardLikeContainer/>} />
+              <Route path="comments" element={<DashboardComment/>}/>
+              <Route path="edit" element={<DashboardEdit/>}/>
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Route>
