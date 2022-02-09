@@ -7,6 +7,7 @@ import Map from "assets/img/mapsample.png";
 import PinMap from "assets/icons/PinMap";
 
 //Components
+
 import Avatar from 'components/Common/Avatar';
 import Comments from 'components/Common/Comments';
 import ImageSlider from 'components/Common/ImageSlider';
@@ -47,7 +48,9 @@ const classes={
 
 function OneRoute() {
   return (
-    <div className={classes.parentcon}>
+    
+       <div className={classes.parentcon}>
+        
       <ImageSlider slides={SliderElements} />
       <div className={classes.divsectioncon} >
         <section className={classes.section} >
@@ -167,6 +170,10 @@ function OneRoute() {
       </div> 
       
     </div>
+    
+      
+    
+   
   );
 }
 

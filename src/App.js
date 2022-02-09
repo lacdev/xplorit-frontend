@@ -14,15 +14,17 @@ import OnePlace from 'pages/OnePlace'
 import CreatePlace from 'pages/CreatePlace'
 import CreateRoute from 'pages/CreateRoute'
 import AboutUsPage from 'pages/AboutUs'
+import NavBarS from 'components/NavBarComponents/NavBarS'
   
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <NavBarS/>
         <Routes>
           <Route path="/login" element={<LogIn/>}/>
           <Route path="/signup" element={<SignUp/>}/>
-
+          
           <Route path="/particularroute" element={<OneRoute/>}/>
           <Route path="/particularplace" element={<OnePlace/>}/>
           <Route path="/about" element={<AboutUsPage/>}/>
