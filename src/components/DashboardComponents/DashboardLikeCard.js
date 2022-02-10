@@ -23,24 +23,6 @@ export default function DashboardLikeCard() {
                 <Labels LabelText="Aire Libre"/>
                 <Labels LabelText="Aventura"/>
             </div>
-            <div className='flex w-1/3 justify-evenly'>
-                <div className='inline-flex w-full justify-center'>
-                    <div className='text-center'>
-                        <div className='flex justify-center'>
-                            <Edit className='' width='28' height='28'/>
-                        </div>
-                        <p className='text-md mt-1'>Edit</p>
-                    </div>
-                </div>
-                <div className='inline-flex justify-center text-center '>
-                    <div className='flex-col'>
-                        <div className='flex justify-center'>
-                            <Trash />
-                        </div>
-                        <p className='text-md mt-2'>Delete</p>
-                    </div>
-                </div>
-            </div>
         </div>
       </div>
   </div>;

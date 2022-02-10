@@ -20,7 +20,7 @@ const mapOptions = {
 }
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-
+console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 
 
 function MapComponent() {
