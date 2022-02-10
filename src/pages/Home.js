@@ -7,12 +7,12 @@ import FooterBanner from 'components/LandingComponents/FooterBanner';
 import CardCarousel from 'components/CardCarousel';
 import Btncards from 'components/Common/Btncards';
 import TestimonialCarousel from 'components/TestimonialCarousel';
+
 import { useQuery } from 'react-query';
 import { getCardsPlacesHome } from 'services/places.services'
-import { getAllRoutes } from 'services/routes.services'
+import { getCardsRoutesHome } from 'services/routes.services'
 
 export default function Home() {
-  //const { data, isLoading, isError, status } = useQuery('getAllRoutes', getAllPlaces)
   
   const useQueryMultiple = () => {
     //places
@@ -21,7 +21,7 @@ export default function Home() {
   } ) 
 
     //Routes
-  const cardsForRoutesInHome = useQuery('getAllRoutes', getAllRoutes, {
+  const cardsForRoutesInHome = useQuery('getAllRoutes', getCardsRoutesHome, {
     onSuccess: () => console.log('data fetch with success'),
   })  
  
@@ -30,14 +30,15 @@ export default function Home() {
 
   const {cardsForPlacesInHome, cardsForRoutesInHome} = useQueryMultiple()
 
-  const { data:placesData, isLoading:loadingPlace, isError:errorPlaces, status:statusPlace } = cardsForPlacesInHome
-  const { data:routesData, isLoading:loadingRoute, isError:errorRoutes, status:statusRoute } = cardsForRoutesInHome
+  const { data:placesData, isLoading:loadingPlace, } = cardsForPlacesInHome
+  const { data:routesData, isLoading:loadingRoute,  } = cardsForRoutesInHome
+  
 
   return <div className='justify-center align-middle'> 
         <HeroBanner className="App-header"/>
         <BigTitle bigTitleText="Lugares mejor valorados"/>
         <div className='flex w-5/6 m-auto justify-center'>
-          {loadingPlace === true?<span>Loading...</span>:<CardCarousel cardsData={placesData} />}
+          {loadingPlace === true ? <span>Loading...</span> : <CardCarousel type={'place'} cardsData={placesData} />}
         </div >
         <div className='flex w-full justify-center'>
           <Btncards className='py-2 mt-8 mb-4' buttonText='Ver más'/>
@@ -45,7 +46,7 @@ export default function Home() {
         <FirstBannerImage/>
         <BigTitle bigTitleText="Rutas más recorridas"/>
         <div className='flex w-5/6 m-auto justify-center'>
-          {loadingRoute === true?<span>Loading...</span>:<CardCarousel cardsData={routesData}/>}
+          {loadingRoute === true ? <span>Loading...</span> : <CardCarousel type={'route'} cardsData={routesData}/>}
         </div >
         <div className='flex w-full justify-center'>
           <Btncards className='py-2 mt-8 mb-4' buttonText='Ver más'/>
