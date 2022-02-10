@@ -10,7 +10,7 @@ export default function Dashboard() {
     <div className='w-full col-span-10 bg-top'>
       <DashboardBanner/>
     </div>
-    <div className='w-full h-full col-span-2'>
+    <div className='w-full h-full col-span-2 hidden md:block'>
       <DashboardSideBar/>
     </div>
     <div className='flex-col col-span-8 min-h-[100vh]'>

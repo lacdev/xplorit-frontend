@@ -5,9 +5,10 @@ import Inputs from 'components/Common/Inputs'
 import AddImage from '../assets/icons/AddImage'
 import TextEditor from '../components/TextEditor'
 import TagSelector from 'components/TagSelector';
-import MapSample from '../assets/img/mapsample.png'
 import Btncards from 'components/Common/Btncards';
 import PlaceSample from '../assets/img/playa.jpg'
+import MapComponent from 'components/MapComponent';
+
 
 export default function CreatePlace({}) {
   const [tags, setTags] = useState([]);
@@ -36,7 +37,9 @@ export default function CreatePlace({}) {
       </div>
       <label>¿En qué dirección se ubica el lugar?</label>
       <Inputs placeholderText='Escribe la dirección aquí'/>
-      <img src={MapSample}></img>
+      <div>
+        <MapComponent/>
+      </div>
       <div className='flex justify-end my-6'>
         <Btncards className='py-1' buttonText='Publicar' />
       </div>
