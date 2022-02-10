@@ -23,15 +23,15 @@ function App() {
           <Route path="/login" element={<LogIn/>}/>
           <Route path="/signup" element={<SignUp/>}/>
 
-          <Route path="/particularroute" element={<OneRoute/>}/>
-          <Route path="/particularplace" element={<OnePlace/>}/>
+          <Route path="/route/:id" element={<OneRoute/>}/>
+          <Route path="/place/:id" element={<OnePlace/>}/>
           <Route path="/about" element={<AboutUsPage/>}/>
 
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Home />} />
             <Route path ="route" element={<RoutePage/>}>
           </Route>
-            <Route path="place" element={<PlacePage/>}/>
+            <Route path="places" element={<PlacePage/>}/>
             <Route path="createplace" element={<CreatePlace/>}/>
             <Route path="createroute" element={<CreateRoute/>}/>
             <Route path="profile" element={<Dashboard/>}>

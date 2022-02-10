@@ -6,8 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../customCss.css";
 
-export default function CardCarousel({cardsData}) {
-  console.log("4: ",cardsData)
+export default function CardCarousel({cardsData, type}) {
     const settings = {
         dots: true,
         infinite: false,
@@ -47,6 +46,8 @@ export default function CardCarousel({cardsData}) {
         <Slider {...settings}>
         {cardsData && cardsData.map((item)=> {
                 return <Cards 
+                  id={item._id}
+                  typeofplace={type}
                   key={item._id} 
                   name= {item.name} 
                   labels={item.tags} 

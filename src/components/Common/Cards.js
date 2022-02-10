@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import  StarHalf from 'assets/icons/starHalf.jsx'
 import Btncards from './Btncards'
 import { Labels } from './Labels'
@@ -15,21 +16,18 @@ const classes={
    // label:'bg-tagscolor text-sm px-2 p-1 mr-2 my-2 rounded-full',
     btncontainer:'py-4',
 }
-function cards({name, score, labels, images=[]}) {
+function cards({name, score, labels, images=[], id, typeofplace}) {
 
-  console.log("aa:", images)
-
+    const cardLink = `${typeofplace}/${id}`
 
     return (
-      <div className={classes.container}>
-        
+      <div className={classes.container}>  
         <div className={classes.imgcont}>
            <img
                className={classes.img}
               src={images[0]}
               alt=""  
-             />
-          
+             />        
         </div>
 
         <div className={classes.contcontainer} >
@@ -44,12 +42,10 @@ function cards({name, score, labels, images=[]}) {
            {labels.map((label) => {
                   return <Labels LabelText={`#${label}`}/>
            })}
-           
-      
             </div>
            
           <div className={classes.btncontainer} >
-            <Btncards className="w-32 h-10" name="Visitar"/>
+            <Link to={cardLink}><Btncards className="w-32 h-10" name="Visitar"/></Link>
           </div>
         </div>
       </div>
