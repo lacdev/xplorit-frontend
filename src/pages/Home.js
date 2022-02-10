@@ -16,14 +16,9 @@ export default function Home() {
   
   const useQueryMultiple = () => {
     //places
-  const cardsForPlacesInHome = useQuery('getAllPlaces',getCardsPlacesHome,{
-    onSuccess: () => console.log('data fetch with success'),
-  } ) 
-
+  const cardsForPlacesInHome = useQuery('getAllPlaces',getCardsPlacesHome) 
     //Routes
-  const cardsForRoutesInHome = useQuery('getAllRoutes', getCardsRoutesHome, {
-    onSuccess: () => console.log('data fetch with success'),
-  })  
+  const cardsForRoutesInHome = useQuery('getAllRoutes', getCardsRoutesHome)  
  
   return { cardsForPlacesInHome, cardsForRoutesInHome };
   };

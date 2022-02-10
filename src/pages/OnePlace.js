@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
 import StarComplete from "assets/icons/starComplete";
@@ -51,11 +52,14 @@ const classes={
 }
 function OnePlace() {
 
+  
+    const { id } = useParams();
+
   const useQueryMultiple = () => {
 
-    const singlePlace = useQuery(['getSinglePlaceData', '6201dc77326d2c5c74344e77'], getSinglePlaceData)
+    const singlePlace = useQuery(['getSinglePlaceData', id], getSinglePlaceData)
 
-    const ownerPlace = useQuery('getOwnerPlace', getOwnerPlace)
+    const ownerPlace = useQuery(['getOwnerPlace', id], getOwnerPlace)
     return {singlePlace, ownerPlace}
   }
 
