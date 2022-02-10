@@ -27,8 +27,18 @@ export async function getRecentlySharedPlaces() {
     return cardsRecentlySharedPlaces
 }
 
-export async function getSinglePlaceData() {
-    const getSinglePlaceDataPromise = await axios.get(endpoints.getSinglePlace)
+export async function getSinglePlaceData({queryKey}) {
+    console.log(queryKey)
+    
+    const service_url = `${endpoints.getAllPlaces}/${queryKey[1]}`
+    const getSinglePlaceDataPromise = await axios.get(service_url)
     const singlePlaceData = getSinglePlaceDataPromise.data.data
     return singlePlaceData
+}
+
+export async function getOwnerPlace() {
+    const getOwnerPlacePromise = await axios.get(endpoints.getOwnerPlace)
+    console.log("getownerplacepromise: ",getOwnerPlacePromise)
+    const getOwnerPlaceData = getOwnerPlacePromise.data
+    return getOwnerPlaceData
 }

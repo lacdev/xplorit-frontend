@@ -5,7 +5,6 @@ const base_url = `${process.env.REACT_APP_SERVER_URL}/v1`
 
 export const endpoints = {
 
-    getSinglePlace : `${base_url}/places/6201dc77326d2c5c74344e77`,
 
     getAllPlaces : `${base_url}/places/`,
 
@@ -22,4 +21,6 @@ export const endpoints = {
     getNearRoutes : `${base_url}/routes/`,
 
     getSharedRoutes : `${base_url}/routes/`,
+
+    getOwnerPlace : `${base_url}/users/61edd1e827853c64e462aa06`
 }

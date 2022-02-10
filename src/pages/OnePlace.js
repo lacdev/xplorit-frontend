@@ -18,6 +18,7 @@ import Btncards from 'components/Common/Btncards';
 //useQuery
 import { useQuery } from 'react-query';
 import { getSinglePlaceData } from 'services/places.services';
+import { getOwnerPlace } from 'services/places.services';
 
 const classes={
   parentcon:'font-primary overflow-x-hidden',
@@ -50,26 +51,43 @@ const classes={
 }
 function OnePlace() {
 
+  const useQueryMultiple = () => {
 
-  const singlePlace = useQuery('getSinglePlaceData', getSinglePlaceData, {
-    onSuccess : () => console.log('getSinglePlaceData fetch with success')
-  })
+    const singlePlace = useQuery(['getSinglePlaceData', '6201dc77326d2c5c74344e77'], getSinglePlaceData)
+
+    const ownerPlace = useQuery('getOwnerPlace', getOwnerPlace)
+    return {singlePlace, ownerPlace}
+  }
+
+  const {singlePlace, ownerPlace} = useQueryMultiple()  
+  console.log("ownerPlace: ",ownerPlace)
   
-  const {data, isLoading, status } = singlePlace
+  const {data:dataPlace, isLoading:loadingPlace, status: statusPlace } = singlePlace
+  const {data:dataOwnerPlace, isLoading:loadingOwnerPlace, status: statusOwnerPlace } = ownerPlace
 
-  if(status === 'loading') {
+  //otra forma de encontrar el username
+  
+  //const getOwnerUser = getOwnerPlace(dataPlace.ownerId)
+
+  if(statusPlace === 'loading') {
     return <p> Loading...</p>
   }
 
-  if (status === 'success') {
-    console.log(data) 
+  if(statusOwnerPlace === 'success')
+  console.log(dataOwnerPlace) 
+
+  if (statusPlace === 'success') {
+    console.log(dataPlace) 
+
+    
+
     return (
       <div className={classes.parentcon}>
-        <ImageSlider slides={data.images} />
+        <ImageSlider slides={dataPlace.images} />
         <div className='w-full'>
           <section className='px-8'>
           <div className={classes.titleicon}>
-            <Titles tag="h3" titleText={data.name}></Titles>
+            <Titles tag="h3" titleText={dataPlace.name}></Titles>
             <div className={classes.iconscon}>
              <div className='flex flex-row'>
              <HeartFillOut width="28" height="28" className={classes.hearticon} />
@@ -109,7 +127,7 @@ function OnePlace() {
               </div>
             
             <div className={classes.tagsdiv}>
-              {data.tags.map((tag) => {
+              {dataPlace.tags.map((tag) => {
                 return <Labels LabelText={tag} className={classes.tags}></Labels>
               })}
               
@@ -124,7 +142,7 @@ function OnePlace() {
           <div className={classes.decriptioncon}>
                   <Titles tag="h4" titleText="Descripción"></Titles>
                   <p className={classes.text}>
-                    {data.description}                   
+                    {dataPlace.description}                   
                   </p>
                 </div>
                 <div className={classes.mapcon}>
@@ -135,10 +153,10 @@ function OnePlace() {
                     <PinMap width="50" height="50" />
                     <p>Dirección de la Ubicación</p>
                   </div>
-                  <div className={classes.ubication}>Ciudad: {data.address.city}</div>
-                  <div className={classes.ubication}>Estado: {data.address.state}</div>
-                  <div className={classes.ubication}>Calle: {data.address.street}</div>
-                  <div className={classes.ubication}>C.P: {data.address.zipcode}</div>
+                  <div className={classes.ubication}>Ciudad: {dataPlace.address.city}</div>
+                  <div className={classes.ubication}>Estado: {dataPlace.address.state}</div>
+                  <div className={classes.ubication}>Calle: {dataPlace.address.street}</div>
+                  <div className={classes.ubication}>C.P: {dataPlace.address.zipcode}</div>
                   
                 </div>
                 <Btncards className={classes.btn} buttonText="Reseñar" />

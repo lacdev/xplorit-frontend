@@ -38,7 +38,7 @@ export default function Home() {
         <HeroBanner className="App-header"/>
         <BigTitle bigTitleText="Lugares mejor valorados"/>
         <div className='flex w-5/6 m-auto justify-center'>
-          {loadingPlace === true?<span>Loading...</span>:<CardCarousel cardsData={placesData} />}
+          {loadingPlace === true ? <span>Loading...</span> : <CardCarousel type={'place'} cardsData={placesData} />}
         </div >
         <div className='flex w-full justify-center'>
           <Btncards className='py-2 mt-8 mb-4' buttonText='Ver más'/>
@@ -46,7 +46,7 @@ export default function Home() {
         <FirstBannerImage/>
         <BigTitle bigTitleText="Rutas más recorridas"/>
         <div className='flex w-5/6 m-auto justify-center'>
-          {loadingRoute === true?<span>Loading...</span>:<CardCarousel cardsData={routesData}/>}
+          {loadingRoute === true ? <span>Loading...</span> : <CardCarousel type={'route'} cardsData={routesData}/>}
         </div >
         <div className='flex w-full justify-center'>
           <Btncards className='py-2 mt-8 mb-4' buttonText='Ver más'/>
