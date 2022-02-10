@@ -1,14 +1,14 @@
 import React from 'react';
 import playa from 'assets/img/playa.jpg'
 import { Labels } from '../Common/Labels';
-import StarHalf from 'assets/icons/StarHalf';
+import StarHalf from 'assets/icons/starHalf';
 import Edit from 'assets/icons/Edit';
 import Trash from 'assets/icons/Trash';
 
 export default function DashboardCard({name, score, tags}) {
   return <div className='inline-flex w-full bg-white shadow-md rounded-md font-primary m-6'>
       <div className='w-1/3 h-full'>
-        <img className='rounded-md'src={playa}></img>
+        <img className='rounded-md' src={playa} alt=""></img>
       </div>
       <div className='w-full'>
         <div className='w-full inline-flex justify-start content-center'>

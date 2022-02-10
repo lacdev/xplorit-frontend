@@ -15,6 +15,7 @@ import CreateRoute from 'pages/CreateRoute'
 import DashboardComment from 'components/DashboardComponents/DashboardComment'
 import DashboardLikeContainer from 'components/DashboardComponents/DeshboardLikeContainer'
 import DashboardEdit from 'components/DashboardComponents/DashboardEdit'
+import AboutUsPage from 'pages/AboutUs'
   
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
 
           <Route path="/particularroute" element={<OneRoute/>}/>
           <Route path="/particularplace" element={<OnePlace/>}/>
+          <Route path="/about" element={<AboutUsPage/>}/>
 
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Home />} />
