@@ -48,130 +48,127 @@ const classes={
 
 function OneRoute() {
   return (
-    
-       <div className={classes.parentcon}>
-        
+    <div className={classes.parentcon}>
       <ImageSlider slides={SliderElements} />
-      <div className={classes.divsectioncon} >
-        <section className={classes.section} >
-        <div className={classes.titleicon}>
-          <Titles tag="h3" titleText="Nombre de Ruta"></Titles>
-          <div className={classes.iconscon}>
-           <div className={classes.auxiconcon}>
-           <HeartFillOut width="28" height="28" className={classes.hearticon} />
-            
-            <StarComplete width="28" height="28" className={classes.staricon} />
-           
-            <ThreePoints width="40" height="28" />
-            
-           </div> 
-             <div className={classes.likequalcon} >
-               <div className={classes.liketext} >
-                 <p>7</p>
-               </div>
-                <div className={classes.qualitext} > 
-                 <p>5</p>
-               </div>
-             </div>  
-              
-            </div>
-            
-          </div>
-         
-          <div className={classes.inforcon}>
-              <div className={classes.avausercon}>
-                <Avatar />
-                <div className={classes.usercon}>
-                  <p>Agregado por</p>
-                  <p>Nombre de Usuario</p>
+      <div className={classes.divsectioncon}>
+        <section className={classes.section}>
+          <div className={classes.titleicon}>
+            <Titles tag="h3" titleText="Nombre de Ruta"></Titles>
+            <div className={classes.iconscon}>
+              <div className={classes.auxiconcon}>
+                <HeartFillOut
+                  width="28"
+                  height="28"
+                  className={classes.hearticon}
+                />
+
+                <StarComplete
+                  width="28"
+                  height="28"
+                  className={classes.staricon}
+                />
+
+                <ThreePoints width="40" height="28" />
+              </div>
+              <div className={classes.likequalcon}>
+                <div className={classes.liketext}>
+                  <p>7</p>
+                </div>
+                <div className={classes.qualitext}>
+                  <p>5</p>
                 </div>
               </div>
-              
             </div>
-            <div className={classes.datecon}>
-              <p>Fecha de publicación</p>
+          </div>
+
+          <div className={classes.inforcon}>
+            <div className={classes.avausercon}>
+              <Avatar />
+              <div className={classes.usercon}>
+                <p>Agregado por</p>
+                <p>Nombre de Usuario</p>
+              </div>
             </div>
-          
+          </div>
+          <div className={classes.datecon}>
+            <p>Fecha de publicación</p>
+          </div>
+
           <div className={classes.tagsdiv}>
             <Labels LabelText="Actividades" className={classes.tags}></Labels>
             <Labels LabelText="Restaurante" className={classes.tags}></Labels>
             <Labels LabelText="Música" className={classes.tags}></Labels>
             <Labels LabelText="Familiar"></Labels>
           </div>
-        
-            
         </section>
       </div>
-      <div className={classes.divsectioncon}>     
-        <section className={classes.section}> 
-        <div className={classes.decriptioncon}>
-                <Titles tag="h4" titleText="Descripción"></Titles>
-                <p className={classes.text}>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis
-                  consectetur quidem nesciunt impedit reiciendis suscipit quia nam
-                  tempora excepturi quo, omnis provident, totam porro repellat esse,
-                  quod nihil aspernatur perspiciatis. Ducimus perspiciatis est repellat
-                  voluptas culpa adipisci! Dolorem sunt commodi voluptate repudiandae
-                  reiciendis vero et labore dolor, sapiente autem. Sit iure ratione
-                  provident a sequi autem tempore vero praesentium cumque. Illo placeat
-                  corrupti nobis autem, explicabo doloremque quis est sequi debitis
-                  quaerat, natus voluptatum harum voluptate ab, laboriosam dignissimos
-                  nulla facilis. Quibusdam doloribus in qui blanditiis quia doloremque!
-                  Odio, id. Dolore molestiae nihil ex reiciendis optio et saepe
-                  incidunt, tempore, consequuntur quaerat voluptas facilis commodi
-                  adipisci pariatur quod sapiente quam quasi, est aliquid esse voluptate
-                  animi nulla! Voluptatem, omnis non. Ratione dolorem pariatur
-                  exercitationem? Quam maxime delectus autem, officiis corporis nisi
-                  facere rerum maiores earum a voluptatem pariatur incidunt esse odit,
-                  dignissimos ipsam consequatur enim. Porro dolorum deleniti quos iusto.
-                  Asperiores magnam voluptas distinctio repellendus, laboriosam magni
-                  quas perspiciatis saepe odit odio debitis inventore delectus porro.
-                  Inventore sint perspiciatis nemo corrupti tempore? Labore repellendus
-                  quas vero officia, magni tempore temporibus? Officiis eveniet dolores
-                  reiciendis tempore at voluptatibus deserunt. Nemo architecto, qui
-                  facilis numquam praesentium sint officiis nesciunt! Expedita, aliquid
-                  assumenda suscipit aliquam rerum architecto ipsam quo voluptatum
-                  quaerat nihil minima. Eius nesciunt consequatur aliquid nam fugit
-                  sequi, eaque distinctio modi quidem quisquam quaerat deserunt,
-                  quibusdam magnam sit incidunt eveniet, autem tenetur neque!
-                  Exercitationem voluptatibus magnam error sit atque necessitatibus at!
-                  Explicabo adipisci inventore harum aliquid consectetur quasi.
-                </p>
-              </div>
-              <div className={classes.mapcon}>
-                <img src={Map} alt="ejemplo de mapa" />
-              </div>
-              <div className={classes.ubicationcon}>
-                <div className={classes.divubications}>
-                  <PinMap width="50" height="50" />
-                  <p>Dirección de la Ubicación</p>
-                </div>
-                <div className={classes.divubications}>
-                  <PinMap width="50" height="50" />
-                  <p>Dirección de la Ubicación</p>
-                </div>
-                <div className={classes.divubications}>
-                  <PinMap width="50" height="50" />
-                  <p>Dirección de la Ubicación</p>
-                </div>
-                <div className={classes.divubications}>
-                  <PinMap width="50" height="50" />
-                  <p>Dirección de la Ubicación</p>
-                </div>
-              </div>
-              <Btncards className={classes.btn} buttonText="Reseñar" />
-              <div className={classes.commentcon}>
-                <Comments />
-                <Comments />
-              </div>
-        </section>     
-      </div> 
-      
+      <div className={classes.divsectioncon}>
+        <section className={classes.section}>
+          <div className={classes.decriptioncon}>
+            <Titles tag="h4" titleText="Descripción"></Titles>
+            <p className={classes.text}>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Blanditiis consectetur quidem nesciunt impedit reiciendis suscipit
+              quia nam tempora excepturi quo, omnis provident, totam porro
+              repellat esse, quod nihil aspernatur perspiciatis. Ducimus
+              perspiciatis est repellat voluptas culpa adipisci! Dolorem sunt
+              commodi voluptate repudiandae reiciendis vero et labore dolor,
+              sapiente autem. Sit iure ratione provident a sequi autem tempore
+              vero praesentium cumque. Illo placeat corrupti nobis autem,
+              explicabo doloremque quis est sequi debitis quaerat, natus
+              voluptatum harum voluptate ab, laboriosam dignissimos nulla
+              facilis. Quibusdam doloribus in qui blanditiis quia doloremque!
+              Odio, id. Dolore molestiae nihil ex reiciendis optio et saepe
+              incidunt, tempore, consequuntur quaerat voluptas facilis commodi
+              adipisci pariatur quod sapiente quam quasi, est aliquid esse
+              voluptate animi nulla! Voluptatem, omnis non. Ratione dolorem
+              pariatur exercitationem? Quam maxime delectus autem, officiis
+              corporis nisi facere rerum maiores earum a voluptatem pariatur
+              incidunt esse odit, dignissimos ipsam consequatur enim. Porro
+              dolorum deleniti quos iusto. Asperiores magnam voluptas distinctio
+              repellendus, laboriosam magni quas perspiciatis saepe odit odio
+              debitis inventore delectus porro. Inventore sint perspiciatis nemo
+              corrupti tempore? Labore repellendus quas vero officia, magni
+              tempore temporibus? Officiis eveniet dolores reiciendis tempore at
+              voluptatibus deserunt. Nemo architecto, qui facilis numquam
+              praesentium sint officiis nesciunt! Expedita, aliquid assumenda
+              suscipit aliquam rerum architecto ipsam quo voluptatum quaerat
+              nihil minima. Eius nesciunt consequatur aliquid nam fugit sequi,
+              eaque distinctio modi quidem quisquam quaerat deserunt, quibusdam
+              magnam sit incidunt eveniet, autem tenetur neque! Exercitationem
+              voluptatibus magnam error sit atque necessitatibus at! Explicabo
+              adipisci inventore harum aliquid consectetur quasi.
+            </p>
+          </div>
+          <div className={classes.mapcon}>
+            <img src={Map} alt="ejemplo de mapa" />
+          </div>
+          <div className={classes.ubicationcon}>
+            <div className={classes.divubications}>
+              <PinMap width="50" height="50" />
+              <p>Dirección de la Ubicación</p>
+            </div>
+            <div className={classes.divubications}>
+              <PinMap width="50" height="50" />
+              <p>Dirección de la Ubicación</p>
+            </div>
+            <div className={classes.divubications}>
+              <PinMap width="50" height="50" />
+              <p>Dirección de la Ubicación</p>
+            </div>
+            <div className={classes.divubications}>
+              <PinMap width="50" height="50" />
+              <p>Dirección de la Ubicación</p>
+            </div>
+          </div>
+          <Btncards className={classes.btn} buttonText="Reseñar" />
+          <div className={classes.commentcon}>
+            <Comments />
+            <Comments />
+          </div>
+        </section>
+      </div>
     </div>
-    
-      
-    
-   
   );
 }
 
