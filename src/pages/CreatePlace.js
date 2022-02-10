@@ -8,11 +8,20 @@ import TagSelector from 'components/TagSelector';
 import Btncards from 'components/Common/Btncards';
 import PlaceSample from '../assets/img/playa.jpg'
 import MapComponent from 'components/MapComponent';
+import SearchMap from 'components/SearchMap';
 
+import { GoogleMap, useLoadScript, LoadScript } from '@react-google-maps/api';
+
+const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+const mapLibraries = ['places'];
 
 export default function CreatePlace({}) {
   const [tags, setTags] = useState([]);
 
+  const { isLoaded, loadError } = useLoadScript({
+        googleMapsApiKey: key,
+        libraries: mapLibraries
+   })
   const setTagValues = (tagOptions) => {
     setTags(tagOptions)
 }
@@ -36,10 +45,13 @@ export default function CreatePlace({}) {
         <TagSelector setTagValues={setTagValues} tags={tags} />
       </div>
       <label>¿En qué dirección se ubica el lugar?</label>
-      <Inputs placeholderText='Escribe la dirección aquí'/>
-      <div>
-        <MapComponent/>
-      </div>
+      <LoadScript googleMapsApiKey={key}>
+        <SearchMap/>
+        <Inputs placeholderText='Escribe la dirección aquí'/>
+        <div>
+          <MapComponent isLoaded={isLoaded} loadError={loadError}/>
+        </div>
+      </LoadScript>
       <div className='flex justify-end my-6'>
         <Btncards className='py-1' buttonText='Publicar' />
       </div>

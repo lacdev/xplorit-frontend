@@ -12,7 +12,7 @@ export default function TextEditor() {
     <>
       <Editor
         onInit={(evt, editor) => editorRef.current = editor}
-        initialValue="<p>This is the initial content of the editor.</p>"
+        initialValue=""
         init={{
           height: 300,
           menubar: false,

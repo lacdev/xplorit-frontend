@@ -128,7 +128,7 @@ function OnePlace() {
               </div>
             
             <div className={classes.tagsdiv}>
-              {dataPlace.tags.map((tag) => {
+              {dataPlace?.tags && dataPlace?.tags?.map((tag) => {
                 return <Labels LabelText={tag} className={classes.tags}></Labels>
               })}
               
@@ -147,7 +147,8 @@ function OnePlace() {
                   </p>
                 </div>
                 <div className={classes.mapcon}>
-                  <img src={Map} alt="ejemplo de mapa" />
+                  <MapComponent/>
+                  {/* <img src={Map} alt="ejemplo de mapa" /> */}
                 </div>
                 <div className={classes.ubicationcon}>
                   <div className={classes.divubications}>

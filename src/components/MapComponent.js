@@ -23,11 +23,15 @@ const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 
 
-function MapComponent() {
-    const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: key,
-        libraries: mapLibraries
-    })
+function MapComponent({isLoaded, loadError}) {
+    // const { isLoaded, loadError } = useLoadScript({
+    //     googleMapsApiKey: key,
+    //     libraries: mapLibraries
+    // })
+
+    // if(!isLoaded) {
+    //   return null
+    // }
     return (
       <GoogleMap
         mapContainerStyle={containerStyle}
