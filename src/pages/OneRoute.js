@@ -23,16 +23,16 @@ const classes={
   section:'px-8', 
   auxiconcon:'flex flex-row',
   iconscon:'flex flex-col p-2 items-end',
-  hearticon:'mr-22 phone:mr-27',
-  staricon:'mr-10 phone:mr-28 sphone:mr-16',
+  hearticon:'mr-22 sphone:mr-27',
+  staricon:'mr-10  sphone:mr-16',
   inforcon:'flex flex-col md:flex-row p-1 justify-between',
   avausercon:'flex',
   usercon:'flex flex-col justify-center items-center',
   likequalcon:'flex flex-row text-center',
   //spanlike:'mr-14 text-center content-center phone:mr-2 phone:text-sm',
   //spanquali:'mr-2 text-center content-center phone:mr-10 phone:text-sm',
-  liketext:'mr-14',
-  qualitext:'mr-10 sphone:mr-17',
+  liketext:'mr-26 sphone:mr-33',
+  qualitext:'mr-22 sphone:mr-28',
   datecon:'"m-1 px-6',
   tagsdiv:'flex justify-start mt-4',
   tags:'mr-8',
@@ -68,11 +68,9 @@ function OneRoute() {
              <div className={classes.likequalcon} >
                <div className={classes.liketext} >
                  <p>7</p>
-                 <p>Me gusta</p>
                </div>
                 <div className={classes.qualitext} > 
                  <p>5</p>
-                 <p>Calificación</p>
                </div>
              </div>  
               
