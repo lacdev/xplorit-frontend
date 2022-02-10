@@ -1,6 +1,6 @@
 import React from 'react'
+import  StarHalf from 'assets/icons/StarHalf.jsx'
 import { Link } from 'react-router-dom'
-import  StarHalf from 'assets/icons/starHalf.jsx'
 import Btncards from './Btncards'
 import { Labels } from './Labels'
 
