@@ -1,7 +1,7 @@
 import React from 'react';
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
-import StarComplete from "assets/icons/starComplete";
+import StarComplete from "assets/icons/StarComplete";
 import ThreePoints from "assets/icons/ThreePoints";
 import Map from "assets/img/mapsample.png";
 import PinMap from "assets/icons/PinMap";
@@ -14,6 +14,7 @@ import { Labels } from 'components/Common/Labels';
 import { SliderElements } from 'components/Common/SliderElements';
 import Titles from 'components/Common/Titles';
 import Btncards from 'components/Common/Btncards';
+import MapComponent from 'components/MapComponent';
 
 //useQuery
 import { useQuery } from 'react-query';
