@@ -1,7 +1,7 @@
 import BigTitle from 'components/Common/BigTitle';
 import DashboardBanner from 'components/DashboardComponents/DashboardBanner';
 import DashboardSideBar from 'components/DashboardComponents/DashboardSideBar';
-import NavBar from 'components/NavBar';
+//import NavBar from 'components/NavBar';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 

@@ -23,9 +23,11 @@ function ImageSlider({slides}) {
     }
 
     useEffect(() => {
-        slideRef.current.addEventListener
-        ('animationend',removeAnimation )
-      //startSlider();
+        slideRef.current.addEventListener ('animationend',removeAnimation )
+        //startSlider();
+       return () => {
+        slideRef.current.removeEventListener('animationend')
+       }
      
     }, []);
     
@@ -72,7 +74,7 @@ function ImageSlider({slides}) {
         return null;
     };
     
-    
+   
     return (
   <section className={classes.secction} ref={slideRef}>
       <ArrowLeft  onClick={prevSlide} className={classes.iconleft} />

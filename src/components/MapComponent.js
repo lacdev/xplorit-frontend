@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
 
-const containerStyle = {
-  width: '100%',
-  height: '50vh'
-};
-
 const center = {
   lat: -3.745,
   lng: -38.52
@@ -23,11 +18,22 @@ const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 
 
-function MapComponent() {
+function MapComponent({fullHeight=false}) {
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: key,
         libraries: mapLibraries
     })
+
+    const mapHeight = fullHeight ? '100vh' : '50vh';
+
+
+    const containerStyle = {
+      width: '100%',
+      height: mapHeight,
+    };
+    
+
+    if(!isLoaded) return null 
     return (
       <GoogleMap
         mapContainerStyle={containerStyle}

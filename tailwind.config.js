@@ -39,8 +39,10 @@ module.exports = {
         '15':'3.75rem',
         '17':'4.25rem',
         '22':'5.50rem',
+        '26':'6.85rem',
         '27':'6.875rem',
         '29':'7.25rem',
+        '33':'8.25rem',
       },
     
       fontSize:{
@@ -78,6 +80,7 @@ module.exports = {
         // => @media (min-width: 360px) {...}
         'sphone':'359px',
         'xsphone':'450px',
+        'minTablet':'960px'
 
       },
     },
