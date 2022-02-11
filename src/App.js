@@ -3,13 +3,15 @@ import NotFoundPage from 'pages/NotFoundPage'
 import Home from 'pages/Home'
 import RoutePage from 'pages/RoutePage'
 import PlacePage from 'pages/PlacePage'
-import LogIn from "pages/LogIn"
-import SignUp from "pages/SignUp"
-import Dashboard from "pages/Dashboard"
-import PageLayout from "PageLayout"
+import LogIn from 'pages/LogIn'
+import SignUp from 'pages/SignUp'
+import Dashboard from 'pages/Dashboard'
+import PageLayout from 'PageLayout'
 import DashboardCardContainer from 'components/DashboardComponents/DashboardCardContainer'
 import OneRoute from 'pages/OneRoute'
 import OnePlace from 'pages/OnePlace'
+import PlaceSearch from 'pages/PlaceSearch'
+import RouteSearch from 'pages/RouteSearch'
 import CreatePlace from 'pages/CreatePlace'
 import CreateRoute from 'pages/CreateRoute'
 import DashboardComment from 'components/DashboardComponents/DashboardComment'
@@ -30,6 +32,8 @@ function App() {
           <Route path="/route/:id" element={<OneRoute/>}/>
           <Route path="/place/:id" element={<OnePlace/>}/>
           <Route path="/about" element={<AboutUsPage/>}/>
+          <Route path="/searchplace" element={<PlaceSearch/>}/>
+          <Route path="/searchroute" element={<RouteSearch/>}/>
 
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Home />} />
