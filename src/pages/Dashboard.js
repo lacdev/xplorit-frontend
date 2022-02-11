@@ -4,8 +4,14 @@ import DashboardSideBar from 'components/DashboardComponents/DashboardSideBar';
 import NavBar from 'components/NavBar';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { useQuery} from 'react-query'
+import { getUserProfilePic } from 'services/user.services';
 
 export default function Dashboard() {
+
+  const profilePic = useQuery (['getSingleUserData', '6200a26e64fdb24e699493d4'], getUserProfilePic)
+  console.log(profilePic)
+
   return <div className='grid grid-cols-10'>
     <div className='w-full col-span-10 bg-top'>
       <DashboardBanner/>

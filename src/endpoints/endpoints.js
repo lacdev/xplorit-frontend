@@ -22,5 +22,7 @@ export const endpoints = {
 
     getSharedRoutes : `${base_url}/routes/`,
 
-    getOwnerPlace : `${base_url}/users/61edd1e827853c64e462aa06`
+    getOwnerPlace : `${base_url}/users/61edd1e827853c64e462aa06`,
+
+    getUserData : `${base_url}/users/6200a26e64fdb24e699493d4`
 }
