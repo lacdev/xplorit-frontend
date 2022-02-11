@@ -1,5 +1,5 @@
 import Footer from 'components/Footer';
-import NavBar from 'components/NavBar';
+import NavBarS from 'components/NavBarComponents/NavBarS';
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ export default function PageLayout() {
   const renderFooter = setRenderFooter(location);
   console.log(location)
   return <div>
-      <NavBar/>
+      <NavBarS/>
         <div>
             <Outlet/>
         </div>

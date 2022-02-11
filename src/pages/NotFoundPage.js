@@ -8,7 +8,7 @@ export default function NotFoundPage() {
   return <div className='flex align-middle h-screen'>
   <main className='flex w-full justify-center bg-gradient-to-b from-[#B9FFF2] items-center'>
     <div className='flex-col text-center'>
-      <img src={travelSearch}></img>
+      <img src={travelSearch} alt=''></img>
       <BigTitle bigTitleText='Parece que aquí no está lo que buscas'/>
       <Link to='/'>
         <Btncards className='py-2 my-10' buttonText= "Regresa al Inicio"/><br></br>
