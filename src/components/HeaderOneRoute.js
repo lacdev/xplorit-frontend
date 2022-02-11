@@ -50,7 +50,7 @@ const classes={
   ubication: 'ml-15 my-2',
  // commentcon:'',
   btn:'ml-9 py-2',
-  created : 'text-2xl'
+  created : 'text-2xl border'
 }
 function HeaderOneRoute({userId, tags, title, likes, updatedAt, average}) {
    console.log("user: ",userId)
@@ -95,7 +95,7 @@ function HeaderOneRoute({userId, tags, title, likes, updatedAt, average}) {
                 <div className={classes.avausercon}>
                   <Avatar avatarImg={userInfo.avatar}/>
                   <div className={classes.usercon}>
-                    <p className={classes.created}>Agregado por {userInfo.username}</p>
+                    <p className={classes.created}>Agregado por<p className='font-bold'>{userInfo.username}</p></p>
                   </div>
                 </div>          
               </div>
