@@ -9,9 +9,10 @@ import Image from "assets/img/image.jpg"
 import HeartFillOut from 'assets/icons/HeartFillOut';
 import StarComplete from 'assets/icons/StarComplete';
 import MapComponent from 'components/MapComponent'
+
 const classes={
    sectionres:'font-primary w-full h-full min-h-screen',
-   tagsfiltroscon:'flex flex-row p-1 w-full bg-white justify-end',
+   tagsfiltroscon:'flex flex-row p-1 w-full bg-white justify-end my-2',
    btnclass:'py-2 flex flex-row-reverse content-center',
    filtroicon:'mr-2',
    renderres:'grid grid-cols-1 minTablet:grid-cols-5 grid-flow-col h-full min-h-screen',
@@ -21,7 +22,7 @@ const classes={
    infocon:'flex',
    img:'h-32 w-44 object-cover object-center rounded-md',
    detailscon:'flex flex-col pl-2',
-   labelscon:'flex flex-wrap',
+   labelscon:'flex flex-wrap my-2',
    ubitextcon:'py-3',
    ubitext:'text-xs break-words',
    btn:'py-1',
