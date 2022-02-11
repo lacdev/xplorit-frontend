@@ -39,7 +39,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path ="route" element={<RoutePage/>}>
           </Route>
-            <Route path="place" element={<PlacePage/>}/>
+            <Route path="places" element={<PlacePage/>}/>
             <Route path="createplace" element={<CreatePlace/>}/>
             <Route path="createroute" element={<CreateRoute/>}/>
             <Route path="profile" element={<Dashboard/>}>
