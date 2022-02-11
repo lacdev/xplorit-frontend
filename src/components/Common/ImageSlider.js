@@ -16,7 +16,6 @@ let count = 0;
 function ImageSlider({slides}) {
    const [current, setCurrent] = useState(0)
     const length = slides.length
-    console.log(slides)
 
     const slideRef=useRef();
     const removeAnimation = ()=> {
@@ -74,8 +73,7 @@ function ImageSlider({slides}) {
     if(!Array.isArray(slides) || slides.length <= 0){
         return null;
     };
-    
-   
+
     return (
   <section className={classes.secction} ref={slideRef}>
       <ArrowLeft  onClick={prevSlide} className={classes.iconleft} />

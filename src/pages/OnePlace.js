@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
 import StarComplete from "assets/icons/StarComplete";
@@ -15,11 +16,12 @@ import { SliderElements } from 'components/Common/SliderElements';
 import Titles from 'components/Common/Titles';
 import Btncards from 'components/Common/Btncards';
 import MapComponent from 'components/MapComponent';
+import HeaderOnePlace from 'components/HeaderOnePlace';
 
 //useQuery
 import { useQuery } from 'react-query';
 import { getSinglePlaceData } from 'services/places.services';
-import { getOwnerPlace } from 'services/places.services';
+import { getPlaceLikes } from 'services/places.services';
 
 const classes={
   parentcon:'font-primary overflow-x-hidden',
@@ -52,98 +54,41 @@ const classes={
 }
 function OnePlace() {
 
-  const useQueryMultiple = () => {
+  const {id} = useParams();
 
-    const singlePlace = useQuery(['getSinglePlaceData', '6201dc77326d2c5c74344e77'], getSinglePlaceData)
-
-    const ownerPlace = useQuery('getOwnerPlace', getOwnerPlace)
-    return {singlePlace, ownerPlace}
-  }
-
-  const {singlePlace, ownerPlace} = useQueryMultiple()  
-  console.log("ownerPlace: ",ownerPlace)
+  const singlePlace = useQuery(['getSinglePlaceData', id], getSinglePlaceData)
   
-  const {data:dataPlace, isLoading:loadingPlace, status: statusPlace } = singlePlace
-  const {data:dataOwnerPlace, isLoading:loadingOwnerPlace, status: statusOwnerPlace } = ownerPlace
+  const {data, isLoading, status} = singlePlace
+  console.log("data: ",data)
 
-  //otra forma de encontrar el username
-  
-  //const getOwnerUser = getOwnerPlace(dataPlace.ownerId)
 
-  if(statusPlace === 'loading') {
+  if(status === 'loading') {
     return <p> Loading...</p>
   }
 
-  if(statusOwnerPlace === 'success')
-  console.log(dataOwnerPlace) 
-
-  if (statusPlace === 'success') {
-    console.log(dataPlace) 
-
-    
+  if (status === 'success') {
+    const userToFind =  data.ownerId.toString()
 
     return (
       <div className={classes.parentcon}>
-        <ImageSlider slides={dataPlace.images} />
+        <ImageSlider slides={data.images} />
+
         <div className='w-full'>
-          <section className='px-8'>
-          <div className={classes.titleicon}>
-            <Titles tag="h3" titleText={dataPlace.name}></Titles>
-            <div className={classes.iconscon}>
-             <div className='flex flex-row'>
-             <HeartFillOut width="28" height="28" className={classes.hearticon} />
-              
-              <StarComplete width="28" height="28" className={classes.staricon} />
-             
-              <ThreePoints width="40" height="28" />
-              
-             </div> 
-               <div className={classes.likequalcon} >
-                 <div className={classes.liketext} >
-                   <p>7</p>
-                   <p>Me gusta</p>
-                 </div>
-                  <div className={classes.qualitext} > 
-                   <p>5</p>
-                   <p>Calificación</p>
-                 </div>
-               </div>  
-                
-              </div>
-              
-            </div>
-           
-            <div className={classes.inforcon}>
-                <div className={classes.avausercon}>
-                  <Avatar />
-                  <div className={classes.usercon}>
-                    <p>Agregado por</p>
-                    <p>Nombre de Usuario</p>
-                  </div>
-                </div>
-                
-              </div>
-              <div className={classes.datecon}>
-                <p>Fecha de publicación</p>
-              </div>
-            
-            <div className={classes.tagsdiv}>
-              {dataPlace.tags.map((tag) => {
-                return <Labels LabelText={tag} className={classes.tags}></Labels>
-              })}
-              
-              
-            </div>
-          
-              
-          </section>
+         {data?.ownerId&&<HeaderOnePlace 
+         userId={userToFind} 
+         title={data.name} 
+         tags={data.tags} 
+         likes={data.likes}
+         updatedAt={data.updatedAt}
+         average={data.average}/>}
         </div>
+
         <div className='w-full'>     
           <section className='px-8'> 
           <div className={classes.decriptioncon}>
                   <Titles tag="h4" titleText="Descripción"></Titles>
                   <p className={classes.text}>
-                    {dataPlace.description}                   
+                    {data.description}                   
                   </p>
                 </div>
                 <div className={classes.mapcon}>
@@ -154,10 +99,10 @@ function OnePlace() {
                     <PinMap width="50" height="50" />
                     <p>Dirección de la Ubicación</p>
                   </div>
-                  <div className={classes.ubication}>Ciudad: {dataPlace.address.city}</div>
-                  <div className={classes.ubication}>Estado: {dataPlace.address.state}</div>
-                  <div className={classes.ubication}>Calle: {dataPlace.address.street}</div>
-                  <div className={classes.ubication}>C.P: {dataPlace.address.zipcode}</div>
+                  <div className={classes.ubication}>Ciudad: {data.address.city}</div>
+                  <div className={classes.ubication}>Estado: {data.address.state}</div>
+                  <div className={classes.ubication}>Calle: {data.address.street}</div>
+                  <div className={classes.ubication}>C.P: {data.address.zipcode}</div>
                   
                 </div>
                 <Btncards className={classes.btn} buttonText="Reseñar" />
@@ -171,12 +116,5 @@ function OnePlace() {
       </div>
       );
   }
-  
-  
-  
-
-
-  
 }
-
 export default OnePlace;

@@ -5,7 +5,7 @@ import Btncards from 'components/Common/Btncards';
 import CardCarousel from 'components/CardCarousel';
 
 import { useQuery } from 'react-query';
-import { getTopRoutes } from 'services/routes.services';
+import { getCardsRoutesHome } from 'services/routes.services';
 import { getNearRoutes } from 'services/routes.services';
 import { getSharedRoutes } from 'services/routes.services';
 
@@ -29,17 +29,17 @@ function RoutePage() {
 
   const useQueryMultiple = () => {
     //Top Routes
-    const cardsTopRoutes = useQuery('getTopRoutes', getTopRoutes, {
+    const cardsTopRoutes = useQuery('getTopRoutes', getCardsRoutesHome, {
       onSuccess : () => console.log('topRoutes fetch with success'),
     })
 
     //Near Routes
-    const cardsNearRoutes = useQuery('getNearRoutes', getNearRoutes, {
+    const cardsNearRoutes = useQuery('getNearRoutes', getCardsRoutesHome, {
       onSuccess : () => console.log('getNearRoutes fetch with success')
     })
 
     //Shared Routes
-    const cardsSharedRoutes = useQuery('getSharedRoutes', getSharedRoutes, {
+    const cardsSharedRoutes = useQuery('getSharedRoutes', getCardsRoutesHome, {
       onSuccess : () => console.log('getSharedRoutes fetch with success')
     })
 
@@ -84,19 +84,19 @@ function RoutePage() {
       <Titles tag='h4' titleText='Top de rutas populares' />
     </div>
     <div className={classes.carruselcon} >
-        {loadingTopRoutes === true?<span>Loading...</span>:<CardCarousel cardsData={dataTopRoutes}/>}
+        {loadingTopRoutes === true?<span>Loading...</span>:<CardCarousel type={'route'} cardsData={dataTopRoutes}/>}
       </div>
       <div className={classes.textcarru}>
       <Titles tag='h4' titleText='Rutas cerca de ti' />
     </div>
     <div className={classes.carruselcon} >
-        {loadingNearRoutes === true?<span>Loading...</span>:<CardCarousel cardsData={dataNearRoutes}/>}
+        {loadingNearRoutes === true?<span>Loading...</span>:<CardCarousel type={'route'} cardsData={dataNearRoutes}/>}
       </div>
       <div className={classes.textcarru}>
       <Titles tag='h4' titleText='Rutas compartidas recientemente' />
     </div>
     <div className={classes.carruselcon} >
-        {loadingSharedRoutes === true?<span>Loading...</span>:<CardCarousel cardsData={dataSharedRoutes}/>}
+        {loadingSharedRoutes === true?<span>Loading...</span>:<CardCarousel type={'route'} cardsData={dataSharedRoutes}/>}
       </div>
   </div>
   
