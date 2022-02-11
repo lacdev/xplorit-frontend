@@ -44,7 +44,7 @@ export default function NavBar() {
   //   window.addEventListener("scroll", listenScrollEvent2)
   // })
 
-  return <div className={navBarColor}>
+  return <nav className={navBarColor}>
       <Link to='/'>
         <NavBarLogo/>
       </Link>
@@ -61,5 +61,5 @@ export default function NavBar() {
       <Link to="/LogIn" >
         <Btncards className='mt-3 py-2'buttonText="Iniciar sesión"/>
       </Link>
-  </div>;
+  </nav>;
 }

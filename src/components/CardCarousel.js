@@ -45,13 +45,15 @@ export default function CardCarousel({cardsData, type}) {
     return <div className="w-full">
         <Slider {...settings}>
         {cardsData && cardsData.map((item)=> {
+          console.log("item:",item)
                 return <Cards 
                   id={item._id}
                   typeofplace={type}
                   key={item._id} 
                   name= {item.name} 
                   labels={item.tags} 
-                  score='3.8' 
+                  score='3.8'
+                  ownerId={item.ownerId} 
                   images={item?.images}/>
               })}           
         </Slider>

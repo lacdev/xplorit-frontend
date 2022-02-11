@@ -8,14 +8,16 @@ const classes={
     h3:'font-primary text-5xl font-normal',
     h4:'font-primary text-4xl font-normal',
     h5:'font-primary text-3xl font-normal',
+    h6:'font-primary text-base font-bold',
     }
 function Titles({titleText="", tag=""}) {
     switch(tag) {
-      case "h1": return  <h1 className={classes.h1}>{titleText}</h1>; 
-      case "h2": return  <h2 className={classes.h2}>{titleText} </h2>; 
-      case "h3": return <h3 className={classes.h3}> {titleText}</h3>; 
-      case "h4": return <h4 className={classes.h4}>{titleText} </h4>;
+      case "h1": return    <h1 className={classes.h1}>{titleText}</h1>; 
+      case "h2": return   <h2 className={classes.h2}>{titleText} </h2>; 
+      case "h3": return   <h3 className={classes.h3}> {titleText}</h3>; 
+      case "h4": return   <h4 className={classes.h4}>{titleText} </h4>;
       case "h5": return    <h5 className={classes.h5}>{titleText} </h5>; 
+      case "h6": return    <h6 className={classes.h6}>{titleText} </h6>; 
       default: return <p>{titleText}</p>;  
 
     }

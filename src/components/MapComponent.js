@@ -5,11 +5,6 @@ import SearchMap from './SearchMap';
 import SearchMapOnPage from './SearchMapOnPage';
 
 
-const containerStyle = {
-  width: '100%',
-  height: '50vh'
-};
-
 const center = {
   lat: -3.745,
   lng: -38.52
@@ -22,10 +17,9 @@ const mapOptions = {
 }
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 
 
-function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLocationOnInputSearch}) {
+function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLocationOnInputSearch, fullHeight=false}) {
     // ?--------------------------------------
     // ? Component setup
     // ?--------------------------------------
@@ -61,12 +55,20 @@ function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLoc
       mapRef.current = null;
   }, []);
 
-    if(!isLoaded) {
-      return null
-    }
     const mapIinitialPosition = selectedLocation !== null ? selectedLocation : center;
     console.log(mapIinitialPosition)
 
+
+    const mapHeight = fullHeight ? '100vh' : '50vh';
+
+
+    const containerStyle = {
+      width: '100%',
+      height: mapHeight,
+    };
+    
+
+    if(!isLoaded) return null 
     return (
       <GoogleMap
         mapContainerStyle={containerStyle}
@@ -78,8 +80,6 @@ function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLoc
       >
         {useOnePageSearch ? <SearchMapOnPage setSelectedLocationOnInputSearch={setSelectedLocationOnInputSearch}/> : <SearchMap/>}
         {selectedLocation && <Marker position={selectedLocation}/>}
-        { /* Child components, such as markers, info windows, etc. */ }
-        <></>
       </GoogleMap>
   )
 }

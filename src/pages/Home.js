@@ -1,4 +1,6 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+
 import HeroBanner from "components/Common/HeroBanner"
 import BigTitle from 'components/Common/BigTitle';
 import FirstBannerImage from 'components/LandingComponents/FirstBannerImage';
@@ -13,7 +15,7 @@ import { getCardsPlacesHome } from 'services/places.services'
 import { getCardsRoutesHome } from 'services/routes.services'
 
 export default function Home() {
-  
+
   const useQueryMultiple = () => {
     //places
   const cardsForPlacesInHome = useQuery('getAllPlaces',getCardsPlacesHome,{

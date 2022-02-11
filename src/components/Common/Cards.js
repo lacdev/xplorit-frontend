@@ -18,7 +18,7 @@ const classes={
 }
 function cards({name, score, labels, images=[], id, typeofplace}) {
 
-    const cardLink = `${typeofplace}/${id}`
+    const cardLink = `/${typeofplace}/${id}`
 
     return (
       <div className={classes.container}>  
