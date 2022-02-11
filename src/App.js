@@ -37,7 +37,7 @@ function App() {
 
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Home />} />
-            <Route path ="route" element={<RoutePage/>}>
+            <Route path ="routes" element={<RoutePage/>}>
           </Route>
             <Route path="places" element={<PlacePage/>}/>
             <Route path="createplace" element={<CreatePlace/>}/>
