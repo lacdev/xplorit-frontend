@@ -112,25 +112,25 @@ function NavBarS() {
                 <div className={classes.linkscon}>
                   {/* Current: "border-secondary text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <Link
-                    to='#'
+                    to='/'
                     className={navBarText}
                   >
                     Home
                   </Link>
                   <Link
-                    to='#'
+                    to='/route'
                     className={navBarText}
                   >
                     Rutas
                   </Link>
                   <Link
-                    to='#'
+                    to='/place'
                     className={navBarText}
                   >
                     Lugares
                   </Link>
                   <Link
-                   to='#'
+                   to='/about'
                     className={navBarText}
                   >
                     Acerca de 
@@ -225,25 +225,25 @@ function NavBarS() {
             <div className={classes.menucon}>
               {/* Current: "bg-blue-200 border-secondary text-black", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-200 hover:text-gray-700" */}
               <Link
-                to='#'
+                to='/'
                 className={classes.movilelinks}
               >
                 Home
               </Link>
               <Link
-                to='#'
+                to='/route'
                 className={classes.movilelinks}
               >
                 Rutas
               </Link>
               <Link
-               to='#'
+               to='/place'
                 className={classes.movilelinks}
               >
                 Lugares
               </Link>
               <Link
-               to='#'
+               to='/about'
                 className={classes.movilelinks}
               >
                 Acerca de
