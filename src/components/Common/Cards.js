@@ -1,5 +1,5 @@
 import React from 'react'
-import  StarHalf from 'assets/icons/StarHalf.jsx'
+import  StarHalf from 'assets/icons/starHalf.jsx'
 import { Link } from 'react-router-dom'
 import Btncards from './Btncards'
 import { Labels } from './Labels'
@@ -18,7 +18,7 @@ const classes={
 }
 function cards({name, score, labels, images=[], id, typeofplace}) {
 
-    const cardLink = `${typeofplace}/${id}`
+    const cardLink = `/${typeofplace}/${id}`
 
     return (
       <div className={classes.container}>  

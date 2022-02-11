@@ -1,7 +1,8 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
-import StarComplete from "assets/icons/StarComplete";
+import StarComplete from "assets/icons/starComplete";
 import ThreePoints from "assets/icons/ThreePoints";
 import Map from "assets/img/mapsample.png";
 import PinMap from "assets/icons/PinMap";
@@ -14,6 +15,12 @@ import { Labels } from 'components/Common/Labels';
 import { SliderElements } from 'components/Common/SliderElements';
 import Titles from 'components/Common/Titles';
 import Btncards from 'components/Common/Btncards';
+import HeaderOneRoute from 'components/HeaderOneRoute';
+
+//useQuery
+import { useQuery } from 'react-query';
+import { getSingleRouteData } from 'services/routes.services';
+
 
 const classes={
   parentcon:'font-primary overflow-x-hidden',
@@ -37,134 +44,87 @@ const classes={
  // mapcon:'',
   ubicationcon:'flex flex-col my-6',
   divubications:'flex flex-row items-center',
+  ubication: 'ml-15 my-2',
  // commentcon:'',
   btn:'ml-9 py-2',
 }
 
 
 function OneRoute() {
-  return (
-    <div className={classes.parentcon}>
-      <ImageSlider slides={SliderElements} />
-      <div className='w-full'>
-        <section className='px-8'>
-        <div className={classes.titleicon}>
-          <Titles tag="h3" titleText="Nombre de Ruta"></Titles>
-          <div className={classes.iconscon}>
-           <div className='flex flex-row'>
-           <HeartFillOut width="28" height="28" className={classes.hearticon} />
-            
-            <StarComplete width="28" height="28" className={classes.staricon} />
-           
-            <ThreePoints width="40" height="28" />
-            
-           </div> 
-             <div className={classes.likequalcon} >
-               <div className={classes.liketext} >
-                 <p>7</p>
-                 <p>Me gusta</p>
-               </div>
-                <div className={classes.qualitext} > 
-                 <p>5</p>
-                 <p>Calificación</p>
-               </div>
-             </div>  
-              
-            </div>
-            
-          </div>
-         
-          <div className={classes.inforcon}>
-              <div className={classes.avausercon}>
-                <Avatar />
-                <div className={classes.usercon}>
-                  <p>Agregado por</p>
-                  <p>Nombre de Usuario</p>
+
+  const {id} = useParams();
+
+  const singleRoute = useQuery(['getSingleRouteData', id], getSingleRouteData)
+
+  const {data, isLoading, status} = singleRoute
+ 
+
+  if(status === 'loading') {
+    return <p> Loading...</p>
+  }
+
+  if (status === 'success') {
+    const userToFind =  data.ownerId.toString()
+    console.log("data: ",data)
+
+    return (
+      <div className={classes.parentcon}>
+        <ImageSlider slides={data.images} />
+
+        <div className='w-full'>
+        {data?.ownerId&&<HeaderOneRoute 
+          userId={userToFind}
+          title={data.name}
+          tags={data.tags}
+          likes={data.likes}
+          updatedAt={data.updatedAt}
+          average={data.average}/>}
+        </div>
+
+        <div className='w-full'>     
+          <section className='px-8'> 
+          <div className={classes.decriptioncon}>
+                  <Titles tag="h4" titleText="Descripción"></Titles>
+                  <p className={classes.text}>
+                  {data.description}
+                  </p>
                 </div>
-              </div>
-              
-            </div>
-            <div className={classes.datecon}>
-              <p>Fecha de publicación</p>
-            </div>
-          
-          <div className={classes.tagsdiv}>
-            <Labels LabelText="Actividades" className={classes.tags}></Labels>
-            <Labels LabelText="Restaurante" className={classes.tags}></Labels>
-            <Labels LabelText="Música" className={classes.tags}></Labels>
-            <Labels LabelText="Familiar"></Labels>
-          </div>
+                <div className={classes.mapcon}>
+                  <img src={Map} alt="ejemplo de mapa" />
+                </div>
+                <div className={classes.ubicationcon}>
+                  <div className={classes.divubications}>
+                    <PinMap width="50" height="50" />
+                    <p>Dirección de la Ubicación</p>
+                    <div className='clases.ubication'>Coordenadas: </div>
+                  </div>
+                  <div className={classes.divubications}>
+                    <PinMap width="50" height="50" />
+                    <p>Dirección de la Ubicación</p>
+                    <div className='clases.ubication'>Coordenadas: </div>
+                  </div>
+                  <div className={classes.divubications}>
+                    <PinMap width="50" height="50" />
+                    <p>Dirección de la Ubicación</p>
+                    <div className='clases.ubication'>Coordenadas: </div>
+
+                  </div>
+                  <div className={classes.divubications}>
+                    <PinMap width="50" height="50" />
+                    <p>Dirección de la Ubicación</p>
+                  </div>
+                </div>
+                <Btncards className={classes.btn} buttonText="Reseñar" />
+                <div className={classes.commentcon}>
+                  <Comments />
+                  <Comments />
+                </div>
+          </section>     
+        </div> 
         
-            
-        </section>
       </div>
-      <div className='w-full'>     
-        <section className='px-8'> 
-        <div className={classes.decriptioncon}>
-                <Titles tag="h4" titleText="Descripción"></Titles>
-                <p className={classes.text}>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis
-                  consectetur quidem nesciunt impedit reiciendis suscipit quia nam
-                  tempora excepturi quo, omnis provident, totam porro repellat esse,
-                  quod nihil aspernatur perspiciatis. Ducimus perspiciatis est repellat
-                  voluptas culpa adipisci! Dolorem sunt commodi voluptate repudiandae
-                  reiciendis vero et labore dolor, sapiente autem. Sit iure ratione
-                  provident a sequi autem tempore vero praesentium cumque. Illo placeat
-                  corrupti nobis autem, explicabo doloremque quis est sequi debitis
-                  quaerat, natus voluptatum harum voluptate ab, laboriosam dignissimos
-                  nulla facilis. Quibusdam doloribus in qui blanditiis quia doloremque!
-                  Odio, id. Dolore molestiae nihil ex reiciendis optio et saepe
-                  incidunt, tempore, consequuntur quaerat voluptas facilis commodi
-                  adipisci pariatur quod sapiente quam quasi, est aliquid esse voluptate
-                  animi nulla! Voluptatem, omnis non. Ratione dolorem pariatur
-                  exercitationem? Quam maxime delectus autem, officiis corporis nisi
-                  facere rerum maiores earum a voluptatem pariatur incidunt esse odit,
-                  dignissimos ipsam consequatur enim. Porro dolorum deleniti quos iusto.
-                  Asperiores magnam voluptas distinctio repellendus, laboriosam magni
-                  quas perspiciatis saepe odit odio debitis inventore delectus porro.
-                  Inventore sint perspiciatis nemo corrupti tempore? Labore repellendus
-                  quas vero officia, magni tempore temporibus? Officiis eveniet dolores
-                  reiciendis tempore at voluptatibus deserunt. Nemo architecto, qui
-                  facilis numquam praesentium sint officiis nesciunt! Expedita, aliquid
-                  assumenda suscipit aliquam rerum architecto ipsam quo voluptatum
-                  quaerat nihil minima. Eius nesciunt consequatur aliquid nam fugit
-                  sequi, eaque distinctio modi quidem quisquam quaerat deserunt,
-                  quibusdam magnam sit incidunt eveniet, autem tenetur neque!
-                  Exercitationem voluptatibus magnam error sit atque necessitatibus at!
-                  Explicabo adipisci inventore harum aliquid consectetur quasi.
-                </p>
-              </div>
-              <div className={classes.mapcon}>
-                <img src={Map} alt="ejemplo de mapa" />
-              </div>
-              <div className={classes.ubicationcon}>
-                <div className={classes.divubications}>
-                  <PinMap width="50" height="50" />
-                  <p>Dirección de la Ubicación</p>
-                </div>
-                <div className={classes.divubications}>
-                  <PinMap width="50" height="50" />
-                  <p>Dirección de la Ubicación</p>
-                </div>
-                <div className={classes.divubications}>
-                  <PinMap width="50" height="50" />
-                  <p>Dirección de la Ubicación</p>
-                </div>
-                <div className={classes.divubications}>
-                  <PinMap width="50" height="50" />
-                  <p>Dirección de la Ubicación</p>
-                </div>
-              </div>
-              <Btncards className={classes.btn} buttonText="Reseñar" />
-              <div className={classes.commentcon}>
-                <Comments />
-                <Comments />
-              </div>
-        </section>     
-      </div> 
-      
-    </div>
-  );
+    );
+  }  
 }
 
 export default OneRoute;
