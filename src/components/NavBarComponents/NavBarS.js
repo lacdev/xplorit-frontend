@@ -118,13 +118,13 @@ function NavBarS() {
                     Home
                   </Link>
                   <Link
-                    to='/route'
+                    to='/routes'
                     className={navBarText}
                   >
                     Rutas
                   </Link>
                   <Link
-                    to='/place'
+                    to='/places'
                     className={navBarText}
                   >
                     Lugares

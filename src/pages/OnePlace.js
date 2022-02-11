@@ -92,7 +92,8 @@ function OnePlace() {
                   </p>
                 </div>
                 <div className={classes.mapcon}>
-                  <img src={Map} alt="ejemplo de mapa" />
+                  <MapComponent/>
+                  {/* <img src={Map} alt="ejemplo de mapa" /> */}
                 </div>
                 <div className={classes.ubicationcon}>
                   <div className={classes.divubications}>
