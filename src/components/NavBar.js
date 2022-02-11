@@ -54,7 +54,7 @@ export default function NavBar() {
       <Link to='/route'>
         <Titles textColors={navBarText} menu="Rutas"/>
       </Link>
-      <Link to='/place'>
+      <Link to='/places'>
         <Titles textColors={navBarText} menu="Lugares"/>
       </Link>
       <Titles textColors={navBarText} menu="Acerca de"/>

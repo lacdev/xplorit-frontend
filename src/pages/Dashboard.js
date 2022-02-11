@@ -4,14 +4,23 @@ import DashboardSideBar from 'components/DashboardComponents/DashboardSideBar';
 //import NavBar from 'components/NavBar';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { useQuery} from 'react-query'
+import { getUserProfilePic } from 'services/user.services';
 
 export default function Dashboard() {
+
+  // const profilePic = useQuery (['getSingleUserData', '6200a26e64fdb24e699493d4'], getUserProfilePic)
+  // const {data, status} = profilePic
+  // if (status === 'success'){
+  //   console.log('data', data)
+  // }
+
   return <div className='grid grid-cols-10'>
     <div className='w-full col-span-10 bg-top'>
       <DashboardBanner/>
     </div>
     <div className='w-full h-full col-span-2 hidden md:block'>
-      <DashboardSideBar/>
+      <DashboardSideBar />
     </div>
     <div className='flex-col col-span-8 min-h-[100vh]'>
       <div >

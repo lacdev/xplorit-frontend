@@ -10,10 +10,10 @@ import Lugares from 'assets/icons/Lugares';
 import Rutas from 'assets/icons/Rutas';
 import Settings from 'assets/icons/Settings';
 
-export default function DashboardSideBar() {
+export default function DashboardSideBar(avatar) {
   return <div className='w-full h-full bg-secondary'>
     <div className='w-full'>
-      <DashboardAvatar/>
+      <DashboardAvatar avatar={avatar}/>
     </div>
     <div className='flex-col relative h-2/3 justify-start top-[200px]'>
       <Link to='routes'>

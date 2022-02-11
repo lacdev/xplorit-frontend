@@ -9,13 +9,17 @@ import Btncards from 'components/Common/Btncards';
 import PlaceSample from '../assets/img/playa.jpg'
 import MapComponent from 'components/MapComponent';
 
-
 export default function CreatePlace({}) {
   const [tags, setTags] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null)
 
   const setTagValues = (tagOptions) => {
     setTags(tagOptions)
-}
+  }
+
+  const setSelectedLocationValue = (coords) => {
+    setSelectedLocation(coords)
+  }
   return <div>
     <img className='w-full max-h-[300px] object-cover brightness-50' src={PlaceSample}></img>
     <BigTile bigTitleText='Publica un nuevo lugar para la comunidad'/>
@@ -36,10 +40,10 @@ export default function CreatePlace({}) {
         <TagSelector setTagValues={setTagValues} tags={tags} />
       </div>
       <label>¿En qué dirección se ubica el lugar?</label>
-      <Inputs placeholderText='Escribe la dirección aquí'/>
-      <div>
-        <MapComponent/>
-      </div>
+        {/* <Inputs placeholderText='Escribe la dirección aquí'/> */}
+        <div>
+          <MapComponent selectedLocation={selectedLocation} setSelectedLocationOnInputSearch={setSelectedLocationValue} useOnePageSearch= {true}/>
+        </div>
       <div className='flex justify-end my-6'>
         <Btncards className='py-1' buttonText='Publicar' />
       </div>
