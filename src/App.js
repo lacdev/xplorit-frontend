@@ -16,11 +16,13 @@ import DashboardComment from 'components/DashboardComponents/DashboardComment'
 import DashboardLikeContainer from 'components/DashboardComponents/DeshboardLikeContainer'
 import DashboardEdit from 'components/DashboardComponents/DashboardEdit'
 import AboutUsPage from 'pages/AboutUs'
+
   
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      
         <Routes>
           <Route path="/login" element={<LogIn/>}/>
           <Route path="/signup" element={<SignUp/>}/>
