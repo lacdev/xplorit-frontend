@@ -80,6 +80,7 @@ module.exports = {
         // => @media (min-width: 360px) {...}
         'sphone':'359px',
         'xsphone':'450px',
+        'minTablet':'1127px'
 
       },
     },
