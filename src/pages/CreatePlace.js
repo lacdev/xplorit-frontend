@@ -8,23 +8,18 @@ import TagSelector from 'components/TagSelector';
 import Btncards from 'components/Common/Btncards';
 import PlaceSample from '../assets/img/playa.jpg'
 import MapComponent from 'components/MapComponent';
-import SearchMap from 'components/SearchMap';
-
-import { GoogleMap, useLoadScript, LoadScript } from '@react-google-maps/api';
-
-const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-const mapLibraries = ['places'];
 
 export default function CreatePlace({}) {
   const [tags, setTags] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null)
 
-  const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: key,
-        libraries: mapLibraries
-   })
   const setTagValues = (tagOptions) => {
     setTags(tagOptions)
-}
+  }
+
+  const setSelectedLocationValue = (coords) => {
+    setSelectedLocation(coords)
+  }
   return <div>
     <img className='w-full max-h-[300px] object-cover brightness-50' src={PlaceSample}></img>
     <BigTile bigTitleText='Publica un nuevo lugar para la comunidad'/>
@@ -45,13 +40,10 @@ export default function CreatePlace({}) {
         <TagSelector setTagValues={setTagValues} tags={tags} />
       </div>
       <label>¿En qué dirección se ubica el lugar?</label>
-      <LoadScript googleMapsApiKey={key}>
-        <SearchMap/>
-        <Inputs placeholderText='Escribe la dirección aquí'/>
+        {/* <Inputs placeholderText='Escribe la dirección aquí'/> */}
         <div>
-          <MapComponent isLoaded={isLoaded} loadError={loadError}/>
+          <MapComponent selectedLocation={selectedLocation} setSelectedLocationOnInputSearch={setSelectedLocationValue} useOnePageSearch= {true}/>
         </div>
-      </LoadScript>
       <div className='flex justify-end my-6'>
         <Btncards className='py-1' buttonText='Publicar' />
       </div>

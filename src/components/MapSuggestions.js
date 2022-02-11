@@ -11,12 +11,12 @@ const MapSuggestions = ({loading, suggestions,getSuggestionItemProps }) => {
         visibility : !loading && suggestions.length <= 0 ?'hidden' : 'visible',
     }
     return (
-        <div className = 'suggestionsContainer' style = {suggestionsStyle}>
+        <div className = 'bg-white w-full' style = {suggestionsStyle}>
             {loading && <span> ...Loading  </span>}
             {
                 suggestions.map((suggestion) => {
                     return (
-                        <div {...getSuggestionItemProps(suggestion)} className = 'suggestion' key = {suggestion.description}>
+                        <div {...getSuggestionItemProps(suggestion)} className = 'border-black' key = {suggestion.description}>
                             {suggestion.description}
                         </div>
                     )

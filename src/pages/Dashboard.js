@@ -10,14 +10,17 @@ import { getUserProfilePic } from 'services/user.services';
 export default function Dashboard() {
 
   const profilePic = useQuery (['getSingleUserData', '6200a26e64fdb24e699493d4'], getUserProfilePic)
-  console.log(profilePic)
+  const {data, status} = profilePic
+  if (status === 'success'){
+    console.log('data', data)
+  }
 
   return <div className='grid grid-cols-10'>
     <div className='w-full col-span-10 bg-top'>
       <DashboardBanner/>
     </div>
     <div className='w-full h-full col-span-2 hidden md:block'>
-      <DashboardSideBar/>
+      <DashboardSideBar avatar={data.avatar}/>
     </div>
     <div className='flex-col col-span-8 min-h-[100vh]'>
       <div >
