@@ -8,8 +8,8 @@ import Btncards from 'components/Common/Btncards'
 
 
 const classes={
-    beforeScroll : 'font-primary fixed bg-none w-full z-10 shadow z-10',
-    afterScroll : 'font-primary fixed w-full z-10 shadow bg-white z-10 shadow',
+    beforeScroll : 'font-primary fixed w-full z-10 bg-transparent shadow',
+    afterScroll : 'font-primary fixed w-full z-10 shadow bg-white shadow',
     parentcon:'max-w-7xl mx-auto px-2 sm:px-6 lg:px-8',
     positioncon:'relative flex justify-between h-16',
     parentmovile:'absolute inset-y-0 left-0 flex items-center sm:hidden',
