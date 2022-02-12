@@ -27,3 +27,7 @@ export async function getPlaceLikes({queryKey}) {
     const getOwnerPlaceData = getOwnerPlacePromise.data
     return getOwnerPlaceData
 }
+
+export async function createPlace(){
+    
+}

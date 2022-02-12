@@ -7,14 +7,14 @@ import useCurrentLocation from 'hooks/UseCurrentLocation';
 
 
 const center = {
-  lat: -3.745,
-  lng: -38.52
+  lat: 19.4326077,
+  lng: -99.133208
 };
 
 const mapLibraries = ['places'];
 const mapOptions = {
     disableDefaultUI: true,
-    zoomControl: false
+    zoomControl: true
 }
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -83,8 +83,8 @@ function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLoc
       const { center } = mapRef.current;
 
 
-      // const lat = center.lat();
-      // const lng = center.lng();
+      const lat = center.lat();
+      const lng = center.lng();
       const coords = {
           lat: center.lat(),
           lng: center.lng()
@@ -124,7 +124,6 @@ function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLoc
     }
 
     const mapIinitialPosition = selectedLocation !== null ? selectedLocation : center;
-    console.log(mapIinitialPosition)
 
 
     const mapHeight = fullHeight ? '100vh' : '50vh';
@@ -143,8 +142,8 @@ function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLoc
         mapContainerStyle={containerStyle}
         onLoad={onMapLoad}
         onUnmount={onMapLoadUnmount}
-        center={center}
-        zoom={15}
+        center={mapIinitialPosition}
+        zoom={12}
         options={mapOptions}
         onDragEnd={onMapDrag}
         onClick={onMapClick}

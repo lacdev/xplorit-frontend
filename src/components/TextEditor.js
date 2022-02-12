@@ -1,7 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-export default function TextEditor() {
+export default function TextEditor({value = "", onTextEditorChange, initialValue=""}) {
+  const onEditorChange = (newValue, editor)=>{
+    console.log(newValue)
+    onTextEditorChange(newValue)
+    console.log(newValue)
+  }
+
   const editorRef = useRef(null);
   const log = () => {
     if (editorRef.current) {
@@ -12,7 +18,9 @@ export default function TextEditor() {
     <>
       <Editor
         onInit={(evt, editor) => editorRef.current = editor}
-        initialValue=""
+        initialValue={initialValue}
+        value={value}
+        onEditorChange={onEditorChange}
         init={{
           height: 300,
           menubar: false,
