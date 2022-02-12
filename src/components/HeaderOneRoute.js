@@ -50,7 +50,7 @@ const classes={
   ubication: 'ml-15 my-2',
  // commentcon:'',
   btn:'ml-9 py-2',
-  created : 'text-2xl border '
+  created : 'text-2xl  '
 }
 function HeaderOneRoute({userId, tags, title, likes, updatedAt, average}) {
    console.log("user: ",userId)
