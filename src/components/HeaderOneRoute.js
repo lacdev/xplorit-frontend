@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
-import StarComplete from "assets/icons/starComplete";
+import StarComplete from "assets/icons/StarComplete";
 import ThreePoints from "assets/icons/ThreePoints";
 import Map from "assets/img/mapsample.png";
 import PinMap from "assets/icons/PinMap";
