@@ -10,10 +10,12 @@ import Lugares from 'assets/icons/Lugares';
 import Rutas from 'assets/icons/Rutas';
 import Settings from 'assets/icons/Settings';
 
-export default function DashboardSideBar(avatar) {
+export default function DashboardSideBar({avatar, username}) {
+  console.log("avatar: ", avatar)
+
   return <div className='w-full h-full bg-secondary'>
     <div className='w-full'>
-      <DashboardAvatar avatar={avatar}/>
+      <DashboardAvatar avatar={avatar} username={username}/>
     </div>
     <div className='flex-col relative h-2/3 justify-start top-[200px]'>
       <Link to='routes'>

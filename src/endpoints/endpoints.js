@@ -13,5 +13,5 @@ export const endpoints = {
 
     getPlacesLikes: `${base_url}/places/`,
 
-    getOwnerRoute : `${base_url}/users`,
+    getUserProfile : `${base_url}/users`,
 }
