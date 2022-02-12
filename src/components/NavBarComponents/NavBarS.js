@@ -70,7 +70,7 @@ function NavBarS() {
        else if (isMinTablet === true || isTablet === true)
         scrollMax=500;
         else if (isDesktop === true || isBigDesktop === true)
-          scrollMax=1000;
+          scrollMax=900;
         
       if (window.scrollY > scrollMax) {
         
