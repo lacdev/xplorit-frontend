@@ -26,7 +26,7 @@ export default function CreatePlace({}) {
     setSelectedLocation(coords)
     setAddress(address)
   }
-
+  console.log("Aqui es")
   const Publish = async (event) => {
     event.preventDefault();
     if (address == null || selectedLocation == null){
@@ -61,7 +61,7 @@ export default function CreatePlace({}) {
   return <div>
     <img className='w-full max-h-[300px] object-cover brightness-50' src={PlaceSample}></img>
     <BigTile bigTitleText='Publica un nuevo lugar para la comunidad'/>
-    <form className='w-2/3 mx-auto'>
+    <form  onSubmit= {Publish} className='w-2/3 mx-auto'>
       <label className='text-xl font-semibold'>Título</label>
       <Inputs value={name} onChange={(event)=> setName(event.target.value)} placeholderText="Escribe aquí el nombre del lugar"/>
       <label className='text-xl font-semibold'>Agrega las imágenes del lugar</label>
@@ -82,7 +82,8 @@ export default function CreatePlace({}) {
           <MapComponent selectedLocation={selectedLocation} setSelectedLocationOnInputSearch={setSelectedLocationValue} useOnePageSearch= {true}/>
         </div>
       <div className='flex justify-end my-6'>
-        <Btncards onClick={Publish} className='py-1' buttonText='Publicar' />
+        <input type='submit' value="Publicar"/>
+        {/* <Btncards onClick={Publish} className='py-1' buttonText='Publicar' /> */}
       </div>
     </form>
   </div>;
