@@ -47,9 +47,21 @@ function PlacePage() {
 
   const { cardsTopPlaces, cardsNearPlaces, cardsRecentlySharedPlaces } = useQueryMultiple()
 
-  const {data:topPlacesData, isLoading:loadingTopPlaces, } = cardsTopPlaces
-  const {data:nearPlacesData, isLoading:loadingNearPlaces } = cardsNearPlaces
-  const {data:recentlyPlacesData, isLoading:loadingRecentlyPlaces } = cardsRecentlySharedPlaces
+  const {data:topPlacesData, isLoading:loadingTopPlaces, status} = cardsTopPlaces
+  const {data:nearPlacesData, isLoading:loadingNearPlaces, status: statusP} = cardsNearPlaces
+  const {data:recentlyPlacesData, isLoading:loadingRecentlyPlaces, status: statusR } = cardsRecentlySharedPlaces
+
+  if(status ==="error") {
+    <span  className='font-bold text-center'> no se encontraron lugares </span>
+  }
+
+  if(statusP === "error") {
+    <span  className='font-bold text-center'> no se encontraron lugares </span>
+  }
+
+  if(statusR === "error") {
+    <span  className='font-bold text-center'> no se encontraron lugares </span>
+  }
 
 
   return (

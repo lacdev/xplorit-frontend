@@ -4,6 +4,7 @@ const base_url = `${process.env.REACT_APP_SERVER_URL}/v1`
 
 export const endpoints = {
 
+    getplacesUser : `${base_url}/places/`,
 
     getAllPlaces : `${base_url}/places/`,
 
@@ -13,7 +14,8 @@ export const endpoints = {
 
     getPlacesLikes: `${base_url}/places/`,
 
-    getOwnerRoute : `${base_url}/users`,
+    getUserProfile : `${base_url}/users`,
 
     postPlace : `${base_url}/places/`,
+
 }

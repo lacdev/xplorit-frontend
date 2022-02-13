@@ -6,7 +6,6 @@ import { Outlet, useLocation } from 'react-router-dom';
 export default function PageLayout() {
   const location = useLocation();
   const renderFooter = setRenderFooter(location);
-  console.log(location)
   return <div>
       <NavBarS/>
         <div>
@@ -26,8 +25,7 @@ function setRenderFooter(location){
   ]
 
   const routeFound = noFooterRoute.indexOf(pathname?.toLowerCase()) 
-  console.log(routeFound)
-  console.log(pathname)
+
 
 
   if(routeFound<0) {

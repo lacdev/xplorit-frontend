@@ -52,6 +52,8 @@ function RoutePage() {
   const {data:dataNearRoutes, isLoading:loadingNearRoutes } = cardsNearRoutes
   const {data:dataSharedRoutes, isLoading:loadingSharedRoutes } = cardsSharedRoutes
 
+  
+
   return (
     <div className={classes.parentcon}>
     <div className={classes.container}>

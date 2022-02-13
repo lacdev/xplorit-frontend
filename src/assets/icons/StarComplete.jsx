@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function starComplete({width , height, className}) {
+export default function StarComplete({width , height, className}) {
   return (
     <>
       <svg

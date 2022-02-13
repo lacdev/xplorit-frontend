@@ -56,7 +56,6 @@ const classes={
 
 function OneRoute() {
 
-
   const {id} = useParams();
 
   const singleRoute = useQuery(['getSingleRouteData', id], getSingleRouteData)
@@ -130,7 +129,6 @@ function OneRoute() {
       </div>
     );
   }  
-
 }
 
 export default OneRoute;

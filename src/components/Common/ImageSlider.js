@@ -73,7 +73,6 @@ function ImageSlider({slides}) {
     if(!Array.isArray(slides) || slides.length <= 0){
         return null;
     };
-
     return (
   <section className={classes.secction} ref={slideRef}>
       <ArrowLeft  onClick={prevSlide} className={classes.iconleft} />
