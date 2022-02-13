@@ -7,6 +7,9 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { useQuery} from 'react-query'
 import { getUserProfilePic } from 'services/user.services';
+import DirectAccess from 'components/DashboardComponents/DirectAccess';
+
+
 
 export default function Dashboard() {
 
@@ -32,6 +35,9 @@ export default function Dashboard() {
         {status === 'loading' ? <span> Loading</span> :<Outlet/>}
       </div>
     </div>
+      <div className='fixed bottom-0 min-w-full'>
+        <DirectAccess />
+      </div>
 </div>)
   
 }

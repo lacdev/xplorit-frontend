@@ -20,6 +20,8 @@ import DashboardEdit from 'components/DashboardComponents/DashboardEdit'
 import AboutUsPage from 'pages/AboutUs'
 import DashboardPlacesContainer from 'components/DashboardComponents/DashboardPlacesContainer'
 import DashboardRoutesContainer from 'components/DashboardComponents/dashboardRoutesContainer'
+import LoaderHome from 'components/LandingComponents/LoaderHome'
+
 
   
 function App() {
@@ -36,6 +38,7 @@ function App() {
           <Route path="/about" element={<AboutUsPage/>}/>
           <Route path="/searchplace" element={<PlaceSearch/>}/>
           <Route path="/searchroute" element={<RouteSearch/>}/>
+          <Route path="/direct" element={<LoaderHome/>}/>
 
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Home />} />

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 //Components
 import Btncards from 'components/Common/Btncards';
 import Titles from 'components/Common/Titles';
@@ -30,14 +31,31 @@ const classes={
    starticon:'mt-5 mr-0',
    starttext:'text-xs text-center',
    placestext:'mt-3 text-xxs underline decoration-solid decoration-black text-center',
-   mapcon:'minTablet:block hidden col-span-3 bg-gray-200 h-full',
+   mapcon:'minTablet:block col-span-3 bg-gray-200 h-full',
 
   
 }
 
-export default function RouteSearch() {
-
-  const [showMap, setShowMap] = useState(true);
+function RouteSearch() {
+  const [showMap, setShowMap] = useState(false);
+  const isPhone = useMediaQuery({query:'(max-width: 960px)'});
+ 
+  const HandlerClick = () => {
+    
+    setShowMap(!showMap)
+    console.log(showMap)
+  }
+  let buttonText = 'Mostrar Mapa' 
+  let mapContainerClass = classes.mapcon
+  
+  if (!showMap) 
+   mapContainerClass += ' hidden'
+  else 
+   buttonText = 'Ocultar Mapa';
+  
+   const renderSideBar = (!isPhone || !showMap ) ? true : false
+  
+ 
 
   return (
    
@@ -52,7 +70,7 @@ export default function RouteSearch() {
             </Btncards>
           </div>
           <section className={classes.renderres}>
-            <aside className={classes.asidecon}>
+           {renderSideBar && <aside className={classes.asidecon}>
               <div className={classes.rescon} >Resultados de busqueda</div>
               <article className={classes.articlecon}>
                 <div className={classes.infocon}>
@@ -111,13 +129,15 @@ export default function RouteSearch() {
                   </div>
                 </div>
               </article>
-            </aside>
-            <div className={`${classes.mapcon} ${showMap ===false}`}>
+            </aside>}
+            <div className={mapContainerClass}>
               <MapComponent fullHeight={true} />
             </div>
           </section>
+          <Btncards buttonText={buttonText} className="py-1 block minTablet:hidden" onClick={HandlerClick}></Btncards>
         </section>
       </>
   
   );
 }
+export default RouteSearch;
