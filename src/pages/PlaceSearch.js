@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 //Components
 import Btncards from 'components/Common/Btncards';
 import Titles from 'components/Common/Titles';
@@ -28,13 +29,29 @@ const classes={
    btn:'py-1',
    starticon:'mt-5',
    starttext:'text-xs text-center',
-   mapcon:'minTablet:block hidden col-span-3 bg-gray-200 h-full',
+   mapcon:'minTablet:block col-span-3 bg-gray-200 h-full',
 
   
 }
 function PlaceSearch() {
- const [showMap, setShowMap] = useState(true);
+ const [showMap, setShowMap] = useState(false);
+ const isPhone = useMediaQuery({query:'(max-width: 960px)'});
 
+ const HandlerClick = () => {
+   
+   setShowMap(!showMap)
+   console.log(showMap)
+ }
+ let buttonText = 'Mostrar Mapa' 
+ let mapContainerClass = classes.mapcon
+ 
+ if (!showMap) 
+  mapContainerClass += ' hidden'
+ else 
+  buttonText = 'Ocultar Mapa';
+ 
+  const renderSideBar = (!isPhone || !showMap ) ? true : false
+ 
 
   return (
     <>
@@ -48,7 +65,7 @@ function PlaceSearch() {
           </Btncards>
         </div>
         <section className={classes.renderres}>
-          <aside className={classes.asidecon}>
+         {renderSideBar && <aside className={classes.asidecon}>
             <div className={classes.rescon} >Resultados de busqueda</div>
             <article className={classes.articlecon}>
               <div className={classes.infocon}>
@@ -108,11 +125,12 @@ function PlaceSearch() {
                 </div>
               </div>
             </article>
-          </aside>
-          <div className={classes.mapcon}>
-            <MapComponent fullHeight={true} />
+          </aside>}
+          <div className={mapContainerClass}>
+            <MapComponent fullHeight={true} useOnePageSearch={true}/>
           </div>
         </section>
+        <Btncards buttonText={buttonText} className="py-1 block minTablet:hidden" onClick={HandlerClick}></Btncards>
       </section>
     </>
   );
