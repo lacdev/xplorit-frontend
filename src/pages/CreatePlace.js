@@ -10,6 +10,8 @@ import PlaceSample from '../assets/img/playa.jpg'
 import MapComponent from 'components/MapComponent';
 import UploadImage from 'components/UploadImage';
 import { formatGoogleMapsAdressToNormalAdress } from 'utils/utils';
+import { createPlace } from 'services/places.services';
+import { useMutation } from 'react-query';
 
 export default function CreatePlace({}) {
   const [name, setName] = useState("")
@@ -17,9 +19,17 @@ export default function CreatePlace({}) {
   const [description, setDescription] = useState("")
   const [address, setAddress] = useState(null)
   const [selectedLocation, setSelectedLocation] = useState(null)
+  const [placeImages, setPlaceImages] = useState([])
+  // const {isLoading, isError, error, mutate} = useMutation(createPlace, {retry: 3})
+
 
   const setTagValues = (tagOptions) => {
     setTags(tagOptions)
+  }
+
+  const saveImageToState = (imagesData) =>{
+    console.log(imagesData)
+    setPlaceImages(imagesData)
   }
 
   const setSelectedLocationValue = (coords, address) => {
@@ -27,19 +37,20 @@ export default function CreatePlace({}) {
     setAddress(address)
   }
   console.log("Aqui es")
+
   const Publish = async (event) => {
     event.preventDefault();
     if (address == null || selectedLocation == null){
       return 
     }
-    const date = new Date();
-    const name = ""
+    // const date = new Date();
     const newTags = tags.map ((tag) =>{
       return tag.value
     })
-
+    const ownerId = "6200a26e64fdb24e699493d4"
     try {
       const data = {
+        ownerId: ownerId,
         name,
         description,
         address : formatGoogleMapsAdressToNormalAdress(address[0].address_components),
@@ -52,11 +63,13 @@ export default function CreatePlace({}) {
         }
       };
       console.log(data)
-      // await createPlace(data);
+      await createPlace(data, placeImages);
+      // {mutate(data)}
     } catch (error) {
       console.error(error.message);
     }
   }
+
 
   return <div>
     <img className='w-full max-h-[300px] object-cover brightness-50' src={PlaceSample}></img>
@@ -66,7 +79,7 @@ export default function CreatePlace({}) {
       <Inputs value={name} onChange={(event)=> setName(event.target.value)} placeholderText="Escribe aquí el nombre del lugar"/>
       <label className='text-xl font-semibold'>Agrega las imágenes del lugar</label>
       <div className='flex w-full justify-center items-center h-96 rounded'>
-        <UploadImage/>
+        <UploadImage value={placeImages} onImageAdd={saveImageToState}/>
       </div>
       <label className='text-xl font-semibold'>Danos una descripción del lugar</label>
       <div  className='my-4'>

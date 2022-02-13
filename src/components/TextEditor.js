@@ -3,9 +3,7 @@ import { Editor } from '@tinymce/tinymce-react';
 
 export default function TextEditor({value = "", onTextEditorChange, initialValue=""}) {
   const onEditorChange = (newValue, editor)=>{
-    console.log(newValue)
     onTextEditorChange(newValue)
-    console.log(newValue)
   }
 
   const editorRef = useRef(null);

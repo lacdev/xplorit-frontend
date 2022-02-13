@@ -1,3 +1,4 @@
+//Function to take the data from the map and change it into desired structure
 
 export function formatGoogleMapsAdressToNormalAdress(address) {
     if (address.length ===3) {
