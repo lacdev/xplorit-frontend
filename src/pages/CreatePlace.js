@@ -1,17 +1,14 @@
 import React from 'react';
 import {useState} from 'react';
-import BigTile from 'components/Common/BigTitle'
-import Inputs from 'components/Common/Inputs'
-import AddImage from '../assets/icons/AddImage'
-import TextEditor from '../components/TextEditor'
+import BigTile from 'components/Common/BigTitle';
+import Inputs from 'components/Common/Inputs';
+import TextEditor from '../components/TextEditor';
 import TagSelector from 'components/TagSelector';
-import Btncards from 'components/Common/Btncards';
-import PlaceSample from '../assets/img/playa.jpg'
+import PlaceSample from '../assets/img/playa.jpg';
 import MapComponent from 'components/MapComponent';
 import UploadImage from 'components/UploadImage';
 import { formatGoogleMapsAdressToNormalAdress } from 'utils/utils';
 import { createPlace } from 'services/places.services';
-import { useMutation } from 'react-query';
 
 export default function CreatePlace({}) {
   const [name, setName] = useState("")
@@ -20,8 +17,6 @@ export default function CreatePlace({}) {
   const [address, setAddress] = useState(null)
   const [selectedLocation, setSelectedLocation] = useState(null)
   const [placeImages, setPlaceImages] = useState([])
-  // const {isLoading, isError, error, mutate} = useMutation(createPlace, {retry: 3})
-
 
   const setTagValues = (tagOptions) => {
     setTags(tagOptions)
@@ -59,7 +54,7 @@ export default function CreatePlace({}) {
 	      scheduleFinish:"2022-01-27",
         location : {
           type : "point",
-          coordinates: [selectedLocation.lat, selectedLocation.lng]
+          coordinates: [selectedLocation.lng, selectedLocation.lat]
         }
       };
       console.log(data)
@@ -94,8 +89,8 @@ export default function CreatePlace({}) {
         <div>
           <MapComponent selectedLocation={selectedLocation} setSelectedLocationOnInputSearch={setSelectedLocationValue} useOnePageSearch= {true}/>
         </div>
-      <div className='flex justify-end my-6'>
-        <input type='submit' value="Publicar"/>
+      <div className='flex justify-end my-6 text-white'>
+        <input className="bg-secondary rounded-xl py-1 px-4" type='submit' value="Publicar"/>
         {/* <Btncards onClick={Publish} className='py-1' buttonText='Publicar' /> */}
       </div>
     </form>
