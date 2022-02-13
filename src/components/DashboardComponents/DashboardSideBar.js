@@ -11,7 +11,6 @@ import Rutas from 'assets/icons/Rutas';
 import Settings from 'assets/icons/Settings';
 
 export default function DashboardSideBar({avatar, username}) {
-  console.log("avatar: ", avatar)
 
   return <div className='w-full h-full bg-secondary'>
     <div className='w-full'>

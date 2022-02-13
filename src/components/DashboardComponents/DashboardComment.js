@@ -6,7 +6,27 @@ import Edit from 'assets/icons/Edit';
 import Trash from 'assets/icons/Trash';
 import Avatar from 'components/Common/Avatar';
 
+//UseQuery
+import { useQuery} from 'react-query'
+import { getCommentsCreatedByUser } from 'services/user.services';
+
 export default function DashboardComment() {
+
+    const id = '61ef68279262e2f167700caf'
+
+    const getComments = useQuery(["getComments", id], getCommentsCreatedByUser)
+    const { data, status, error } = getComments
+
+    if(error === true) {
+        console.log("an errro had happend")
+    }
+
+    if (status === 'succes') {
+        console.log(data)
+    }
+
+
+
   return <div className='w-full bg-white shadow-md rounded-md font-primary m-6'>
       <div className='inline-flex justify-start items-center w-full px-10'>
           <Avatar/>

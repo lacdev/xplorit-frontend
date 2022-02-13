@@ -18,22 +18,26 @@ export default function Home() {
 
   const useQueryMultiple = () => {
     //places
-  const cardsForPlacesInHome = useQuery('getAllPlaces',getCardsPlacesHome,{
-    onSuccess: () => console.log('data fetch with success'),
-  } ) 
+  const cardsForPlacesInHome = useQuery('getAllPlaces',getCardsPlacesHome) 
 
     //Routes
-  const cardsForRoutesInHome = useQuery('getAllRoutes', getCardsRoutesHome, {
-    onSuccess: () => console.log('data fetch with success'),
-  })  
+  const cardsForRoutesInHome = useQuery('getAllRoutes', getCardsRoutesHome)  
  
   return { cardsForPlacesInHome, cardsForRoutesInHome };
   };
 
   const {cardsForPlacesInHome, cardsForRoutesInHome} = useQueryMultiple()
 
-  const { data:placesData, isLoading:loadingPlace, } = cardsForPlacesInHome
-  const { data:routesData, isLoading:loadingRoute,  } = cardsForRoutesInHome
+  const { data:placesData, isLoading:loadingPlace, status } = cardsForPlacesInHome
+  const { data:routesData, isLoading:loadingRoute, status: statusR } = cardsForRoutesInHome
+
+  if(status === 'error') {
+    return <span className='font-bold text-center'>No se encontraron lugares con ese ID</span>
+  }
+
+  if(statusR === 'error') {
+    return <span className='font-bold text-center'>No se encontraron rutas con ese ID</span>
+  }
   
 
   return <div className='justify-center align-middle'> 

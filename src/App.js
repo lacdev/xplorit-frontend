@@ -18,6 +18,8 @@ import DashboardComment from 'components/DashboardComponents/DashboardComment'
 import DashboardLikeContainer from 'components/DashboardComponents/DeshboardLikeContainer'
 import DashboardEdit from 'components/DashboardComponents/DashboardEdit'
 import AboutUsPage from 'pages/AboutUs'
+import DashboardPlacesContainer from 'components/DashboardComponents/DashboardPlacesContainer'
+import DashboardRoutesContainer from 'components/DashboardComponents/dashboardRoutesContainer'
 
   
 function App() {
@@ -43,8 +45,8 @@ function App() {
             <Route path="createplace" element={<CreatePlace/>}/>
             <Route path="createroute" element={<CreateRoute/>}/>
             <Route path="profile" element={<Dashboard/>}>
-              <Route path="routes" element={<DashboardCardContainer/>} />
-              <Route path="places" element={<DashboardCardContainer/>} />
+              <Route path="routes" element={<DashboardRoutesContainer />} />
+              <Route path="places" element={<DashboardPlacesContainer/>} />
               <Route path="likes" element={<DashboardLikeContainer/>} />
               <Route path="comments" element={<DashboardComment/>}/>
               <Route path="edit" element={<DashboardEdit/>}/>

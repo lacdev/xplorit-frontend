@@ -15,15 +15,6 @@ export default function Dashboard() {
   const getUser = useQuery(['getUserProfilePic',id],getUserProfilePic)
 
   const { data, status } = getUser
-  
-  if(status === 'loading ') {
-    return  <p> Loading...</p>
-  }
-
-  if(status === 'success') {
-    console.log("status: ", status)
-    console.log("data: ", data)
-  }
 
   return (
     <div className='grid grid-cols-10'>
@@ -38,7 +29,7 @@ export default function Dashboard() {
         <BigTitle className='flex justify-start' bigTitleText='Rutas creadas'/>
         </div>
       <div className=' flex w-5/6 mx-auto my-4'>
-        {status === 'loading' ? <span> Loading</span> :<Outlet username={data.username}/>}
+        {status === 'loading' ? <span> Loading</span> :<Outlet/>}
       </div>
     </div>
 </div>)
