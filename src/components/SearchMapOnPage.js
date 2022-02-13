@@ -27,17 +27,17 @@ const [address, setAddress] = useState("");
 const [selectedAddress, setSelectedAddress] = useState("");
 
 useEffect( () => {
-    // geocodeByAddress(selectedAddress)
-    //   .then(results => getLatLng(results[0]))
-    //   .then(latLng => console.log('Success', latLng))
-    //   .catch(error => console.error('Error', error));
-    geocodeByAddress(selectedAddress).
-    then(results => getLatLng(results[0]))
-    .then((latLng) => {
-            console.log(latLng)
-            setSelectedLocationOnInputSearch(latLng);
-    })
-    .catch(error => console.error('Error', error));
+
+    async function getCoordinates(){
+        let results = await geocodeByAddress(selectedAddress)
+        console.log('result', results)
+        let coords = await getLatLng(results[0])
+        console.log('new coords', coords)
+        setSelectedLocationOnInputSearch(coords, results)
+        
+    } 
+    getCoordinates()
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [selectedAddress]);
 // ?--------------------------------------

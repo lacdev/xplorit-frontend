@@ -27,3 +27,15 @@ export async function getPlaceLikes({queryKey}) {
     const getOwnerPlaceData = getOwnerPlacePromise.data
     return getOwnerPlaceData
 }
+
+export async function createPlace(data, images){
+    const service_url = `${endpoints.postPlace}`
+    const formData = new FormData()
+    formData.append('data', JSON.stringify(data))
+    for(let image of images) {
+        formData.append('images', image)
+    }
+    console.log("Data desde el back", data)
+    return await axios.post(service_url, formData)
+    // return postNewPlace
+}
