@@ -29,6 +29,7 @@ module.exports = {
         commentsW:'50rem',
       },
       height:{
+        loaderCard:'35rem',
         testimonialHeight:'24rem',
         footerBannerH:'20.5rem',
         commentsH:'18.75rem',

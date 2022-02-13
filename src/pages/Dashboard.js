@@ -23,7 +23,6 @@ export default function Dashboard() {
       <div className="w-full col-span-10 bg-top">
         <DashboardBanner />
       </div>
-      <DirectAccess />
       <div className="w-full h-full col-span-2 hidden md:block">
         <DashboardSideBar />
       </div>
@@ -38,6 +37,9 @@ export default function Dashboard() {
         <div className=" flex w-5/6 mx-auto my-4">
           <Outlet />
         </div>
+      </div>
+      <div className='fixed bottom-0 min-w-full'>
+      <DirectAccess />
       </div>
     </div>
   );
