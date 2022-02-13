@@ -5,7 +5,7 @@ import StarHalf from 'assets/icons/StarHalf';
 import Edit from 'assets/icons/Edit';
 import Trash from 'assets/icons/Trash';
 
-export default function DashboardCard({name, score, tags}) {
+export default function DashboardCard({name}) {
   return <div className='inline-flex w-full bg-white shadow-md rounded-md font-primary m-6'>
       <div className='w-1/3 h-full'>
         <img className='rounded-md' src={playa} alt=""></img>

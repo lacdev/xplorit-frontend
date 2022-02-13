@@ -13,9 +13,7 @@ import MapSuggestions from './MapSuggestions';
 // Create Functional Component
 // --------------------------------------
 const SearchMap = ({
-    containerName = "",
     // changePosition,
-    localSearch,
     onChangeEvent,
     onAddressSelected
 }) => {
@@ -27,7 +25,11 @@ const [address, setAddress] = useState("");
 const [selectedAddress, setSelectedAddress] = useState("");
 
 useEffect( () => {
-    geocodeByAddress(selectedAddress).then(results => getLatLng(results[0]))
+    geocodeByAddress(selectedAddress)
+    .then((results) => {
+        console.log('results', results)
+        getLatLng(results[0])
+    })
     .then((latLng) => {
             onAddressSelected(latLng, true);
     })
@@ -52,7 +54,8 @@ const handleSelect =  (selectedAddress) => {
 // ?--------------------------------------
 const SearchSelectedLocation = (selectedAddress) => {
     // setSelectedAddress(selectedAddress);
-    geocodeByAddress(selectedAddress).then(results => getLatLng(results[0]))
+    geocodeByAddress(selectedAddress)
+    .then(results => getLatLng(results[0]))
     .then((latLng) => {
             onAddressSelected(latLng, true);
     })

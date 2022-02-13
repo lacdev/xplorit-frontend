@@ -13,10 +13,10 @@ const options = [
     {value:"Playa", label:"Playa"},
 ]
 
-const TagSelector = ({tags, setTagValues}) => {
+const CitySelector = ({tags, setTagValues}) => {
     
     const handleChange = (selectedOptions) => {
-        if(selectedOptions.length > 4) {
+        if(selectedOptions.length > 1) {
             return
         }
         setTagValues(selectedOptions)
@@ -32,4 +32,4 @@ const TagSelector = ({tags, setTagValues}) => {
         );
     }
 
-export default TagSelector
+export default CitySelector
