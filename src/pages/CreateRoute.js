@@ -9,6 +9,7 @@ import MapComponent from 'components/MapComponent';
 import UploadImage from 'components/UploadImage';
 import { formatGoogleMapsAdressToNormalAdress } from 'utils/utils';
 import { createPlace } from 'services/places.services';
+import ExtraPlaceForRoute from 'components/ExtraPlaceForRoute';
 
 export default function CreateRoute({}) {
   const [name, setName] = useState("")
@@ -54,7 +55,7 @@ export default function CreateRoute({}) {
 	      scheduleFinish:"2022-01-27",
         location : {
           type : "point",
-          coordinates: [selectedLocation.lat, selectedLocation.lng]
+          coordinates: [selectedLocation.lng, selectedLocation.lat]
         }
       };
       console.log(data)
@@ -85,10 +86,10 @@ export default function CreateRoute({}) {
         <TagSelector setTagValues={setTagValues} tags={tags} />
       </div>
       <label className='text-xl font-semibold'>¿En qué dirección se ubica el lugar?</label>
-        {/* <Inputs placeholderText='Escribe la dirección aquí'/> */}
-        <div>
-          <MapComponent selectedLocation={selectedLocation} setSelectedLocationOnInputSearch={setSelectedLocationValue} useOnePageSearch= {true}/>
-        </div>
+      <div>
+        <MapComponent selectedLocation={selectedLocation} setSelectedLocationOnInputSearch={setSelectedLocationValue} useOnePageSearch= {true}/>
+      </div>
+      <ExtraPlaceForRoute addressFromMap="Fuente de la Rana #43, Fuentes de Morelia, Morelia, Michoacan, Mexico"/>
       <div className='flex justify-end my-6 text-white'>
         <input className="bg-secondary rounded-xl py-1 px-4" type='submit' value="Publicar"/>
         {/* <Btncards onClick={Publish} className='py-1' buttonText='Publicar' /> */}

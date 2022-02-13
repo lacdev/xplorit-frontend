@@ -27,19 +27,7 @@ const [address, setAddress] = useState("");
 const [selectedAddress, setSelectedAddress] = useState("");
 
 useEffect( () => {
-    // geocodeByAddress(selectedAddress)
-    //   .then(results => getLatLng(results[0]))
-    //   .then(latLng => console.log('Success', latLng))
-    //   .catch(error => console.error('Error', error));
 
-    // async function fetchMyAPI() {
-    //     let response = await fetch('api/data')
-    //     response = await response.json()
-    //     dataSet(response)
-    //   }
-  
-    //   fetchMyAPI()
-  
     async function getCoordinates(){
         let results = await geocodeByAddress(selectedAddress)
         console.log('result', results)
@@ -50,16 +38,6 @@ useEffect( () => {
     } 
     getCoordinates()
 
-    // geocodeByAddress(selectedAddress).
-    // then((results) => {
-    //     console.log('results', results[0])
-    //     getLatLng(results[0])
-    // })
-    // .then((latLng) => {
-    //         console.log(latLng)
-    //         setSelectedLocationOnInputSearch(latLng);
-    // })
-    // .catch(error => console.error('Error', error));
     // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [selectedAddress]);
 // ?--------------------------------------

@@ -8,7 +8,7 @@ export function formatGoogleMapsAdressToNormalAdress(address) {
             state: address[1].long_name,
             zipcode: "",
         }
-    } else if (address.length == 5) {
+    } else if (address.length === 5) {
         return {
             street: address[0].long_name,
             city: address[1].long_name,
