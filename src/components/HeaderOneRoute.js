@@ -53,7 +53,6 @@ const classes={
   created : 'text-2xl  '
 }
 function HeaderOneRoute({userId, tags, title, likes, updatedAt, average}) {
-   console.log("user: ",userId)
   const getUser = useQuery(['getOwnerRoute', userId], getOwnerRoute) 
   let userInfo = null
 
