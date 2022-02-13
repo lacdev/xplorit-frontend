@@ -127,7 +127,7 @@ function PlaceSearch() {
             </article>
           </aside>}
           <div className={mapContainerClass}>
-            <MapComponent fullHeight={true} />
+            <MapComponent fullHeight={true} useOnePageSearch={true}/>
           </div>
         </section>
         <Btncards buttonText={buttonText} className="py-1 block minTablet:hidden" onClick={HandlerClick}></Btncards>
