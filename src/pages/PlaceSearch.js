@@ -11,6 +11,7 @@ import HeartFillOut from 'assets/icons/HeartFillOut';
 import StarComplete from 'assets/icons/StarComplete';
 import MapComponent from 'components/MapComponent'
 import Toggle from 'components/Toggle';
+import Paginacion from 'components/Paginacion';
 
 const classes={
    sectionres:'font-primary w-full h-full min-h-screen',
@@ -109,7 +110,7 @@ function PlaceSearch() {
                     <Btncards buttonText="Explorar" className={classes.btn} ></Btncards>
                   </div>
                 </div>
-                <div>
+                <div className='mr-auto'>
                   <HeartFillOut width="30px" height="30px" />
                   <StarComplete width="30px" height="30px" className={classes.starticon} />
                   <p className={classes.starttext}>5</p>
@@ -145,11 +146,13 @@ function PlaceSearch() {
                 </div>
               </div>
             </article>
+            <Paginacion/>
           </aside>}
           <div className={mapContainerClass}>
             <MapComponent fullHeight={true} useOnePageSearch={true}/>
           </div>
         </section>
+        
         <Btncards buttonText={buttonText} className="py-1 block minTablet:hidden" onClick={HandlerClick}></Btncards>
       </section>
     </>

@@ -20,7 +20,7 @@ import DashboardEdit from 'components/DashboardComponents/DashboardEdit'
 import AboutUsPage from 'pages/AboutUs'
 import DashboardPlacesContainer from 'components/DashboardComponents/DashboardPlacesContainer'
 import DashboardRoutesContainer from 'components/DashboardComponents/dashboardRoutesContainer'
-import Paginacion from 'components/Páginacion'
+import Paginacion from 'components/Paginacion'
 
 
   
