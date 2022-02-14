@@ -29,12 +29,11 @@ export default function DashboardSideBar({avatar, username}) {
       <Link to='likes'>
         <DashboardSideButton  SvgIcon={Heart} DashboardButtonText="Likes"/>
       </Link>
-      <Link to='edit'>
-        <DashboardSideButton  SvgIcon={Settings} DashboardButtonText="Editar perfil"/>
-      </Link>
+      {//<Link to='edit'>
+        //<DashboardSideButton  SvgIcon={Settings} DashboardButtonText="Editar perfil"/>
+      //</Link>
+      }
       <DashboardSideButton SvgIcon={LogOut} DashboardButtonText="Cerrar sesión"/>
     </div>
-
-    
   </div>;
 }
