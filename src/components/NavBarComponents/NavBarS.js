@@ -139,7 +139,9 @@ function NavBarS() {
               </div>
               <div className={classes.rightcon}>
                 <div className={classes.btncon}>
-                   <Btncards className={classes.btn} buttonText="Iniciar sesión"></Btncards>
+                  <Link to="login">
+                    <Btncards className={classes.btn} buttonText="Iniciar sesión"></Btncards>
+                  </Link>
                 </div>
                 <div className={classes.rigthposition}>
                   
