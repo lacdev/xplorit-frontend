@@ -27,6 +27,7 @@ module.exports = {
       minWidth:{
         footerBannerW:'85.063rem',
         commentsW:'50rem',
+        '110px':'110px',
       },
       height:{
         loaderCard:'35rem',
@@ -45,7 +46,9 @@ module.exports = {
         '29':'7.25rem',
         '33':'8.25rem',
       },
-    
+      padding: {
+       '2.6':'0.65rem',
+      },
       fontSize:{
        'h1':'4rem',
        'xxs':'0.65rem',

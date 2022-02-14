@@ -10,10 +10,13 @@ import Image from "assets/img/image.jpg"
 import HeartFillOut from 'assets/icons/HeartFillOut';
 import StarComplete from 'assets/icons/StarComplete';
 import MapComponent from 'components/MapComponent'
+import Toggle from 'components/Toggle';
 
 const classes={
    sectionres:'font-primary w-full h-full min-h-screen',
-   tagsfiltroscon:'flex flex-row p-1 w-full bg-white justify-end my-2',
+   tagsfiltroscon:'flex flex-row justify-between p-1 w-full bg-white my-2',
+   scroll:'scroll-smooth scroll-pl-4 snap-end snap-x snap-mandatory',
+   scrolltags:'snap-center snap-always scroll-mr-3.5',
    btnclass:'py-2 flex flex-row-reverse content-center',
    filtroicon:'mr-2',
    renderres:'grid grid-cols-1 minTablet:grid-cols-5 grid-flow-col h-full min-h-screen',
@@ -57,12 +60,29 @@ function PlaceSearch() {
     <>
       <section className={classes.sectionres}>
         <div className={classes.tagsfiltroscon}>
+          <div className='flex content-center items-center px-4'>
+            <span>Lugares</span>
+          <Toggle/>
+          <span>Rutas</span>
+          </div>
+          <div className='flex overflow-x-hidden'>
+            <Btncards buttonText='Aire Libre' padding='px-4' color='bg-quartiary' className={`mr-4 text-base min-w-110px ${classes.btnclass} `} ></Btncards>
+            <Btncards buttonText='Artesanias' padding='px-4' color='bg-quartiary' className={`mr-4 text-base  ${classes.btnclass} `}></Btncards>
+            <Btncards buttonText='Comida' padding='px-4' color='bg-quartiary' className={`mr-4 text-base  ${classes.btnclass} `}></Btncards>
+            <Btncards buttonText='Cultural' padding='px-4' color='bg-quartiary' className={`mr-4 text-base  ${classes.btnclass} `}></Btncards>
+            <Btncards buttonText='Entretenimiento' padding='px-4' color='bg-quartiary' className={`mr-4 text-base  ${classes.btnclass} `}></Btncards>
+            <Btncards buttonText='Familiar' padding='px-4' color='bg-quartiary' className={`mr-4 text-base  ${classes.btnclass} `}></Btncards>
+            <Btncards buttonText='Playa' padding='px-4' color='bg-quartiary' className={`mr-4 text-base  ${classes.btnclass} `}></Btncards>
+          </div>
+          <div className='mr-auto'>
           <Btncards
             className={classes.btnclass}
             buttonText="Filtros"
           >
             <AdjustmentsIcon width="20px" height="20px" className={classes.filtroicon} />
           </Btncards>
+          </div>
+
         </div>
         <section className={classes.renderres}>
          {renderSideBar && <aside className={classes.asidecon}>

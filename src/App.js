@@ -20,7 +20,7 @@ import DashboardEdit from 'components/DashboardComponents/DashboardEdit'
 import AboutUsPage from 'pages/AboutUs'
 import DashboardPlacesContainer from 'components/DashboardComponents/DashboardPlacesContainer'
 import DashboardRoutesContainer from 'components/DashboardComponents/dashboardRoutesContainer'
-import LoaderHome from 'components/LandingComponents/LoaderHome'
+import Paginacion from 'components/Páginacion'
 
 
   
@@ -38,13 +38,14 @@ function App() {
           <Route path="/about" element={<AboutUsPage/>}/>
           <Route path="/searchplace" element={<PlaceSearch/>}/>
           <Route path="/searchroute" element={<RouteSearch/>}/>
-          <Route path="/direct" element={<LoaderHome/>}/>
+          <Route path="/direct" element={<Paginacion/>}/>
 
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Home />} />
             <Route path ="routes" element={<RoutePage/>}>
           </Route>
             <Route path="places" element={<PlacePage/>}/>
+            <Route path="/searchplace" element={<PlaceSearch/>}/>
             <Route path="createplace" element={<CreatePlace/>}/>
             <Route path="createroute" element={<CreateRoute/>}/>
             <Route path="profile" element={<Dashboard/>}>
