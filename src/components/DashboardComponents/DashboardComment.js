@@ -18,10 +18,10 @@ export default function DashboardComment() {
     const { data, status, error } = getComments
 
     if(error === true) {
-        console.log("an errro had happend")
+        console.log("an errror had happend")
     }
 
-    if (status === 'succes') {
+    if (status === 'success') {
         console.log(data)
     }
 

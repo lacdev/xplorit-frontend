@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { formatCreationDate, formatDate } from 'utils/date'
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
 import StarComplete from "assets/icons/StarComplete";
@@ -52,13 +53,14 @@ const classes={
   btn:'ml-9 py-2',
   created : 'text-2xl'
 }
-function HeaderOnePlace({userId, tags, title, likes, updatedAt, average}) {
-   
+function HeaderOnePlace({userId, tags, title, likes, createdAt, average}) {
+  
+  const currentDate = formatDate(createdAt)
+
   const getUser = useQuery(['getOwnerPlace', userId], getOwnerPlace) 
   let userInfo = null
 
   const {data:dataUser, status:statusUser} = getUser
-  console.log(dataUser)
 
   if(statusUser === 'loading') {
     return <p> Loading...</p>
@@ -66,7 +68,6 @@ function HeaderOnePlace({userId, tags, title, likes, updatedAt, average}) {
 
   if(statusUser === 'success') {
     userInfo = dataUser.foundUser[0]
-    console.log(userInfo)
   }
 
     return (
@@ -101,7 +102,7 @@ function HeaderOnePlace({userId, tags, title, likes, updatedAt, average}) {
               </div>
               <div className={classes.datecon}>
                 <p className="ml-12 text-xl">Fecha de publicación</p>
-                <p className='ml-12'>{updatedAt}</p>
+                <p className='ml-12'>{currentDate}</p>
               </div>
             <div className={classes.tagsdiv}>
               {tags&&tags.map((tag) => {
