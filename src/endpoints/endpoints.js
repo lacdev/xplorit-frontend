@@ -18,4 +18,6 @@ export const endpoints = {
 
     postPlace : `${base_url}/places/`,
 
+    getLikesFromUser : `${base_url}/users`
+
 }

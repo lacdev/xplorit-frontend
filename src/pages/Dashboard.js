@@ -31,7 +31,7 @@ export default function Dashboard() {
       <div >
         <BigTitle className='flex justify-start' bigTitleText='Rutas creadas'/>
         </div>
-      <div className=' flex w-5/6 mx-auto my-4'>
+      <div className=' flex-col w-5/6 mx-auto my-4'>
         {status === 'loading' ? <span> Loading</span> :<Outlet/>}
       </div>
     </div>
