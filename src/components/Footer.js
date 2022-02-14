@@ -5,7 +5,7 @@ import InstagramLogo from 'assets/icons/InstagramLogo';
 
 export default function Footer() {
   return <div className='font-primary text-center' >
-    <footer className='bg-quartiary text-white pt-4 mt-20'>
+    <footer className='bg-quartiary text-white pt-4'>
      <div>
          <h1 className='text-4xl mb-5 font-bold '>Xplorit</h1>
      </div>

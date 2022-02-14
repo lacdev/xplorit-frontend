@@ -50,7 +50,7 @@ const classes={
   ubicationcon:'flex flex-col my-6',
   divubications:'flex flex-row items-center',
   ubication: 'ml-15 my-2',
- // commentcon:'',
+  commentcon:'mb-20',
   btn:'ml-9 py-2',
 }
 

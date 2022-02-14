@@ -33,8 +33,7 @@ function App() {
           <Route path="/login" element={<LogIn/>}/>
           <Route path="/signup" element={<SignUp/>}/>
 
-          <Route path="/route/:id" element={<OneRoute/>}/>
-          <Route path="/place/:id" element={<OnePlace/>}/>
+       
           <Route path="/about" element={<AboutUsPage/>}/>
           <Route path="/searchplace" element={<PlaceSearch/>}/>
           <Route path="/searchroute" element={<RouteSearch/>}/>
@@ -47,12 +46,16 @@ function App() {
             <Route path="places" element={<PlacePage/>}/>
             <Route path="createplace" element={<CreatePlace/>}/>
             <Route path="createroute" element={<CreateRoute/>}/>
+            <Route path="/route/:id" element={<OneRoute/>}/>
+            <Route path="/place/:id" element={<OnePlace/>}/>
             <Route path="profile" element={<Dashboard/>}>
+              <Route index element={<DashboardRoutesContainer />} />
               <Route path="routes" element={<DashboardRoutesContainer />} />
               <Route path="places" element={<DashboardPlacesContainer/>} />
               <Route path="likes" element={<DashboardLikeContainer/>} />
               <Route path="comments" element={<DashboardComment/>}/>
-              <Route path="edit" element={<DashboardEdit/>}/>
+              {//<Route path="edit" element={<DashboardEdit/>}/>
+              }
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Route>
