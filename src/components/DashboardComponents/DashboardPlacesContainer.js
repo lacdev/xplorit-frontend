@@ -1,5 +1,7 @@
 import React from 'react';
 import BigTitle from 'components/Common/BigTitle';
+import Btncards from 'components/Common/Btncards';
+import { Link } from 'react-router-dom';
 
 
 //Usequery
@@ -23,11 +25,16 @@ export default function DashboardPlacesContainer() {
     return <span className='font-bold text-center'>No se encontraron lugares con ese ID</span>
   }
 
-  return <>
-        <BigTitle bigTitleText='Lugares creados'/>
+  return <div>
+          <div className='text-right'>
+            <BigTitle bigTitleText='Lugares agregados'/>
+            <Link to="/createplace">
+              <Btncards className="py-1" buttonText="+ Crear un lugar"/>
+            </Link>
+          </div>
         {data&&data.map((place) =>{
         return <DashboardCard key={place._id} cardData={place}/>
         })}
-    </>
+    </div>
    
 }

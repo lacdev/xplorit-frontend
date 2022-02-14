@@ -16,7 +16,7 @@ export default function Dashboard() {
 
   const {data, status} = useQuery(['getUserProfilePic',id], getUserProfilePic)
   // const { data, status } = getUser
-  console.log(status)
+  
   return (
     <div className='grid grid-cols-10'>
       <div className='w-full col-span-10 bg-top'>
