@@ -7,7 +7,6 @@ import Trash from 'assets/icons/Trash';
 export default function DashboardCard({cardData}) {
 
   return (
-        
         <div className='inline-flex w-full bg-white shadow-lg rounded-md font-primary m-6 border'>
            <div className='w-1/3 h-full'>
              <img className='rounded-md' src={cardData.images[0]} alt=""></img>

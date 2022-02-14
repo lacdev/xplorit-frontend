@@ -1,4 +1,5 @@
 import React from 'react';
+import BigTitle from 'components/Common/BigTitle';
 //Usequery
 import { useQuery} from 'react-query'
 import { getRoutesCreatedByUser } from 'services/user.services';
@@ -22,6 +23,7 @@ if(status === 'error') {
 
 
   return <>
+        <BigTitle bigTitleText='Rutas creadas'/>
         {data&&data.map((route) =>{
           console.log("data: ",data)
         return <DashboardCard key={route._id} cardData={route}/>

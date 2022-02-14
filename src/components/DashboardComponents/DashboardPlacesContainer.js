@@ -1,4 +1,5 @@
 import React from 'react';
+import BigTitle from 'components/Common/BigTitle';
 
 
 //Usequery
@@ -23,6 +24,7 @@ export default function DashboardPlacesContainer() {
   }
 
   return <>
+        <BigTitle bigTitleText='Lugares creados'/>
         {data&&data.map((place) =>{
         return <DashboardCard key={place._id} cardData={place}/>
         })}

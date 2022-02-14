@@ -9,6 +9,7 @@ import Avatar from 'components/Common/Avatar';
 //UseQuery
 import { useQuery} from 'react-query'
 import { getCommentsCreatedByUser } from 'services/user.services';
+import BigTitle from 'components/Common/BigTitle';
 
 export default function DashboardComment() {
 
@@ -27,7 +28,9 @@ export default function DashboardComment() {
 
 
 
-  return <div className='w-full bg-white shadow-md rounded-md font-primary m-6'>
+  return <div>
+      <BigTitle bigTitleText='Comentarios'/>
+        <div className='w-full bg-white shadow-md rounded-md font-primary m-6'>
       <div className='inline-flex justify-start items-center w-full px-10'>
           <Avatar/>
           <p>Name of Place</p>
@@ -36,5 +39,6 @@ export default function DashboardComment() {
           <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
           </p> <br></br>
       </div>
+  </div>
   </div>;
 }
