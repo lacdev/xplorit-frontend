@@ -32,10 +32,9 @@ export async function getCommentsCreatedByUser({queryKey}) {
 }
 
 export async function getLikesCreatedByUser({queryKey}) {
-    console.log("queryKey", queryKey)
 const service_url = `${endpoints.getLikesFromUser}/${queryKey[1]}/likes`
 const getLikesPromise = await axios.get(service_url)
 const getLikes = getLikesPromise.data.data
-console.log("getLikes: ", getLikes)
+console.log("getlikes: ", getLikes)
 return getLikes
 }

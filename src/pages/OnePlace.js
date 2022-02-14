@@ -1,5 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
 import StarComplete from "assets/icons/StarComplete";
@@ -22,6 +24,7 @@ import HeaderOnePlace from 'components/HeaderOnePlace';
 import { useQuery } from 'react-query';
 import { getSinglePlaceData } from 'services/places.services';
 import { getPlaceLikes } from 'services/places.services';
+import TextEditor from 'components/TextEditor';
 
 const classes={
   parentcon:'font-primary overflow-x-hidden',
@@ -49,10 +52,27 @@ const classes={
   ubicationcon:'flex flex-col my-6',
   divubications:'flex flex-row items-center',
   ubication: 'ml-15 my-2',
- // commentcon:'',
+ commentcon:'mb-20',
   btn:'ml-9 py-2',
+  textEditorHidden :"mt-10 hidden",
+  textEditorShow : "mt-10 block",
+  btnForm : "py-2 mt-3 place-content-end"
 }
+
+  
+
+
 function OnePlace() {
+
+  const [textEditorView, setTextEditorView] = useState(classes.textEditorHidden) 
+
+  const handleClick = () => {
+    if(textEditorView === classes.textEditorHidden){
+      setTextEditorView(classes.textEditorShow)
+    } else {
+      setTextEditorView(classes.textEditorHidden)
+    }
+  }
 
   const {id} = useParams();
 
@@ -64,6 +84,9 @@ function OnePlace() {
   if(status === 'loading') {
     return <p> Loading...</p>
   }
+
+  
+  
 
   if (status === 'success') {
     const userToFind =  data.ownerId.toString()
@@ -106,7 +129,11 @@ function OnePlace() {
                   <div className={classes.ubication}>C.P: {data.address.zipcode}</div>
                   
                 </div>
-                <Btncards className={classes.btn} buttonText="Reseñar" />
+                <Btncards onClick ={handleClick} className={classes.btn} buttonText="Reseñar" />
+                <div className={textEditorView}> 
+                <TextEditor />
+                <Btncards className={classes.btnForm} buttonText={"Enviar Reseña"}/>
+                </div>
                 <div className={classes.commentcon}>
                   <Comments />
                   <Comments />
