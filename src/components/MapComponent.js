@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, Marker, Polyline } from '@react-google-maps/api';
 import SearchMap from './SearchMap';
 import SearchMapOnPage from './SearchMapOnPage';
 import useCurrentLocation from 'hooks/UseCurrentLocation';
@@ -17,10 +17,25 @@ const mapOptions = {
     zoomControl: true
 }
 
+const lineOptions = {
+  strokeColor: '#4377ff ',
+  strokeOpacity: 0.8,
+  strokeWeight: 5,
+  fillColor: '#4377ff',
+  fillOpacity: 0.35,
+  clickable: false,
+  draggable: true,
+  editable: true,
+  visible: true,
+  radius: 30000,
+  paths: [],
+  zIndex: 1
+}
+
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 
-function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLocationOnInputSearch, fullHeight=false}) {
+function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLocationOnInputSearch, fullHeight=false, locationsData, useMultipleLocations=false}) {
     // ?--------------------------------------
     // ? Component setup
     // ?--------------------------------------
@@ -95,6 +110,11 @@ function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLoc
       // setCurrentUserLocation({ lat: coords.lat, lng : coords.lng })
     }
 
+    const onLineLoad = useCallback((lineContext) => {
+      console.log("🚀 ~ file: CustomGoogleMap.js ~ line 120 ~ onLineLoad ~ lineContext", lineContext);
+
+    }, [])
+
     // ?--------------------------------------
     // ? Click Event on all markers
     // ?--------------------------------------
@@ -123,11 +143,27 @@ function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLoc
 
     }
 
+    const createPathData = () => {
+      if(!locationsData) {
+        return []
+      }
+      const pathCoords = locationsData.map((location ) =>{
+        return location.coords
+      })
+
+      const newPathOptions = Object.assign({}, lineOptions)
+      newPathOptions.paths = pathCoords
+
+      return {path:pathCoords, options:newPathOptions}
+    }
+
     const mapIinitialPosition = selectedLocation !== null ? selectedLocation : center;
 
 
     const mapHeight = fullHeight ? '100vh' : '50vh';
 
+    const pathOptionsData = createPathData()
+    console.log("Path Options", pathOptionsData)
 
     const containerStyle = {
       width: '100%',
@@ -143,13 +179,24 @@ function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLoc
         onLoad={onMapLoad}
         onUnmount={onMapLoadUnmount}
         center={mapIinitialPosition}
-        zoom={12}
+        zoom={13}
         options={mapOptions}
         onDragEnd={onMapDrag}
         onClick={onMapClick}
       >
         {useOnePageSearch ? <SearchMapOnPage setSelectedLocationOnInputSearch={setSelectedLocationOnInputSearch}/> : <SearchMap/>}
-        {selectedLocation && <Marker position={selectedLocation}/>}
+        {selectedLocation && useMultipleLocations == false && <Marker position={selectedLocation}/>}
+        {locationsData && useMultipleLocations == true && locationsData.map((location)=>{
+          return <Marker position={location.coords} />
+        })}
+        {locationsData && useMultipleLocations ==true &&
+        <Polyline
+            onLoad={onLineLoad}
+            path={pathOptionsData.path}
+            options={pathOptionsData.options}
+            onClick={(event) => console.log(event)}
+        />
+        }
       </GoogleMap>
   )
 }

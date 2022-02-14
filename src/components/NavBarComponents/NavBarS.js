@@ -139,7 +139,9 @@ function NavBarS() {
               </div>
               <div className={classes.rightcon}>
                 <div className={classes.btncon}>
-                   <Btncards className={classes.btn} buttonText="Iniciar sesión"></Btncards>
+                  <Link to="login">
+                    <Btncards className={classes.btn} buttonText="Iniciar sesión"></Btncards>
+                  </Link>
                 </div>
                 <div className={classes.rigthposition}>
                   
@@ -175,7 +177,7 @@ function NavBarS() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                               to='#'
+                               to='profile'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
@@ -188,7 +190,7 @@ function NavBarS() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                               to='#'
+                               to='profile/edit'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
@@ -201,7 +203,7 @@ function NavBarS() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                               to='#'
+                               to='createroute'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
@@ -214,7 +216,7 @@ function NavBarS() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                               to='#'
+                               to='createplace'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'

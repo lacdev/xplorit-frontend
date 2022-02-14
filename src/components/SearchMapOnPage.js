@@ -34,7 +34,7 @@ useEffect( () => {
         let coords = await getLatLng(results[0])
         console.log('new coords', coords)
         setSelectedLocationOnInputSearch(coords, results)
-        
+        setAddress("")
     } 
     getCoordinates()
 
