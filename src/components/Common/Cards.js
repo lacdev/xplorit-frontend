@@ -5,7 +5,7 @@ import Btncards from './Btncards'
 import { Labels } from './Labels'
 
 const classes={
-    container:'font-Poppins bg-white rounded-3xl mx-8 my-4 drop-shadow-md flex min-h-[470px] lg:min-h-[445px] flex-col',
+    container:'font-Poppins bg-white rounded-3xl mx-8 my-4 drop-shadow-md flex min-h-[470px] lg:min-h-[490px] flex-col',
     imgcont:'h-auto w-full',
     img:'rounded-t-lg  w-full object-cover',
     contcontainer:'p-4',

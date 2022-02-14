@@ -3,22 +3,20 @@ import DashboardBanner from 'components/DashboardComponents/DashboardBanner';
 import DashboardSideBar from 'components/DashboardComponents/DashboardSideBar';
 
 //import NavBar from 'components/NavBar';
+
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { useQuery} from 'react-query'
 import { getUserProfilePic } from 'services/user.services';
 import DirectAccess from 'components/DashboardComponents/DirectAccess';
 
-
-
 export default function Dashboard() {
 
   const id = '61ef68279262e2f167700caf'
 
   const getUser = useQuery(['getUserProfilePic',id],getUserProfilePic)
-
   const { data, status } = getUser
-
+  
   return (
     <div className='grid grid-cols-10'>
       <div className='w-full col-span-10 bg-top'>
@@ -39,6 +37,4 @@ export default function Dashboard() {
         <DirectAccess />
       </div>
 </div>)
-  
 }
-
