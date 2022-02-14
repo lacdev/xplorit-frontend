@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
 import StarComplete from "assets/icons/StarComplete";
@@ -69,7 +70,6 @@ function OneRoute() {
 
   if (status === 'success') {
     const userToFind =  data.ownerId.toString()
-    console.log("data: ",data)
 
     return (
       <div className={classes.parentcon}>
@@ -81,7 +81,7 @@ function OneRoute() {
           title={data.name}
           tags={data.tags}
           likes={data.likes}
-          updatedAt={data.updatedAt}
+          createdAt={data.createdAt}
           average={data.average}/>}
         </div>
 

@@ -58,8 +58,7 @@ function OnePlace() {
 
   const singlePlace = useQuery(['getSinglePlaceData', id], getSinglePlaceData)
   
-  const {data, isLoading, status} = singlePlace
-  console.log("data: ",data)
+  const {data, status} = singlePlace
 
 
   if(status === 'loading') {
@@ -68,6 +67,7 @@ function OnePlace() {
 
   if (status === 'success') {
     const userToFind =  data.ownerId.toString()
+    
 
     return (
       <div className={classes.parentcon}>
@@ -79,7 +79,7 @@ function OnePlace() {
          title={data.name} 
          tags={data.tags} 
          likes={data.likes}
-         updatedAt={data.updatedAt}
+         createdAt={data.createdAt}
          average={data.average}/>}
         </div>
 

@@ -21,14 +21,21 @@ export async function getRoutesCreatedByUser({queryKey}) {
     const service_url = `${endpoints.getUserProfile}/${queryKey[1]}/routes`
     const getRoutesPromise = await axios.get(service_url)
     const getRoutes = getRoutesPromise.data.data
-    console.log("getRoutes: ", getRoutes)
     return getRoutes
 }
 
 export async function getCommentsCreatedByUser({queryKey}) {
-    console.log("queryKey: ", queryKey)
     const service_url = `${endpoints.getAllComments}/${queryKey[1]}/reviews`
     const getCommentsPromise = await axios.get(service_url)
     const getComments = getCommentsPromise.data.data.routes
     return getComments
+}
+
+export async function getLikesCreatedByUser({queryKey}) {
+    console.log("queryKey", queryKey)
+const service_url = `${endpoints.getLikesFromUser}/${queryKey[1]}/likes`
+const getLikesPromise = await axios.get(service_url)
+const getLikes = getLikesPromise.data.data
+console.log("getLikes: ", getLikes)
+return getLikes
 }
