@@ -48,19 +48,6 @@ export default function CreateRoute({}) {
     console.log(newLocationDataArray)
     
   }
-  
-  // const removePlaceFromMap = (event) => {
-  //   event.preventDefault()
-  //   console.log("Primeras", locationsData)
-  //   // const newLocationsData = locationsData.splice(event.currentTarget.id, 1)
-  //   const newDataArray = [...locationsData]
-  //   newDataArray.splice(event.currentTarget.id, 1)
-  //   console.log("New Data Array", newDataArray)
-  //   console.log("Locations despues de splice", locationsData)
-  //   console.log("Aqui esta el evento", event.currentTarget.id)
-  //   setLocationsData(newDataArray)
-  //   console.log("Locations despues del seteo", locationsData)
-  // }
 
   console.log("Aqui es para breakpoint")
 

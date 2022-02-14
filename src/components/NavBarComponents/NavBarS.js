@@ -177,7 +177,7 @@ function NavBarS() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                               to='#'
+                               to='profile'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
@@ -190,7 +190,7 @@ function NavBarS() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                               to='#'
+                               to='profile/edit'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
@@ -203,7 +203,7 @@ function NavBarS() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                               to='#'
+                               to='createroute'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
@@ -216,7 +216,7 @@ function NavBarS() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                               to='#'
+                               to='createplace'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
