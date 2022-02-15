@@ -54,7 +54,6 @@ function NavBarS() {
     const isDesktop = useMediaQuery({query:'(min-width: 1280px) and (max-width: 1535px)'});
     const isBigDesktop = useMediaQuery({query:'(min-width: 1536px)'});
     
-    console.log(isxPhone)
    
     useEffect(() => {
       window.addEventListener("scroll", listenScrollEvent)
@@ -65,7 +64,6 @@ function NavBarS() {
     
     let scrollMax=100;
     const listenScrollEvent = (event) => {
-      console.log(window.scrollY)
       
        if (isxPhone === true || isPhone === true) 
         scrollMax=200;

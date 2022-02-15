@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
 const classes = {
-    container       :  'relative  w-full h-screen bg-cover  bg-[url(assets/img/aboutUsBanner.jpg)] ',
-    title           :  'text-4xl text-center',
+    container       :  'relative  w-full h-screen bg-cover pt-20 bg-[url(assets/img/aboutUsBanner.jpg)] ',
+    title           :  'text-4xl text-center ',
     logo            :  'text-7xl text-center mt-40',
     text            :  'w-6/12 text-center m-auto mt-32'
 }
