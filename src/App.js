@@ -20,7 +20,8 @@ import DashboardEdit from 'components/DashboardComponents/DashboardEdit'
 import AboutUsPage from 'pages/AboutUs'
 import DashboardPlacesContainer from 'components/DashboardComponents/DashboardPlacesContainer'
 import DashboardRoutesContainer from 'components/DashboardComponents/dashboardRoutesContainer'
-import Paginacion from 'components/Paginacion'
+import ModalFiltro from 'components/ModalFiltro'
+
 
 
   
@@ -36,9 +37,9 @@ function App() {
           <Route path="/route/:id" element={<OneRoute/>}/>
           <Route path="/place/:id" element={<OnePlace/>}/>
           <Route path="/about" element={<AboutUsPage/>}/>
-          <Route path="/searchplace" element={<PlaceSearch/>}/>
+         
           <Route path="/searchroute" element={<RouteSearch/>}/>
-          <Route path="/direct" element={<Paginacion/>}/>
+          <Route path="/direct" element={<ModalFiltro/>}/>
 
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Home />} />

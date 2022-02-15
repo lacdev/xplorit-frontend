@@ -5,13 +5,13 @@ import Btncards from 'components/Common/Btncards';
 import Titles from 'components/Common/Titles';
 import { Labels } from 'components/Common/Labels';
 //Imgages & Icons
-import { AdjustmentsIcon } from '@heroicons/react/outline';
+import ModalFiltro from 'components/ModalFiltro';
 import Image from "assets/img/image.jpg"
 import HeartFillOut from 'assets/icons/HeartFillOut';
 import StarComplete from 'assets/icons/StarComplete';
 import MapComponent from 'components/MapComponent'
 import Toggle from 'components/Toggle';
-import Paginacion from 'components/Paginacion';
+
 
 const classes={
    sectionres:'font-primary w-full h-full min-h-screen',
@@ -19,7 +19,6 @@ const classes={
    scroll:'scroll-smooth scroll-pl-4 snap-end snap-x snap-mandatory',
    scrolltags:'snap-center snap-always scroll-mr-3.5',
    btnclass:'py-2 flex flex-row-reverse content-center',
-   filtroicon:'mr-2',
    renderres:'grid grid-cols-1 minTablet:grid-cols-5 grid-flow-col h-full min-h-screen',
    asidecon:'col-span-5 xl:col-span-3 minTablet:col-span-2 bg-white divide-y divide-solid border-slate-500 px-3',
    rescon:'py-2 pl-2',
@@ -66,22 +65,18 @@ function PlaceSearch() {
           <Toggle/>
           <span>Rutas</span>
           </div>
-          <div className='flex overflow-x-hidden'>
+          <div className='hidden lg:flex overflow-x-hidden items-center pb-2'>
+            
             <Btncards buttonText='Aire Libre' padding='px-4' color='bg-quartiary' className={`mr-4 text-base min-w-110px ${classes.btnclass} `} ></Btncards>
-            <Btncards buttonText='Artesanias' padding='px-4' color='bg-quartiary' className={`mr-4 text-base  ${classes.btnclass} `}></Btncards>
-            <Btncards buttonText='Comida' padding='px-4' color='bg-quartiary' className={`mr-4 text-base  ${classes.btnclass} `}></Btncards>
-            <Btncards buttonText='Cultural' padding='px-4' color='bg-quartiary' className={`mr-4 text-base  ${classes.btnclass} `}></Btncards>
-            <Btncards buttonText='Entretenimiento' padding='px-4' color='bg-quartiary' className={`mr-4 text-base  ${classes.btnclass} `}></Btncards>
-            <Btncards buttonText='Familiar' padding='px-4' color='bg-quartiary' className={`mr-4 text-base  ${classes.btnclass} `}></Btncards>
-            <Btncards buttonText='Playa' padding='px-4' color='bg-quartiary' className={`mr-4 text-base  ${classes.btnclass} `}></Btncards>
+            <Btncards buttonText='Artesanias' padding='px-4' color='bg-quartiary' className={`mr-4 text-base ${classes.btnclass} `}></Btncards>
+            <Btncards buttonText='Comida' padding='px-4' color='bg-quartiary' className={`mr-4 text-base ${classes.btnclass} `}></Btncards>
+            <Btncards buttonText='Cultural' padding='px-4' color='bg-quartiary' className={`mr-4 text-base ${classes.btnclass} `}></Btncards>
+            <Btncards buttonText='Entretenimiento' padding='px-4' color='bg-quartiary' className={`mr-4 text-base ${classes.btnclass} `}></Btncards>
+            <Btncards buttonText='Familiar' padding='px-4' color='bg-quartiary' className={`mr-4 text-base ${classes.btnclass} `}></Btncards>
+            <Btncards buttonText='Playa' padding='px-4' color='bg-quartiary' className={`mr-4 text-base ${classes.btnclass} `}></Btncards>
           </div>
-          <div className='mr-auto'>
-          <Btncards
-            className={classes.btnclass}
-            buttonText="Filtros"
-          >
-            <AdjustmentsIcon width="20px" height="20px" className={classes.filtroicon} />
-          </Btncards>
+          <div className='ml-auto'>
+          <ModalFiltro/>
           </div>
 
         </div>
@@ -146,10 +141,10 @@ function PlaceSearch() {
                 </div>
               </div>
             </article>
-            <Paginacion/>
+            <Btncards buttonText='Mostrar más' color='bg-black'></Btncards>
           </aside>}
           <div className={mapContainerClass}>
-            <MapComponent fullHeight={true} useOnePageSearch={true}/>
+            <MapComponent fullHeight={true}/>
           </div>
         </section>
         
