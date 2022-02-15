@@ -71,8 +71,6 @@ function HeaderOnePlace({ userId, tags, title, likes, createdAt, average }) {
     console.log(dataUser);
   }
 
-  //useEffect(() => {}, []);
-
   const handleClick = () => {
     if (useHeart === false) {
       setUseHeart(true);

@@ -57,7 +57,7 @@ const classes = {
   btn: "ml-9 py-2",
   textEditorHidden: "mt-10 hidden",
   textEditorShow: "mt-10 block",
-  btnForm: "py-2 mt-3 place-content-end",
+  btnForm: "py-2 mt-3 text-right",
   textArea: "border border-current rounded-md w-full min-h-[200px]",
 };
 
