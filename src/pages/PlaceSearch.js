@@ -57,7 +57,7 @@ function PlaceSearch() {
  
 
   return (
-    <>
+    <div className='pt-4'>
       <section className={classes.sectionres}>
         <div className={classes.tagsfiltroscon}>
           <div className='flex content-center items-center px-4'>
@@ -150,7 +150,7 @@ function PlaceSearch() {
         
         <Btncards buttonText={buttonText} className="py-1 block minTablet:hidden" onClick={HandlerClick}></Btncards>
       </section>
-    </>
+    </div>
   );
 }
 
