@@ -9,6 +9,7 @@ import MapComponent from 'components/MapComponent';
 import UploadImage from 'components/UploadImage';
 import { formatGoogleMapsAdressToNormalAdress } from 'utils/utils';
 import { createPlace } from 'services/places.services';
+import { useMutation } from 'react-query';
 
 export default function CreatePlace({}) {
   const [name, setName] = useState("")
@@ -17,6 +18,8 @@ export default function CreatePlace({}) {
   const [address, setAddress] = useState(null)
   const [selectedLocation, setSelectedLocation] = useState(null)
   const [placeImages, setPlaceImages] = useState([])
+
+  const mutationPost = useMutation((data) => createPlace(data.data, data.placeImages), {onSuccess : ()=>console.log("Todo cool")})
 
   const setTagValues = (tagOptions) => {
     setTags(tagOptions)
@@ -53,12 +56,13 @@ export default function CreatePlace({}) {
         scheduleStart:"2022-02-11",
 	      scheduleFinish:"2022-01-27",
         location : {
-          type : "point",
+          type : "Point",
           coordinates: [selectedLocation.lng, selectedLocation.lat]
         }
       };
-      console.log(data)
-      await createPlace(data, placeImages);
+      console.log(data, placeImages)
+      mutationPost.mutate({data, placeImages})
+      // await createPlace(data, placeImages);
       // {mutate(data)}
     } catch (error) {
       console.error(error.message);

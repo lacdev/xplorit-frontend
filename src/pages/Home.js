@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -14,8 +14,10 @@ import TestimonialCarousel from 'components/TestimonialCarousel';
 import { useQuery } from 'react-query';
 import { getCardsPlacesHome } from 'services/places.services'
 import { getCardsRoutesHome } from 'services/routes.services'
+import { AuthContext } from 'context/AuthContext';
 
 export default function Home() {
+  const {userState} = useContext(AuthContext)
 
   const useQueryMultiple = () => {
     //places
