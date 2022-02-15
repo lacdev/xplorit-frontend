@@ -80,6 +80,7 @@ function OnePlace() {
   
   const {data, status} = singlePlace
 
+  console.log("Esto es singleplace", singlePlace)
 
   if(status === 'loading') {
     return <p> Loading...</p>

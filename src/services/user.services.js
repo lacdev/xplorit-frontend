@@ -4,7 +4,7 @@ import { endpoints } from 'endpoints/endpoints'
 export async function getUserProfilePic({queryKey}) {
     const service_url = `${endpoints.getUserProfile}/${queryKey[1]}`
     const getUserPromise = await axios.get(service_url)
-    const getUser = getUserPromise.data.foundUser[0]
+    const getUser = getUserPromise.data.data
     return getUser
 }
 
@@ -35,6 +35,13 @@ export async function getLikesCreatedByUser({queryKey}) {
 const service_url = `${endpoints.getLikesFromUser}/${queryKey[1]}/likes`
 const getLikesPromise = await axios.get(service_url)
 const getLikes = getLikesPromise.data.data
-console.log("getlikes: ", getLikes)
 return getLikes
+}
+
+export async function userLogin(userEmail, userPassword){
+    // const service_url = `${base_url}/login`
+    const getLoginPromise = await axios.post(endpoints.logIn, {email: userEmail, password: userPassword})
+    console.log("Aqui es login promise", getLoginPromise)
+    return getLoginPromise.data
+    
 }

@@ -21,47 +21,50 @@ import AboutUsPage from 'pages/AboutUs'
 import DashboardPlacesContainer from 'components/DashboardComponents/DashboardPlacesContainer'
 import DashboardRoutesContainer from 'components/DashboardComponents/dashboardRoutesContainer'
 import LoaderHome from 'components/LandingComponents/LoaderHome'
+import { AuthContextProvider } from 'context/AuthContext'
 
 
   
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-      
-        <Routes>
-          <Route path="/login" element={<LogIn/>}/>
-          <Route path="/signup" element={<SignUp/>}/>
+    <AuthContextProvider>
+      <div className="App">
+        <BrowserRouter>
+        
+          <Routes>
+            <Route path="/login" element={<LogIn/>}/>
+            <Route path="/signup" element={<SignUp/>}/>
 
-       
-          <Route path="/about" element={<AboutUsPage/>}/>
-          <Route path="/searchplace" element={<PlaceSearch/>}/>
-          <Route path="/searchroute" element={<RouteSearch/>}/>
-          <Route path="/direct" element={<LoaderHome/>}/>
+        
+            <Route path="/about" element={<AboutUsPage/>}/>
+            <Route path="/searchplace" element={<PlaceSearch/>}/>
+            <Route path="/searchroute" element={<RouteSearch/>}/>
+            <Route path="/direct" element={<LoaderHome/>}/>
 
-          <Route path="/" element={<PageLayout/>}>
-            <Route index element={<Home />} />
-            <Route path ="routes" element={<RoutePage/>}>
-          </Route>
-            <Route path="places" element={<PlacePage/>}/>
-            <Route path="createplace" element={<CreatePlace/>}/>
-            <Route path="createroute" element={<CreateRoute/>}/>
-            <Route path="/route/:id" element={<OneRoute/>}/>
-            <Route path="/place/:id" element={<OnePlace/>}/>
-            <Route path="profile" element={<Dashboard/>}>
-              <Route index element={<DashboardRoutesContainer />} />
-              <Route path="routes" element={<DashboardRoutesContainer />} />
-              <Route path="places" element={<DashboardPlacesContainer/>} />
-              <Route path="likes" element={<DashboardLikeContainer/>} />
-              <Route path="comments" element={<DashboardComment/>}/>
-              {//<Route path="edit" element={<DashboardEdit/>}/>
-              }
+            <Route path="/" element={<PageLayout/>}>
+              <Route index element={<Home />} />
+              <Route path ="routes" element={<RoutePage/>}>
             </Route>
-            <Route path="*" element={<NotFoundPage />} />
-          </Route>
-        </Routes>         
-    </BrowserRouter>
-    </div>
+              <Route path="places" element={<PlacePage/>}/>
+              <Route path="createplace" element={<CreatePlace/>}/>
+              <Route path="createroute" element={<CreateRoute/>}/>
+              <Route path="/route/:id" element={<OneRoute/>}/>
+              <Route path="/place/:id" element={<OnePlace/>}/>
+              <Route path="profile" element={<Dashboard/>}>
+                <Route index element={<DashboardRoutesContainer />} />
+                <Route path="routes" element={<DashboardRoutesContainer />} />
+                <Route path="places" element={<DashboardPlacesContainer/>} />
+                <Route path="likes" element={<DashboardLikeContainer/>} />
+                <Route path="comments" element={<DashboardComment/>}/>
+                {//<Route path="edit" element={<DashboardEdit/>}/>
+                }
+              </Route>
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
+          </Routes>         
+      </BrowserRouter>
+      </div>
+    </AuthContextProvider>
   )
 }
 

@@ -58,7 +58,6 @@ function HeaderOnePlace({userId, tags, title, likes, createdAt, average}) {
   const currentDate = formatDate(createdAt)
 
   const getUser = useQuery(['getOwnerPlace', userId], getOwnerPlace) 
-  let userInfo = null
 
   const {data:dataUser, status:statusUser} = getUser
 
@@ -67,7 +66,8 @@ function HeaderOnePlace({userId, tags, title, likes, createdAt, average}) {
   }
 
   if(statusUser === 'success') {
-    userInfo = dataUser.foundUser[0]
+   
+    console.log(dataUser)
   }
 
     return (
@@ -94,9 +94,9 @@ function HeaderOnePlace({userId, tags, title, likes, createdAt, average}) {
             </div>
             <div className={classes.inforcon}>
                 <div className={classes.avausercon}>
-                  <Avatar avatarImg={userInfo.avatar}/>
+                  <Avatar avatarImg={dataUser.avatar}/>
                   <div className={classes.usercon}>
-                    <p className={classes.created}>Agregado por {userInfo.username}</p>
+                    <p className={classes.created}>Agregado por {dataUser.username}</p>
                   </div>
                 </div>          
               </div>
