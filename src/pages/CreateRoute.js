@@ -93,7 +93,7 @@ export default function CreateRoute({}) {
 
   return <div>
     <img className='w-full max-h-[300px] object-cover brightness-50' src={PlaceSample}></img>
-    <BigTile bigTitleText='Publica un nuevo lugar para la comunidad'/>
+    <BigTile bigTitleText='Crea una nueva ruta para que los demás sigan'/>
     <form  className='w-2/3 mx-auto'>
       <label className='text-xl font-semibold'>Título</label>
       <Inputs value={name} onChange={(event)=> setName(event.target.value)} placeholderText="Escribe aquí el nombre del lugar"/>

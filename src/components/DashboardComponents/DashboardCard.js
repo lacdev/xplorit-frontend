@@ -21,10 +21,10 @@ export default function DashboardCard({cardData}) {
                      <p className='text-md mt-1'>{cardData.average}</p>
                  </div>
              </div>
-             <div className='flex'>
-                 <div className='flex ml-10 justify-start'>
+             <div className='flex-col'>
+                 <div className='flex justify-start'>
                      {cardData.tags&&cardData.tags.map((tag) =>{
-                         return <Labels LabelText={tag}/>
+                         return <Labels className="min-w-[80px]" LabelText={tag}/>
                      }) }
                      
                  </div>

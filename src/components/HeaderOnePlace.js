@@ -67,7 +67,7 @@ function HeaderOnePlace({userId, tags, title, likes, createdAt, average}) {
   }
 
   if(statusUser === 'success') {
-    userInfo = dataUser.foundUser[0]
+    userInfo = dataUser.foundUser
   }
 
     return (
