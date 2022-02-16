@@ -23,13 +23,30 @@ export async function getRoutesCreatedByUser({ queryKey }) {
 }
 
 export async function getCommentsCreatedByUser({ queryKey }) {
-  const service_url = `${endpoints.getAllComments}/${queryKey[1]}/reviews`;
+  console.log(
+    "🚀 ~ file: user.services.js ~ line 26 ~ getCommentsCreatedByUser ~ queryKey",
+    queryKey
+  );
+  const service_url = `${endpoints.getLikesFromUser}/${queryKey[1]}/reviews`;
+  console.log(
+    "🚀 ~ file: user.services.js ~ line 29 ~ getCommentsCreatedByUser ~ service_url ",
+    service_url
+  );
   const getCommentsPromise = await axios.get(service_url);
+  console.log(
+    "🚀 ~ file: user.services.js ~ line 30 ~ getCommentsCreatedByUser ~ getCommentsPromise",
+    getCommentsPromise
+  );
   const getComments = getCommentsPromise.data.data.routes;
+  console.log(
+    "🚀 ~ file: user.services.js ~ line 32 ~ getCommentsCreatedByUser ~ getComments",
+    getComments
+  );
   return getComments;
 }
 
 export async function getLikesCreatedByUser({ queryKey }) {
+  console.log("querykey", queryKey);
   const service_url = `${endpoints.getLikesFromUser}/${queryKey[1]}/likes`;
   const getLikesPromise = await axios.get(service_url);
   const getLikes = getLikesPromise.data.data;

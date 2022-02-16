@@ -8,10 +8,17 @@ export async function getCardsRoutesHome() {
 }
 
 export async function getSingleRouteData({ queryKey }) {
+  console.log("queryKey, ", queryKey);
+
   const service_url = `${endpoints.getAllRoutes}/${queryKey[1]}`;
+  console.log("service ", service_url);
+
   const getSinglePlaceDataPromise = await axios.get(service_url);
-  const singlePlaceData = getSinglePlaceDataPromise.data.data;
+  console.log("promise ", getSinglePlaceDataPromise);
+
+  const singlePlaceData = getSinglePlaceDataPromise;
   console.log("singleRoutedata ", singlePlaceData);
+
   return singlePlaceData;
 }
 
@@ -19,7 +26,6 @@ export async function getOwnerRoute({ queryKey }) {
   const service_url = `${endpoints.getUserProfile}/${queryKey[1]}`;
   const getOwnerPlacePromise = await axios.get(service_url);
   const getOwnerPlaceData = getOwnerPlacePromise.data.data;
-  console.log("user: ", getOwnerPlaceData);
   return getOwnerPlaceData;
 }
 
