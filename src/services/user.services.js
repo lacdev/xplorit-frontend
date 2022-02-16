@@ -45,3 +45,13 @@ export async function userLogin(userEmail, userPassword) {
   console.log("Aqui es login promise", getLoginPromise);
   return getLoginPromise.data;
 }
+
+export async function userSignUp(userName, userEmail, userPassword) {
+  const getSignUpPromise = await axios.post(endpoints.signUp, {
+    username: userName,
+    email: userEmail,
+    password: userPassword,
+  });
+  console.log(`Aqui es login promise ${getSignUpPromise}`);
+  return getSignUpPromise.data;
+}

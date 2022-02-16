@@ -1,25 +1,23 @@
-
-const base_url = `${process.env.REACT_APP_SERVER_URL}/v1`
-
+const base_url = `${process.env.REACT_APP_SERVER_URL}/v1`;
 
 export const endpoints = {
+  getplacesUser: `${base_url}/places/`,
 
-    getplacesUser : `${base_url}/places/`,
+  getAllPlaces: `${base_url}/places/`,
 
-    getAllPlaces : `${base_url}/places/`,
+  getAllRoutes: `${base_url}/routes`,
 
-    getAllRoutes :  `${base_url}/routes`,
+  getOwnerPlace: `${base_url}/users`,
 
-    getOwnerPlace : `${base_url}/users`,
+  getPlacesLikes: `${base_url}/places/`,
 
-    getPlacesLikes: `${base_url}/places/`,
+  getUserProfile: `${base_url}/users`,
 
-    getUserProfile : `${base_url}/users`,
+  postPlace: `${base_url}/places/`,
 
-    postPlace : `${base_url}/places/`,
+  getLikesFromUser: `${base_url}/users`,
 
-    getLikesFromUser : `${base_url}/users`,
+  logIn: `${base_url}/login`,
 
-    logIn: `${base_url}/login`
-
-}
+  signUp: `${base_url}/users`,
+};
