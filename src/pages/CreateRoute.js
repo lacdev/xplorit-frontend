@@ -10,8 +10,6 @@ import UploadImage from 'components/UploadImage';
 import { formatGoogleMapsAdressToNormalAdress } from 'utils/utils';
 import { createPlace } from 'services/places.services';
 import ExtraPlaceForRoute from 'components/ExtraPlaceForRoute';
-import PinMap from 'assets/icons/PinMap'
-import DeleteX from 'assets/icons/DeleteX'
 
 export default function CreateRoute({}) {
   const [name, setName] = useState("")
