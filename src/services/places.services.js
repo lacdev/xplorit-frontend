@@ -32,6 +32,7 @@ export async function getPlaceLikes({queryKey}) {
     return getOwnerPlaceData
 }
 
+
 export async function createPlace(data, images){
     const service_url = `${endpoints.postPlace}`
     const formData = new FormData()
