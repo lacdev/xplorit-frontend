@@ -20,7 +20,8 @@ import DashboardEdit from 'components/DashboardComponents/DashboardEdit'
 import AboutUsPage from 'pages/AboutUs'
 import DashboardPlacesContainer from 'components/DashboardComponents/DashboardPlacesContainer'
 import DashboardRoutesContainer from 'components/DashboardComponents/dashboardRoutesContainer'
-import ModalFiltro from 'components/ModalFiltro'
+
+import StateSelector from 'components/StateSelector'
 
 
 
@@ -39,7 +40,7 @@ function App() {
           <Route path="/about" element={<AboutUsPage/>}/>
          
           <Route path="/searchroute" element={<RouteSearch/>}/>
-          <Route path="/direct" element={<ModalFiltro/>}/>
+          <Route path="/direct" element={<StateSelector/>}/>
 
           <Route path="/" element={<PageLayout/>}>
             <Route index element={<Home />} />

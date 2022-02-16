@@ -63,7 +63,7 @@ function NavBarS() {
     
     let scrollMax=100;
     const listenScrollEvent = (event) => {
-      console.log(window.scrollY)
+     
       
        if (isxPhone === true || isPhone === true) 
         scrollMax=200;

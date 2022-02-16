@@ -29,6 +29,7 @@ export default function Home() {
   const {cardsForPlacesInHome, cardsForRoutesInHome} = useQueryMultiple()
 
   const { data:placesData, isLoading:loadingPlace, status } = cardsForPlacesInHome
+  
   const { data:routesData, isLoading:loadingRoute, status: statusR } = cardsForRoutesInHome
 
   if(status === 'error') {
