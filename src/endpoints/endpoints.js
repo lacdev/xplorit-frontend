@@ -20,6 +20,8 @@ export const endpoints = {
 
     getLikesFromUser : `${base_url}/users`,
 
+    getAllStates:`${base_url}/states`,
+    
     logIn: `${base_url}/login`
 
 }
