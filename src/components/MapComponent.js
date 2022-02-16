@@ -1,26 +1,51 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import SearchMap from './SearchMap';
-import SearchMapOnPage from './SearchMapOnPage';
-import useCurrentLocation from 'hooks/UseCurrentLocation';
-
+import React, { useCallback, useRef, useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import {
+    GoogleMap,
+    useLoadScript,
+    Marker,
+    Polyline,
+} from "@react-google-maps/api";
+import SearchMap from "./SearchMap";
+import SearchMapOnPage from "./SearchMapOnPage";
+import useCurrentLocation from "hooks/UseCurrentLocation";
 
 const center = {
-  lat: 19.4326077,
-  lng: -99.133208
+    lat: 19.4326077,
+    lng: -99.133208,
 };
 
-const mapLibraries = ['places'];
+const mapLibraries = ["places"];
 const mapOptions = {
     disableDefaultUI: true,
-    zoomControl: true
-}
+    zoomControl: true,
+};
+
+const lineOptions = {
+    strokeColor: "#4377ff ",
+    strokeOpacity: 0.8,
+    strokeWeight: 5,
+    fillColor: "#4377ff",
+    fillOpacity: 0.35,
+    clickable: false,
+    draggable: true,
+    editable: true,
+    visible: true,
+    radius: 30000,
+    paths: [],
+    zIndex: 1,
+};
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-
-function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLocationOnInputSearch, fullHeight=false}) {
+function MapComponent({
+    useOnePageSearch,
+    selectedLocation = null,
+    setSelectedLocationOnInputSearch,
+    fullHeight = false,
+    locationsData,
+    useMultipleLocations = false,
+}) {
     // ?--------------------------------------
     // ? Component setup
     // ?--------------------------------------
@@ -28,46 +53,49 @@ function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLoc
     const [currentUserLocation, setCurrentUserLocation] = useState(null);
 
     // ? use custom hook, : es alias de la variable
-    const { currentBrowserLocation, currentBrowserLocationError } = useCurrentLocation();
+    const { currentBrowserLocation, currentBrowserLocationError } =
+        useCurrentLocation();
 
     useEffect(() => {
+        if (!currentBrowserLocation || currentBrowserLocation === null) return;
 
-      if (!currentBrowserLocation || currentBrowserLocation === null)
-          return;
+        if (currentBrowserLocationError !== undefined)
+            setCurrentUserLocation({ ...center });
 
-      if (currentBrowserLocationError !== undefined)
-          setCurrentUserLocation({ ...center })
+        setCurrentUserLocation({ ...currentBrowserLocation });
 
-      setCurrentUserLocation({ ...currentBrowserLocation });
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentBrowserLocation, currentBrowserLocationError])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentBrowserLocation, currentBrowserLocationError]);
 
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: key,
-        libraries: mapLibraries
-    })
-    const goToLocation = (coords)=>{
-      mapRef.current.panTo(coords);
-    }
+        libraries: mapLibraries,
+    });
 
-    useEffect (()=>{
-      if(selectedLocation == null){
-        return
-      }
-      goToLocation(selectedLocation)
-    },[selectedLocation])
+    const goToLocation = (coords) => {
+        console.log("map ", mapRef);
+        mapRef?.current?.panTo(coords);
+    };
+
+    useEffect(() => {
+        if (selectedLocation == null) {
+            return;
+        }
+        console.log("asd", selectedLocation);
+        goToLocation(selectedLocation);
+    }, [selectedLocation]);
+
     // ?--------------------------------------
     // ? Create a Ref to the map when is loaded
     // ? To keep track with Google Maps API
     // ?--------------------------------------
     const onMapLoad = useCallback((map) => {
-      mapRef.current = map;
+        mapRef.current = map;
     }, []);
 
-  // ?--------------------------------------
-  // ? Clean Memory
-  // ?--------------------------------------
+    // ?--------------------------------------
+    // ? Clean Memory
+    // ?--------------------------------------
     const onMapLoadUnmount = useCallback((map) => {
         mapRef.current = null;
     }, []);
@@ -76,82 +104,139 @@ function MapComponent({useOnePageSearch, selectedLocation = null, setSelectedLoc
     // ? Drag Event of the map
     // ?--------------------------------------
     const onMapDrag = (event) => {
-      console.log("🚀 ~ file: CustomGoogleMap.js ~ line 81 ~ onMapDrag ~ event", event);
-      if (!mapRef.current.center)
-          return;
+        console.log(
+            "🚀 ~ file: CustomGoogleMap.js ~ line 81 ~ onMapDrag ~ event",
+            event
+        );
+        if (!mapRef.current.center) return;
 
-      const { center } = mapRef.current;
+        const { center } = mapRef.current;
 
+        const lat = center.lat();
+        const lng = center.lng();
+        const coords = {
+            lat: center.lat(),
+            lng: center.lng(),
+        };
 
-      const lat = center.lat();
-      const lng = center.lng();
-      const coords = {
-          lat: center.lat(),
-          lng: center.lng()
-      }
+        console.log(
+            "🚀 ~ file: CustomGoogleMap.js ~ line 82 ~ onMapDrag ~ coords",
+            coords
+        );
+        setCurrentUserLocation({ ...coords });
+        // setCurrentUserLocation({ lat: coords.lat, lng : coords.lng })
+    };
 
-      console.log("🚀 ~ file: CustomGoogleMap.js ~ line 82 ~ onMapDrag ~ coords", coords);
-      setCurrentUserLocation({ ...coords })
-      // setCurrentUserLocation({ lat: coords.lat, lng : coords.lng })
-    }
+    const onLineLoad = useCallback((lineContext) => {
+        console.log(
+            "🚀 ~ file: CustomGoogleMap.js ~ line 120 ~ onLineLoad ~ lineContext",
+            lineContext
+        );
+    }, []);
 
     // ?--------------------------------------
     // ? Click Event on all markers
     // ?--------------------------------------
     const onMarkerClick = (event) => {
-      console.log("🚀 ~ file: CustomGoogleMap.js ~ line 101 ~ onMarkerClick ~ event", event);
-
-      const { latLng } = event;
-
-      const coords = {
-          lat: latLng.lat(),
-          lng: latLng.lng()
-      }
-      console.log("🚀 ~ file: CustomGoogleMap.js ~ line 109 ~ onMarkerClick ~ coords", coords);
-    }
-
-
-    const onMapClick = (event) => {
+        console.log(
+            "🚀 ~ file: CustomGoogleMap.js ~ line 101 ~ onMarkerClick ~ event",
+            event
+        );
 
         const { latLng } = event;
 
         const coords = {
             lat: latLng.lat(),
-            lng: latLng.lng()
+            lng: latLng.lng(),
+        };
+        console.log(
+            "🚀 ~ file: CustomGoogleMap.js ~ line 109 ~ onMarkerClick ~ coords",
+            coords
+        );
+    };
+
+    const onMapClick = (event) => {
+        const { latLng } = event;
+
+        const coords = {
+            lat: latLng.lat(),
+            lng: latLng.lng(),
+        };
+        console.log(
+            "🚀 ~ file: CustomGoogleMap.js ~ line 124 ~ onMapClick ~ coords",
+            coords
+        );
+    };
+
+    const createPathData = () => {
+        if (!locationsData) {
+            return [];
         }
-        console.log("🚀 ~ file: CustomGoogleMap.js ~ line 124 ~ onMapClick ~ coords", coords);
+        const pathCoords = locationsData.map((location) => {
+            return location.coords;
+        });
 
-    }
+        const newPathOptions = Object.assign({}, lineOptions);
+        newPathOptions.paths = pathCoords;
 
-    const mapIinitialPosition = selectedLocation !== null ? selectedLocation : center;
+        return { path: pathCoords, options: newPathOptions };
+    };
 
+    const mapIinitialPosition =
+        selectedLocation !== null ? selectedLocation : center;
 
-    const mapHeight = fullHeight ? '100vh' : '50vh';
+    const mapHeight = fullHeight ? "100vh" : "50vh";
 
+    const pathOptionsData = createPathData();
+    console.log("Path Options", pathOptionsData);
 
     const containerStyle = {
-      width: '100%',
-      height: mapHeight,
+        width: "100%",
+        height: mapHeight,
     };
     //Define map center
-    const centerLocation = currentUserLocation !== null ? currentUserLocation : center;
+    const centerLocation =
+        currentUserLocation !== null ? currentUserLocation : center;
 
-    if(!isLoaded) return null 
+    if (!isLoaded) return null;
     return (
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        onLoad={onMapLoad}
-        onUnmount={onMapLoadUnmount}
-        center={mapIinitialPosition}
-        zoom={12}
-        options={mapOptions}
-        onDragEnd={onMapDrag}
-        onClick={onMapClick}
-      >
-        {useOnePageSearch ? <SearchMapOnPage setSelectedLocationOnInputSearch={setSelectedLocationOnInputSearch}/> : <SearchMap/>}
-        {selectedLocation && <Marker position={selectedLocation}/>}
-      </GoogleMap>
-  )
+        <GoogleMap
+            mapContainerStyle={containerStyle}
+            onLoad={onMapLoad}
+            onUnmount={onMapLoadUnmount}
+            center={mapIinitialPosition}
+            zoom={13}
+            options={mapOptions}
+            onDragEnd={onMapDrag}
+            onClick={onMapClick}
+        >
+            {useOnePageSearch ? (
+                <SearchMapOnPage
+                    setSelectedLocationOnInputSearch={
+                        setSelectedLocationOnInputSearch
+                    }
+                />
+            ) : (
+                <SearchMap />
+            )}
+            {selectedLocation && useMultipleLocations == false && (
+                <Marker position={selectedLocation} />
+            )}
+            {locationsData &&
+                useMultipleLocations == true &&
+                locationsData.map((location) => {
+                    return <Marker position={location.coords} />;
+                })}
+            {locationsData && useMultipleLocations == true && (
+                <Polyline
+                    onLoad={onLineLoad}
+                    path={pathOptionsData.path}
+                    options={pathOptionsData.options}
+                    onClick={(event) => console.log(event)}
+                />
+            )}
+        </GoogleMap>
+    );
 }
 
-export default MapComponent
+export default MapComponent;

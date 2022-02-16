@@ -7,17 +7,21 @@ export async function  getCardsPlacesHome() {
     return  cardsDataPlaces
 } 
 
-export async function getSinglePlaceData({queryKey}) {    
+export async function getSinglePlaceData({queryKey}) {  
+    console.log("singleplace: ",queryKey)  
     const service_url = `${endpoints.getAllPlaces}/${queryKey[1]}`
     const getSinglePlaceDataPromise = await axios.get(service_url)
     const singlePlaceData = getSinglePlaceDataPromise.data.data
+    console.log("Lugar", getSinglePlaceDataPromise)
+    
     return singlePlaceData
 }
 
 export async function getOwnerPlace({queryKey}) {
     const service_url = `${endpoints.getOwnerPlace}/${queryKey[1]}`
     const getOwnerPlacePromise = await axios.get(service_url)
-    const getOwnerPlaceData = getOwnerPlacePromise.data
+    console.log(getOwnerPlacePromise)
+    const getOwnerPlaceData = getOwnerPlacePromise.data.data
     return getOwnerPlaceData
 }
 

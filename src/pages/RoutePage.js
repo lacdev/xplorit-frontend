@@ -21,7 +21,7 @@ const classes = {
   textcon:'self-center',
   box:'mx-3 my-3',
   select:'block p-2.5 text-base text-gray-400 bg-neutral-200 bg-clip-padding bg-no-repeat border-solid border-gray-300 rounded-full transition ease-in-out m-0 focus:text-gray-700 focus:border-black focus:outline-none',
-  carruselcon:'flex w-5/6 m-auto justify-center',
+  carruselcon:'flex w-5/6 m-auto justify-center mb-20',
   textcarru:'ml-20 my-8',
 }
 

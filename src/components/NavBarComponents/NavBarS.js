@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import {Link} from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import Btncards from 'components/Common/Btncards'
+import { AuthContext } from 'context/AuthContext'
 
 
 const classes={
@@ -45,6 +46,7 @@ function NavBarS() {
     const [navBarColor, setNavBarColor] = useState(classes.beforeScroll)
     const [navBarText, setNavBarText] = useState(classes.textBefore)
     const [navBarFill, setNavBarFill] = useState(classes.fillBefore)
+    const {userState} = useContext(AuthContext)
     const isxPhone = useMediaQuery({query:'(min-width: 360px) and (max-width: 639px)'});
     const isPhone = useMediaQuery({query:'(min-width: 640px) and (max-width: 767px)'});
     const isMinTablet = useMediaQuery({query:'(min-width: 768px) and (max-width: 1023px)'});
@@ -52,7 +54,6 @@ function NavBarS() {
     const isDesktop = useMediaQuery({query:'(min-width: 1280px) and (max-width: 1535px)'});
     const isBigDesktop = useMediaQuery({query:'(min-width: 1536px)'});
     
-    console.log(isxPhone)
    
     useEffect(() => {
       window.addEventListener("scroll", listenScrollEvent)
@@ -138,14 +139,16 @@ function NavBarS() {
                 </div>
               </div>
               <div className={classes.rightcon}>
-                <div className={classes.btncon}>
-                   <Btncards className={classes.btn} buttonText="Iniciar sesión"></Btncards>
-                </div>
+                {userState.loggedIn === false && <div className={classes.btncon}>
+                  <Link to="login">
+                    <Btncards className={classes.btn} buttonText="Iniciar sesión"></Btncards>
+                  </Link>
+                </div>}
                 <div className={classes.rigthposition}>
                   
 
                 {/* Profile dropdown */}
-                <Menu as="div" className={classes.dropdowncon}>
+                {userState.loggedIn && <Menu as="div" className={classes.dropdowncon}>
                   {({ open }) => (
                     <>
                       <div>
@@ -175,7 +178,7 @@ function NavBarS() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                               to='#'
+                               to='profile'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
@@ -188,7 +191,7 @@ function NavBarS() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                               to='#'
+                               to='profile/edit'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
@@ -201,7 +204,7 @@ function NavBarS() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                               to='#'
+                               to='createroute'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
@@ -214,7 +217,7 @@ function NavBarS() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                               to='#'
+                               to='createplace'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
@@ -241,7 +244,7 @@ function NavBarS() {
                       </Transition>
                     </>
                   )}
-                </Menu>
+                </Menu>}
               </div>
             </div>
           </div>

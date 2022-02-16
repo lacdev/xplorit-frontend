@@ -20,8 +20,6 @@ export default function PageLayout() {
 function setRenderFooter(location){
   const {pathname} = location;
   const noFooterRoute = [
-    '/profile/routes',
-    '/profile/likes',
     '/searchplace',
   ]
 

@@ -2,7 +2,7 @@ import React from 'react';
 import Btncards from 'components/Common/Btncards';
 
 const classes={
-    container:'w-full h-80 flex justify-center',
+    container:'w-full h-80 flex justify-center mb-20',
     //img:'object-cover min-w-footerBannerW h-footerBannerH min-h-fit rounded-3xl m-6'
 } 
 function FooterBanner() {

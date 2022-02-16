@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import HeroBanner from "components/Common/HeroBanner"
 import BigTitle from 'components/Common/BigTitle';
@@ -13,8 +14,10 @@ import TestimonialCarousel from 'components/TestimonialCarousel';
 import { useQuery } from 'react-query';
 import { getCardsPlacesHome } from 'services/places.services'
 import { getCardsRoutesHome } from 'services/routes.services'
+import { AuthContext } from 'context/AuthContext';
 
 export default function Home() {
+  const {userState} = useContext(AuthContext)
 
   const useQueryMultiple = () => {
     //places
@@ -48,7 +51,9 @@ export default function Home() {
           {loadingPlace === true ? <span>Loading...</span> : <CardCarousel type={'place'} cardsData={placesData} />}
         </div >
         <div className='flex w-full justify-center'>
-          <Btncards className='py-2 mt-8 mb-4' buttonText='Ver más'/>
+          <Link to='places'>
+            <Btncards className='py-2 mt-8 mb-4' buttonText='Ver más'/>
+          </Link>
         </div>
         <FirstBannerImage/>
         <BigTitle bigTitleText="Rutas más recorridas"/>
@@ -56,7 +61,9 @@ export default function Home() {
           {loadingRoute === true ? <span>Loading...</span> : <CardCarousel type={'route'} cardsData={routesData}/>}
         </div >
         <div className='flex w-full justify-center'>
-          <Btncards className='py-2 mt-8 mb-4' buttonText='Ver más'/>
+          <Link to='routes'>
+            <Btncards className='py-2 mt-8 mb-4' buttonText='Ver más'/>
+          </Link>
         </div>
         <SecondBannerImage/>
         <BigTitle bigTitleText="Lo que dicen de nosotros"/>
