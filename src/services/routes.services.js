@@ -12,6 +12,7 @@ export async function getSingleRouteData({ queryKey }) {
   const getSinglePlaceDataPromise = await axios.get(service_url);
   const singlePlaceData = getSinglePlaceDataPromise.data.data;
   console.log("singleRoutedata ", singlePlaceData);
+
   return singlePlaceData;
 }
 
@@ -19,7 +20,6 @@ export async function getOwnerRoute({ queryKey }) {
   const service_url = `${endpoints.getUserProfile}/${queryKey[1]}`;
   const getOwnerPlacePromise = await axios.get(service_url);
   const getOwnerPlaceData = getOwnerPlacePromise.data.data;
-  console.log("user: ", getOwnerPlaceData);
   return getOwnerPlaceData;
 }
 

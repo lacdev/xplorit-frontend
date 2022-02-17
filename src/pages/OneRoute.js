@@ -94,6 +94,7 @@ function OneRoute() {
   }
 
   if (status === "success") {
+    console.log("status ", data);
     const userToFind = data.ownerId.toString();
 
     return (

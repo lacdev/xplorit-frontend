@@ -22,7 +22,7 @@ import DashboardPlacesContainer from "components/DashboardComponents/DashboardPl
 import DashboardRoutesContainer from "components/DashboardComponents/dashboardRoutesContainer";
 import LoaderHome from "components/LandingComponents/LoaderHome";
 import { AuthContextProvider } from "context/AuthContext";
-import StateSelector from 'components/StateSelector'
+import StateSelector from "components/StateSelector";
 
 function App() {
   return (
@@ -33,7 +33,6 @@ function App() {
             <Route path='/login' element={<LogIn />} />
             <Route path='/signup' element={<SignUp />} />
 
-            <Route path='/about' element={<AboutUsPage />} />
             <Route path='/searchplace' element={<PlaceSearch />} />
             <Route path='/searchroute' element={<RouteSearch />} />
             <Route path='/direct' element={<LoaderHome />} />
@@ -46,6 +45,7 @@ function App() {
               <Route path='createroute' element={<CreateRoute />} />
               <Route path='/route/:id' element={<OneRoute />} />
               <Route path='/place/:id' element={<OnePlace />} />
+              <Route path='/about' element={<AboutUsPage />} />
               <Route path='profile' element={<Dashboard />}>
                 <Route index element={<DashboardRoutesContainer />} />
                 <Route path='routes' element={<DashboardRoutesContainer />} />

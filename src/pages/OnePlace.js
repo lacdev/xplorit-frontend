@@ -107,6 +107,7 @@ function OnePlace() {
               tags={data.tags}
               likes={data.likes}
               createdAt={data.createdAt}
+              updatedAt={data.updatedAt}
               average={data.average}
             />
           )}
