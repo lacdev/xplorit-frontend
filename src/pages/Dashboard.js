@@ -1,16 +1,26 @@
-import BigTitle from 'components/Common/BigTitle';
-import DashboardBanner from 'components/DashboardComponents/DashboardBanner';
-import DashboardSideBar from 'components/DashboardComponents/DashboardSideBar';
-
-//import NavBar from 'components/NavBar';
-
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { useQuery} from 'react-query'
+//Services
 import { getUserProfilePic } from 'services/user.services';
+//Components
+import BigTitle from 'components/Common/BigTitle';
+import DashboardBanner from 'components/DashboardComponents/DashboardBanner';
+import DashboardSideBar from 'components/DashboardComponents/DashboardSideBar';
+//import NavBar from 'components/NavBar';
 import DirectAccess from 'components/DashboardComponents/DirectAccess';
 
-export default function Dashboard() {
+const classes = {
+   parentcon:'grid grid-cols-10',
+   bannercon:'w-full col-span-10 bg-top',
+   aside:'w-full h-full col-span-2 hidden md:block',
+   maincon:'flex-col col-span-8 min-h-[100vh]',
+   title:'flex justify-start',
+   outletcon:'flex-col w-5/6 mx-auto my-4',
+   accescon:'fixed bottom-0 min-w-full',
+}
+
+function Dashboard() {
 
   const id = '61ef68279262e2f167700caf'
 
@@ -18,23 +28,24 @@ export default function Dashboard() {
   const { data, status } = getUser
   
   return (
-    <div className='grid grid-cols-10'>
-      <div className='w-full col-span-10 bg-top'>
+    <div className={classes.parentcon}>
+      <div className={classes.bannercon}>
         {status === 'loading' ? <span> Loading</span> : <DashboardBanner coverPhoto={data.coverPhoto}/>}
       </div>
-      <div className='w-full h-full col-span-2 hidden md:block'>
+      <div className={classes.aside}>
         {status === 'loading' ? <span> Loading</span> : <DashboardSideBar avatar={data.avatar} username={data.username}/>}
       </div>
-      <div className='flex-col col-span-8 min-h-[100vh]'>
+      <div className={classes.maincon}>
       <div >
-        <BigTitle className='flex justify-start' bigTitleText='Rutas creadas'/>
+        <BigTitle className={classes.title}bigTitleText='Rutas creadas'/>
         </div>
-      <div className=' flex-col w-5/6 mx-auto my-4'>
+      <div className={classes.outletcon}>
         {status === 'loading' ? <span> Loading</span> :<Outlet/>}
       </div>
     </div>
-      <div className='fixed bottom-0 min-w-full'>
+      <div className={classes.accescon}>
         <DirectAccess />
       </div>
 </div>)
 }
+export default Dashboard;

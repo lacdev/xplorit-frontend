@@ -1,12 +1,16 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Inputs from 'components/Common/Inputs';
-import BigTitle from 'components/Common/BigTitle';
-import Btncards from 'components/Common/Btncards';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
+//Context, useQuery & services
 import { AuthContext } from 'context/AuthContext';
 import { useMutation } from 'react-query';
 import { userSignUp } from 'services/user.services';
+
+//Components
+import Inputs from 'components/Common/Inputs';
+import BigTitle from 'components/Common/BigTitle';
+import Btncards from 'components/Common/Btncards';
+
 
 const classes = {
     parentcon:'inline-flex w-full h-screen items-center',

@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 //Components
-import Titles from "components/Common/Titles";
-import BtnTags from "./BtnTags";
+import Titles from 'components/Common/Titles';
+import BtnTags from './BtnTags';
 //Icons 
-import StarFillOut from "assets/icons/StarFillOut";
+import StarFillOut from 'assets/icons/StarFillOut';
 import { AdjustmentsIcon } from '@heroicons/react/outline';
-import StarComplete from "assets/icons/StarComplete";
+import StarComplete from 'assets/icons/StarComplete';
 
 
 const classes = {

@@ -1,20 +1,34 @@
-import React, { useEffect, useContext } from "react";
-import { useState } from "react";
-import { AuthContext } from "context/AuthContext";
-import { useMutation } from "react-query";
-import BigTile from "components/Common/BigTitle";
-import Inputs from "components/Common/Inputs";
-import TextEditor from "../components/TextEditor";
-import TagSelector from "components/TagSelector";
-import PlaceSample from "../assets/img/playa.jpg";
-import MapComponent from "components/MapComponent";
-import UploadImage from "components/UploadImage";
-import { formatGoogleMapsAdressToNormalAdress } from "utils/utils";
-import { createRoute } from "services/routes.services";
-import ExtraPlaceForRoute from "components/ExtraPlaceForRoute";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useContext } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from 'react-query';
+//Services & Context
+import { AuthContext } from 'context/AuthContext';
+import { createRoute } from 'services/routes.services';
+//Components
+import BigTile from 'components/Common/BigTitle';
+import Inputs from 'components/Common/Inputs';
+import TextEditor from '../components/TextEditor';
+import TagSelector from 'components/TagSelector';
+import PlaceSample from '../assets/img/playa.jpg';
+import MapComponent from 'components/MapComponent';
+import UploadImage from 'components/UploadImage';
+import { formatGoogleMapsAdressToNormalAdress } from 'utils/utils';
+import ExtraPlaceForRoute from 'components/ExtraPlaceForRoute';
 
-export default function CreateRoute({}) {
+
+const classes = {
+  coverimg:'w-full max-h-[300px] object-cover brightness-50',
+  formcon:'w-2/3 mx-auto',
+  label:'text-xl font-semibold',
+  filecon:'flex w-full justify-center items-center h-96 rounded',
+  editorcon:'my-4',
+  btncon:'flex justify-end my-6 text-white',
+  btn:'bg-secondary rounded-full py-1 px-4 hover:cursor-pointer',
+
+}
+
+function CreateRoute() {
   const [name, setName] = useState("");
   const [tags, setTags] = useState([]);
   const [description, setDescription] = useState("");
@@ -27,7 +41,7 @@ export default function CreateRoute({}) {
 
   const mutationPost = useMutation(
     (data) => createRoute(data.data, data.placeImages),
-    { onSuccess: () => console.log("Todo cool en rutas") }
+    { onSuccess: () => console.log('Todo cool en rutas') }
   );
 
   const setTagValues = (tagOptions) => {
@@ -40,7 +54,7 @@ export default function CreateRoute({}) {
   };
 
   // useEffect(()=>{
-  //   console.log("Estas cambiando locatiosData", locationsData)
+  //   console.log('Estas cambiando locatiosData', locationsData)
   // },[locationsData])
 
   const setSelectedLocationValue = (coords, address) => {
@@ -55,7 +69,7 @@ export default function CreateRoute({}) {
     console.log(newLocationDataArray);
   };
 
-  console.log("Aqui es para breakpoint");
+  console.log('Aqui es para breakpoint');
 
   const Publish = async (event) => {
     event.preventDefault();
@@ -89,12 +103,12 @@ export default function CreateRoute({}) {
           coordinates: newCoords,
         },
       };
-      console.log("Estamos dentro de Publish", data, placeImages);
+      console.log('Estamos dentro de Publish', data, placeImages);
       if (userState.loggedIn == true) {
         mutationPost.mutate({ data, placeImages });
-        navigate("/", { replace: true });
+        navigate('/', { replace: true });
       } else {
-        navigate("/login", { replace: true });
+        navigate('/login', { replace: true });
       }
       // await createPlace(data, placeImages);
       // {mutate(data)}
@@ -106,39 +120,39 @@ export default function CreateRoute({}) {
   return (
     <div>
       <img
-        className="w-full max-h-[300px] object-cover brightness-50"
-        src={PlaceSample}
+        className={classes.coverimg}
+        src={PlaceSample} alt='cover-img'
       ></img>
-      <BigTile bigTitleText="Publica un nuevo lugar para la comunidad" />
-      <form onSubmit={Publish} className="w-2/3 mx-auto">
-        <label className="text-xl font-semibold">Título</label>
+      <BigTile bigTitleText='Publica un nuevo lugar para la comunidad' />
+      <form onSubmit={Publish} className={classes.formcon}>
+        <label className={classes.label}>Título</label>
         <Inputs
           value={name}
           onChange={(event) => setName(event.target.value)}
-          placeholderText="Escribe aquí el nombre del lugar"
+          placeholderText='Escribe aquí el nombre del lugar'
         />
-        <label className="text-xl font-semibold">
+        <label className={classes.label}>
           Agrega las imágenes del lugar
         </label>
-        <div className="flex w-full justify-center items-center h-96 rounded">
+        <div className={classes.filecon}>
           <UploadImage value={placeImages} onImageAdd={saveImageToState} />
         </div>
-        <label className="text-xl font-semibold">
+        <label className={classes.label}>
           Danos una descripción del lugar
         </label>
-        <div className="my-4">
+        <div className={classes.editorcon}>
           <TextEditor
             value={description}
             onTextEditorChange={(value) => setDescription(value)}
           />
         </div>
-        <label className="text-xl font-semibold">
+        <label className={classes.label}>
           Elige hasta 4 tags relacionados al lugar
         </label>
-        <div className="my-4">
+        <div className={classes.editorcon}>
           <TagSelector setTagValues={setTagValues} tags={tags} />
         </div>
-        <label className="text-xl font-semibold">
+        <label className={classes.label}>
           ¿En qué dirección se ubica el lugar?
         </label>
         <div>
@@ -162,11 +176,11 @@ export default function CreateRoute({}) {
               />
             );
           })}
-        <div className="flex justify-end my-6 text-white">
+        <div className={classes.btncon}>
           <input
-            className="bg-secondary rounded-xl py-1 px-4 hover:cursor-pointer"
-            type="submit"
-            value="Publicar"
+            className={classes.btn}
+            type='submit'
+            value='Publicar'
           />
           {/* <Btncards onClick={Publish} className='py-1' buttonText='Publicar' /> */}
         </div>
@@ -174,3 +188,4 @@ export default function CreateRoute({}) {
     </div>
   );
 }
+export default CreateRoute;
