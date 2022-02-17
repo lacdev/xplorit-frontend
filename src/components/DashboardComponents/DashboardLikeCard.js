@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Labels } from "../Common/Labels";
-import HeartComplete from "assets/icons/HeartComplete";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Labels } from '../Common/Labels';
+import HeartComplete from 'assets/icons/HeartComplete';
 
 export default function DashboardLikeCard({ id, name, type, images, tags }) {
   const cardLink = `/${type}/${id}`;

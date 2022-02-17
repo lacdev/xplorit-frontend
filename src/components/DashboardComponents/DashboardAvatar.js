@@ -8,7 +8,7 @@ const classes = {
   img:'rounded-full w-[200px] border-solid border-8 m-auto  border-secondary' ,
 }
 
-export default function DashboardAvatar({avatar, username}) {
+function DashboardAvatar({avatar, username}) {
   return <div className={classes.parentcon }>
     <div className={classes.imgcon}>
       <img className={classes.img} src={avatar} alt='avatar-dashb'></img>
@@ -16,3 +16,4 @@ export default function DashboardAvatar({avatar, username}) {
     </div>
   </div>;
 }
+export default  DashboardAvatar;
