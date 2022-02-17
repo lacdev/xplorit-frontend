@@ -5,6 +5,7 @@ import Edit from "assets/icons/Edit";
 import Trash from "assets/icons/Trash";
 
 export default function DashboardCard({ cardData }) {
+  console.log("cardData ", cardData);
   return (
     <div className='m-auto flex w-fit mb-5 bg-white shadow-md rounded-md'>
       <div className='max-w-xs mr-5'>
