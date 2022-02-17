@@ -22,7 +22,7 @@ import DashboardPlacesContainer from "components/DashboardComponents/DashboardPl
 import DashboardRoutesContainer from "components/DashboardComponents/dashboardRoutesContainer";
 import LoaderHome from "components/LandingComponents/LoaderHome";
 import { AuthContextProvider } from "context/AuthContext";
-import StateSelector from 'components/StateSelector'
+
 
 function App() {
   return (

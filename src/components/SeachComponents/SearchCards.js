@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 //Components
 import Titles from 'components/Common/Titles';
-import { Labels } from './Common/Labels';
-import Btncards from './Common/Btncards';
+import { Labels } from '../Common/Labels';
+import Btncards from '../Common/Btncards';
 //Img & Icons
 import StarComplete from 'assets/icons/StarComplete';
 import HeartFillOut from 'assets/icons/HeartFillOut';

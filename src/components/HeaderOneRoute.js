@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { formatCreationDate, formatDate } from "utils/date";
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
-import HeartComplet from "assets/icons/HeartComplete";
+import HeartComplete from "assets/icons/HeartComplete";
 import StarComplete from "assets/icons/StarComplete";
 import ThreePoints from "assets/icons/ThreePoints";
 import Map from "assets/img/mapsample.png";
@@ -84,20 +84,22 @@ function HeaderOneRoute({ userId, tags, title, likes, createdAt, average }) {
       <div className={classes.titleicon}>
         <Titles tag='h3' titleText={title || ""}></Titles>
         <div className={classes.iconscon}>
-          <div onClick={handleClick} className='flex flex-row'>
-            {useHeart === false ? (
-              <HeartFillOut
-                width='28'
-                height='28'
-                className={classes.hearticon}
-              />
-            ) : (
-              <HeartComplet
-                width='28'
-                height='28'
-                className={classes.hearticon}
-              />
-            )}
+          <div className='flex flex-row'>
+            <div onClick={handleClick}>
+               {useHeart === false ? (
+                <HeartFillOut
+                 width='28'
+                  height='28'
+                 className={classes.hearticon}
+                />
+                ) : (
+                  <HeartComplete
+                  width='28'
+                  height='28'
+                  className={classes.hearticon}
+               />
+               )}
+             </div>
             <StarComplete width='28' height='28' className={classes.staricon} />
             <ThreePoints width='40' height='28' />
           </div>

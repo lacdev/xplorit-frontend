@@ -5,27 +5,32 @@ import { getCardsPlacesHome } from "services/places.services";
 import { getAllStates } from "services/utils.services";
 //Components
 import Btncards from "components/Common/Btncards";
-
-//Imgages & Icons
-import ModalFiltro from "components/ModalFiltro";
-
+import ModalFiltro from "components/SeachComponents/ModalFiltro";
 import MapComponent from "components/MapComponent";
-import Toggle from "components/Toggle";
-import SearchCards from "components/SearchCards";
-import StateSelector from "components/StateSelector";
+import Toggle from "components/SeachComponents/Toggle";
+import SearchCards from "components/SeachComponents/SearchCards";
+import StateSelector from "components/SeachComponents/StateSelector";
+import BtnTags from "components/SeachComponents/BtnTags";
+import LimitCards from "components/SeachComponents/LimitCards";
+
+
 
 const classes = {
   sectionres: "font-primary w-full h-full min-h-screen",
   tagsfiltroscon: "flex flex-row justify-between p-1 w-full bg-white my-2",
   scroll: "scroll-smooth scroll-pl-4 snap-end snap-x snap-mandatory",
   scrolltags: "snap-center snap-always scroll-mr-3.5",
+  togglecon:'flex content-center items-center px-4',
   btnclass: "py-2 flex flex-row-reverse content-center",
+  btntagscon:'hidden lg:flex overflow-x-hidden items-center pb-2',
   renderres:
     "grid grid-cols-1 minTablet:grid-cols-5 grid-flow-col h-full min-h-screen",
+  
   asidecon:
-    "col-span-5 xl:col-span-3 minTablet:col-span-2 bg-white divide-y divide-solid border-slate-500 px-3",
+    "col-span-5 xl:col-span-3 minTablet:col-span-2 bg-white divide-y divide-solid border-slate-500 px-3 overscroll-y-auto",
   rescon: "py-2 pl-2",
   mapcon: "minTablet:block col-span-3 bg-gray-200 h-full",
+  
 };
 function PlaceSearch() {
   const [showMap, setShowMap] = useState(false);
@@ -54,7 +59,7 @@ function PlaceSearch() {
       </span>
     );
   }
-  const HandlerClick = () => {
+  const handlerClick = () => {
     setShowMap(!showMap);
     
   };
@@ -79,54 +84,13 @@ function PlaceSearch() {
     <div className="pt-16">
       <section className={classes.sectionres}>
         <div className={classes.tagsfiltroscon}>
-          <div className="flex content-center items-center px-4">
-            <span>Lugares</span>
+          <div className={classes.togglecon}>
+            <span className="mr-2">Lugares</span>
             <Toggle />
-            <span>Rutas</span>
+            <span className="ml-2">Rutas</span>
           </div>
-          <div className="hidden lg:flex overflow-x-hidden items-center pb-2">
-            <Btncards
-              buttonText="Aire Libre"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base min-w-110px ${classes.btnclass} `}
-            ></Btncards>
-            <Btncards
-              buttonText="Artesanias"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base ${classes.btnclass} `}
-            ></Btncards>
-            <Btncards
-              buttonText="Comida"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base ${classes.btnclass} `}
-            ></Btncards>
-            <Btncards
-              buttonText="Cultural"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base ${classes.btnclass} `}
-            ></Btncards>
-            <Btncards
-              buttonText="Entretenimiento"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base ${classes.btnclass} `}
-            ></Btncards>
-            <Btncards
-              buttonText="Familiar"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base ${classes.btnclass} `}
-            ></Btncards>
-            <Btncards
-              buttonText="Playa"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base ${classes.btnclass} `}
-            ></Btncards>
+          <div className={classes.btntagscon}>
+            <BtnTags/>
           </div>
           <div className="ml-auto">
             <ModalFiltro />
@@ -169,7 +133,7 @@ function PlaceSearch() {
                   );
                 })
               )}
-              <Btncards buttonText="Mostrar más" color="bg-black"></Btncards>
+             <LimitCards/>
             </aside>
           )}
           <div className={mapContainerClass}>
@@ -180,7 +144,7 @@ function PlaceSearch() {
         <Btncards
           buttonText={buttonText}
           className="py-1 block minTablet:hidden"
-          onClick={HandlerClick}
+          onClick={handlerClick}
         ></Btncards>
       </section>
     </div>

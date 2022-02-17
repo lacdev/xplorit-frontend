@@ -7,11 +7,16 @@ function classNames(...classes) {
   
 function Toggle() {
     const [enabled, setEnabled] = useState(false)
+    const [changePage, setChangePage] = useState(0)
+    const listenClick = () => setChangePage(changePage + 1);
+    console.log('click', changePage)
+
   return (
     
     <Switch
       checked={enabled}
       onChange={setEnabled}
+      onClick={listenClick}
       className="flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
     >
       <span className="sr-only">Use setting</span>
