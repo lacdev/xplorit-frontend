@@ -8,7 +8,7 @@ function LimitCards() {
     
   return (
       <div>
-          <Btncards buttonText="Mostrar más" color="bg-black"></Btncards>
+          <Btncards buttonText="Mostrar más" color="bg-black" onClick={listenClick}></Btncards>
       </div>
     
   )
