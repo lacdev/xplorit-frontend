@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+//Icons
 import StarHalf from 'assets/icons/StarHalf';
 
 const classes = {

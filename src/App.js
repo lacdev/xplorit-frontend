@@ -15,11 +15,11 @@ import RouteSearch from 'pages/RouteSearch';
 import CreatePlace from 'pages/CreatePlace';
 import CreateRoute from 'pages/CreateRoute';
 import DashboardComment from 'components/DashboardComponents/DashboardComment';
-import DashboardLikeContainer from 'components/DashboardComponents/DeshboardLikeContainer';
+import DashboardLikeContainer from 'components/DashboardComponents/DashboardLikeContainer';
 import DashboardEdit from 'components/DashboardComponents/DashboardEdit';
 import AboutUsPage from 'pages/AboutUs';
 import DashboardPlacesContainer from 'components/DashboardComponents/DashboardPlacesContainer';
-import DashboardRoutesContainer from 'components/DashboardComponents/dashboardRoutesContainer';
+import DashboardRoutesContainer from 'components/DashboardComponents/DashboardRoutesContainer';
 import LoaderHome from 'components/LandingComponents/LoaderHome';
 import { AuthContextProvider } from 'context/AuthContext';
 

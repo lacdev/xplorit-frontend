@@ -1,10 +1,10 @@
 import React from 'react';
-//Usequery
+//Usequery & services
 import { useQuery} from 'react-query'
 import { getRoutesCreatedByUser } from 'services/user.services';
 import DashboardCard from './DashboardCard';
 
-export default function DashboardRoutesContainer() {
+ function DashboardRoutesContainer() {
 
  const id = '61ef68279262e2f167700caf'
 
@@ -29,3 +29,4 @@ if(status === 'error') {
     </>
    
 }
+export default DashboardRoutesContainer

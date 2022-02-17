@@ -1,5 +1,6 @@
 import React from 'react';
 import { Labels } from '../Common/Labels';
+//Icons
 import StarHalf from 'assets/icons/StarHalf';
 import Edit from 'assets/icons/Edit';
 import Trash from 'assets/icons/Trash';

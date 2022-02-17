@@ -1,5 +1,5 @@
 import React from "react";
-import image from "assets/img/image.jpg";
+//import image from "assets/img/image.jpg";
 
 const classes = {
   img:'w-screen max-h-[30vh] object-cover object-center object-bottom ',

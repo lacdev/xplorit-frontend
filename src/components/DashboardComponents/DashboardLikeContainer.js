@@ -1,11 +1,12 @@
-import React from "react";
-import DashboardLikeCard from "./DashboardLikeCard";
+import React from 'react';
 
 //UseQuery
-import { useQuery } from "react-query";
-import { getLikesCreatedByUser } from "services/user.services";
+import { useQuery } from 'react-query';
+import { getLikesCreatedByUser } from 'services/user.services';
+//Components 
+import DashboardLikeCard from './DashboardLikeCard';
 
-export default function DashboardLikeContainer() {
+function DashboardLikeContainer() {
   const id = "61ef68279262e2f167700caf";
 
   const getLikes = useQuery(["getLikes", id], getLikesCreatedByUser);
@@ -54,3 +55,4 @@ export default function DashboardLikeContainer() {
     </div>
   );
 }
+export default DashboardLikeContainer;

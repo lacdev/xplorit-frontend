@@ -1,5 +1,6 @@
 import React from 'react';
-import profilepic from 'assets/img/profilepic.jpg';
+//Img || Component 
+//import profilepic from 'assets/img/profilepic.jpg';
 import ProfileUsername from './ProfileUsername';
 
 const classes = {

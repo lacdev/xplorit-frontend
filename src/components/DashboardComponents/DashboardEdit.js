@@ -1,4 +1,5 @@
 import React from 'react';
+//Components
 import AddImageDashboard from 'assets/icons/AddImageDashboard'
 import Btncards from 'components/Common/Btncards';
 
@@ -10,8 +11,8 @@ const classes = {
   btnbann:'py-1',
 }
 
-export default function DashboardEdit() {
-  return <div className={'flex-col mx-auto text-center'}>
+function DashboardEdit() {
+  return <div className={classes.parentcon}>
       <p className={classes.text} >Cambiar foto de usuario</p>
       <div className={classes.filecon}>
         <AddImageDashboard height='50' width='50'/>
@@ -26,3 +27,4 @@ export default function DashboardEdit() {
 
   </div>;
 }
+export default DashboardEdit;

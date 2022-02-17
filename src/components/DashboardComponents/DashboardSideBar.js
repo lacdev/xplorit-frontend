@@ -1,22 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+//Components
 import DashboardAvatar from './DashboardAvatar';
 import DashboardSideButton from './DashboardSideButton';
-import { Link } from 'react-router-dom';
-
+//Icons
 import Comments from 'assets/icons/Comments';
 import Heart from 'assets/icons/Heart';
 import LogOut from 'assets/icons/LogOut';
 import Lugares from 'assets/icons/Lugares';
 import Rutas from 'assets/icons/Rutas';
-import Settings from 'assets/icons/Settings';
+//import Settings from 'assets/icons/Settings';
 
-export default function DashboardSideBar({avatar, username}) {
+const classes = {
+  bodycon:'w-full h-full bg-secondary',
+  avatarcon:'w-full',
+  sectionscon:'flex-col relative h-2/3 justify-start top-[200px]',
+}
 
-  return <div className='w-full h-full bg-secondary'>
-    <div className='w-full'>
+function DashboardSideBar({avatar, username}) {
+
+  return <div className={classes.bodycon}>
+    <div className={classes.avatarcon}>
       <DashboardAvatar avatar={avatar} username={username}/>
     </div>
-    <div className='flex-col relative h-2/3 justify-start top-[200px]'>
+    <div className={classes.sectionscon}>
       <Link to='routes'>
         <DashboardSideButton  SvgIcon={Rutas} DashboardButtonText="Rutas creadas"/>
       </Link>
@@ -37,3 +44,4 @@ export default function DashboardSideBar({avatar, username}) {
     </div>
   </div>;
 }
+export default DashboardSideBar;
