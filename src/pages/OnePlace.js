@@ -4,18 +4,11 @@ import { useState } from "react";
 import parse from "html-react-parser";
 
 //Icons & Images
-import HeartFillOut from "assets/icons/HeartFillOut";
-import StarComplete from "assets/icons/StarComplete";
-import ThreePoints from "assets/icons/ThreePoints";
-import Map from "assets/img/mapsample.png";
 import PinMap from "assets/icons/PinMap";
 
 //Components
-import Avatar from "components/Common/Avatar";
 import Comments from "components/Common/Comments";
 import ImageSlider from "components/Common/ImageSlider";
-import { Labels } from "components/Common/Labels";
-import { SliderElements } from "components/Common/SliderElements";
 import Titles from "components/Common/Titles";
 import Btncards from "components/Common/Btncards";
 import MapComponent from "components/MapComponent";

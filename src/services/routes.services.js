@@ -30,14 +30,14 @@ export async function getRouteLikes({ queryKey }) {
   return getOwnerPlaceData;
 }
 
-export async function createRoute(data, images){
-  const service_url = `${endpoints.postPlace}`
-  const formData = new FormData()
-  formData.append('data', JSON.stringify(data))
-  for(let image of images) {
-      formData.append('images', image)
+export async function createRoute(data, images) {
+  const service_url = `${endpoints.postRoute}`;
+  const formData = new FormData();
+  formData.append("data", JSON.stringify(data));
+  for (let image of images) {
+    formData.append("images", image);
   }
-  console.log("Data desde el back", data)
-  return await axios.post(service_url, formData)
+  console.log("Data desde el back", data);
+  return await axios.post(service_url, formData);
   // return postNewPlace
 }

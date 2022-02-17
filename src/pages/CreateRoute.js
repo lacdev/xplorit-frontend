@@ -85,7 +85,7 @@ export default function CreateRoute({}) {
         scheduleStart: "2022-02-11",
         scheduleFinish: "2022-01-27",
         location: {
-          type: "Multipoint",
+          type: "MultiPoint",
           coordinates: newCoords,
         },
       };

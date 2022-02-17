@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
+import parse from "html-react-parser";
 
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
@@ -54,11 +56,38 @@ const classes = {
 };
 
 function OneRoute() {
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [textEditorView, setTextEditorView] = useState(
+    classes.textEditorHidden
+  );
+
   const { id } = useParams();
-
   const singleRoute = useQuery(["getSingleRouteData", id], getSingleRouteData);
-
   const { data, isLoading, status } = singleRoute;
+
+  useEffect(() => {
+    if (status === "loading") {
+      return;
+    }
+
+    if (data === undefined) {
+      return;
+    }
+
+    const markerCoords = {
+      lat: data.location.coordinates[1],
+      lng: data.location.coordinates[0],
+    };
+    setSelectedLocation(markerCoords);
+  }, [data, status]);
+
+  const handleClick = () => {
+    if (textEditorView === classes.textEditorHidden) {
+      setTextEditorView(classes.textEditorShow);
+    } else {
+      setTextEditorView(classes.textEditorHidden);
+    }
+  };
 
   if (status === "loading") {
     return <p> Loading...</p>;
@@ -71,7 +100,7 @@ function OneRoute() {
       <div className={classes.parentcon}>
         <ImageSlider slides={data.images} />
 
-        <div className='w-full'>
+        <div className="w-full">
           {data?.ownerId && (
             <HeaderOneRoute
               userId={userToFind}
@@ -84,37 +113,37 @@ function OneRoute() {
           )}
         </div>
 
-        <div className='w-full'>
-          <section className='px-8'>
+        <div className="w-full">
+          <section className="px-8">
             <div className={classes.decriptioncon}>
-              <Titles tag='h4' titleText='Descripción'></Titles>
-              <p className={classes.text}>{data.description}</p>
+              <Titles tag="h4" titleText="Descripción"></Titles>
+              <p className={classes.text}>{parse(data.description)}</p>
             </div>
             <div className={classes.mapcon}>
-              <img src={Map} alt='ejemplo de mapa' />
+              <img src={Map} alt="ejemplo de mapa" />
             </div>
             <div className={classes.ubicationcon}>
               <div className={classes.divubications}>
-                <PinMap width='50' height='50' />
+                <PinMap width="50" height="50" />
                 <p>Dirección de la Ubicación</p>
-                <div className='clases.ubication'>Coordenadas: </div>
+                <div className="clases.ubication">Coordenadas: </div>
               </div>
               <div className={classes.divubications}>
-                <PinMap width='50' height='50' />
+                <PinMap width="50" height="50" />
                 <p>Dirección de la Ubicación</p>
-                <div className='clases.ubication'>Coordenadas: </div>
+                <div className="clases.ubication">Coordenadas: </div>
               </div>
               <div className={classes.divubications}>
-                <PinMap width='50' height='50' />
+                <PinMap width="50" height="50" />
                 <p>Dirección de la Ubicación</p>
-                <div className='clases.ubication'>Coordenadas: </div>
+                <div className="clases.ubication">Coordenadas: </div>
               </div>
               <div className={classes.divubications}>
-                <PinMap width='50' height='50' />
+                <PinMap width="50" height="50" />
                 <p>Dirección de la Ubicación</p>
               </div>
             </div>
-            <Btncards className={classes.btn} buttonText='Reseñar' />
+            <Btncards className={classes.btn} buttonText="Reseñar" />
             <div className={classes.commentcon}>
               <Comments />
               <Comments />
