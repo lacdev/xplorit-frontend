@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import parse from "html-react-parser";
 
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
@@ -105,7 +106,7 @@ function OnePlace() {
       <div className={classes.parentcon}>
         <ImageSlider slides={data.images} />
 
-        <div className='w-5/6 m-auto'>
+        <div className="w-5/6 m-auto">
           {data?.ownerId && (
             <HeaderOnePlace
               userId={userToFind}
@@ -118,18 +119,18 @@ function OnePlace() {
             />
           )}
         </div>
-        <div className='w-5/6 m-auto'>
-          <section className='px-8'>
+        <div className="w-5/6 m-auto">
+          <section className="px-8">
             <div className={classes.decriptioncon}>
-              <Titles tag='h4' titleText='Descripción'></Titles>
-              <p className={classes.text}>{data.description}</p>
+              <Titles tag="h4" titleText="Descripción"></Titles>
+              <p className={classes.text}>{parse(data.description)}</p>
             </div>
             <div className={classes.mapcon}>
               <MapComponent selectedLocation={selectedLocation} />
             </div>
             <div className={classes.ubicationcon}>
               <div className={classes.divubications}>
-                <PinMap width='50' height='50' />
+                <PinMap width="50" height="50" />
                 <p>Dirección de la Ubicación</p>
               </div>
               <div className={classes.ubication}>
@@ -148,11 +149,11 @@ function OnePlace() {
             <Btncards
               onClick={handleClick}
               className={classes.btn}
-              buttonText='Reseñar'
+              buttonText="Reseñar"
             />
             <div className={textEditorView}>
               <form>
-                <textarea type='text' className={classes.textArea}></textarea>
+                <textarea type="text" className={classes.textArea}></textarea>
               </form>
               <Btncards
                 className={classes.btnForm}

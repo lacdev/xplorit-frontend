@@ -19,7 +19,9 @@ export default function PageLayout() {
 
 function setRenderFooter(location){
   const {pathname} = location;
-  const noFooterRoute = []
+  const noFooterRoute = [
+    '/searchplace',
+  ]
 
   const routeFound = noFooterRoute.indexOf(pathname?.toLowerCase()) 
 

@@ -24,10 +24,18 @@ export default function Footer() {
           <div className='max-w-[25%] p-5 flex-1'>
             <h3 className='text-center text-xl'>Links</h3>
             <ul className='text-center mt-3'>
-              <li className='mb-1 text-sm cursor-pointer'> Home </li>
-              <li className='mb-1 text-sm cursor-pointer'> Mi Cuenta </li>
-              <li className='mb-1 text-sm cursor-pointer'> Lugares </li>
-              <li className='mb-1 text-sm cursor-pointer'> Routes </li>
+              <Link to='/'>
+                <li className='mb-1 text-sm cursor-pointer'> Home </li>
+              </Link>
+              <Link to='/profile/routes'>
+                <li className='mb-1 text-sm cursor-pointer'> Mi Cuenta </li>
+              </Link>
+              <Link to='/places'>
+                <li className='mb-1 text-sm cursor-pointer'> Lugares </li>
+              </Link>
+              <Link to='/routes'>
+                <li className='mb-1 text-sm cursor-pointer'> Routes </li>
+              </Link>
             </ul>
           </div>
           <div className=' max-w-[25%] p-5 flex-1'>
@@ -48,7 +56,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className='border border-t-gray-50 sm:w-full sm:min-h-fit'>
+        <div className='border border-t-gray-50'>
           <p className='my-3 font-bold'>
             {" "}
             Xplorit todos los derechos reservados

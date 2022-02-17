@@ -43,7 +43,9 @@ module.exports = {
         29: "7.25rem",
         33: "8.25rem",
       },
-
+      padding: {
+        2.6: "0.65rem",
+      },
       fontSize: {
         h1: "4rem",
         xxs: "0.65rem",
