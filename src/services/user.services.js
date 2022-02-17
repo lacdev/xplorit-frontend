@@ -23,13 +23,18 @@ export async function getRoutesCreatedByUser({ queryKey }) {
 }
 
 export async function getCommentsCreatedByUser({ queryKey }) {
-  const service_url = `${endpoints.getAllComments}/${queryKey[1]}/reviews`;
+  const service_url = `${endpoints.getLikesFromUser}/${queryKey[1]}/reviews`;
   const getCommentsPromise = await axios.get(service_url);
-  const getComments = getCommentsPromise.data.data.routes;
+  const getComments = getCommentsPromise.data.data;
+  console.log(
+    "🚀 ~ file: user.services.js ~ line 32 ~ getCommentsCreatedByUser ~ getComments",
+    getComments
+  );
   return getComments;
 }
 
 export async function getLikesCreatedByUser({ queryKey }) {
+  console.log("querykey", queryKey);
   const service_url = `${endpoints.getLikesFromUser}/${queryKey[1]}/likes`;
   const getLikesPromise = await axios.get(service_url);
   const getLikes = getLikesPromise.data.data;

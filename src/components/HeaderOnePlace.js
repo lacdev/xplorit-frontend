@@ -54,10 +54,19 @@ const classes = {
   btn: "ml-9 py-2",
   created: "text-2xl",
 };
-function HeaderOnePlace({ userId, tags, title, likes, createdAt, average }) {
+function HeaderOnePlace({
+  userId,
+  tags,
+  title,
+  likes,
+  createdAt,
+  updatedAt,
+  average,
+}) {
   const [useHeart, setUseHeart] = useState(false);
 
-  const currentDate = formatDate(createdAt);
+  const currentDate = formatDate(updatedAt);
+  const creationDate = formatDate(createdAt);
 
   const getUser = useQuery(["getOwnerPlace", userId], getOwnerPlace);
 
@@ -121,7 +130,7 @@ function HeaderOnePlace({ userId, tags, title, likes, createdAt, average }) {
       </div>
       <div className={classes.datecon}>
         <p className='ml-12 text-xl'>Fecha de publicación</p>
-        <p className='ml-12'>{currentDate}</p>
+        <p className='ml-12'>{`creado ${creationDate} (ultima actualizacion ${currentDate})`}</p>
       </div>
       <div className={classes.tagsdiv}>
         {tags &&
