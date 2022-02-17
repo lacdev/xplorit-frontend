@@ -1,11 +1,6 @@
 import React from "react";
-import playa from "assets/img/playa.jpg";
 import { Labels } from "../Common/Labels";
 import HeartComplete from "assets/icons/HeartComplete";
-
-//useQuery
-import { useQuery } from "react-query";
-import { getSinglePlaceData } from "services/places.services";
 
 export default function DashboardLikeCard({ id, name, type, images, tags }) {
   const cardLink = `/${type}/${id}`;
@@ -18,7 +13,7 @@ export default function DashboardLikeCard({ id, name, type, images, tags }) {
           alt=''
         ></img>
       </div>
-      <div className='  '>
+      <div className=''>
         <div className='w-full  justify-start mt-5 content-center flex flex-wrap'>
           <h2 className='text-2xl  font-bold   w-80'>{name}</h2>
           <div className='my-auto  items-end mr-5 '>
