@@ -1,7 +1,11 @@
 import React, { useEffect, useContext } from "react";
 import { useState } from "react";
-import { AuthContext } from "context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
+//Services & Context
+import { AuthContext } from "context/AuthContext";
+import { createRoute } from "services/routes.services";
+//Components
 import BigTile from "components/Common/BigTitle";
 import Inputs from "components/Common/Inputs";
 import TextEditor from "../components/TextEditor";
@@ -10,11 +14,19 @@ import PlaceSample from "../assets/img/playa.jpg";
 import MapComponent from "components/MapComponent";
 import UploadImage from "components/UploadImage";
 import { formatGoogleMapsAdressToNormalAdress } from "utils/utils";
-import { createRoute } from "services/routes.services";
 import ExtraPlaceForRoute from "components/ExtraPlaceForRoute";
-import { useNavigate } from "react-router-dom";
 
-export default function CreateRoute({}) {
+const classes = {
+  coverimg: "w-full max-h-[300px] object-cover brightness-50",
+  formcon: "w-2/3 mx-auto",
+  label: "text-xl font-semibold",
+  filecon: "flex w-full justify-center items-center h-96 rounded",
+  editorcon: "my-4",
+  btncon: "flex justify-end my-6 text-white",
+  btn: "bg-secondary rounded-full py-1 px-4 hover:cursor-pointer",
+};
+
+function CreateRoute() {
   const [name, setName] = useState("");
   const [tags, setTags] = useState([]);
   const [description, setDescription] = useState("");
@@ -101,40 +113,33 @@ export default function CreateRoute({}) {
 
   return (
     <div>
-      <img
-        className="w-full max-h-[300px] object-cover brightness-50"
-        src={PlaceSample}
-      ></img>
+      <img className={classes.coverimg} src={PlaceSample} alt="cover-img"></img>
       <BigTile bigTitleText="Publica un nuevo lugar para la comunidad" />
-      <form onSubmit={Publish} className="w-2/3 mx-auto">
-        <label className="text-xl font-semibold">Título</label>
+      <form onSubmit={Publish} className={classes.formcon}>
+        <label className={classes.label}>Título</label>
         <Inputs
           value={name}
           onChange={(event) => setName(event.target.value)}
           placeholderText="Escribe aquí el nombre del lugar"
         />
-        <label className="text-xl font-semibold">
-          Agrega las imágenes del lugar
-        </label>
-        <div className="flex w-full justify-center items-center h-96 rounded">
+        <label className={classes.label}>Agrega las imágenes del lugar</label>
+        <div className={classes.filecon}>
           <UploadImage value={placeImages} onImageAdd={saveImageToState} />
         </div>
-        <label className="text-xl font-semibold">
-          Danos una descripción del lugar
-        </label>
-        <div className="my-4">
+        <label className={classes.label}>Danos una descripción del lugar</label>
+        <div className={classes.editorcon}>
           <TextEditor
             value={description}
             onTextEditorChange={(value) => setDescription(value)}
           />
         </div>
-        <label className="text-xl font-semibold">
+        <label className={classes.label}>
           Elige hasta 4 tags relacionados al lugar
         </label>
-        <div className="my-4">
+        <div className={classes.editorcon}>
           <TagSelector setTagValues={setTagValues} tags={tags} />
         </div>
-        <label className="text-xl font-semibold">
+        <label className={classes.label}>
           ¿En qué dirección se ubica el lugar?
         </label>
         <div>
@@ -158,15 +163,12 @@ export default function CreateRoute({}) {
               />
             );
           })}
-        <div className="flex justify-end my-6 text-white">
-          <input
-            className="bg-secondary rounded-xl py-1 px-4 hover:cursor-pointer"
-            type="submit"
-            value="Publicar"
-          />
+        <div className={classes.btncon}>
+          <input className={classes.btn} type="submit" value="Publicar" />
           {/* <Btncards onClick={Publish} className='py-1' buttonText='Publicar' /> */}
         </div>
       </form>
     </div>
   );
 }
+export default CreateRoute;

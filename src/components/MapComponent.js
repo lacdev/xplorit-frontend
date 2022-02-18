@@ -1,14 +1,11 @@
-import React, { useCallback, useRef, useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  Polyline,
-} from "@react-google-maps/api";
-import SearchMap from "./SearchMap";
-import SearchMapOnPage from "./SearchMapOnPage";
-import useCurrentLocation from "hooks/UseCurrentLocation";
+import React, { useCallback, useRef, useState, useEffect } from 'react';
+//import PropTypes from 'prop-types';
+//Google React 
+import { GoogleMap, useLoadScript, Marker, Polyline } from '@react-google-maps/api';
+//Components
+import SearchMap from './SearchMap';
+import SearchMapOnPage from './SearchMapOnPage';
+import useCurrentLocation from 'hooks/UseCurrentLocation';
 
 const center = {
   lat: 19.4326077,

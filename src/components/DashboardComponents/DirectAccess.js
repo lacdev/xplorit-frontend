@@ -1,10 +1,6 @@
-import {
-  ChatIcon,
-  LocationMarkerIcon,
-  HeartIcon,
-  PencilAltIcon,
-} from "@heroicons/react/outline";
-import RoutesIcon from "assets/icons/RoutesIcon";
+//Icons
+import { ChatIcon, LocationMarkerIcon, HeartIcon,PencilAltIcon } from '@heroicons/react/outline';
+import RoutesIcon from 'assets/icons/RoutesIcon';
 import { Link } from "react-router-dom";
 
 const classes = {

@@ -26,10 +26,6 @@ export async function getCommentsCreatedByUser({ queryKey }) {
   const service_url = `${endpoints.getLikesFromUser}/${queryKey[1]}/reviews`;
   const getCommentsPromise = await axios.get(service_url);
   const getComments = getCommentsPromise.data.data;
-  console.log(
-    "🚀 ~ file: user.services.js ~ line 32 ~ getCommentsCreatedByUser ~ getComments",
-    getComments
-  );
   return getComments;
 }
 

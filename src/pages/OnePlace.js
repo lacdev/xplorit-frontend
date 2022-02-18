@@ -35,7 +35,7 @@ const classes = {
   //spanquali:'mr-2 text-center content-center phone:mr-10 phone:text-sm',
   liketext: "mr-14",
   qualitext: "mr-10 sphone:mr-17",
-  datecon: '"m-1 px-6',
+  datecon: "m-1 px-6",
   tagsdiv: "flex justify-start mt-4",
   tags: "mr-8",
   decriptioncon: "mt-8 mb-8",

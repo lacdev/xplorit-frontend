@@ -13,24 +13,27 @@ import Titles from "components/Common/Titles";
 import Btncards from "components/Common/Btncards";
 import HeaderOneRoute from "components/HeaderOneRoute";
 import MapComponent from "components/MapComponent";
+//useQuery & services
+import { useQuery } from 'react-query';
+import { getSingleRouteData } from 'services/routes.services';
 
-//useQuery
-import { useQuery } from "react-query";
-import { getSingleRouteData } from "services/routes.services";
+
+
+
 
 const classes = {
-  parentcon: "font-primary overflow-x-hidden",
-  titleicon: "flex flex-col md:flex-row p-2 mt-4 justify-between",
-  divsectioncon: "w-full",
-  section: "px-8",
-  auxiconcon: "flex flex-row",
-  iconscon: "flex flex-col p-2 items-end",
-  hearticon: "mr-22 sphone:mr-27",
-  staricon: "mr-10  sphone:mr-16",
-  inforcon: "flex flex-col md:flex-row p-1 justify-between",
-  avausercon: "flex",
-  usercon: "flex flex-col justify-center items-center",
-  likequalcon: "flex flex-row text-center",
+  parentcon: 'font-primary overflow-x-hidden',
+  titleicon: 'flex flex-col md:flex-row p-2 mt-4 justify-between',
+  divsectioncon: 'w-full',
+  section: 'px-8',
+  auxiconcon: 'flex flex-row',
+  iconscon: 'flex flex-col p-2 items-end',
+  hearticon: 'mr-22 sphone:mr-27',
+  staricon: 'mr-10  sphone:mr-16',
+  inforcon: 'flex flex-col md:flex-row p-1 justify-between',
+  avausercon: 'flex',
+  usercon: 'flex flex-col justify-center items-center',
+  likequalcon: 'flex flex-row text-center',
   //spanlike:'mr-14 text-center content-center phone:mr-2 phone:text-sm',
   //spanquali:'mr-2 text-center content-center phone:mr-10 phone:text-sm',
   liketext: "mr-14",
@@ -92,8 +95,8 @@ function OneRoute() {
     return <p> Loading...</p>;
   }
 
-  if (status === "success") {
-    console.log("status ", data);
+  if (status === 'success') {
+    console.log('status ', data);
     const userToFind = data.ownerId.toString();
 
     return (

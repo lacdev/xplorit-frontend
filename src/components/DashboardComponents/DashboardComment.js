@@ -1,47 +1,60 @@
-import React from "react";
-import playa from "assets/img/playa.jpg";
-import { Labels } from "../Common/Labels";
-import StarHalf from "assets/icons/StarHalf";
-import Edit from "assets/icons/Edit";
-import Trash from "assets/icons/Trash";
-import Avatar from "components/Common/Avatar";
+import React from 'react';
+//Components
+import DashboardCommentComponent from './DashboardCommentComponent';
 
-//UseQuery
-import { useQuery } from "react-query";
-import { getCommentsCreatedByUser } from "services/user.services";
+//UseQuery & service
+import { useQuery } from 'react-query';
+import { getCommentsCreatedByUser } from 'services/user.services';
 
-export default function DashboardComment() {
+function DashboardComment() {
   const id = "61ef68279262e2f167700caf"; //ID user
 
   const getComments = useQuery(["getComments", id], getCommentsCreatedByUser);
   const { data, status, error } = getComments;
 
   if (error === true) {
-    console.log("an errror had happend");
+    console.log('an errror had happend');
   }
 
-  if (status === "success") {
+  if (status === 'success') {
     console.log(data);
   }
 
+  const renderCard = (comment) => {
+    console.log("comment ", comment);
+
+    if (comment?.placeId) {
+      return (
+        <DashboardCommentComponent
+          images={comment?.placeId.images[0]}
+          name={comment?.placeId.name}
+          comment={comment.comment}
+          average={comment.stars}
+          type={"place"}
+          id={comment.placeId._id}
+        />
+      );
+    } else {
+      return (
+        <DashboardCommentComponent
+          images={comment.routeId.images[0]}
+          name={comment.routeId.name}
+          comment={comment.comment}
+          average={comment.stars}
+          type={"route"}
+          id={comment.routeId._id}
+        />
+      );
+    }
+  };
+
   return (
-    <div className='w-full bg-white shadow-md rounded-md font-primary m-6'>
-      <div className='inline-flex justify-start items-center w-full px-10'>
-        <Avatar />
-        <p>Name of Place</p>
-      </div>
-      <div className='text-justify px-10 py-3'>
-        <p>
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It
-          has roots in a piece of classical Latin literature from 45 BC, making
-          it over 2000 years old. Richard McClintock, a Latin professor at
-          Hampden-Sydney College in Virginia, looked up one of the more obscure
-          Latin words, consectetur, from a Lorem Ipsum passage, and going
-          through the cites of the word in classical literature, discovered the
-          undoubtable source.
-        </p>{" "}
-        <br></br>
-      </div>
+    <div>
+      {data &&
+        data.map((comment) => {
+          return renderCard(comment);
+        })}
     </div>
   );
 }
+export default DashboardComment;
