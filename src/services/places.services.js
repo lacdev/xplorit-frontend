@@ -36,6 +36,13 @@ export async function getSingleReview({ queryKey }) {
   return getReviews;
 }
 
+export async function getSingleReviewRoute({ queryKey }) {
+  const service_url = `${endpoints.getReviewsRoute}/${queryKey[1]}/reviews`;
+  const getReviewsPromise = await axios.get(service_url);
+  const getReviews = getReviewsPromise.data.data.reviews;
+  return getReviews;
+}
+
 export async function createPlace(data, images) {
   const service_url = `${endpoints.postPlace}`;
   const formData = new FormData();
@@ -46,4 +53,13 @@ export async function createPlace(data, images) {
   console.log("Data desde el back", data);
   return await axios.post(service_url, formData);
   // return postNewPlace
+}
+
+export async function saveLikeOnPlace(userId, placeId) {
+  console.log("saveLike ", placeId, userId);
+  const service_url = `${endpoints.saveLike}/${placeId}/likes`;
+  return await axios.post(service_url, {
+    placeId: placeId,
+    userId: userId,
+  });
 }

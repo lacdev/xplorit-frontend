@@ -1,5 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
+import parse from "html-react-parser";
 
 //Icons & Images
 
@@ -16,6 +18,7 @@ import HeaderOneRoute from "components/HeaderOneRoute";
 //useQuery
 import { useQuery } from "react-query";
 import { getSingleRouteData } from "services/routes.services";
+import { getSingleReviewRoute } from "services/places.services";
 
 const classes = {
   parentcon: "font-primary overflow-x-hidden",
@@ -48,11 +51,25 @@ const classes = {
 };
 
 function OneRoute() {
+  const [textEditorView, setTextEditorView] = useState(
+    classes.textEditorHidden
+  );
+
   const { id } = useParams();
 
   const singleRoute = useQuery(["getSingleRouteData", id], getSingleRouteData);
+  const getReviews = useQuery(["getSingleReview", id], getSingleReviewRoute);
 
   const { data, status } = singleRoute;
+  const { data: dataReviews, status: statusReviews } = getReviews;
+
+  const handleClick = () => {
+    if (textEditorView === classes.textEditorHidden) {
+      setTextEditorView(classes.textEditorShow);
+    } else {
+      setTextEditorView(classes.textEditorHidden);
+    }
+  };
 
   if (status === "loading") {
     return <p> Loading...</p>;
@@ -66,7 +83,7 @@ function OneRoute() {
       <div className={classes.parentcon}>
         <ImageSlider slides={data.images} />
 
-        <div className='w-full'>
+        <div className='w-5/6 m-auto'>
           {data?.ownerId && (
             <HeaderOneRoute
               userId={userToFind}
@@ -79,7 +96,7 @@ function OneRoute() {
           )}
         </div>
 
-        <div className='w-full'>
+        <div className='w-5/6 m-auto'>
           <section className='px-8'>
             <div className={classes.decriptioncon}>
               <Titles tag='h4' titleText='Descripción'></Titles>
@@ -109,10 +126,24 @@ function OneRoute() {
                 <p>Dirección de la Ubicación</p>
               </div>
             </div>
-            <Btncards className={classes.btn} buttonText='Reseñar' />
+            <Btncards
+              onClick={handleClick}
+              className={classes.btn}
+              buttonText='Reseñar'
+            />
             <div className={classes.commentcon}>
-              <Comments />
-              <Comments />
+              {dataReviews &&
+                dataReviews.map((review) => {
+                  return (
+                    <Comments
+                      avatarImg={review.userId.avatar}
+                      username={review.userId.username}
+                      currentDate={review.createdAt}
+                      stars={review.stars}
+                      comment={review.comment}
+                    />
+                  );
+                })}
             </div>
           </section>
         </div>

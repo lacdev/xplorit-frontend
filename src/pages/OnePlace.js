@@ -106,7 +106,8 @@ function OnePlace() {
         <div className='w-5/6 m-auto'>
           {data?.ownerId && (
             <HeaderOnePlace
-              userId={userToFind}
+              placeId={id}
+              userId={"620c634ae13127a727d794e7"}
               title={data.name}
               tags={data.tags}
               likes={data.likes}

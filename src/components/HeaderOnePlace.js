@@ -11,18 +11,17 @@ import PinMap from "assets/icons/PinMap";
 
 //Components
 import Avatar from "components/Common/Avatar";
-import Comments from "components/Common/Comments";
-import ImageSlider from "components/Common/ImageSlider";
+
 import { Labels } from "components/Common/Labels";
-import { SliderElements } from "components/Common/SliderElements";
+
 import Titles from "components/Common/Titles";
-import Btncards from "components/Common/Btncards";
-import MapComponent from "components/MapComponent";
 
 //useQuery
 import { useQuery } from "react-query";
 import { getSinglePlaceData } from "services/places.services";
 import { getOwnerPlace } from "services/places.services";
+import { saveLikeOnPlace } from "services/places.services";
+import axios from "axios";
 
 const classes = {
   parentcon: "font-primary overflow-x-hidden",
@@ -55,15 +54,17 @@ const classes = {
   created: "text-2xl",
 };
 function HeaderOnePlace({
+  placeId,
   userId,
   tags,
   title,
-  likes,
+  likes = 0,
   createdAt,
   updatedAt,
   average,
 }) {
   const [useHeart, setUseHeart] = useState(false);
+  const [usePostLike, setUsePostLike] = useState(likes);
 
   const currentDate = formatDate(updatedAt);
   const creationDate = formatDate(createdAt);
@@ -80,10 +81,15 @@ function HeaderOnePlace({
     console.log(dataUser);
   }
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (useHeart === false) {
       setUseHeart(true);
-    } else setUseHeart(false);
+      setUsePostLike(usePostLike + 1);
+    } else {
+      setUseHeart(false);
+      setUsePostLike(usePostLike - 1);
+    }
+    // await saveLikeOnPlace(userId, placeId);
   };
 
   return (
@@ -91,7 +97,7 @@ function HeaderOnePlace({
       <div className={classes.titleicon}>
         <Titles tag='h3' titleText={title || ""}></Titles>
         <div className={classes.iconscon}>
-          <div onClick={handleClick} className='flex flex-row'>
+          <div onClick={handleClick} className=''>
             {useHeart === false ? (
               <HeartFillOut
                 width='28'
@@ -110,7 +116,7 @@ function HeaderOnePlace({
           </div>
           <div className={classes.likequalcon}>
             <div className={classes.liketext}>
-              <p>{likes}</p>
+              <p>{usePostLike}</p>
               <p>Me gusta</p>
             </div>
             <div className={classes.qualitext}>

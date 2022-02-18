@@ -23,7 +23,11 @@ export const endpoints = {
 
   getReviews: `${base_url}/places`,
 
+  getReviewsRoute: `${base_url}/routes`,
+
   logIn: `${base_url}/login`,
 
   signUp: `${base_url}/users`,
+
+  saveLike: `${base_url}/places`,
 };
