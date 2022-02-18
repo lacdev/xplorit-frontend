@@ -185,7 +185,7 @@ function MapComponent({
     const mapHeight = fullHeight ? "100vh" : "50vh";
 
     const pathOptionsData = createPathData();
-    console.log("Path Options", pathOptionsData);
+   // console.log("Path Options", pathOptionsData);
 
     const containerStyle = {
         width: "100%",

@@ -2,7 +2,7 @@
 const classes = {
     container: 'flex flex-col max-w-full pt-5 mt-4',
     containerAnimate: 'w-full px-3 animate-pulse',
-    backgroundContainer: 'rounded-lg w-full p-2 shadow bg-white',
+    backgroundContainer: 'rounded-lg w-full p-2 shadow-testimonialShadow bg-white',
     imageContainer: 'flex flex-col w-full h-full justify-center',
     imageBackground:
       'w-full h-48 bg-gradient-to-r from-violet-100 to-fuchsia-200 rounded-lg',

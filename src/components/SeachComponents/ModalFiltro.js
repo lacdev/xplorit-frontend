@@ -10,7 +10,7 @@ import StarComplete from 'assets/icons/StarComplete';
 
 
 const classes = {
-  filtrobtn:'flex flex-row-reverse content-center bg-secondary text-white active:bg-blue-700 font-primary font-normal text-sm px-6 py-3 rounded-full shadow-testimonialShadow outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150',
+  filtrobtn:'flex flex-row-reverse content-center bg-secondary text-white active:bg-blue-700 hover:bg-blue-700 font-primary font-normal text-sm px-6 py-3 rounded-full shadow-testimonialShadow outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150',
   filtroicon:'mr-2',
   perentcon:'justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 font-primary outline-none focus:outline-none',
   containersize:'relative w-auto my-6 mx-auto max-w-3xl',
@@ -41,7 +41,7 @@ function ModalFiltro() {
   const [useRecient, setUseRecient] = useState(0);
 
   const listenClick =() => setUseRecient(useRecient + 1);
-  console.log("🚀 ~ file: ModalFiltro.js ~ line 44 ~ ModalFiltro ~ useRecient", useRecient)
+ // console.log("🚀 ~ file: ModalFiltro.js ~ line 44 ~ ModalFiltro ~ useRecient", useRecient)
   
 
   const handleClick = () => {
