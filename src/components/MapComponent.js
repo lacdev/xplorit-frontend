@@ -42,6 +42,7 @@ function MapComponent({
   fullHeight = false,
   locationsData,
   useMultipleLocations = false,
+  customCenter = null
 }) {
   // ?--------------------------------------
   // ? Component setup
@@ -152,8 +153,8 @@ function MapComponent({
     return { path: pathCoords, options: newPathOptions };
   };
 
-  const mapIinitialPosition =
-    selectedLocation !== null ? selectedLocation : center;
+  // const mapIinitialPosition =
+  //   selectedLocation !== null ? selectedLocation : center;
 
   const mapHeight = fullHeight ? "100vh" : "50vh";
 
@@ -164,8 +165,21 @@ function MapComponent({
     height: mapHeight,
   };
   //Define map center
-  const centerLocation =
-    currentUserLocation !== null ? currentUserLocation : center;
+  const newCenter = () => {
+    if (customCenter != null){
+      return customCenter
+    } 
+    if (selectedLocation != null){ 
+      return selectedLocation
+    }
+    if (currentUserLocation !=  null){
+      return currentUserLocation
+    }
+    return center
+  }
+
+  const mapIinitialPosition = newCenter()
+  // const centerLocation = currentUserLocation !== null ? currentUserLocation : center;
 
   if (!isLoaded) return null;
   return (
