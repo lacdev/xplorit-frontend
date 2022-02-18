@@ -3,11 +3,9 @@ import { Outlet } from 'react-router-dom';
 import { useQuery} from 'react-query'
 //Services
 import { getUserProfilePic } from 'services/user.services';
-//Components
 import BigTitle from 'components/Common/BigTitle';
 import DashboardBanner from 'components/DashboardComponents/DashboardBanner';
 import DashboardSideBar from 'components/DashboardComponents/DashboardSideBar';
-//import NavBar from 'components/NavBar';
 import DirectAccess from 'components/DashboardComponents/DirectAccess';
 
 const classes = {

@@ -1,12 +1,13 @@
-import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Inputs from 'components/Common/Inputs';
-import BigTitle from 'components/Common/BigTitle';
-import Btncards from 'components/Common/Btncards';
-import { Link } from 'react-router-dom';
-import { AuthContext } from 'context/AuthContext';
-import { useMutation } from 'react-query';
-import { userLogin } from 'services/user.services';
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Inputs from "components/Common/Inputs";
+import BigTitle from "components/Common/BigTitle";
+import Btncards from "components/Common/Btncards";
+import { Link } from "react-router-dom";
+import { AuthContext } from "context/AuthContext";
+import { useMutation } from "react-query";
+import { userLogin } from "services/user.services";
+import { data } from "autoprefixer";
 
 const classes = {
   parentcon:'inline-flex w-full h-screen items-center',
@@ -38,6 +39,7 @@ function LogIn() {
     mutationLogIn.mutate({ userEmail, userPassword });
   };
 
+  console.log("Esto es data", data);
   const setToken = (token) => {
     console.log(token);
     const newUserState = Object.assign({}, userState, {

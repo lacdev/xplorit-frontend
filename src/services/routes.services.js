@@ -31,7 +31,7 @@ export async function getRouteLikes({ queryKey }) {
 }
 
 export async function createRoute(data, images) {
-  const service_url = `${endpoints.postPlace}`;
+  const service_url = `${endpoints.postRoute}`;
   const formData = new FormData();
   formData.append("data", JSON.stringify(data));
   for (let image of images) {
