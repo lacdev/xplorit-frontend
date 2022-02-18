@@ -37,7 +37,7 @@ const classes = {
   liketext: "mr-14",
   qualitext: "mr-10 sphone:mr-17",
   datecon: "m-1 px-6",
-  tagsdiv: "flex justify-start mt-4",
+  tagsdiv: "flex justify-start mt-4 ml-17",
   tags: "mr-8",
   decriptioncon: "mt-8 mb-8",
   text: "mt-8 break-words",

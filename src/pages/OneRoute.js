@@ -69,15 +69,6 @@ function OneRoute() {
   const { data, status } = singleRoute;
   const { data: dataReviews, status: statusReviews } = getReviews;
 
-  const handleClick = () => {
-    if (textEditorView === classes.textEditorHidden) {
-      setTextEditorView(classes.textEditorShow);
-    } else {
-      setTextEditorView(classes.textEditorHidden);
-    }
-  };
-  const { data, isLoading, status } = singleRoute;
-
   useEffect(() => {
     if (status === "loading") {
       return;
@@ -86,11 +77,11 @@ function OneRoute() {
     if (data === undefined) {
       return;
     }
-    const markerCoords = data.location.coordinates.map((correctCoords) => {
+    const markerCoords = data?.location?.coordinates?.map((correctCoords) => {
       return { coords: { lat: correctCoords[1], lng: correctCoords[0] } };
     });
 
-    const addressArrayPromises = markerCoords.map((event) => {
+    const addressArrayPromises = markerCoords?.map((event) => {
       return getPlaceAddress(
         event.coords.lat.toString(),
         event.coords.lng.toString()
