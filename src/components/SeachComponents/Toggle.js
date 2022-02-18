@@ -5,17 +5,26 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
   
+  const classes={
+    switch:'flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary',
+    span:'pointer-events-none absolute bg-white w-full h-full rounded-md',
+  }
 function Toggle() {
     const [enabled, setEnabled] = useState(false)
+    const [changePage, setChangePage] = useState(0)
+    const listenClick = () => setChangePage(changePage + 1);
+    console.log('click', changePage)
+
   return (
     
     <Switch
       checked={enabled}
       onChange={setEnabled}
-      className="flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
+      onClick={listenClick}
+      className={classes.switch}
     >
       <span className="sr-only">Use setting</span>
-      <span aria-hidden="true" className="pointer-events-none absolute bg-white w-full h-full rounded-md" />
+      <span aria-hidden="true" className={classes.span} />
       <span
         aria-hidden="true"
         className={classNames(

@@ -1,13 +1,15 @@
+//Querys & services
+import { useQuery } from 'react-query';
+import { getCardsRoutesHome } from 'services/routes.services';
+//import { getNearRoutes } from 'services/routes.services';
+//import { getSharedRoutes } from 'services/routes.services';
+
+//Components
 import Titles from 'components/Common/Titles';
 import React from 'react';
 import Inputs from 'components/Common/Inputs';
 import Btncards from 'components/Common/Btncards';
 import CardCarousel from 'components/CardCarousel';
-
-import { useQuery } from 'react-query';
-import { getCardsRoutesHome } from 'services/routes.services';
-import { getNearRoutes } from 'services/routes.services';
-import { getSharedRoutes } from 'services/routes.services';
 
 const classes = {
   parentcon:'font-primary justify-center',

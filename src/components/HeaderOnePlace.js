@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { formatCreationDate, formatDate } from "utils/date";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "context/AuthContext";
+import { formatDate } from "utils/date";
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
 import HeartComplet from "assets/icons/HeartComplete";
 import StarComplete from "assets/icons/StarComplete";
 import ThreePoints from "assets/icons/ThreePoints";
-import Map from "assets/img/mapsample.png";
-import PinMap from "assets/icons/PinMap";
 
 //Components
 import Avatar from "components/Common/Avatar";
-
 import { Labels } from "components/Common/Labels";
-
 import Titles from "components/Common/Titles";
 
 //useQuery
 import { useQuery } from "react-query";
-import { getSinglePlaceData } from "services/places.services";
 import { getOwnerPlace } from "services/places.services";
 import { saveLikeOnPlace } from "services/places.services";
 import axios from "axios";
@@ -40,7 +36,7 @@ const classes = {
   //spanquali:'mr-2 text-center content-center phone:mr-10 phone:text-sm',
   liketext: "mr-14",
   qualitext: "mr-10 sphone:mr-17",
-  datecon: '"m-1 px-6',
+  datecon: "m-1 px-6",
   tagsdiv: "flex justify-start mt-4",
   tags: "mr-8",
   decriptioncon: "mt-8 mb-8",
@@ -65,6 +61,8 @@ function HeaderOnePlace({
 }) {
   const [useHeart, setUseHeart] = useState(false);
   const [usePostLike, setUsePostLike] = useState(likes);
+  const { userState, setUserState } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const currentDate = formatDate(updatedAt);
   const creationDate = formatDate(createdAt);
@@ -81,15 +79,16 @@ function HeaderOnePlace({
     console.log(dataUser);
   }
 
-  const handleClick = async () => {
-    if (useHeart === false) {
+  const handleClick = () => {
+    if (useHeart === false && userState.loggedIn === true) {
       setUseHeart(true);
       setUsePostLike(usePostLike + 1);
+    } else if (useHeart === false && userState.loggedIn === false) {
+      navigate("/login", { replace: true });
     } else {
       setUseHeart(false);
       setUsePostLike(usePostLike - 1);
     }
-    // await saveLikeOnPlace(userId, placeId);
   };
 
   return (
@@ -97,7 +96,7 @@ function HeaderOnePlace({
       <div className={classes.titleicon}>
         <Titles tag='h3' titleText={title || ""}></Titles>
         <div className={classes.iconscon}>
-          <div onClick={handleClick} className=''>
+          <div onClick={handleClick} className='flex flex-row'>
             {useHeart === false ? (
               <HeartFillOut
                 width='28'

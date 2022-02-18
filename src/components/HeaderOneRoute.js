@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { formatCreationDate, formatDate } from "utils/date";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "context/AuthContext";
+import { formatDate } from "utils/date";
+//useQuery & services
+import { useQuery } from "react-query";
+import { getOwnerRoute } from "services/routes.services";
+
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
-import HeartComplet from "assets/icons/HeartComplete";
+import HeartComplete from "assets/icons/HeartComplete";
 import StarComplete from "assets/icons/StarComplete";
 import ThreePoints from "assets/icons/ThreePoints";
 
@@ -33,7 +38,7 @@ const classes = {
   //spanquali:'mr-2 text-center content-center phone:mr-10 phone:text-sm',
   liketext: "mr-14",
   qualitext: "mr-10 sphone:mr-17",
-  datecon: '"m-1 px-6',
+  datecon: "m-1 px-6",
   tagsdiv: "flex justify-start mt-4",
   tags: "mr-8",
   decriptioncon: "mt-8 mb-8",
@@ -48,6 +53,8 @@ const classes = {
 };
 function HeaderOneRoute({ userId, tags, title, likes, createdAt, average }) {
   const [useHeart, setUseHeart] = useState(false);
+  const { userState, setUserState } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const currentDate = formatDate(createdAt);
 
@@ -67,9 +74,13 @@ function HeaderOneRoute({ userId, tags, title, likes, createdAt, average }) {
   }
 
   const handleClick = () => {
-    if (useHeart === false) {
+    if (useHeart === false && userState.loggedIn === true) {
       setUseHeart(true);
-    } else setUseHeart(false);
+    } else if (useHeart === false && userState.loggedIn === false) {
+      navigate("/login", { replace: true });
+    } else {
+      setUseHeart(false);
+    }
   };
 
   return (
@@ -77,20 +88,22 @@ function HeaderOneRoute({ userId, tags, title, likes, createdAt, average }) {
       <div className={classes.titleicon}>
         <Titles tag='h3' titleText={title || ""}></Titles>
         <div className={classes.iconscon}>
-          <div onClick={handleClick} className='flex flex-row'>
-            {useHeart === false ? (
-              <HeartFillOut
-                width='28'
-                height='28'
-                className={classes.hearticon}
-              />
-            ) : (
-              <HeartComplet
-                width='28'
-                height='28'
-                className={classes.hearticon}
-              />
-            )}
+          <div className='flex flex-row'>
+            <div onClick={handleClick}>
+              {useHeart === false ? (
+                <HeartFillOut
+                  width='28'
+                  height='28'
+                  className={classes.hearticon}
+                />
+              ) : (
+                <HeartComplete
+                  width='28'
+                  height='28'
+                  className={classes.hearticon}
+                />
+              )}
+            </div>
             <StarComplete width='28' height='28' className={classes.staricon} />
             <ThreePoints width='40' height='28' />
           </div>

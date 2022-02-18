@@ -1,12 +1,9 @@
 // --------------------------------------
 // Get Dependences
 // --------------------------------------
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import PlacesAutoComplete, {
-    geocodeByAddress,
-    getLatLng,
-} from 'react-places-autocomplete';
+import PlacesAutoComplete, { geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 import MapSuggestions from './MapSuggestions';
 
 // --------------------------------------

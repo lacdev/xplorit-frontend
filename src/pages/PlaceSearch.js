@@ -1,31 +1,38 @@
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useQuery } from "react-query";
+//Services
 import { getCardsPlacesHome } from "services/places.services";
 import { getAllStates } from "services/utils.services";
 //Components
 import Btncards from "components/Common/Btncards";
-
-//Imgages & Icons
-import ModalFiltro from "components/ModalFiltro";
-
+import ModalFiltro from "components/SeachComponents/ModalFiltro";
 import MapComponent from "components/MapComponent";
-import Toggle from "components/Toggle";
-import SearchCards from "components/SearchCards";
-import StateSelector from "components/StateSelector";
+import Toggle from "components/SeachComponents/Toggle";
+import SearchCards from "components/SeachComponents/SearchCards";
+import StateSelector from "components/SeachComponents/StateSelector";
+import BtnTags from "components/SeachComponents/BtnTags";
+import LimitCards from "components/SeachComponents/LimitCards";
 
 const classes = {
-  sectionres: "font-primary w-full h-full min-h-screen",
-  tagsfiltroscon: "flex flex-row justify-between p-1 w-full bg-white my-2",
-  scroll: "scroll-smooth scroll-pl-4 snap-end snap-x snap-mandatory",
-  scrolltags: "snap-center snap-always scroll-mr-3.5",
-  btnclass: "py-2 flex flex-row-reverse content-center",
-  renderres:
-    "grid grid-cols-1 minTablet:grid-cols-5 grid-flow-col h-full min-h-screen",
-  asidecon:
-    "col-span-5 xl:col-span-3 minTablet:col-span-2 bg-white divide-y divide-solid border-slate-500 px-3",
-  rescon: "py-2 pl-2",
-  mapcon: "minTablet:block col-span-3 bg-gray-200 h-full",
+  parentcon:'pt-16',
+  sectionres:'font-primary w-full h-full min-h-screen',
+  tagsfiltroscon:'flex flex-row justify-between p-1 w-full bg-white my-2',
+  scroll:'scroll-smooth scroll-pl-4 snap-end snap-x snap-mandatory',
+  scrolltags:'snap-center snap-always scroll-mr-3.5',
+  togglecon:'flex content-center items-center px-4',
+  btnclass:'py-2 flex flex-row-reverse content-center',
+  btntagscon:'hidden lg:flex overflow-x-hidden items-center pb-2',
+  renderres:'grid grid-cols-1 minTablet:grid-cols-5 grid-flow-col h-full min-h-screen',
+  togglespanplace:'mr-2',
+  togglespanroute:'mx-2',
+  filtroposition:'ml-auto',
+  asidecon:'col-span-5 xl:col-span-3 minTablet:col-span-2 bg-white divide-y divide-solid border-slate-500 px-3 overscroll-y-auto',
+  rescon:'py-2 pl-2',
+  selectorcon:'flex flex-row w-full',
+  mapcon:'minTablet:block col-span-3 bg-gray-200 h-full',
+  btnshow:'py-1 block minTablet:hidden',
+  
 };
 function PlaceSearch() {
   const [showMap, setShowMap] = useState(false);
@@ -33,7 +40,8 @@ function PlaceSearch() {
   const [selectedMunicipio, setSelectedMunicipio] = useState(null);
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
   const { data: statesData, status: statesStatus } = useQuery( "getAllStates", getAllStates );
-
+  console.logo(statesStatus)
+//Querys & services 
   const useQueryPlaces = () => {
     //places
     const cardsForPlacesInHome = useQuery("getAllPlaces", getCardsPlacesHome);
@@ -41,11 +49,7 @@ function PlaceSearch() {
   };
   const { cardsForPlacesInHome } = useQueryPlaces();
 
-  const {
-    data: placesData,
-    isLoading: loadingPlace,
-    status,
-  } = cardsForPlacesInHome;
+  const { data: placesData, isLoading: loadingPlace, status } = cardsForPlacesInHome;
 
   if (status === "error") {
     return (
@@ -54,7 +58,9 @@ function PlaceSearch() {
       </span>
     );
   }
-  const HandlerClick = () => {
+
+//Event Ocultar Aside Mapa
+  const handlerClick = () => {
     setShowMap(!showMap);
     
   };
@@ -66,6 +72,7 @@ function PlaceSearch() {
 
   const renderSideBar = !isPhone || !showMap ? true : false;
 
+//Selectors de Estado y Municipio
   const onStateChange = (stateItem) => {
     setSelectedState(stateItem);
     setSelectedMunicipio(null);
@@ -76,66 +83,25 @@ function PlaceSearch() {
   };
 
   return (
-    <div className="pt-16">
+    <div className={classes.parentcon}>
       <section className={classes.sectionres}>
         <div className={classes.tagsfiltroscon}>
-          <div className="flex content-center items-center px-4">
-            <span>Lugares</span>
+          <div className={classes.togglecon}>
+            <span className={classes.togglespanplace}>Lugares</span>
             <Toggle />
-            <span>Rutas</span>
+            <span className={classes.togglespanroute}>Rutas</span>
           </div>
-          <div className="hidden lg:flex overflow-x-hidden items-center pb-2">
-            <Btncards
-              buttonText="Aire Libre"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base min-w-110px ${classes.btnclass} `}
-            ></Btncards>
-            <Btncards
-              buttonText="Artesanias"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base ${classes.btnclass} `}
-            ></Btncards>
-            <Btncards
-              buttonText="Comida"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base ${classes.btnclass} `}
-            ></Btncards>
-            <Btncards
-              buttonText="Cultural"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base ${classes.btnclass} `}
-            ></Btncards>
-            <Btncards
-              buttonText="Entretenimiento"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base ${classes.btnclass} `}
-            ></Btncards>
-            <Btncards
-              buttonText="Familiar"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base ${classes.btnclass} `}
-            ></Btncards>
-            <Btncards
-              buttonText="Playa"
-              padding="px-4"
-              color="bg-quartiary"
-              className={`mr-4 text-base ${classes.btnclass} `}
-            ></Btncards>
+          <div className={classes.btntagscon}>
+            <BtnTags/>
           </div>
-          <div className="ml-auto">
+          <div className={classes.filtroposition}>
             <ModalFiltro />
           </div>
         </div>
         <section className={classes.renderres}>
           {renderSideBar && (
             <aside className={classes.asidecon}>
-              <div className="flex flex-row w-full">
+              <div className={classes.selectorcon}>
                 <StateSelector
                   locationsData={statesData}
                   onStateChange={onStateChange}
@@ -169,7 +135,7 @@ function PlaceSearch() {
                   );
                 })
               )}
-              <Btncards buttonText="Mostrar más" color="bg-black"></Btncards>
+             <LimitCards/>
             </aside>
           )}
           <div className={mapContainerClass}>
@@ -179,8 +145,8 @@ function PlaceSearch() {
 
         <Btncards
           buttonText={buttonText}
-          className="py-1 block minTablet:hidden"
-          onClick={HandlerClick}
+          className={classes.btnshow}
+          onClick={handlerClick}
         ></Btncards>
       </section>
     </div>

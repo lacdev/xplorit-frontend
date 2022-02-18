@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+//import React, { useState } from "react";
 import FileUpload from "./FileUpload/FileUploadComponent";
 
 function UploadImage({onImageAdd}) {
@@ -15,10 +15,10 @@ function UploadImage({onImageAdd}) {
     // const readFiles = new FileReader(newUserInfo)
     // console.log(newUserInfo)
 
-    const handleSubmit = (event) => {
-    event.preventDefault();
+//    const handleSubmit = (event) => {
+  //  event.preventDefault();
     //logic to create new user...
-    };
+//    };
 
     return (
     <div>

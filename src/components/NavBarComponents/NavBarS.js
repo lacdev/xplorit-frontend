@@ -1,9 +1,10 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import { Fragment } from "react";
+//Plugins UI & HeroIcons
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/solid";
+//Components
 import Btncards from "components/Common/Btncards";
 import { AuthContext } from "context/AuthContext";
 
@@ -49,58 +50,61 @@ function classNames(...classes) {
 }
 
 function NavBarS() {
-    const [navBarColor, setNavBarColor] = useState(classes.beforeScroll)
-    const [navBarText, setNavBarText] = useState(classes.textBefore)
-    const [navBarFill, setNavBarFill] = useState(classes.fillBefore)
-    const {userState, setUserState} = useContext(AuthContext)
-    const isxPhone = useMediaQuery({query:'(min-width: 360px) and (max-width: 639px)'});
-    const isPhone = useMediaQuery({query:'(min-width: 640px) and (max-width: 767px)'});
-    const isMinTablet = useMediaQuery({query:'(min-width: 768px) and (max-width: 1023px)'});
-    const isTablet = useMediaQuery({query:'(min-width: 1024px) and (max-width: 1279px)'});
-    const isDesktop = useMediaQuery({query:'(min-width: 1280px) and (max-width: 1535px)'});
-    const isBigDesktop = useMediaQuery({query:'(min-width: 1536px)'});
-    
-   
-    useEffect(() => {
-      window.addEventListener("scroll", listenScrollEvent)
-      return () => {
-        window.removeEventListener('scroll')
-      }
-    }, [])
-    
-    const logOut = () => {
-      console.log("Si cerraria la sesion");
-      const newUserState = Object.assign({}, userState, {
-        authToken: "",
-        loggedIn: false,
-      });
-      setUserState(newUserState);
-      localStorage.removeItem("token");
+  const [navBarColor, setNavBarColor] = useState(classes.beforeScroll);
+  const [navBarText, setNavBarText] = useState(classes.textBefore);
+  const [navBarFill, setNavBarFill] = useState(classes.fillBefore);
+  const { userState, setUserState } = useContext(AuthContext);
+  const isxPhone = useMediaQuery({
+    query: "(min-width: 360px) and (max-width: 639px)",
+  });
+  const isPhone = useMediaQuery({
+    query: "(min-width: 640px) and (max-width: 767px)",
+  });
+  const isMinTablet = useMediaQuery({
+    query: "(min-width: 768px) and (max-width: 1023px)",
+  });
+  const isTablet = useMediaQuery({
+    query: "(min-width: 1024px) and (max-width: 1279px)",
+  });
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 1280px) and (max-width: 1535px)",
+  });
+  const isBigDesktop = useMediaQuery({ query: "(min-width: 1536px)" });
+
+  useEffect(() => {
+    window.addEventListener("scroll", listenScrollEvent);
+    return () => {
+      window.removeEventListener("scroll");
     };
-    
-    let scrollMax=100;
-    const listenScrollEvent = (event) => {
-     
-      
-       if (isxPhone === true || isPhone === true) 
-        scrollMax=200;
-       else if (isMinTablet === true || isTablet === true)
-        scrollMax=500;
-        else if (isDesktop === true || isBigDesktop === true)
-          scrollMax=900;
-        
-      if (window.scrollY > scrollMax) {
-        
-        setNavBarColor(classes.afterScroll)
-        setNavBarText(classes.textAfter)
-        setNavBarFill(classes.fillAfter)
-      } else {
-        setNavBarColor(classes.beforeScroll)
-        setNavBarText(classes.textBefore)
-        setNavBarFill(classes.fillBefore)
-      }
+  }, []);
+
+  const logOut = () => {
+    console.log("Si cerraria la sesion");
+    const newUserState = Object.assign({}, userState, {
+      authToken: "",
+      loggedIn: false,
+    });
+    setUserState(newUserState);
+    localStorage.removeItem("token");
+  };
+
+  let scrollMax = 100;
+  const listenScrollEvent = (event) => {
+    if (isxPhone === true || isPhone === true) scrollMax = 200;
+    else if (isMinTablet === true || isTablet === true) scrollMax = 500;
+    else if (isDesktop === true || isBigDesktop === true) scrollMax = 900;
+
+    if (window.scrollY > scrollMax) {
+      setNavBarColor(classes.afterScroll);
+      setNavBarText(classes.textAfter);
+      setNavBarFill(classes.fillAfter);
+    } else {
+      setNavBarColor(classes.beforeScroll);
+      setNavBarText(classes.textBefore);
+      setNavBarFill(classes.fillBefore);
     }
-  
+  };
+
   return (
     <Disclosure as="nav" className={navBarColor}>
       {({ open }) => (
@@ -263,10 +267,10 @@ function NavBarS() {
               <Link to="/" className={classes.movilelinks}>
                 Home
               </Link>
-              <Link to="/route" className={classes.movilelinks}>
+              <Link to="/routes" className={classes.movilelinks}>
                 Rutas
               </Link>
-              <Link to="/place" className={classes.movilelinks}>
+              <Link to="/places" className={classes.movilelinks}>
                 Lugares
               </Link>
               <Link to="/about" className={classes.movilelinks}>
@@ -279,5 +283,4 @@ function NavBarS() {
     </Disclosure>
   );
 }
-
 export default NavBarS;
