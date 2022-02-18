@@ -1,12 +1,12 @@
-import { useEffect, useState, useContext, Fragment } from "react";
-import { Link } from "react-router-dom";
-import { useMediaQuery } from "react-responsive";
+import { useEffect, useState, useContext, Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 //Plugins UI & HeroIcons
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { MenuIcon, XIcon } from "@heroicons/react/solid";
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { MenuIcon, XIcon } from '@heroicons/react/solid';
 //Components
-import Btncards from "components/Common/Btncards";
-import { AuthContext } from "context/AuthContext";
+import Btncards from 'components/Common/Btncards';
+import { AuthContext } from 'context/AuthContext';
 
 
 function classNames(...classes) {
