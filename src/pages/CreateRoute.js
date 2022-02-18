@@ -1,32 +1,30 @@
-import React, { useEffect, useContext } from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useMutation } from 'react-query';
+import React, { useEffect, useContext } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
 //Services & Context
-import { AuthContext } from 'context/AuthContext';
-import { createRoute } from 'services/routes.services';
+import { AuthContext } from "context/AuthContext";
+import { createRoute } from "services/routes.services";
 //Components
-import BigTile from 'components/Common/BigTitle';
-import Inputs from 'components/Common/Inputs';
-import TextEditor from '../components/TextEditor';
-import TagSelector from 'components/TagSelector';
-import PlaceSample from '../assets/img/playa.jpg';
-import MapComponent from 'components/MapComponent';
-import UploadImage from 'components/UploadImage';
-import { formatGoogleMapsAdressToNormalAdress } from 'utils/utils';
-import ExtraPlaceForRoute from 'components/ExtraPlaceForRoute';
-
+import BigTile from "components/Common/BigTitle";
+import Inputs from "components/Common/Inputs";
+import TextEditor from "../components/TextEditor";
+import TagSelector from "components/TagSelector";
+import PlaceSample from "../assets/img/playa.jpg";
+import MapComponent from "components/MapComponent";
+import UploadImage from "components/UploadImage";
+import { formatGoogleMapsAdressToNormalAdress } from "utils/utils";
+import ExtraPlaceForRoute from "components/ExtraPlaceForRoute";
 
 const classes = {
-  coverimg:'w-full max-h-[300px] object-cover brightness-50',
-  formcon:'w-2/3 mx-auto',
-  label:'text-xl font-semibold',
-  filecon:'flex w-full justify-center items-center h-96 rounded',
-  editorcon:'my-4',
-  btncon:'flex justify-end my-6 text-white',
-  btn:'bg-secondary rounded-full py-1 px-4 hover:cursor-pointer',
-
-}
+  coverimg: "w-full max-h-[300px] object-cover brightness-50",
+  formcon: "w-2/3 mx-auto",
+  label: "text-xl font-semibold",
+  filecon: "flex w-full justify-center items-center h-96 rounded",
+  editorcon: "my-4",
+  btncon: "flex justify-end my-6 text-white",
+  btn: "bg-secondary rounded-full py-1 px-4 hover:cursor-pointer",
+};
 
 function CreateRoute() {
   const [name, setName] = useState("");
@@ -41,7 +39,7 @@ function CreateRoute() {
 
   const mutationPost = useMutation(
     (data) => createRoute(data.data, data.placeImages),
-    { onSuccess: () => console.log('Todo cool en rutas') }
+    { onSuccess: () => console.log("Todo cool en rutas") }
   );
 
   const setTagValues = (tagOptions) => {
@@ -53,10 +51,6 @@ function CreateRoute() {
     setPlaceImages(imagesData);
   };
 
-  // useEffect(()=>{
-  //   console.log('Estas cambiando locatiosData', locationsData)
-  // },[locationsData])
-
   const setSelectedLocationValue = (coords, address) => {
     setSelectedLocation(coords);
     setAddress(address);
@@ -66,10 +60,10 @@ function CreateRoute() {
     };
     const newLocationDataArray = [...locationsData, locationsObject];
     setLocationsData(newLocationDataArray);
-    console.log(newLocationDataArray);
+    console.log("This is newLocation", newLocationDataArray);
   };
 
-  console.log('Aqui es para breakpoint');
+  console.log("Aqui es para breakpoint");
 
   const Publish = async (event) => {
     event.preventDefault();
@@ -99,16 +93,16 @@ function CreateRoute() {
         scheduleStart: "2022-02-11",
         scheduleFinish: "2022-01-27",
         location: {
-          type: "Multipoint",
+          type: "MultiPoint",
           coordinates: newCoords,
         },
       };
-      console.log('Estamos dentro de Publish', data, placeImages);
+      console.log("Estamos dentro de Publish", data, placeImages);
       if (userState.loggedIn == true) {
         mutationPost.mutate({ data, placeImages });
-        navigate('/', { replace: true });
+        navigate("/", { replace: true });
       } else {
-        navigate('/login', { replace: true });
+        navigate("/login", { replace: true });
       }
       // await createPlace(data, placeImages);
       // {mutate(data)}
@@ -119,27 +113,20 @@ function CreateRoute() {
 
   return (
     <div>
-      <img
-        className={classes.coverimg}
-        src={PlaceSample} alt='cover-img'
-      ></img>
-      <BigTile bigTitleText='Publica un nuevo lugar para la comunidad' />
+      <img className={classes.coverimg} src={PlaceSample} alt="cover-img"></img>
+      <BigTile bigTitleText="Publica un nuevo lugar para la comunidad" />
       <form onSubmit={Publish} className={classes.formcon}>
         <label className={classes.label}>Título</label>
         <Inputs
           value={name}
           onChange={(event) => setName(event.target.value)}
-          placeholderText='Escribe aquí el nombre del lugar'
+          placeholderText="Escribe aquí el nombre del lugar"
         />
-        <label className={classes.label}>
-          Agrega las imágenes del lugar
-        </label>
+        <label className={classes.label}>Agrega las imágenes del lugar</label>
         <div className={classes.filecon}>
           <UploadImage value={placeImages} onImageAdd={saveImageToState} />
         </div>
-        <label className={classes.label}>
-          Danos una descripción del lugar
-        </label>
+        <label className={classes.label}>Danos una descripción del lugar</label>
         <div className={classes.editorcon}>
           <TextEditor
             value={description}
@@ -177,11 +164,7 @@ function CreateRoute() {
             );
           })}
         <div className={classes.btncon}>
-          <input
-            className={classes.btn}
-            type='submit'
-            value='Publicar'
-          />
+          <input className={classes.btn} type="submit" value="Publicar" />
           {/* <Btncards onClick={Publish} className='py-1' buttonText='Publicar' /> */}
         </div>
       </form>
