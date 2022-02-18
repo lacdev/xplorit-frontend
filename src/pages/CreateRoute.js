@@ -39,10 +39,6 @@ export default function CreateRoute({}) {
     setPlaceImages(imagesData);
   };
 
-  // useEffect(()=>{
-  //   console.log("Estas cambiando locatiosData", locationsData)
-  // },[locationsData])
-
   const setSelectedLocationValue = (coords, address) => {
     setSelectedLocation(coords);
     setAddress(address);
@@ -52,7 +48,7 @@ export default function CreateRoute({}) {
     };
     const newLocationDataArray = [...locationsData, locationsObject];
     setLocationsData(newLocationDataArray);
-    console.log(newLocationDataArray);
+    console.log("This is newLocation", newLocationDataArray);
   };
 
   console.log("Aqui es para breakpoint");

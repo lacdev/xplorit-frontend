@@ -4,22 +4,15 @@ import { useState } from "react";
 import parse from "html-react-parser";
 
 //Icons & Images
-import HeartFillOut from "assets/icons/HeartFillOut";
-import StarComplete from "assets/icons/StarComplete";
-import ThreePoints from "assets/icons/ThreePoints";
-import Map from "assets/img/mapsample.png";
 import PinMap from "assets/icons/PinMap";
 
 //Components
-
-import Avatar from "components/Common/Avatar";
 import Comments from "components/Common/Comments";
 import ImageSlider from "components/Common/ImageSlider";
-import { Labels } from "components/Common/Labels";
-import { SliderElements } from "components/Common/SliderElements";
 import Titles from "components/Common/Titles";
 import Btncards from "components/Common/Btncards";
 import HeaderOneRoute from "components/HeaderOneRoute";
+import MapComponent from "components/MapComponent";
 
 //useQuery
 import { useQuery } from "react-query";
@@ -40,8 +33,8 @@ const classes = {
   likequalcon: "flex flex-row text-center",
   //spanlike:'mr-14 text-center content-center phone:mr-2 phone:text-sm',
   //spanquali:'mr-2 text-center content-center phone:mr-10 phone:text-sm',
-  liketext: "mr-26 sphone:mr-33",
-  qualitext: "mr-22 sphone:mr-28",
+  liketext: "mr-14",
+  qualitext: "mr-10 sphone:mr-17",
   datecon: '"m-1 px-6',
   tagsdiv: "flex justify-start mt-4",
   tags: "mr-8",
@@ -53,10 +46,14 @@ const classes = {
   ubication: "ml-15 my-2",
   commentcon: "mb-20",
   btn: "ml-9 py-2",
+  textEditorHidden: "mt-10 hidden",
+  textEditorShow: "mt-10 block",
+  btnForm: "py-2 mt-3 text-right",
+  textArea: "border border-current rounded-md w-full min-h-[200px]",
 };
 
 function OneRoute() {
-  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [locationsData, setLocationsData] = useState(null);
   const [textEditorView, setTextEditorView] = useState(
     classes.textEditorHidden
   );
@@ -73,13 +70,15 @@ function OneRoute() {
     if (data === undefined) {
       return;
     }
+    const newMarkerCoords = [];
+    const markerCoords = data.location.coordinates.map((correctCoords) => {
+      return { coords: { lat: correctCoords[1], lng: correctCoords[0] } };
+    });
 
-    const markerCoords = {
-      lat: data.location.coordinates[1],
-      lng: data.location.coordinates[0],
-    };
-    setSelectedLocation(markerCoords);
+
+    setLocationsData(markerCoords);
   }, [data, status]);
+  console.log("This should be locations", locationsData);
 
   const handleClick = () => {
     if (textEditorView === classes.textEditorHidden) {
@@ -101,7 +100,7 @@ function OneRoute() {
       <div className={classes.parentcon}>
         <ImageSlider slides={data.images} />
 
-        <div className="w-full">
+        <div className="w-5/6 m-auto">
           {data?.ownerId && (
             <HeaderOneRoute
               userId={userToFind}
@@ -109,19 +108,23 @@ function OneRoute() {
               tags={data.tags}
               likes={data.likes}
               createdAt={data.createdAt}
+              updatedAt={data.updatedAt}
               average={data.average}
             />
           )}
         </div>
 
-        <div className="w-full">
+        <div className="w-5/6 m-auto">
           <section className="px-8">
             <div className={classes.decriptioncon}>
               <Titles tag="h4" titleText="Descripción"></Titles>
               <p className={classes.text}>{parse(data.description)}</p>
             </div>
             <div className={classes.mapcon}>
-              <img src={Map} alt="ejemplo de mapa" />
+              <MapComponent
+                locationsData={locationsData}
+                useMultipleLocations={true}
+              />
             </div>
             <div className={classes.ubicationcon}>
               <div className={classes.divubications}>
@@ -144,7 +147,20 @@ function OneRoute() {
                 <p>Dirección de la Ubicación</p>
               </div>
             </div>
-            <Btncards className={classes.btn} buttonText="Reseñar" />
+            <Btncards
+              onClick={handleClick}
+              className={classes.btn}
+              buttonText="Reseñar"
+            />
+            <div className={textEditorView}>
+              <form>
+                <textarea type="text" className={classes.textArea}></textarea>
+              </form>
+              <Btncards
+                className={classes.btnForm}
+                buttonText={"Enviar Reseña"}
+              />
+            </div>
             <div className={classes.commentcon}>
               <Comments />
               <Comments />

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "context/AuthContext";
 import { useMutation } from "react-query";
 import { userLogin } from "services/user.services";
+import { data } from "autoprefixer";
 
 export default function LogIn() {
   const { userState, setUserState } = useContext(AuthContext);
@@ -23,6 +24,7 @@ export default function LogIn() {
     mutationLogIn.mutate({ userEmail, userPassword });
   };
 
+  console.log("Esto es data", data);
   const setToken = (token) => {
     console.log(token);
     const newUserState = Object.assign({}, userState, {

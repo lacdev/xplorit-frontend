@@ -17,9 +17,6 @@ import HeaderOnePlace from "components/HeaderOnePlace";
 //useQuery
 import { useQuery } from "react-query";
 import { getSinglePlaceData } from "services/places.services";
-import { getPlaceLikes } from "services/places.services";
-import TextEditor from "components/TextEditor";
-import { Marker } from "@react-google-maps/api";
 
 const classes = {
   parentcon: "font-primary overflow-x-hidden",
@@ -95,6 +92,7 @@ function OnePlace() {
 
   if (status === "success") {
     const userToFind = data.ownerId.toString();
+
     return (
       <div className={classes.parentcon}>
         <ImageSlider slides={data.images} />
