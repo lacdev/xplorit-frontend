@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import parse from "html-react-parser";
+import Geocode from "react-geocode";
 
 //Icons & Images
 import PinMap from "assets/icons/PinMap";
@@ -16,6 +17,8 @@ import MapComponent from "components/MapComponent";
 //useQuery & services
 import { useQuery } from "react-query";
 import { getSingleRouteData } from "services/routes.services";
+import PlaceAddress from "components/PlaceAddress";
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
 const classes = {
   parentcon: "font-primary overflow-x-hidden",
@@ -56,6 +59,7 @@ function OneRoute() {
   const [textEditorView, setTextEditorView] = useState(
     classes.textEditorHidden
   );
+  const [formattedAddress, setFormatedAddress] = useState([]);
 
   const { id } = useParams();
   const singleRoute = useQuery(["getSingleRouteData", id], getSingleRouteData);
@@ -69,14 +73,37 @@ function OneRoute() {
     if (data === undefined) {
       return;
     }
-    const newMarkerCoords = [];
     const markerCoords = data.location.coordinates.map((correctCoords) => {
       return { coords: { lat: correctCoords[1], lng: correctCoords[0] } };
     });
 
+    const addressArrayPromises = markerCoords.map((event) => {
+      return getPlaceAddress(
+        event.coords.lat.toString(),
+        event.coords.lng.toString()
+      );
+      // [event.coords.lat.toString(), event.coords.lng.toString()];
+    });
+
+    let addressesData = [];
+    Promise.all(addressArrayPromises)
+      .then((results) => {
+        addressesData = results.map((res) => {
+          return res.results[0].formatted_address;
+        });
+        setFormatedAddress(addressesData);
+        console.log(formattedAddress);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
     setLocationsData(markerCoords);
   }, [data, status]);
-  console.log("This should be locations", locationsData);
+
+  const getPlaceAddress = (lat, lng) => {
+    return Geocode.fromLatLng(lat, lng);
+  };
 
   const handleClick = () => {
     if (textEditorView === classes.textEditorHidden) {
@@ -127,27 +154,10 @@ function OneRoute() {
                 }
               />
             </div>
-            <div className={classes.ubicationcon}>
-              <div className={classes.divubications}>
-                <PinMap width="50" height="50" />
-                <p>Dirección de la Ubicación</p>
-                <div className="clases.ubication">Coordenadas: </div>
-              </div>
-              <div className={classes.divubications}>
-                <PinMap width="50" height="50" />
-                <p>Dirección de la Ubicación</p>
-                <div className="clases.ubication">Coordenadas: </div>
-              </div>
-              <div className={classes.divubications}>
-                <PinMap width="50" height="50" />
-                <p>Dirección de la Ubicación</p>
-                <div className="clases.ubication">Coordenadas: </div>
-              </div>
-              <div className={classes.divubications}>
-                <PinMap width="50" height="50" />
-                <p>Dirección de la Ubicación</p>
-              </div>
-            </div>
+            {formattedAddress &&
+              formattedAddress.map((location) => {
+                return <PlaceAddress addressFromCoords={location} />;
+              })}
             <Btncards
               onClick={handleClick}
               className={classes.btn}
