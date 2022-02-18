@@ -21,6 +21,8 @@ export const endpoints = {
 
   getAllStates: `${base_url}/states`,
 
+  getReviews: `${base_url}/places`,
+
   logIn: `${base_url}/login`,
 
   signUp: `${base_url}/users`,

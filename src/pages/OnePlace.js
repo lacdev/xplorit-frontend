@@ -4,18 +4,11 @@ import { useState } from "react";
 import parse from "html-react-parser";
 
 //Icons & Images
-import HeartFillOut from "assets/icons/HeartFillOut";
-import StarComplete from "assets/icons/StarComplete";
-import ThreePoints from "assets/icons/ThreePoints";
-import Map from "assets/img/mapsample.png";
 import PinMap from "assets/icons/PinMap";
 
 //Components
-import Avatar from "components/Common/Avatar";
 import Comments from "components/Common/Comments";
 import ImageSlider from "components/Common/ImageSlider";
-import { Labels } from "components/Common/Labels";
-import { SliderElements } from "components/Common/SliderElements";
 import Titles from "components/Common/Titles";
 import Btncards from "components/Common/Btncards";
 import MapComponent from "components/MapComponent";
@@ -24,9 +17,7 @@ import HeaderOnePlace from "components/HeaderOnePlace";
 //useQuery
 import { useQuery } from "react-query";
 import { getSinglePlaceData } from "services/places.services";
-import { getPlaceLikes } from "services/places.services";
-import TextEditor from "components/TextEditor";
-import { Marker } from "@react-google-maps/api";
+import { getSingleReview } from "services/places.services";
 
 const classes = {
   parentcon: "font-primary overflow-x-hidden",
@@ -69,8 +60,12 @@ function OnePlace() {
   );
 
   const { id } = useParams();
+
   const singlePlace = useQuery(["getSinglePlaceData", id], getSinglePlaceData);
+  const getReviews = useQuery(["getSingleReview", id], getSingleReview);
+
   const { data, status } = singlePlace;
+  const { data: dataReviews, status: statusReviews } = getReviews;
 
   useEffect(() => {
     if (status === "loading") {
@@ -80,6 +75,8 @@ function OnePlace() {
     if (data === undefined) {
       return;
     }
+
+    if (statusReviews === "success") console.log("status ", dataReviews);
 
     const markerCoords = {
       lat: data.location.coordinates[1],
@@ -106,7 +103,7 @@ function OnePlace() {
       <div className={classes.parentcon}>
         <ImageSlider slides={data.images} />
 
-        <div className="w-5/6 m-auto">
+        <div className='w-5/6 m-auto'>
           {data?.ownerId && (
             <HeaderOnePlace
               userId={userToFind}
@@ -119,10 +116,10 @@ function OnePlace() {
             />
           )}
         </div>
-        <div className="w-5/6 m-auto">
-          <section className="px-8">
+        <div className='w-5/6 m-auto'>
+          <section className='px-8'>
             <div className={classes.decriptioncon}>
-              <Titles tag="h4" titleText="Descripción"></Titles>
+              <Titles tag='h4' titleText='Descripción'></Titles>
               <p className={classes.text}>{parse(data.description)}</p>
             </div>
             <div className={classes.mapcon}>
@@ -130,7 +127,7 @@ function OnePlace() {
             </div>
             <div className={classes.ubicationcon}>
               <div className={classes.divubications}>
-                <PinMap width="50" height="50" />
+                <PinMap width='50' height='50' />
                 <p>Dirección de la Ubicación</p>
               </div>
               <div className={classes.ubication}>
@@ -149,11 +146,11 @@ function OnePlace() {
             <Btncards
               onClick={handleClick}
               className={classes.btn}
-              buttonText="Reseñar"
+              buttonText='Reseñar'
             />
             <div className={textEditorView}>
               <form>
-                <textarea type="text" className={classes.textArea}></textarea>
+                <textarea type='text' className={classes.textArea}></textarea>
               </form>
               <Btncards
                 className={classes.btnForm}
@@ -161,8 +158,18 @@ function OnePlace() {
               />
             </div>
             <div className={classes.commentcon}>
-              <Comments />
-              <Comments />
+              {dataReviews &&
+                dataReviews.map((review) => {
+                  return (
+                    <Comments
+                      avatarImg={review.userId.avatar}
+                      username={review.userId.username}
+                      currentDate={review.createdAt}
+                      stars={review.stars}
+                      comment={review.comment}
+                    />
+                  );
+                })}
             </div>
           </section>
         </div>
