@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Btncards from 'components/Common/Btncards'
 const classes={
-    btnclass: "py-2 flex flex-row content-center",
+    btnclass: 'py-2 flex flex-row content-center',
 }
 function BtnTags({className}) {
  const [choice, setChoice] = useState(0)

@@ -8,10 +8,11 @@ const navStyle = {
   beforeScroll : 'font-Poppins inline-flex w-full justify-around fixed bg-none pt-4 z-10',
   afterScroll : 'font-Poppins inline-flex w-full justify-around fixed bg-white pt-4 z-10 shadow',
   textBefore: 'my-4 mx-10 font-semibold text-[20px] hover:underline text-white',
-  textAfter: 'my-4 mx-10 font-semibold text-[20px] hover:underline text-black'
+  textAfter: 'my-4 mx-10 font-semibold text-[20px] hover:underline text-black',
+  btn:'mt-3 py-2',
 }
 
-export default function NavBar() {
+function NavBar() {
   const [navBarColor, setNavBarColor] = useState(navStyle.beforeScroll)
   const [navBarText, setNavBarText] = useState(navStyle.textBefore)
   
@@ -59,7 +60,8 @@ export default function NavBar() {
       </Link>
       <Titles textColors={navBarText} menu="Acerca de"/>
       <Link to="/LogIn" >
-        <Btncards className='mt-3 py-2'buttonText="Iniciar sesión"/>
+        <Btncards className={navStyle.btn} buttonText="Iniciar sesión"/>
       </Link>
   </nav>;
 }
+export default NavBar;

@@ -16,6 +16,7 @@ const classes={
     ubitextcon:'py-3',
     ubitext:'text-xs break-words',
     btn:'py-1',
+    iconcon:'ml-auto',
     starticon:'mt-5',
     starttext:'text-xs text-center',   
  }
@@ -44,7 +45,7 @@ function SearchCards({id, name, score, labels,key,  images=[],  typeofplace , ad
               </Link>
             </div>
           </div>
-          <div className="ml-auto">
+          <div className={classes.iconcon}>
             <HeartFillOut width="30px" height="30px" />
             <StarComplete
               width="30px"
