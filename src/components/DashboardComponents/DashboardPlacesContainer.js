@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-//Usequery
-import { useQuery } from "react-query";
-import { getPlacesCreatedByUser } from "services/user.services";
-import DashboardCard from "./DashboardCard";
+//Usequery & services
+import { useQuery } from 'react-query';
+import { getPlacesCreatedByUser } from 'services/user.services';
+import DashboardCard from './DashboardCard';
 
-export default function DashboardPlacesContainer() {
+function DashboardPlacesContainer() {
   const id = "61ff09c5f1b8eb106745942f";
 
   const getPlaces = useQuery(["getPlaces", id], getPlacesCreatedByUser);
@@ -33,3 +33,4 @@ export default function DashboardPlacesContainer() {
     </>
   );
 }
+export default DashboardPlacesContainer;

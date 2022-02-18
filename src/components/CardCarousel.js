@@ -1,12 +1,17 @@
-import React from "react";
-import Slider from "react-slick";
-import Cards from "./Common/Cards";
+import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import '../customCss.css';
+//Components
+import Cards from './Common/Cards';
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "../customCss.css";
 
-export default function CardCarousel({cardsData, type}) {
+
+const classes = {
+  carruselcon:'w-full',
+}
+function CardCarousel({cardsData, type}) {
     const settings = {
         dots: true,
         infinite: false,
@@ -42,7 +47,7 @@ export default function CardCarousel({cardsData, type}) {
         ]
       };
       
-    return <div className="w-full">
+    return <div className={classes.carruselcon}>
         <Slider {...settings}>
         {cardsData && cardsData.map((item)=> {
           console.log("item:",item)
@@ -59,3 +64,4 @@ export default function CardCarousel({cardsData, type}) {
         </Slider>
   </div>
 }
+export default CardCarousel;

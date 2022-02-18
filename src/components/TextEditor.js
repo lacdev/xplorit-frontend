@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-export default function TextEditor({value = "", onTextEditorChange, initialValue=""}) {
+function TextEditor({value = "", onTextEditorChange, initialValue=""}) {
   const onEditorChange = (newValue, editor)=>{
     onTextEditorChange(newValue)
   }
@@ -37,3 +37,4 @@ export default function TextEditor({value = "", onTextEditorChange, initialValue
     </>
   );
 }
+export default TextEditor;

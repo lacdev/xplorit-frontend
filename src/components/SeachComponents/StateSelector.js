@@ -1,8 +1,10 @@
 
 import Select from 'react-select';
+
+const classes = {
+  selectorcon:'w-full',
+}
 function StateSelector({locationsData, renderMunicipios= false, onStateChange=null, selectOption}) {
-  
-   
   const formatStateData = () => {
       if(!locationsData)
     
@@ -33,7 +35,7 @@ function StateSelector({locationsData, renderMunicipios= false, onStateChange=nu
   }
   const locations = renderMunicipios === true ? formatMunicipiosData() :  formatStateData() 
   return (
-  <div className='w-full'> 
+  <div className={classes.selectorcon}> 
       <Select options={locations} onChange={onStateChange} value={selectOption}/>
       </div>
   )

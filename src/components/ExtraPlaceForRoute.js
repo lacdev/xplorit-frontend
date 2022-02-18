@@ -2,7 +2,11 @@ import React from 'react'
 import PinMap from 'assets/icons/PinMap'
 import DeleteX from 'assets/icons/DeleteX'
 
-export default function ExtraPlaceForRoute({addressFromMap, deleteButtonIndex, setLocationsData, locationsData}) {
+const classes = {
+    body:'flex justify-between w-full mt-2 px-2',
+    pincon:'inline-flex',
+}
+function ExtraPlaceForRoute({addressFromMap, deleteButtonIndex, setLocationsData, locationsData}) {
     const removePlaceFromMap = (event) => {
         event.preventDefault()
         console.log("Primeras", locationsData)
@@ -16,8 +20,8 @@ export default function ExtraPlaceForRoute({addressFromMap, deleteButtonIndex, s
         console.log("Locations despues del seteo", locationsData)
       }
   return (
-    <div className='flex justify-between w-full mt-2 px-2'>
-        <div className='inline-flex'>
+    <div className={classes.body}>
+        <div className={classes.pincon}>
             <PinMap width="28" height="28"/>
             <p>{addressFromMap}</p>
         </div>
@@ -27,3 +31,4 @@ export default function ExtraPlaceForRoute({addressFromMap, deleteButtonIndex, s
     </div>
   )
 }
+export default ExtraPlaceForRoute;

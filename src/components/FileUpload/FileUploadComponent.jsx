@@ -21,6 +21,10 @@ const convertNestedObjectToArray = (nestedObj) =>
 
 const convertBytesToKB = (bytes) => Math.round(bytes / KILO_BYTES_PER_BYTE);
 
+const classes = {
+   filewidth:'w-auto',
+}
+
 const FileUpload = ({
   label,
   updateFilesCb,
@@ -85,20 +89,20 @@ const FileUpload = ({
         />
       </FileUploadContainer>
       <FilePreviewContainer >
-        <PreviewList className="w-auto" >
+        <PreviewList className={classes.filewidth} >
           {Object.keys(files).map((fileName, index) => {
             let file = files[fileName];
             let isImageFile = file.type.split("/")[0] === "image";
             return (
-              <PreviewContainer className="w-auto" key={fileName}>
+              <PreviewContainer className={classes.filewidth} key={fileName}>
                 <div>
                   {isImageFile && (
-                    <ImagePreview className="w-auto"
+                    <ImagePreview className={classes.filewidth}
                       src={URL.createObjectURL(file)}
                       alt={`file preview ${index}`}
                     />
                   )}
-                  <FileMetaData className="w-auto" isImageFile={isImageFile}>
+                  <FileMetaData className={classes.filewidth} isImageFile={isImageFile}>
                     <span>{file.name}</span>
                     <aside>
                       <span>{convertBytesToKB(file.size)} kb</span>

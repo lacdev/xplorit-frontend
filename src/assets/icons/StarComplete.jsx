@@ -1,12 +1,13 @@
 import React from 'react';
 
-export default function StarComplete({width , height, className}) {
+export default function StarComplete({width , height, className, onClick=null}) {
   return (
     <>
       <svg
          width={width}
          height={height}
          className={`${className}`}
+         onClick={onClick}
         viewBox="0 0 30 30"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

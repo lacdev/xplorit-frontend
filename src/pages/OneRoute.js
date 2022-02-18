@@ -1,71 +1,71 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
-//Icons & Images
-import HeartFillOut from "assets/icons/HeartFillOut";
-import StarComplete from "assets/icons/StarComplete";
-import ThreePoints from "assets/icons/ThreePoints";
-import Map from "assets/img/mapsample.png";
-import PinMap from "assets/icons/PinMap";
+//useQuery & services
+import { useQuery } from 'react-query';
+import { getSingleRouteData } from 'services/routes.services';
 
 //Components
 
-import Avatar from "components/Common/Avatar";
-import Comments from "components/Common/Comments";
-import ImageSlider from "components/Common/ImageSlider";
-import { Labels } from "components/Common/Labels";
-import { SliderElements } from "components/Common/SliderElements";
-import Titles from "components/Common/Titles";
-import Btncards from "components/Common/Btncards";
-import HeaderOneRoute from "components/HeaderOneRoute";
 
-//useQuery
-import { useQuery } from "react-query";
-import { getSingleRouteData } from "services/routes.services";
+import Comments from 'components/Common/Comments';
+import ImageSlider from 'components/Common/ImageSlider';
+import Titles from 'components/Common/Titles';
+import Btncards from 'components/Common/Btncards';
+import HeaderOneRoute from 'components/HeaderOneRoute';
+
+//Icons & Images
+
+import Map from 'assets/img/mapsample.png';
+import PinMap from 'assets/icons/PinMap';
+
+
+
+
 
 const classes = {
-  parentcon: "font-primary overflow-x-hidden",
-  titleicon: "flex flex-col md:flex-row p-2 mt-4 justify-between",
-  divsectioncon: "w-full",
-  section: "px-8",
-  auxiconcon: "flex flex-row",
-  iconscon: "flex flex-col p-2 items-end",
-  hearticon: "mr-22 sphone:mr-27",
-  staricon: "mr-10  sphone:mr-16",
-  inforcon: "flex flex-col md:flex-row p-1 justify-between",
-  avausercon: "flex",
-  usercon: "flex flex-col justify-center items-center",
-  likequalcon: "flex flex-row text-center",
+  parentcon: 'font-primary overflow-x-hidden',
+  titleicon: 'flex flex-col md:flex-row p-2 mt-4 justify-between',
+  divsectioncon: 'w-full',
+  section: 'px-8',
+  auxiconcon: 'flex flex-row',
+  iconscon: 'flex flex-col p-2 items-end',
+  hearticon: 'mr-22 sphone:mr-27',
+  staricon: 'mr-10  sphone:mr-16',
+  inforcon: 'flex flex-col md:flex-row p-1 justify-between',
+  avausercon: 'flex',
+  usercon: 'flex flex-col justify-center items-center',
+  likequalcon: 'flex flex-row text-center',
   //spanlike:'mr-14 text-center content-center phone:mr-2 phone:text-sm',
   //spanquali:'mr-2 text-center content-center phone:mr-10 phone:text-sm',
-  liketext: "mr-26 sphone:mr-33",
-  qualitext: "mr-22 sphone:mr-28",
-  datecon: '"m-1 px-6',
-  tagsdiv: "flex justify-start mt-4",
-  tags: "mr-8",
-  decriptioncon: "mt-8 mb-8",
-  text: "mt-8 break-words",
+  liketext: 'mr-26 sphone:mr-33',
+  qualitext: 'mr-22 sphone:mr-28',
+  datecon: 'm-1 px-6',
+  tagsdiv: 'flex justify-start mt-4',
+  tags: 'mr-8',
+  decriptioncon: 'mt-8 mb-8',
+  text: 'mt-8 break-words',
   // mapcon:'',
-  ubicationcon: "flex flex-col my-6",
-  divubications: "flex flex-row items-center",
-  ubication: "ml-15 my-2",
-  commentcon: "mb-20",
-  btn: "ml-9 py-2",
+  ubicationcon: 'flex flex-col my-6',
+  divubications: 'flex flex-row items-center',
+  ubication: 'ml-15 my-2',
+  commentcon: 'mb-20',
+  btn: 'ml-9 py-2',
 };
 
 function OneRoute() {
   const { id } = useParams();
 
-  const singleRoute = useQuery(["getSingleRouteData", id], getSingleRouteData);
+  const singleRoute = useQuery(['getSingleRouteData', id], getSingleRouteData);
 
   const { data, isLoading, status } = singleRoute;
 
-  if (status === "loading") {
+  if (status === 'loading') {
     return <p> Loading...</p>;
   }
 
-  if (status === "success") {
-    console.log("status ", data);
+  if (status === 'success') {
+    console.log('status ', data);
     const userToFind = data.ownerId.toString();
 
     return (

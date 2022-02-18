@@ -1,11 +1,12 @@
 import React from 'react'
 
-function StarFillOut({width, height,className}) {
+function StarFillOut({width, height,className, onClick=null}) {
   return (
     <svg
       width={width}
       height={height}
       className={`${className}`}
+      onClick={onClick}
       viewBox="0 0 36 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

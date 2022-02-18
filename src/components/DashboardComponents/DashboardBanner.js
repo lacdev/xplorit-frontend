@@ -1,13 +1,17 @@
 import React from "react";
-import image from "assets/img/image.jpg";
+//import image from "assets/img/image.jpg";
 
-export default function DashboardBanner({ coverPhoto }) {
+const classes = {
+  img:'w-screen max-h-[30vh] object-cover object-center object-bottom ',
+}
+function DashboardBanner({ coverPhoto }) {
   return (
     <div className=''>
       <img
-        className='w-screen max-h-[30vh] object-cover object-bottom '
-        src={coverPhoto}
+        className={classes.img}
+        src={coverPhoto} alt='cover-dashboard'
       ></img>
     </div>
   );
 }
+export default DashboardBanner;

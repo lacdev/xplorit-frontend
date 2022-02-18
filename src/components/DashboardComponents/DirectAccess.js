@@ -1,5 +1,6 @@
-import { ChatIcon, LocationMarkerIcon, HeartIcon,PencilAltIcon } from "@heroicons/react/outline";
-import RoutesIcon from "assets/icons/RoutesIcon";
+//Icons
+import { ChatIcon, LocationMarkerIcon, HeartIcon,PencilAltIcon } from '@heroicons/react/outline';
+import RoutesIcon from 'assets/icons/RoutesIcon';
 
 const classes ={
     parentcon:'max-w-screen-md bg-secondary block md:hidden rounded-full my-4 py-2 px-4',
