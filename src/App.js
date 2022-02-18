@@ -7,7 +7,7 @@ import LogIn from 'pages/LogIn';
 import SignUp from 'pages/SignUp';
 import Dashboard from 'pages/Dashboard';
 import PageLayout from 'PageLayout';
-import DashboardCardContainer from 'components/DashboardComponents/DashboardCardContainer';
+//import DashboardCardContainer from 'components/DashboardComponents/DashboardCardContainer';
 import OneRoute from 'pages/OneRoute';
 import OnePlace from 'pages/OnePlace';
 import PlaceSearch from 'pages/PlaceSearch';
@@ -16,11 +16,11 @@ import CreatePlace from 'pages/CreatePlace';
 import CreateRoute from 'pages/CreateRoute';
 import DashboardComment from 'components/DashboardComponents/DashboardComment';
 import DashboardLikeContainer from 'components/DashboardComponents/DashboardLikeContainer';
-import DashboardEdit from 'components/DashboardComponents/DashboardEdit';
+//import DashboardEdit from 'components/DashboardComponents/DashboardEdit';
 import AboutUsPage from 'pages/AboutUs';
 import DashboardPlacesContainer from 'components/DashboardComponents/DashboardPlacesContainer';
 import DashboardRoutesContainer from 'components/DashboardComponents/DashboardRoutesContainer';
-import LoaderHome from 'components/LandingComponents/LoaderHome';
+import DashboardLoaderCards from 'components/DashboardComponents/DashboardLoaderCards';
 import { AuthContextProvider } from 'context/AuthContext';
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
 
            
             <Route path='/searchroute' element={<RouteSearch />} />
-            <Route path='/direct' element={<LoaderHome />} />
+            <Route path='/direct' element={<DashboardLoaderCards />} />
 
             <Route path='/' element={<PageLayout />}>
               <Route index element={<Home />} />
