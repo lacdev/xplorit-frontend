@@ -77,211 +77,210 @@ function NavBarS() {
       window.removeEventListener("scroll");
     };
   }, []);
-}
 
-const logOut = () => {
-  console.log("Si cerraria la sesion");
-  const newUserState = Object.assign({}, userState, {
-    authToken: "",
-    loggedIn: false,
-  });
-  setUserState(newUserState);
-  localStorage.removeItem("token");
-};
+  const logOut = () => {
+    console.log("Si cerraria la sesion");
+    const newUserState = Object.assign({}, userState, {
+      authToken: "",
+      loggedIn: false,
+    });
+    setUserState(newUserState);
+    localStorage.removeItem("token");
+  };
 
-let scrollMax = 100;
-const listenScrollEvent = (event) => {
-  if (isxPhone === true || isPhone === true) scrollMax = 200;
-  else if (isMinTablet === true || isTablet === true) scrollMax = 500;
-  else if (isDesktop === true || isBigDesktop === true) scrollMax = 900;
+  let scrollMax = 100;
+  const listenScrollEvent = (event) => {
+    if (isxPhone === true || isPhone === true) scrollMax = 200;
+    else if (isMinTablet === true || isTablet === true) scrollMax = 500;
+    else if (isDesktop === true || isBigDesktop === true) scrollMax = 900;
 
-  if (window.scrollY > scrollMax) {
-    setNavBarColor(classes.afterScroll);
-    setNavBarText(classes.textAfter);
-    setNavBarFill(classes.fillAfter);
-  } else {
-    setNavBarColor(classes.beforeScroll);
-    setNavBarText(classes.textBefore);
-    setNavBarFill(classes.fillBefore);
-  }
-};
+    if (window.scrollY > scrollMax) {
+      setNavBarColor(classes.afterScroll);
+      setNavBarText(classes.textAfter);
+      setNavBarFill(classes.fillAfter);
+    } else {
+      setNavBarColor(classes.beforeScroll);
+      setNavBarText(classes.textBefore);
+      setNavBarFill(classes.fillBefore);
+    }
+  };
 
-return (
-  <Disclosure as="nav" className={navBarColor}>
-    {({ open }) => (
-      <>
-        <div className={classes.parentcon}>
-          <div className={classes.positioncon}>
-            <div className={classes.parentmovile}>
-              {/* Mobile menu button */}
-              <Disclosure.Button className={classes.movilebtn}>
-                <span className="sr-only">Open main menu</span>
-                {open ? (
-                  <XIcon className={classes.movileicon} aria-hidden="true" />
-                ) : (
-                  <MenuIcon className={navBarFill} aria-hidden="true" />
-                )}
-              </Disclosure.Button>
-            </div>
-            <div className={classes.logolinks}>
-              <div className={classes.logocon}>
-                <img
-                  className={classes.logoimg}
-                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                  alt="Workflow"
-                />
+  return (
+    <Disclosure as="nav" className={navBarColor}>
+      {({ open }) => (
+        <>
+          <div className={classes.parentcon}>
+            <div className={classes.positioncon}>
+              <div className={classes.parentmovile}>
+                {/* Mobile menu button */}
+                <Disclosure.Button className={classes.movilebtn}>
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <XIcon className={classes.movileicon} aria-hidden="true" />
+                  ) : (
+                    <MenuIcon className={navBarFill} aria-hidden="true" />
+                  )}
+                </Disclosure.Button>
               </div>
-              <div className={classes.linkscon}>
-                {/* Current: "border-secondary text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                <Link to="/" className={navBarText}>
-                  Home
-                </Link>
-                <Link to="/routes" className={navBarText}>
-                  Rutas
-                </Link>
-                <Link to="/places" className={navBarText}>
-                  Lugares
-                </Link>
-                <Link to="/about" className={navBarText}>
-                  Acerca de
-                </Link>
-              </div>
-            </div>
-            <div className={classes.rightcon}>
-              {userState.loggedIn === false && (
-                <div className={classes.btncon}>
-                  <Link to="login">
-                    <Btncards
-                      className={classes.btn}
-                      buttonText="Iniciar sesión"
-                    ></Btncards>
+              <div className={classes.logolinks}>
+                <div className={classes.logocon}>
+                  <img
+                    className={classes.logoimg}
+                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                    alt="Workflow"
+                  />
+                </div>
+                <div className={classes.linkscon}>
+                  {/* Current: "border-secondary text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
+                  <Link to="/" className={navBarText}>
+                    Home
+                  </Link>
+                  <Link to="/routes" className={navBarText}>
+                    Rutas
+                  </Link>
+                  <Link to="/places" className={navBarText}>
+                    Lugares
+                  </Link>
+                  <Link to="/about" className={navBarText}>
+                    Acerca de
                   </Link>
                 </div>
-              )}
-              <div className={classes.rigthposition}>
-                {/* Profile dropdown */}
-                {userState.loggedIn && (
-                  <Menu as="div" className={classes.dropdowncon}>
-                    {({ open }) => (
-                      <>
-                        <div>
-                          <Menu.Button className={classes.avatarcon}>
-                            <span className="sr-only">Open user menu</span>
-                            <img
-                              className={classes.avatarclass}
-                              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                              alt=""
-                            />
-                          </Menu.Button>
-                        </div>
-                        <Transition
-                          show={open}
-                          as={Fragment}
-                          enter="transition ease-out duration-200"
-                          enterFrom="transform opacity-0 scale-95"
-                          enterTo="transform opacity-100 scale-100"
-                          leave="transition ease-in duration-75"
-                          leaveFrom="transform opacity-100 scale-100"
-                          leaveTo="transform opacity-0 scale-95"
-                        >
-                          <Menu.Items static className={classes.itemsdrop}>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <Link
-                                  to="profile"
-                                  className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
-                                  )}
-                                >
-                                  Perfil
-                                </Link>
-                              )}
-                            </Menu.Item>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <Link
-                                  to="profile/edit"
-                                  className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
-                                  )}
-                                >
-                                  Configuración
-                                </Link>
-                              )}
-                            </Menu.Item>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <Link
-                                  to="createroute"
-                                  className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
-                                  )}
-                                >
-                                  Crear Ruta
-                                </Link>
-                              )}
-                            </Menu.Item>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <Link
-                                  to="createplace"
-                                  className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
-                                  )}
-                                >
-                                  Crear Lugar
-                                </Link>
-                              )}
-                            </Menu.Item>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <Link
-                                  to="/"
-                                  onClick={logOut}
-                                  className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
-                                  )}
-                                >
-                                  Cerrar sesión
-                                </Link>
-                              )}
-                            </Menu.Item>
-                          </Menu.Items>
-                        </Transition>
-                      </>
-                    )}
-                  </Menu>
+              </div>
+              <div className={classes.rightcon}>
+                {userState.loggedIn === false && (
+                  <div className={classes.btncon}>
+                    <Link to="login">
+                      <Btncards
+                        className={classes.btn}
+                        buttonText="Iniciar sesión"
+                      ></Btncards>
+                    </Link>
+                  </div>
                 )}
+                <div className={classes.rigthposition}>
+                  {/* Profile dropdown */}
+                  {userState.loggedIn && (
+                    <Menu as="div" className={classes.dropdowncon}>
+                      {({ open }) => (
+                        <>
+                          <div>
+                            <Menu.Button className={classes.avatarcon}>
+                              <span className="sr-only">Open user menu</span>
+                              <img
+                                className={classes.avatarclass}
+                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                alt=""
+                              />
+                            </Menu.Button>
+                          </div>
+                          <Transition
+                            show={open}
+                            as={Fragment}
+                            enter="transition ease-out duration-200"
+                            enterFrom="transform opacity-0 scale-95"
+                            enterTo="transform opacity-100 scale-100"
+                            leave="transition ease-in duration-75"
+                            leaveFrom="transform opacity-100 scale-100"
+                            leaveTo="transform opacity-0 scale-95"
+                          >
+                            <Menu.Items static className={classes.itemsdrop}>
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to="profile"
+                                    className={classNames(
+                                      active ? "bg-gray-100" : "",
+                                      "block px-4 py-2 text-sm text-gray-700"
+                                    )}
+                                  >
+                                    Perfil
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to="profile/edit"
+                                    className={classNames(
+                                      active ? "bg-gray-100" : "",
+                                      "block px-4 py-2 text-sm text-gray-700"
+                                    )}
+                                  >
+                                    Configuración
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to="createroute"
+                                    className={classNames(
+                                      active ? "bg-gray-100" : "",
+                                      "block px-4 py-2 text-sm text-gray-700"
+                                    )}
+                                  >
+                                    Crear Ruta
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to="createplace"
+                                    className={classNames(
+                                      active ? "bg-gray-100" : "",
+                                      "block px-4 py-2 text-sm text-gray-700"
+                                    )}
+                                  >
+                                    Crear Lugar
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to="/"
+                                    onClick={logOut}
+                                    className={classNames(
+                                      active ? "bg-gray-100" : "",
+                                      "block px-4 py-2 text-sm text-gray-700"
+                                    )}
+                                  >
+                                    Cerrar sesión
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                            </Menu.Items>
+                          </Transition>
+                        </>
+                      )}
+                    </Menu>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <Disclosure.Panel className={classes.movilemenu}>
-          <div className={classes.menucon}>
-            {/* Current: "bg-blue-200 border-secondary text-black", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-200 hover:text-gray-700" */}
-            <Link to="/" className={classes.movilelinks}>
-              Home
-            </Link>
-            <Link to="/routes" className={classes.movilelinks}>
-              Rutas
-            </Link>
-            <Link to="/places" className={classes.movilelinks}>
-              Lugares
-            </Link>
-            <Link to="/about" className={classes.movilelinks}>
-              Acerca de
-            </Link>
-          </div>
-        </Disclosure.Panel>
-      </>
-    )}
-  </Disclosure>
-);
-
+          <Disclosure.Panel className={classes.movilemenu}>
+            <div className={classes.menucon}>
+              {/* Current: "bg-blue-200 border-secondary text-black", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-200 hover:text-gray-700" */}
+              <Link to="/" className={classes.movilelinks}>
+                Home
+              </Link>
+              <Link to="/routes" className={classes.movilelinks}>
+                Rutas
+              </Link>
+              <Link to="/places" className={classes.movilelinks}>
+                Lugares
+              </Link>
+              <Link to="/about" className={classes.movilelinks}>
+                Acerca de
+              </Link>
+            </div>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
+  );
+}
 export default NavBarS;
