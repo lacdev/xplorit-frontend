@@ -176,11 +176,6 @@ function OneRoute() {
                 buttonText={"Enviar Reseña"}
               />
             </div>
-            <Btncards
-              onClick={handleClick}
-              className={classes.btn}
-              buttonText='Reseñar'
-            />
             <div className={classes.commentcon}>
               {dataReviews &&
                 dataReviews.map((review) => {

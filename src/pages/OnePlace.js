@@ -13,7 +13,7 @@ import Titles from "components/Common/Titles";
 import Btncards from "components/Common/Btncards";
 import MapComponent from "components/MapComponent";
 import HeaderOnePlace from "components/HeaderOnePlace";
-
+import StarRating from "components/RatingStar";
 //useQuery
 import { useQuery } from "react-query";
 import { getSinglePlaceData } from "services/places.services";
@@ -49,8 +49,9 @@ const classes = {
   btn: "ml-9 py-2",
   textEditorHidden: "mt-10 hidden",
   textEditorShow: "mt-10 block",
-  btnForm: "py-2 mt-3 text-right",
+  btnForm: " mt-1 text-right ml-auto",
   textArea: "border border-current rounded-md w-full min-h-[200px]",
+  star: "flex cursor-pointer",
 };
 
 function OnePlace() {
@@ -154,10 +155,14 @@ function OnePlace() {
               <form>
                 <textarea type='text' className={classes.textArea}></textarea>
               </form>
-              <Btncards
-                className={classes.btnForm}
-                buttonText={"Enviar Reseña"}
-              />
+              <p className='ml-10'> califica el lugar :</p>
+              <div className='flex '>
+                <StarRating width='25' height='25' className={classes.star} />
+                <Btncards
+                  className={classes.btnForm}
+                  buttonText={"Enviar Reseña"}
+                />
+              </div>
             </div>
             <div className={classes.commentcon}>
               {dataReviews &&
