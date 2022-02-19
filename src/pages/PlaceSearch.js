@@ -88,14 +88,15 @@ function PlaceSearch() {
   };
 
   const onToggleChange = (event) => {
-    console.log('Este evento se llama cuando se acciona el toggle');
+   // console.log('Acciona el evento onChange');
   }
  
   const onTagChange = (info) => {
-      console.log('Infomación de Tags', info)
+      console.log('Infomación de Tags', info);
   }
+
   return (
-    <div className={classes.parentcon}>
+    <div>
       
       <section className={classes.sectionres}>
         <div className={classes.tagsfiltroscon}>

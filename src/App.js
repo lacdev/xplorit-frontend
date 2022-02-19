@@ -32,7 +32,7 @@ function App() {
             <Route path='/login' element={<LogIn />} />
             <Route path='/signup' element={<SignUp />} />
 
-            <Route path='/searchplace' element={<PlaceSearch />} />
+           {/*<Route path='/searchplace' element={<PlaceSearch />} />*/} 
             <Route path='/searchroute' element={<RouteSearch />} />
             <Route path='/direct' element={<DashboardLoaderCards />} />
 
@@ -40,7 +40,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path='routes' element={<RoutePage />}></Route>
               <Route path='places' element={<PlacePage />} />
-              
+              <Route path='/searchplace' element={<PlaceSearch />} />
               <Route path='createplace' element={<CreatePlace />} />
               <Route path='createroute' element={<CreateRoute />} />
               <Route path='/route/:id' element={<OneRoute />} />

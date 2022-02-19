@@ -8,6 +8,7 @@ function BtnTags({className, onTagClick=null}) {
 
  const listenClick = (info) => {
     onTagClick(info)
+    
     }
 
  

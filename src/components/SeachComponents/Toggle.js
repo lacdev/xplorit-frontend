@@ -17,7 +17,10 @@ function Toggle({accionToggle}) {
      setEnabled(!enabled)
      if (enabled) 
      {
-       console.log('Accion de cambio en Lugar')
+       console.log('Accion de cambio a Lugares')
+     }
+     else {
+       console.log('Accion de cambio a Rutas')
      }
      accionToggle()
    }

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 //Components
-import Titles from 'components/Common/Titles';
 import BtnTags from './BtnTags';
+import FiltroSelector from 'components/FiltroSelector';
 //Icons 
 import StarFillOut from 'assets/icons/StarFillOut';
 import { AdjustmentsIcon } from '@heroicons/react/outline';
@@ -23,11 +23,13 @@ const classes = {
   distancecon:'relative pt-1',
   rangedesing:'form-range appearance-none w-full h-4 p-0 bg-gray-100 rounded-md focus:outline-none focus:ring-0 focus:shadow-none',
   btntagscon:'flex flex-wrap py-12',
-  sortcon:'flex flex-wrap',
+  sortcon:'flex flex-wrap sm:flex-nowrap',
   starscon:'flex mr-4 items-center',
-  starsaux:'flex',
+  starsaux:'flex flex-grap',
+  labels:'text-xs',
   star:'ml-4 mr-2',
-  recientcon:'flex items-center',
+  recientcon:'flex items-center w-full',
+  filtroscon:'w-full',
   checkbox:'w-4 h-4 ml-4 bg-gray-50 rounded border border-gray-300 appearance-none checked:bg-blue-500 indeterminate:bg-gray-300 focus:ring-3 focus:ring-blue-300 default:ring-2',
   btnclass: 'py-2 flex flex-row content-center mb-3',
   footercon:'flex items-center justify-end p-6 border-t border-solid border-blue-200 rounded-b',
@@ -38,17 +40,23 @@ const classes = {
 function ModalFiltro() {
   const [showModal, setShowModal] = useState(false);
   const [useStar, setUseStar] = useState(false);
-  const [useRecient, setUseRecient] = useState(0);
+  const [filtros, setFiltros] = useState([]);
+  const [rangeValue, setRangeValue] = useState([5,50]);
 
-  const listenClick =() => setUseRecient(useRecient + 1);
- // console.log("🚀 ~ file: ModalFiltro.js ~ line 44 ~ ModalFiltro ~ useRecient", useRecient)
-  
+  const updateRangeValue = (event, data) => {
+    setRangeValue(event.target.value)
+    console.log(event.target.value)
+  }
 
   const handleClick = () => {
     if (useStar === false) {
       setUseStar(true);
     } else setUseStar(false);
   };
+  const setFiltrosValues = (filtrosOptions) => {
+    setFiltros(filtrosOptions);
+  };
+
   return (
     <>
       <button
@@ -85,49 +93,19 @@ function ModalFiltro() {
                     <label htmlFor="customRange1" className="form-label">
                       Distancia
                     </label>
-                    <input type="range" className={classes.rangedesing} id="customRange1"
+                    <input type="range" max={50} min={5} step={1} placeholder={rangeValue} value={rangeValue} onChange={updateRangeValue} className={classes.rangedesing} id="customRange1"
                     />
                   </div>
                   <div className={classes.btntagscon}>
                   <BtnTags className={classes.btnclass}/>
                   </div>
                   <div>
-                      <Titles tag='h6' titleText="Ordenar por"></Titles>
                     <div className={classes.sortcon}>
-                       <div className={classes.starscon}>
-                         <label>Más popular</label>
-                         <div onClick={handleClick} className={classes.starsaux}>
-                             {useStar === false ? ( 
-                             <StarFillOut width='30' height='30' className={classes.star}/>
-                              ) : (
-                             <StarComplete width='30' height='30' className={classes.star}/>
-                            )}
-                              {useStar === false ? ( 
-                             <StarFillOut width='30' height='30' className={classes.star}/>
-                              ) : (
-                             <StarComplete width='30' height='30' className={classes.star}/>
-                            )}
-                              {useStar === false ? ( 
-                             <StarFillOut width='30' height='30' className={classes.star}/>
-                              ) : (
-                             <StarComplete width='30' height='30' className={classes.star}/>
-                            )}
-                              {useStar === false ? ( 
-                             <StarFillOut width='30' height='30' className={classes.star}/>
-                              ) : (
-                             <StarComplete width='30' height='30' className={classes.star}/>
-                            )}
-                              {useStar === false ? ( 
-                             <StarFillOut width='30' height='30' className={classes.star}/>
-                              ) : (
-                             <StarComplete width='30' height='30' className={classes.star}/>
-                            )}
-                        </div>
-                      
-                      </div>
                        <div className={classes.recientcon}>
-                        <label>Más reciente</label>
-                        <input type="checkbox" className={classes.checkbox} onClick={listenClick}/>
+                       <label className={classes.labels}>Buscar por:</label>
+                          <div className={classes.filtroscon}>
+                            <FiltroSelector setFiltrosValues={setFiltrosValues} filtros={filtros} />
+                          </div>
                        </div>
                     </div>
                       
