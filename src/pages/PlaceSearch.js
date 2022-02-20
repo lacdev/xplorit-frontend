@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
-import { useMediaQuery } from "react-responsive";
+import { useState, useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import {useSearchParams} from 'react-router-dom';
-import { useQuery } from "react-query";
-import Geocode from "react-geocode";
+import { useQuery } from 'react-query';
+import Geocode from 'react-geocode';
+import { endpoints } from 'endpoints/endpoints';
 //Services
-import { getCardsPlacesHome } from 'services/places.services';
+import { getAllFilterPlaces } from 'services/places.services';
 import { getAllStates } from 'services/utils.services';
 //Components
 import Btncards from 'components/Common/Btncards';
@@ -45,22 +46,23 @@ function PlaceSearch() {
   const [showMap, setShowMap] = useState(false);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedMunicipio, setSelectedMunicipio] = useState(null);
+  const [URLSearch, setURLSearch] = useState(endpoints.getFilterPlacer)
   const [locationsData, setLocationsData] = useState([]);
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
   const [searchParams, setSearchParams ] = useSearchParams();
   const q = searchParams.get("q") ?? "";
   const { data: statesData, status: statesStatus } = useQuery( "getAllStates", getAllStates );
-  
-//Querys & service to Places
-  const useQueryPlaces = () => {
-    //places
-    const cardsForPlacesInHome = useQuery("getAllPlaces", getCardsPlacesHome);
-    return { cardsForPlacesInHome };
-  };
-  const { cardsForPlacesInHome } = useQueryPlaces();
+    console.log('is state for selectorMunicipio?', selectedMunicipio);
+    useEffect(()=> {
+    console.log('state de url',URLSearch)
+    },[URLSearch]) 
 
-  const { data: placesData, isLoading: loadingPlace, status } = cardsForPlacesInHome;
-   console.log(cardsForPlacesInHome)
+//Querys & service to Places
+    //places
+    const { data: placesData, isLoading: loadingPlace, status } = useQuery(["getAllFilterPlaces",URLSearch],() =>  getAllFilterPlaces(URLSearch),{
+      onSuccess:() => console.log('is success?')
+    })
+
 
   useEffect(() => {
     if (status === "loading") {
@@ -88,6 +90,9 @@ function PlaceSearch() {
       </span>
     );
   }
+  if (status === "success") {
+     console.log('what is placesData?', placesData)
+  }
 
 //Event Hide Aside Map
   const handlerClick = () => {
@@ -108,6 +113,9 @@ function PlaceSearch() {
   };
 
   const onMunicipioChange = (municipioItem) => {
+    const newURL = endpoints.getFilterPlacer + 'q=' + municipioItem.value
+    console.log("🚀 ~ file: PlaceSearch.js ~ line 96 ~ onMunicipioChange ~ newURL", newURL)
+    setURLSearch(newURL)
     setSelectedMunicipio(municipioItem);
   };
 
@@ -116,7 +124,31 @@ function PlaceSearch() {
   }
  
   const onTagChange = (info) => {
+     let newURL = ''
       console.log('Infomación de Tags', info);
+      if(URLSearch.includes('q=')){
+        if(URLSearch.includes('tags')){
+           newURL = URLSearch + ',' +  info
+        }
+        else {
+          
+           newURL = URLSearch + '&tags=' + info
+        }
+
+        console.log('includes URLSearch')
+        
+      } else {
+        if(URLSearch.includes('tags')){
+          newURL = URLSearch + ',' +  info
+       }
+       else {
+         
+          newURL = URLSearch + '&tags=' + info
+       }
+      }
+      setURLSearch(newURL)
+      console.log('how is the new URL', newURL)
+      
   }
 
   const handlerKeyword = (event) => {
@@ -173,11 +205,7 @@ function PlaceSearch() {
                 <span>Loading...</span>
               ) : ( 
                 <div className={classes.cardscon}>
-               { placesData.filter(place => { 
-                          if (!q) return true;
-                     const name = place.name.toLowerCase();
-                    return name.includes(q.toLowerCase());
-                      }) .map((data, index) => {
+               { placesData.data.places.map((data, index) => {
                   return (
                     <SearchCards
                       id={data._id}

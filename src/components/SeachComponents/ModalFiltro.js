@@ -37,9 +37,10 @@ const classes = {
   savecon:'bg-secondary text-white active:bg-blue-700 font-normal text-sm px-6 py-3 rounded-full shadow hover:shadow-testimonialShadow outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150',
   positioncon:'opacity-25 fixed inset-0 z-40 bg-black',
 };
-function ModalFiltro() {
+function ModalFiltro({onTagClick=null}) {
   const [showModal, setShowModal] = useState(false);
   const [useStar, setUseStar] = useState(false);
+  const [useTags, setTags] = useState('');
   const [filtros, setFiltros] = useState([]);
   const [rangeValue, setRangeValue] = useState([5,50]);
 
@@ -56,6 +57,10 @@ function ModalFiltro() {
   const setFiltrosValues = (filtrosOptions) => {
     setFiltros(filtrosOptions);
   };
+
+  const handleTagChange = (info) => {
+     console.log('What have info', info)
+  }
 
   return (
     <>
@@ -97,7 +102,7 @@ function ModalFiltro() {
                     />
                   </div>
                   <div className={classes.btntagscon}>
-                  <BtnTags className={classes.btnclass}/>
+                  <BtnTags className={classes.btnclass} onTagClick={handleTagChange} />
                   </div>
                   <div>
                     <div className={classes.sortcon}>

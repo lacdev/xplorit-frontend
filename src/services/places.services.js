@@ -27,6 +27,21 @@ export async function getOwnerPlace({ queryKey }) {
   return getOwnerPlaceData;
 }
 
+
+export async function getAllFilterPlaces(url) {
+     const getFilterPlaces = await axios.get(url)
+     console.log('is url there?', url)
+    const filterPlaces = getFilterPlaces.data
+    return filterPlaces
+}
+
+export async function getAllFilterRoutes(url) {
+    const getFilterRoutes = await axios.get(url)
+    console.log('is url there?', url)
+   const filterRoutes = getFilterRoutes.data
+   return filterRoutes
+}
+
 export async function getPlaceLikes({ queryKey }) {
   const service_url = `${endpoints.getAllPlaces}/${queryKey[1]}/likes`;
   const getOwnerPlacePromise = await axios.get(service_url);

@@ -16,7 +16,7 @@ function BtnTags({className, onTagClick=null}) {
   return (
     <>
         <Btncards buttonText="Aire Libre" padding="px-4" color="bg-quartiary" className={`mr-4 text-base min-w-110px ${classes.btnclass} ${className} `}
-         onClick={()=>listenClick("aire libre")}></Btncards>
+         onClick={()=>listenClick("airelibre")}></Btncards>
         <Btncards buttonText="Artesanias" padding="px-4" color="bg-quartiary" className={`mr-4 text-base ${classes.btnclass} ${className} `} 
         onClick={()=>listenClick("artesanias")}></Btncards>
         <Btncards buttonText="Comida" padding="px-4" color="bg-quartiary" className={`mr-4 text-base ${classes.btnclass} ${className} `} 
