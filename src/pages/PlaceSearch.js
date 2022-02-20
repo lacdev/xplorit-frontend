@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {useSearchParams} from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { useQuery } from 'react-query';
 //Services
@@ -43,9 +44,10 @@ function PlaceSearch() {
   const [selectedState, setSelectedState] = useState(null);
   const [selectedMunicipio, setSelectedMunicipio] = useState(null);
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
+  const [searchParams, setSearchParams ] = useSearchParams();
+  const q = searchParams.get("q") ?? "";
   const { data: statesData, status: statesStatus } = useQuery( "getAllStates", getAllStates );
-  console.log(statesStatus)
-
+  
 //Querys & service to Places
   const useQueryPlaces = () => {
     //places
@@ -55,7 +57,7 @@ function PlaceSearch() {
   const { cardsForPlacesInHome } = useQueryPlaces();
 
   const { data: placesData, isLoading: loadingPlace, status } = cardsForPlacesInHome;
-
+   console.log(cardsForPlacesInHome)
   if (status === "error") {
     return (
       <span className='font-bold text-center'>
@@ -95,6 +97,11 @@ function PlaceSearch() {
       console.log('Infomación de Tags', info);
   }
 
+  const handlerKeyword = (event) => {
+     setSearchParams({q: event.target.value});
+     
+  }
+
   return (
     <div>
       
@@ -116,7 +123,7 @@ function PlaceSearch() {
           {renderSideBar && (
             <aside className={classes.asidecon}>
               <div>
-                <Inputs placeholderText="¿Que deseas explorar?"/>
+                <Inputs type='text' value={q} placeholderText="¿Que deseas explorar?" onChange={handlerKeyword}/>
               </div>
               <div className={classes.selectorcon}>
                 <div className={classes.divselector}>
@@ -144,12 +151,16 @@ function PlaceSearch() {
                 <span>Loading...</span>
               ) : ( 
                 <div className={classes.cardscon}>
-               { placesData.map((data) => {
+               { placesData.filter(place => { 
+                          if (!q) return true;
+                     const name = place.name.toLowerCase();
+                    return name.includes(q.toLowerCase());
+                      }) .map((data, index) => {
                   return (
                     <SearchCards
                       id={data._id}
                       //typeofplace={data.type}
-                      key={data._id}
+                      key={data.index}
                       name={data.name}
                       address={data.address.street}
                       labels={data.tags}
