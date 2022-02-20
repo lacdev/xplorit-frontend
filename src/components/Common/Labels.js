@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 const Labels = ({ LabelText = ' ' }) => {
   const classes = {
-    wraplabels: 'm-2',
+    wraplabels: 'm-2 ',
     labels:
-      'bg-tagscolor text-xxs sm:text-sm px-3 py-1 sm:mr-1 rounded-full cursor-pointer',
+      'bg-tagscolor text-xs sm:text-xs px-3 py-1 rounded-full cursor-pointer',
   }
 
   return (
