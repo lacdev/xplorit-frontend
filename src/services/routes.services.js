@@ -42,3 +42,10 @@ export async function createRoute(data, images) {
   console.log("Data desde el back", data);
   return await axios.post(service_url, formData, {headers: { Authorization: `Bearer ${token}` }});
 }
+
+export async function getAllFilterRoutes(url) {
+  const getFilterRoutes = await axios.get(url)
+  console.log('is url there?', url)
+ const filterRoutes = getFilterRoutes.data
+ return filterRoutes
+}

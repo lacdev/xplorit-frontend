@@ -46,16 +46,14 @@ function PlaceSearch() {
   const [showMap, setShowMap] = useState(false);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedMunicipio, setSelectedMunicipio] = useState(null);
-  const [URLSearch, setURLSearch] = useState(endpoints.getFilterPlacer)
+  const [URLSearch, setURLSearch] = useState(endpoints.getFilterPlace)
   const [locationsData, setLocationsData] = useState([]);
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
   const [searchParams, setSearchParams ] = useSearchParams();
   const q = searchParams.get("q") ?? "";
   const { data: statesData, status: statesStatus } = useQuery( "getAllStates", getAllStates );
     console.log('is state for selectorMunicipio?', selectedMunicipio);
-    useEffect(()=> {
-    console.log('state de url',URLSearch)
-    },[URLSearch]) 
+  
 
 //Querys & service to Places
     //places
@@ -72,7 +70,7 @@ function PlaceSearch() {
     if (placesData === undefined) {
       return;
     }
-    const markerCoords = placesData.map((correctCoords) => {
+    const markerCoords = placesData.data.places.map((correctCoords) => {
       return {
         coords: {
           lat: correctCoords.location?.coordinates[1],
@@ -80,8 +78,9 @@ function PlaceSearch() {
         },
       };
     });
+    console.log('is ther URL?', URLSearch)
     setLocationsData(markerCoords);
-  }, [placesData, status]);
+  }, [placesData, status, URLSearch]);
 
   if (status === "error") {
     return (
@@ -113,7 +112,7 @@ function PlaceSearch() {
   };
 
   const onMunicipioChange = (municipioItem) => {
-    const newURL = endpoints.getFilterPlacer + 'q=' + municipioItem.value
+    const newURL = endpoints.getFilterPlace + 'q=' + municipioItem.value
     console.log("🚀 ~ file: PlaceSearch.js ~ line 96 ~ onMunicipioChange ~ newURL", newURL)
     setURLSearch(newURL)
     setSelectedMunicipio(municipioItem);
