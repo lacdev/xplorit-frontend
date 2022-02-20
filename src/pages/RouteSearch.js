@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 import Geocode from 'react-geocode';
 import { endpoints } from 'endpoints/endpoints';
 //Services
-import { getAllFilterRoutes } from 'services/places.services';
+import { getAllFilterRoutes } from 'services/routes.services';
 import { getAllStates } from 'services/utils.services';
 //Components
 import Btncards from 'components/Common/Btncards';
@@ -46,20 +46,18 @@ function RouteSearch() {
   const [showMap, setShowMap] = useState(false);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedMunicipio, setSelectedMunicipio] = useState(null);
-  const [URLSearch, setURLSearch] = useState(endpoints.getAllFilterRoutes)
+  const [URLSearch, setURLSearch] = useState(endpoints.getFilterRoute)
   const [locationsData, setLocationsData] = useState([]);
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
   const [searchParams, setSearchParams ] = useSearchParams();
   const q = searchParams.get("q") ?? "";
   const { data: statesData, status: statesStatus } = useQuery( "getAllStates", getAllStates );
     console.log('is state for selectorMunicipio?', selectedMunicipio);
-    useEffect(()=> {
-    console.log('state de url',URLSearch)
-    },[URLSearch]) 
+  
 
 //Querys & service to Places
     //places
-    const { data: routesData, isLoading: loadingRoute, status } = useQuery(["getAllFilterRoute",URLSearch],() =>  getAllFilterRoutes(URLSearch),{
+    const { data: routesData, isLoading: loadingRoute, status } = useQuery(["getAllFilterRoutes",URLSearch],() =>  getAllFilterRoutes(URLSearch),{
       onSuccess:() => console.log('is success?')
     })
 
@@ -72,7 +70,7 @@ function RouteSearch() {
     if (routesData === undefined) {
       return;
     }
-    const markerCoords = routesData.map((correctCoords) => {
+    const markerCoords = routesData.data.routes.map((correctCoords) => {
       return {
         coords: {
           lat: correctCoords.location?.coordinates[1],
@@ -81,7 +79,7 @@ function RouteSearch() {
       };
     });
     setLocationsData(markerCoords);
-  }, [routesData, status]);
+  }, [routesData, status, URLSearch]);
 
   if (status === "error") {
     return (
@@ -91,7 +89,7 @@ function RouteSearch() {
     );
   }
   if (status === "success") {
-     console.log('what is placesData?', routesData)
+     console.log('what is routesData?', routesData)
   }
 
 //Event Hide Aside Map
@@ -210,9 +208,9 @@ function RouteSearch() {
                     <SearchCards
                       id={data._id}
                       //typeofplace={data.type}
-                      key={data.index}
+                      key={index}
                       name={data.name}
-                      address={data.address.street}
+                      //address={data.address.street}
                       labels={data.tags}
                       score={data.average}
                       ownerId={data.ownerId}
