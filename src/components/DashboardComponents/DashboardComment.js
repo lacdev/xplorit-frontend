@@ -1,10 +1,13 @@
 import React from 'react';
+import { AuthContext } from 'context/AuthContext';
 //Components
 import DashboardCommentComponent from './DashboardCommentComponent';
 
 //UseQuery & service
 import { useQuery } from 'react-query';
 import { getCommentsCreatedByUser } from 'services/user.services';
+
+const token = localStorage.getItem("token")
 
 function DashboardComment() {
   const id = "61ef68279262e2f167700caf"; //ID user

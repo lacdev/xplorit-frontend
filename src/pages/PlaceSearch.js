@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import {useSearchParams} from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import {useSearchParams} from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { endpoints } from 'endpoints/endpoints';
+import Geocode from 'react-geocode';
 //Services
 import { getCardsPlacesHome, getAllFilterPlaces } from 'services/places.services';
 import { getAllStates } from 'services/utils.services';
@@ -16,6 +16,7 @@ import StateSelector from 'components/SeachComponents/StateSelector';
 import BtnTags from 'components/SeachComponents/BtnTags';
 import LimitCards from 'components/SeachComponents/LimitCards';
 import Inputs from 'components/Common/Inputs';
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
 const classes = {
   parentcon:'pt-16',
@@ -45,6 +46,7 @@ function PlaceSearch() {
   const [selectedState, setSelectedState] = useState(null);
   const [selectedMunicipio, setSelectedMunicipio] = useState(null);
   const [URLSearch, setURLSearch] = useState(endpoints.getFilterPlacer)
+  const [locationsData, setLocationsData] = useState([]);
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
   const [searchParams, setSearchParams ] = useSearchParams();
   const q = searchParams.get("q") ?? "";
@@ -61,6 +63,25 @@ function PlaceSearch() {
     })
 
 
+  useEffect(() => {
+    if (status === "loading") {
+      return;
+    }
+
+    if (placesData === undefined) {
+      return;
+    }
+    const markerCoords = placesData.map((correctCoords) => {
+      return {
+        coords: {
+          lat: correctCoords.location?.coordinates[1],
+          lng: correctCoords.location?.coordinates[0],
+        },
+      };
+    });
+    setLocationsData(markerCoords);
+  }, [placesData, status]);
+
   if (status === "error") {
     return (
       <span className='font-bold text-center'>
@@ -75,7 +96,6 @@ function PlaceSearch() {
 //Event Hide Aside Map
   const handlerClick = () => {
     setShowMap(!showMap);
-    
   };
   let buttonText = "Mostrar Mapa";
   let mapContainerClass = classes.mapcon;
@@ -206,7 +226,14 @@ function PlaceSearch() {
             </aside>
           )}
           <div className={mapContainerClass}>
-            <MapComponent fullHeight={true} />
+            <MapComponent
+              fullHeight={true}
+              locationsData={locationsData}
+              useMultipleLocations={false}
+              customCenter={
+                locationsData[Math.floor(locationsData?.length / 2)]?.coords
+              }
+            />
           </div>
         </section>
 
