@@ -2,23 +2,26 @@ import React, { useState } from "react";
 import StarComplete from "assets/icons/StarComplete";
 
 const StarRatingStatic = ({ width, height, className, ratingValue }) => {
+  const integer = Math.round(ratingValue);
+
   return (
     <div className='flex '>
-      {[...Array(5)].map((star) => {
+      {[...Array(5)].map((star, i) => {
+        const rating = i;
         return (
           <label>
             <input
               type='radio'
               name='rating'
               className='hidden'
-              value={ratingValue}
+              value={integer}
             />
             <div className='flex '>
               <StarComplete
                 width={width}
                 height={height}
                 className={className}
-                fill={ratingValue >= 0 ? "#ffc107" : "#e4e5e9"}
+                fill={integer <= rating ? "#e4e5e9" : "#ffc107"}
               />
             </div>
           </label>

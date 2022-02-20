@@ -70,14 +70,6 @@ function HeaderOnePlace({
   const currentDate = formatDate(updatedAt);
   const creationDate = formatCreationDate(createdAt);
 
-  /*if (statusUser === "loading") {
-    return <p> Loading...</p>;
-  }
-
-  if (statusUser === "success") {
-    console.log(dataUser);
-  }*/
-
   const handleClick = () => {
     if (useHeart === false && userState.loggedIn === true) {
       setUseHeart(true);
