@@ -3,8 +3,9 @@ import { useMediaQuery } from 'react-responsive';
 import {useSearchParams} from 'react-router-dom';
 import { useQuery } from 'react-query';
 import Geocode from 'react-geocode';
+import { endpoints } from 'endpoints/endpoints';
 //Services
-import { getCardsPlacesHome, getAllFilterPlaces } from 'services/places.services';
+import { getAllFilterPlaces } from 'services/places.services';
 import { getAllStates } from 'services/utils.services';
 //Components
 import Btncards from 'components/Common/Btncards';

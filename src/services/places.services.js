@@ -35,6 +35,12 @@ export async function getAllFilterPlaces(url) {
     return filterPlaces
 }
 
+export async function getAllFilterRoutes(url) {
+    const getFilterRoutes = await axios.get(url)
+    console.log('is url there?', url)
+   const filterRoutes = getFilterRoutes.data
+   return filterRoutes
+}
 
 export async function getPlaceLikes({ queryKey }) {
   const service_url = `${endpoints.getAllPlaces}/${queryKey[1]}/likes`;

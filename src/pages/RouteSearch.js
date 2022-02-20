@@ -1,143 +1,250 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import {useSearchParams} from 'react-router-dom';
+import { useQuery } from 'react-query';
+import Geocode from 'react-geocode';
+import { endpoints } from 'endpoints/endpoints';
+//Services
+import { getAllFilterRoutes } from 'services/places.services';
+import { getAllStates } from 'services/utils.services';
 //Components
 import Btncards from 'components/Common/Btncards';
-import Titles from 'components/Common/Titles';
-import { Labels } from 'components/Common/Labels';
-//Imgages & Icons
-import { AdjustmentsIcon } from '@heroicons/react/outline';
-import Image from "assets/img/image.jpg";
-import HeartFillOut from 'assets/icons/HeartFillOut';
-import StarComplete from 'assets/icons/StarComplete';
+import ModalFiltro from 'components/SeachComponents/ModalFiltro';
 import MapComponent from 'components/MapComponent';
-
-const classes={
-   sectionres:'font-primary w-full h-full min-h-screen',
-   tagsfiltroscon:'flex flex-row p-1 w-full bg-white justify-end my-2',
-   btnclass:'py-2 flex flex-row-reverse content-center',
-   filtroicon:'mr-2',
-   renderres:'grid grid-cols-1 minTablet:grid-cols-5 grid-flow-col h-full min-h-screen',
-   asidecon:'col-span-5 xl:col-span-3 minTablet:col-span-2 bg-white divide-y divide-solid border-slate-500 px-3',
-   rescon:'py-2 pl-2',
-   articlecon:'py-2 px-4',
-   infocon:'flex',
-   img:'h-32 w-44 object-cover object-center rounded-md',
-   detailscon:'flex flex-col pl-2',
-   labelscon:'flex flex-wrap my-2',
-   ubitextcon:'py-3',
-   ubitext:'text-xs break-words',
-   btn:'py-1',
-   hearticon:'m-0',
-   starticon:'mt-5 mr-0',
-   starttext:'text-xs text-center',
-   placestext:'mt-3 text-xxs underline decoration-solid decoration-black text-center',
-   mapcon:'minTablet:block col-span-3 bg-gray-200 h-full',
-
+import Toggle from 'components/SeachComponents/Toggle';
+import SearchCards from 'components/SeachComponents/SearchCards';
+import StateSelector from 'components/SeachComponents/StateSelector';
+import BtnTags from 'components/SeachComponents/BtnTags';
+import LimitCards from 'components/SeachComponents/LimitCards';
+import Inputs from 'components/Common/Inputs';
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+const classes = {
+  parentcon:'pt-16',
+  sectionres:'font-primary w-full h-full min-h-screen overflow-hidden',
+  tagsfiltroscon:'flex flex-row justify-between p-1 w-full bg-white my-2',
+  scroll:'scroll-smooth scroll-pl-4 snap-end snap-x snap-mandatory',
+  scrolltags:'snap-center snap-always scroll-mr-3.5',
+  togglecon:'flex content-center items-center px-4',
+  btnclass:'py-2 flex flex-row-reverse content-center',
+  btntagscon:'hidden lg:flex overflow-x-hidden items-center pb-2',
+  renderres:'grid grid-cols-1 minTablet:grid-cols-5 grid-flow-col overflow-hidden h-[90vh]',
+  togglespanplace:'mr-2',
+  togglespanroute:'mx-2',
+  filtroposition:'ml-auto',
+  asidecon:'col-span-5 xl:col-span-3 minTablet:col-span-2 bg-white divide-y divide-solid border-slate-500 px-3 max-h-[90vh]',
+  rescon:'py-2 pl-2',
+  selectorcon:'flex flex-row w-full',
+  divselector:'flex flex-col w-full',
+  labelselect:'text-xs',
+  cardscon:'h-screen overgflow-y-scroll overflow-scroll',
+  mapcon:'minTablet:block col-span-3 bg-gray-200 h-full',
+  btnshow:'py-1 block minTablet:hidden',
   
-}
+};
 
 function RouteSearch() {
   const [showMap, setShowMap] = useState(false);
-  const isPhone = useMediaQuery({query:'(max-width: 960px)'});
- 
-  const HandlerClick = () => {
-    
-    setShowMap(!showMap)
-    console.log(showMap)
+  const [selectedState, setSelectedState] = useState(null);
+  const [selectedMunicipio, setSelectedMunicipio] = useState(null);
+  const [URLSearch, setURLSearch] = useState(endpoints.getAllFilterRoutes)
+  const [locationsData, setLocationsData] = useState([]);
+  const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
+  const [searchParams, setSearchParams ] = useSearchParams();
+  const q = searchParams.get("q") ?? "";
+  const { data: statesData, status: statesStatus } = useQuery( "getAllStates", getAllStates );
+    console.log('is state for selectorMunicipio?', selectedMunicipio);
+    useEffect(()=> {
+    console.log('state de url',URLSearch)
+    },[URLSearch]) 
+
+//Querys & service to Places
+    //places
+    const { data: routesData, isLoading: loadingRoute, status } = useQuery(["getAllFilterRoute",URLSearch],() =>  getAllFilterRoutes(URLSearch),{
+      onSuccess:() => console.log('is success?')
+    })
+
+
+  useEffect(() => {
+    if (status === "loading") {
+      return;
+    }
+
+    if (routesData === undefined) {
+      return;
+    }
+    const markerCoords = routesData.map((correctCoords) => {
+      return {
+        coords: {
+          lat: correctCoords.location?.coordinates[1],
+          lng: correctCoords.location?.coordinates[0],
+        },
+      };
+    });
+    setLocationsData(markerCoords);
+  }, [routesData, status]);
+
+  if (status === "error") {
+    return (
+      <span className='font-bold text-center'>
+        No se encontraron lugares con ese ID
+      </span>
+    );
   }
-  let buttonText = 'Mostrar Mapa' 
-  let mapContainerClass = classes.mapcon
-  
-  if (!showMap) 
-   mapContainerClass += ' hidden'
-  else 
-   buttonText = 'Ocultar Mapa';
-  
-   const renderSideBar = (!isPhone || !showMap ) ? true : false
-  
+  if (status === "success") {
+     console.log('what is placesData?', routesData)
+  }
+
+//Event Hide Aside Map
+  const handlerClick = () => {
+    setShowMap(!showMap);
+  };
+  let buttonText = "Mostrar Mapa";
+  let mapContainerClass = classes.mapcon;
+
+  if (!showMap) mapContainerClass += " hidden";
+  else buttonText = "Ocultar Mapa";
+
+  const renderSideBar = !isPhone || !showMap ? true : false;
+
+//Selectors State & City
+  const onStateChange = (stateItem) => {
+    setSelectedState(stateItem);
+    setSelectedMunicipio(null);
+  };
+
+  const onMunicipioChange = (municipioItem) => {
+    const newURL = endpoints.getFilterRoute + 'q=' + municipioItem.value
+    console.log("🚀 ~ file: PlaceSearch.js ~ line 96 ~ onMunicipioChange ~ newURL", newURL)
+    setURLSearch(newURL)
+    setSelectedMunicipio(municipioItem);
+  };
+
+  const onToggleChange = (event) => {
+   // console.log('Acciona el evento onChange');
+  }
  
+  const onTagChange = (info) => {
+     let newURL = ''
+      console.log('Infomación de Tags', info);
+      if(URLSearch.includes('q=')){
+        if(URLSearch.includes('tags')){
+           newURL = URLSearch + ',' +  info
+        }
+        else {
+          
+           newURL = URLSearch + '&tags=' + info
+        }
+
+        console.log('includes URLSearch')
+        
+      } else {
+        if(URLSearch.includes('tags')){
+          newURL = URLSearch + ',' +  info
+       }
+       else {
+         
+          newURL = URLSearch + '&tags=' + info
+       }
+      }
+      setURLSearch(newURL)
+      console.log('how is the new URL', newURL)
+      
+  }
+
+  const handlerKeyword = (event) => {
+     setSearchParams({q: event.target.value});
+     
+  }
 
   return (
-   
-      <>
-        <section className={classes.sectionres}>
-          <div className={classes.tagsfiltroscon}>
-            <Btncards
-              className={classes.btnclass}
-              buttonText="Filtros"
-            >
-              <AdjustmentsIcon width="20px" height="20px" className={classes.filtroicon} />
-            </Btncards>
+    <div>
+      
+      <section className={classes.sectionres}>
+        <div className={classes.tagsfiltroscon}>
+          <div className={classes.togglecon}>
+            <span className={classes.togglespanplace}>Lugares</span>
+            <Toggle accionToggle={onToggleChange} />
+            <span className={classes.togglespanroute}>Rutas</span>
           </div>
-          <section className={classes.renderres}>
-           {renderSideBar && <aside className={classes.asidecon}>
-              <div className={classes.rescon} >Resultados de busqueda</div>
-              <article className={classes.articlecon}>
-                <div className={classes.infocon}>
-                  <img
-                    src={Image}
-                    alt="search-img"
-                    className={classes.img}
-                  />
-                  <div className={classes.detailscon}>
-                    <Titles tag="h6" titleText="Nombre del Lugar"></Titles>
-                    <div className={classes.labelscon}>
-                      <Labels LabelText="Aventura"></Labels>
-                      <Labels LabelText="Playa"></Labels>
-                      <Labels LabelText="Relajación"></Labels>
-                      <Labels LabelText="Nocturno"></Labels>
-                    </div>
-                   
-                    <div>
-                      <Btncards buttonText="Explorar" className={classes.btn} ></Btncards>
-                    </div>
-                  </div>
-                  <div>
-                    <HeartFillOut width="30px" height="30px" className={classes.hearticon} />
-                    <StarComplete width="30px" height="30px" className={classes.starticon} />
-                    <p className={classes.starttext}>5</p>
-                   
-                      <p className={classes.placestext}>9 lugares</p>
-                      
-                  </div>
+          <div className={classes.btntagscon}>
+            <BtnTags onTagClick={onTagChange}/>
+          </div>
+          <div className={classes.filtroposition}>
+            <ModalFiltro />
+          </div>
+        </div>
+        <section className={classes.renderres}>
+          {renderSideBar && (
+            <aside className={classes.asidecon}>
+              <div>
+                <Inputs type='text' value={q} placeholderText="¿Que deseas explorar?" onChange={handlerKeyword}/>
+              </div>
+              <div className={classes.selectorcon}>
+                <div className={classes.divselector}>
+                <label className={classes.labelselect}>Elige un Estado</label>
+                <StateSelector
+                  locationsData={statesData}
+                  onStateChange={onStateChange}
+                  selectOption={selectedState}
+                />
                 </div>
-              </article>
-              <article className={classes.articlecon}>
-                <div className={classes.infocon}>
-                  <img
-                    src={Image}
-                    alt="search-img"
-                    className={classes.img}
-                  />
-                  <div className={classes.detailscon}>
-                    <Titles tag="h6" titleText="Nombre del Lugar"></Titles>
-                    <div className={classes.labelscon}>
-                      <Labels LabelText="Aventura"></Labels>
-                      <Labels LabelText="Playa"></Labels>
-                      <Labels LabelText="Relajación"></Labels>
-                      <Labels LabelText="Nocturno"></Labels>
-                    </div>
-                    <div>
-                      <Btncards buttonText="Explorar" className={classes.btn}></Btncards>
-                    </div>
-                  </div>
-                  <div>
-                    <HeartFillOut width="30px" height="30px" />
-                    <StarComplete width="30px" height="30px" className={classes.starticon} />
-                    <p className={classes.starttext}>5</p>
-                    <p className={classes.placestext}>5 lugares</p>
-                  </div>
+                <div className={classes.divselector}>
+                <label className={classes.labelselect}>Elige un Municipio</label>
+                <StateSelector
+                  locationsData={selectedState?.municipios || []}
+                  renderMunicipios={true}
+                  selectOption={selectedMunicipio}
+                  onStateChange={onMunicipioChange}
+                />
                 </div>
-              </article>
-            </aside>}
-            <div className={mapContainerClass}>
-              <MapComponent fullHeight={true} />
-            </div>
-          </section>
-          <Btncards buttonText={buttonText} className="py-1 block minTablet:hidden" onClick={HandlerClick}></Btncards>
+                
+              </div>
+
+              <div className={classes.rescon}>Resultados de busqueda</div>
+              {loadingRoute === true ? (
+                <span>Loading...</span>
+              ) : ( 
+                <div className={classes.cardscon}>
+               { routesData.data.routes.map((data, index) => {
+                  return (
+                    <SearchCards
+                      id={data._id}
+                      //typeofplace={data.type}
+                      key={data.index}
+                      name={data.name}
+                      address={data.address.street}
+                      labels={data.tags}
+                      score={data.average}
+                      ownerId={data.ownerId}
+                      images={data?.images}
+                    />
+                  );
+                })
+                } 
+               </div>
+              )}
+              <LimitCards/>
+            </aside>
+          )}
+          <div className={mapContainerClass}>
+            <MapComponent
+              fullHeight={true}
+              locationsData={locationsData}
+              useMultipleLocations={false}
+              customCenter={
+                locationsData[Math.floor(locationsData?.length / 2)]?.coords
+              }
+            />
+          </div>
         </section>
-      </>
-  
+
+        <Btncards
+          buttonText={buttonText}
+          className={classes.btnshow}
+          onClick={handlerClick}
+        ></Btncards>
+      </section>
+    </div>
   );
 }
 export default RouteSearch;
