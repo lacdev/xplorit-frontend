@@ -3,16 +3,22 @@ import { useState, useEffect, useRef } from 'react'
 import ArrowLeft from 'assets/icons/ArrowLeft'
 import ArrowRight from 'assets/icons/ArrowRight'
 
+// imgcont: 'h-48 w-full rounded-t-lg',
+//   img: 'w-full h-48 object-fill rounded-t-lg',
+
 const classes = {
   secction: 'relative w-full h-full lg:w-screen lg:h-full',
   iconleft:
     'absolute right-0 bottom-bottom7.5 left-80 justify-end inline-flex items-start cursor-pointer h-9 w-12',
   iconright:
     'absolute bottom-bottom7.5 left-2/3 justify-end inline-flex items-center cursor-pointer h-9 w-12',
-  imgcont: 'w-full h-screen',
-  img: 'object-cover object-center w-full h-1/2 lg:w-screen lg:h-1/2 ',
+  imgcont: 'w-full h-2/4 flex flex-grow',
+  img: 'object-fill w-full h-1/4',
   animation: 'delay-05ms ease-out animate-slides',
 }
+
+// lg:w-screen lg:h-1/2
+// object-center
 
 // lg:h-screen
 

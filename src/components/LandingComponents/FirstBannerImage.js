@@ -14,7 +14,7 @@ function FirstBannerImage() {
     <div className={classes.bodycon}>
       <section className={classes.infocon}>
         <h2 className={classes.title}>
-          Explora las mejores rutas compartidas por la comunidad
+          Explora las mejores rutas <br></br> compartidas por la comunidad
         </h2>
         <img
           className={classes.img}

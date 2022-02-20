@@ -1,8 +1,14 @@
-const base_url = `${process.env.REACT_APP_SERVER_URL}/v1`;
+const base_url = `${process.env.REACT_APP_SERVER_URL}/v1`
 
 export const endpoints = {
   getplacesUser: `${base_url}/places/`,
 
+  //Use this service to sort on search pages and home pages.
+  getFilteredPlaces: `${base_url}/places`,
+  // Example of sorting for home page
+  //v1/places?sort=average
+
+  //To be deprecated not going to be used in the future, use FilterPlaces instead.
   getAllPlaces: `${base_url}/places/`,
 
   getAllRoutes: `${base_url}/routes`,
@@ -24,4 +30,4 @@ export const endpoints = {
   logIn: `${base_url}/login`,
 
   signUp: `${base_url}/users`,
-};
+}

@@ -2,8 +2,7 @@ import PropTypes from 'prop-types'
 const Labels = ({ LabelText = ' ' }) => {
   const classes = {
     wraplabels: 'm-2 ',
-    labels:
-      'bg-tagscolor text-xs sm:text-xs px-3 py-1 rounded-full cursor-pointer',
+    labels: 'bg-tagscolor text-xs  px-3 py-1 rounded-full cursor-pointer',
   }
 
   return (
