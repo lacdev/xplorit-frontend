@@ -76,7 +76,6 @@ function OneRoute() {
     const markerCoords = data.location.coordinates.map((correctCoords) => {
       return { coords: { lat: correctCoords[1], lng: correctCoords[0] } };
     });
-
     const addressArrayPromises = markerCoords.map((event) => {
       return getPlaceAddress(
         event.coords.lat.toString(),
@@ -92,7 +91,6 @@ function OneRoute() {
           return res.results[0].formatted_address;
         });
         setFormatedAddress(addressesData);
-        console.log(formattedAddress);
       })
       .catch((error) => {
         console.error(error);
@@ -118,7 +116,6 @@ function OneRoute() {
   }
 
   if (status === "success") {
-    console.log("status ", data);
     const userToFind = data.ownerId.toString();
 
     return (
