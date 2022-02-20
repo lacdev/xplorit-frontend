@@ -28,4 +28,6 @@ export const endpoints = {
   logIn: `${base_url}/login`,
 
   signUp: `${base_url}/users`,
+
+  userMe: `${base_url}/users/me`
 };

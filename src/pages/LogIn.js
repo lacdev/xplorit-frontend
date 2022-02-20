@@ -10,19 +10,20 @@ import { userLogin } from "services/user.services";
 import { data } from "autoprefixer";
 
 const classes = {
-  parentcon:'inline-flex w-full h-screen items-center',
-  container:'w-1/2 h-full bg-img-01 bg-no-repeat bg-center',
-  textcon:'flex h-full justify-center items-center',
-  textdesing:'font-primary font-bold bg-black/50 text-white text-[36px] text-center py-24',
-  formcon:'flex w-1/2 justify-center h-screen items-center',
-  sidecon:'flex-col w-1/2 justify-center',
-  title:'p-6',
-  description:'text-center px-10 mb-4',
-  datacon:'flex-col w-full content-center mt-10 mb-24',
-  input:'w-full h-auto',
-  btn:'flex py-2 m-auto',
-  idication:'text-sm underline text-center',
-}
+  parentcon: "inline-flex w-full h-screen items-center",
+  container: "w-1/2 h-full bg-img-01 bg-no-repeat bg-center",
+  textcon: "flex h-full justify-center items-center",
+  textdesing:
+    "font-primary font-bold bg-black/50 text-white text-[36px] text-center py-24",
+  formcon: "flex w-1/2 justify-center h-screen items-center",
+  sidecon: "flex-col w-1/2 justify-center",
+  title: "p-6",
+  description: "text-center px-10 mb-4",
+  datacon: "flex-col w-full content-center mt-10 mb-24",
+  input: "w-full h-auto",
+  btn: "flex py-2 m-auto",
+  idication: "text-sm underline text-center",
+};
 
 function LogIn() {
   const { userState, setUserState } = useContext(AuthContext);
@@ -47,6 +48,7 @@ function LogIn() {
       loggedIn: true,
     });
     setUserState(newUserState);
+    decodeToken(token);
     localStorage.setItem("token", token);
     navigate("/", { replace: true });
   };

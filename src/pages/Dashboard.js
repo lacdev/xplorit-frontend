@@ -24,9 +24,9 @@ const classes = {
 const token = localStorage.getItem("token");
 
 function Dashboard() {
-  const id = '61ef68279262e2f167700caf'
+  // const id = '61ef68279262e2f167700caf'
   const {userState, setUserState} = useContext(AuthContext)
-  const getUser = useQuery(["getUserProfilePic", id], getUserProfilePic);
+  const getUser = useQuery(["getUserProfilePic", token], getUserProfilePic);
   console.log(getUser);
   const { data, status } = getUser;
 
