@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "context/AuthContext";
-import { formatDate } from "utils/date";
+import { formatDate, formatCreationDate } from "utils/date";
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
 import HeartComplet from "assets/icons/HeartComplete";
@@ -12,6 +12,7 @@ import ThreePoints from "assets/icons/ThreePoints";
 import Avatar from "components/Common/Avatar";
 import { Labels } from "components/Common/Labels";
 import Titles from "components/Common/Titles";
+import StarRatingStatic from "./RatingStarStatic";
 
 //useQuery
 import { useQuery } from "react-query";
@@ -26,16 +27,16 @@ const classes = {
   titleicon: "flex flex-col md:flex-row p-2 mt-4 justify-between",
   auxiconcon: "flex flex-row ",
   iconscon: "flex flex-col p-2 items-end ",
-  hearticon: "mr-22 phone:mr-27",
-  staricon: "mr-10 phone:mr-28 sphone:mr-16",
+  hearticon: "mr-8",
+  staricon: "",
   inforcon: "flex flex-col md:flex-row p-1 justify-between",
   avausercon: "flex ",
   usercon: "flex flex-col justify-center items-center",
   likequalcon: "flex flex-row text-center",
   //spanlike:'mr-14 text-center content-center phone:mr-2 phone:text-sm',
   //spanquali:'mr-2 text-center content-center phone:mr-10 phone:text-sm',
-  liketext: "mr-14",
-  qualitext: "mr-10 sphone:mr-17",
+  liketext: "mr-9 mt-1",
+  qualitext: "mr-22",
   datecon: "m-1 px-6",
   tagsdiv: "flex justify-start mt-4 ml-17",
   tags: "mr-8",
@@ -65,7 +66,7 @@ function HeaderOnePlace({
   const navigate = useNavigate();
 
   const currentDate = formatDate(updatedAt);
-  const creationDate = formatDate(createdAt);
+  const creationDate = formatCreationDate(createdAt);
 
   const getUser = useQuery(["getOwnerPlace", userId], getOwnerPlace);
 
@@ -83,11 +84,13 @@ function HeaderOnePlace({
     if (useHeart === false && userState.loggedIn === true) {
       setUseHeart(true);
       setUsePostLike(usePostLike + 1);
+      //saveLikeOnPlace(userId, placeId)
     } else if (useHeart === false && userState.loggedIn === false) {
       navigate("/login", { replace: true });
     } else {
       setUseHeart(false);
       setUsePostLike(usePostLike - 1);
+      //deleteLikeOnPlace(userId, placeId)
     }
   };
 
@@ -96,7 +99,7 @@ function HeaderOnePlace({
       <div className={classes.titleicon}>
         <Titles tag='h3' titleText={title || ""}></Titles>
         <div className={classes.iconscon}>
-          <div onClick={handleClick} className='flex flex-row'>
+          <div onClick={handleClick} className='flex flex-row w-fit'>
             {useHeart === false ? (
               <HeartFillOut
                 width='28'
@@ -110,8 +113,13 @@ function HeaderOnePlace({
                 className={classes.hearticon}
               />
             )}
-            <StarComplete width='28' height='28' className={classes.staricon} />
-            <ThreePoints width='40' height='28' />
+            <StarRatingStatic
+              width='28'
+              height='28'
+              className={classes.staricon}
+              ratingValue={average}
+            />
+            <ThreePoints width='40' height='28' className='ml-8' />
           </div>
           <div className={classes.likequalcon}>
             <div className={classes.liketext}>
@@ -119,8 +127,8 @@ function HeaderOnePlace({
               <p>Me gusta</p>
             </div>
             <div className={classes.qualitext}>
-              <p>{average}</p>
-              <p>Calificación</p>
+              <p className='mt-1'>{average}</p>
+              <p className=''>Calificación</p>
             </div>
           </div>
         </div>
@@ -135,7 +143,7 @@ function HeaderOnePlace({
       </div>
       <div className={classes.datecon}>
         <p className='ml-12 text-xl'>Fecha de publicación</p>
-        <p className='ml-12'>{`creado ${creationDate} (ultima actualizacion ${currentDate})`}</p>
+        <p className='ml-12'>{`ultima actualizacion ${currentDate} (creado el ${creationDate})`}</p>
       </div>
       <div className={classes.tagsdiv}>
         {tags &&

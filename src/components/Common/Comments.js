@@ -4,20 +4,21 @@ import Avatar from "components/Common/Avatar";
 import StarHalf from "assets/icons/StarHalf.jsx";
 import Titles from "components/Common/Titles";
 import { formatCreationDate, formatDate } from "utils/date";
+import StarRatingStatic from "../RatingStarStatic";
 
 //useQuery
 import { useQuery } from "react-query";
 
 const classes = {
   container:
-    "  flex font-primary w-auto pb-4 h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow mt-20 overflow-hidden phone:h-auto",
-  maincon: "flex flex-row m-2 pt-1",
-  avatarcon: "flex rounded-full p-2.5",
-  detailscon: "flex flex-col mt-1  ",
-  titleh3: "text-2xl fond-normal",
-  qualificationcon: "flex m-auto justify-items-end",
-  number: "m-auto text-xs mx-1",
-  text: "my-3  font-base break-words mx-auto w-3/4",
+    "  flex font-primary w-full pb-4 h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow mt-20 overflow-hidden phone:h-auto",
+  maincon: "w-1/2 sm:w-fit md:w-fit flex flex-row p-3 ",
+  avatarcon: " rounded-full  ",
+  detailscon: " w-1/2 sm:w-fit xl:w-fit border",
+  title: "",
+  qualificationcon: "",
+  number: "text-xs text-left",
+  text: "py-2 text-xs mt-3 m-1 xl:w-full",
 };
 
 function Comments({ avatarImg, username, currentDate, stars, comment }) {
@@ -29,13 +30,18 @@ function Comments({ avatarImg, username, currentDate, stars, comment }) {
         <Avatar width='38' height='38' avatarImg={avatarImg} />
       </div>
       <div className={classes.detailscon}>
-        <h3 className='text-lg m-auto mt-2'>{username}</h3>
-        <p className='text-left mt-1 mb-1 text-xs'>Fecha de Publicación</p>
+        <h3 className='font-bold mb-1 mt-3'>{username}</h3>
+
         <div className={classes.qualificationcon}>
-          <p className='text-xs text-left pt-1 mr-5'>{dateReview}</p>
-          <StarHalf width='1.375rem' height='1.375rem' />
+          <StarRatingStatic
+            width='10'
+            height='10'
+            className={classes.staricon}
+            ratingValue={stars}
+          />
           <p className={classes.number}>{stars}</p>
         </div>
+        <p className='text-xs mt-2'>{dateReview}</p>
       </div>
       <p className={classes.text}>{comment}</p>
     </div>

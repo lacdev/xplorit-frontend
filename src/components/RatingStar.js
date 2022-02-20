@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import StarComplete from "assets/icons/StarComplete";
-import { set } from "date-fns";
 
-const StarRating = ({ width, height, className }) => {
+const StarRating = ({ width, height, className, ratingValue = null }) => {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 
   return (
-    <div className='flex mr-96 mt-0 ml-10'>
+    <div className='flex '>
       {[...Array(5)].map((star, i) => {
         const ratingValue = i + 1;
 

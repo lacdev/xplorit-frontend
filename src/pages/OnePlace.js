@@ -49,13 +49,20 @@ const classes = {
   btn: "ml-9 py-2",
   textEditorHidden: "mt-10 hidden",
   textEditorShow: "mt-10 block",
-  btnForm: " mt-1 text-right ml-auto",
+  btnForm: " mt-1 text-right ml-auto py-2",
   textArea: "border border-current rounded-md w-full min-h-[200px]",
-  star: "flex cursor-pointer",
+  star: "flex cursor-pointer ml-4 mt-",
 };
 
 function OnePlace() {
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [review, setReview] = useState({
+    comment: "",
+    stars: 0,
+    _id: "",
+    username: "",
+    avatar: "",
+  });
   const [textEditorView, setTextEditorView] = useState(
     classes.textEditorHidden
   );
@@ -92,6 +99,13 @@ function OnePlace() {
     } else {
       setTextEditorView(classes.textEditorHidden);
     }
+  };
+
+  const saveReview = (e) => {
+    const newReview = { ...review };
+    newReview[e.target.id] = e.target.value;
+    setReview(newReview);
+    console.log(newReview);
   };
 
   if (status === "loading") {
@@ -153,7 +167,14 @@ function OnePlace() {
             />
             <div className={textEditorView}>
               <form>
-                <textarea type='text' className={classes.textArea}></textarea>
+                <textarea
+                  placeholder=' describe tu experiencia...'
+                  type='text'
+                  id='comment'
+                  className={classes.textArea}
+                  onChange={(e) => saveReview(e)}
+                  value={review.comment}
+                ></textarea>
               </form>
               <p className='ml-10'> califica el lugar :</p>
               <div className='flex '>
@@ -161,6 +182,7 @@ function OnePlace() {
                 <Btncards
                   className={classes.btnForm}
                   buttonText={"Enviar Reseña"}
+                  onClick={saveReview}
                 />
               </div>
             </div>
