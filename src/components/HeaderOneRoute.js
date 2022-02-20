@@ -56,6 +56,8 @@ function HeaderOneRoute({
   createdAt,
   updatedAt,
   average,
+  username,
+  avatar,
 }) {
   const [useHeart, setUseHeart] = useState(false);
   const { userState, setUserState } = useContext(AuthContext);
@@ -63,21 +65,6 @@ function HeaderOneRoute({
 
   const currentDate = formatDate(updatedAt);
   const creationDate = formatCreationDate(createdAt);
-
-  const getUser = useQuery(["getOwnerRoute", userId], getOwnerRoute);
-
-  let userInfo = null;
-
-  const { data: dataUser, status: statusUser } = getUser;
-
-  if (statusUser === "loading") {
-    return <p> Loading...</p>;
-  }
-
-  if (statusUser === "success") {
-    userInfo = dataUser;
-    console.log("asd: ", userInfo);
-  }
 
   const handleClick = () => {
     if (useHeart === false && userState.loggedIn === true) {
@@ -130,10 +117,10 @@ function HeaderOneRoute({
       </div>
       <div className={classes.inforcon}>
         <div className={classes.avausercon}>
-          <Avatar avatarImg={userInfo.avatar} />
+          <Avatar avatarImg={avatar} />
           <div className={classes.usercon}>
             <p className={classes.created}>
-              Agregado por<p className='font-bold'>{userInfo.username}</p>
+              Agregado por<p className='font-bold'>{username}</p>
             </p>
           </div>
         </div>

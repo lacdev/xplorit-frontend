@@ -59,6 +59,8 @@ function HeaderOnePlace({
   createdAt,
   updatedAt,
   average,
+  username,
+  avatar,
 }) {
   const [useHeart, setUseHeart] = useState(false);
   const [usePostLike, setUsePostLike] = useState(likes);
@@ -68,17 +70,13 @@ function HeaderOnePlace({
   const currentDate = formatDate(updatedAt);
   const creationDate = formatCreationDate(createdAt);
 
-  const getUser = useQuery(["getOwnerPlace", userId], getOwnerPlace);
-
-  const { data: dataUser, status: statusUser } = getUser;
-
-  if (statusUser === "loading") {
+  /*if (statusUser === "loading") {
     return <p> Loading...</p>;
   }
 
   if (statusUser === "success") {
     console.log(dataUser);
-  }
+  }*/
 
   const handleClick = () => {
     if (useHeart === false && userState.loggedIn === true) {
@@ -135,9 +133,9 @@ function HeaderOnePlace({
       </div>
       <div className={classes.inforcon}>
         <div className={classes.avausercon}>
-          <Avatar avatarImg={dataUser.avatar} />
+          <Avatar avatarImg={avatar} />
           <div className={classes.usercon}>
-            <p className={classes.created}>Agregado por {dataUser.username}</p>
+            <p className={classes.created}>Agregado por {username}</p>
           </div>
         </div>
       </div>

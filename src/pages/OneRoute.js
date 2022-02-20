@@ -125,9 +125,6 @@ function OneRoute() {
   }
 
   if (status === "success") {
-    console.log("status ", data);
-    const userToFind = data.ownerId.toString();
-
     return (
       <div className={classes.parentcon}>
         <ImageSlider slides={data.images} />
@@ -135,13 +132,15 @@ function OneRoute() {
         <div className='w-5/6 m-auto'>
           {data?.ownerId && (
             <HeaderOneRoute
-              userId={userToFind}
+              userId={data.userId}
               title={data.name}
               tags={data.tags}
               likes={data.likes}
               createdAt={data.createdAt}
               updatedAt={data.updatedAt}
               average={data.average}
+              username={data.ownerId.username}
+              avatar={data.ownerId.avatar}
             />
           )}
         </div>

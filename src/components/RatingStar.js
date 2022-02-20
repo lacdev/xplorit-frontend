@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import StarComplete from "assets/icons/StarComplete";
 
-const StarRating = ({ width, height, className, ratingValue = null }) => {
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
+const StarRating = ({ width, height, className, onChange }) => {
+  const [rating, setRating] = useState(0);
 
   return (
     <div className='flex '>
@@ -14,18 +13,17 @@ const StarRating = ({ width, height, className, ratingValue = null }) => {
           <label>
             <input
               type='radio'
-              name='rating'
+              name='stars'
               className='hidden'
               value={ratingValue}
               onClick={() => setRating(ratingValue)}
+              onChange={(e) => onChange(e)}
             />
             <StarComplete
               width={width}
               height={height}
               className={className}
-              fill={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
-              onMouseEnter={() => setHover(ratingValue)}
-              onMouseLeave={() => setHover(null)}
+              fill={ratingValue <= rating ? "#ffc107" : "#e4e5e9"}
             />
           </label>
         );

@@ -71,12 +71,13 @@ export async function deleteLikeOnPlace(userId, placeId) {
   });
 }
 
-export async function savePostonPlace(comment, stars, _id, placeId) {
+export async function saveReviewOnPlace(data, placeId, userId) {
   const service_url = `${endpoints.getReviews}/${placeId}/reviews`;
+  console.log("URL ", service_url);
+  console.log("JSON to POST ", data);
   return await axios.post(service_url, {
-    comment: comment,
-    stars: stars,
-    userId: _id,
-    placeId: placeId,
+    comment: data.comment,
+    stars: data.stars,
+    userId: userId,
   });
 }

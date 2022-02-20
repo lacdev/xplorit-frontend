@@ -14,7 +14,7 @@ const classes = {
     "  flex font-primary w-full pb-4 h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow mt-20 overflow-hidden phone:h-auto",
   maincon: "w-1/2 sm:w-fit md:w-fit flex flex-row p-3 ",
   avatarcon: " rounded-full  ",
-  detailscon: " w-1/2 sm:w-fit xl:w-fit border",
+  detailscon: "w-1/2 sm:w-fit xl:w-fit",
   title: "",
   qualificationcon: "",
   number: "text-xs text-left",
