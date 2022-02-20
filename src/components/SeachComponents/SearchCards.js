@@ -20,7 +20,7 @@ const classes={
     starticon:'mt-5',
     starttext:'text-xs text-center',   
  }
-function SearchCards({id, name, score, labels,key,  images=[],  typeofplace , address}) {
+function SearchCards({id, name, score, labels,key, images=[],  typeofplace , address}) {
     const cardLink = `/${typeofplace}/${id}`
     return (
       <article className={classes.articlecon} key={key} >
