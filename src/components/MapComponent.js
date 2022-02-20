@@ -1,12 +1,7 @@
 import React, { useCallback, useRef, useState, useEffect } from "react";
 //import PropTypes from 'prop-types';
 //Google React
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  Polyline,
-} from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Marker, Polyline } from "@react-google-maps/api";
 //Components
 import SearchMap from "./SearchMap";
 import SearchMapOnPage from "./SearchMapOnPage";
@@ -56,14 +51,12 @@ function MapComponent({
   const [currentUserLocation, setCurrentUserLocation] = useState(null);
 
   // ? use custom hook, : es alias de la variable
-  const { currentBrowserLocation, currentBrowserLocationError } =
-    useCurrentLocation();
+  const { currentBrowserLocation, currentBrowserLocationError } = useCurrentLocation();
 
   useEffect(() => {
     if (!currentBrowserLocation || currentBrowserLocation === null) return;
 
-    if (currentBrowserLocationError !== undefined)
-      setCurrentUserLocation({ ...center });
+    if (currentBrowserLocationError !== undefined) setCurrentUserLocation({ ...center });
 
     setCurrentUserLocation({ ...currentBrowserLocation });
 
@@ -146,7 +139,7 @@ function MapComponent({
       return [];
     }
     const pathCoords = locationsData.map((location) => {
-      return location.coords;
+      return location?.coords || [];
     });
 
     const newPathOptions = Object.assign({}, lineOptions);
@@ -196,24 +189,20 @@ function MapComponent({
       onClick={onMapClick}
     >
       {useOnePageSearch ? (
-        <SearchMapOnPage
-          setSelectedLocationOnInputSearch={setSelectedLocationOnInputSearch}
-        />
+        <SearchMapOnPage setSelectedLocationOnInputSearch={setSelectedLocationOnInputSearch} />
       ) : (
         <SearchMap />
       )}
-      {selectedLocation && useMultipleLocations == false && (
-        <Marker position={selectedLocation} />
-      )}
+      {selectedLocation && useMultipleLocations == false && <Marker position={selectedLocation} />}
       {locationsData &&
         useMultipleLocations == false &&
         locationsData.map((location) => {
-          return <Marker position={location.coords} />;
+          return <Marker position={location?.coords} />;
         })}
       {locationsData &&
         useMultipleLocations == true &&
         locationsData.map((location) => {
-          return <Marker position={location.coords} />;
+          return <Marker position={location?.coords} />;
         })}
       {locationsData && useMultipleLocations == true && (
         <Polyline

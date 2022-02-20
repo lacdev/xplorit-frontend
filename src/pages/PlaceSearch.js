@@ -63,20 +63,6 @@ function PlaceSearch() {
       onSuccess:() => console.log('is success?')
     })
 
-  //Querys & service to Places
-  //places
-  const {
-    data: placesData,
-    isLoading: loadingPlace,
-    status,
-  } = useQuery(
-    ["getAllFilterPlaces", URLSearch],
-    () => getAllFilterPlaces(URLSearch),
-    {
-      onSuccess: () => console.log("is success?"),
-    }
-  );
-
   useEffect(() => {
     if (status === "loading") {
       return;
