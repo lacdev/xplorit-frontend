@@ -5,6 +5,8 @@ export const endpoints = {
 
   getAllPlaces: `${base_url}/places/`,
 
+  getFilterPlacer: `${base_url}/places?`,
+
   getAllRoutes: `${base_url}/routes`,
 
   getOwnerPlace: `${base_url}/users`,

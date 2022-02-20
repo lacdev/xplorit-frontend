@@ -33,6 +33,14 @@ export async function getPlaceLikes({queryKey}) {
 }
 
 
+export async function getAllFilterPlaces(url) {
+     const getFilterPlaces = await axios.get(url)
+     console.log('is url there?', url)
+    const filterPlaces = getFilterPlaces.data
+    return filterPlaces
+}
+
+
 export async function createPlace(data, images){
     const service_url = `${endpoints.postPlace}`
     const formData = new FormData()
