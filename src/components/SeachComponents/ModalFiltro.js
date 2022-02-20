@@ -59,7 +59,19 @@ function ModalFiltro({onTagClick=null}) {
   };
 
   const handleTagChange = (info) => {
+    let newString = ''
      console.log('What have info', info)
+     if(useTags.includes(info)){
+       if(useTags.includes('')){
+         newString = useTags + ',' + info
+       }
+       else {
+        newString = useTags + 'tags' + info
+      }
+     }
+     
+     console.log('what write?', newString)
+
   }
 
   return (
