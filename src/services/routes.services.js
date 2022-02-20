@@ -41,3 +41,9 @@ export async function createRoute(data, images) {
   return await axios.post(service_url, formData);
   // return postNewPlace
 }
+
+export async function saveReviewOnRoute(data, routeId, userId) {
+  const service_url = `${endpoints.postRoute}/${routeId}/reviews`;
+  console.log("URL ", service_url);
+  console.log("JSON to Post ", data);
+}

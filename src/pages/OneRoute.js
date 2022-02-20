@@ -20,6 +20,7 @@ import StarRating from "components/RatingStar";
 import { useQuery } from "react-query";
 import { getSingleRouteData } from "services/routes.services";
 import { getSingleReviewRoute } from "services/places.services";
+import { saveReviewOnRoute } from "services/routes.services";
 import PlaceAddress from "components/PlaceAddress";
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
@@ -50,7 +51,7 @@ const classes = {
   divubications: "flex flex-row items-center",
   ubication: "ml-15 my-2",
   commentcon: "mb-20",
-  btn: "ml-9 py-2",
+  btn: "ml-9 py-2 mt-5",
   textEditorHidden: "mt-10 hidden",
   textEditorShow: "mt-10 block",
   btnForm: " mt-1 text-right ml-auto py-2",
@@ -59,13 +60,20 @@ const classes = {
 };
 
 function OneRoute() {
+  const { id } = useParams();
+  const userId = "620c634ae13127a727d794e7";
   const [locationsData, setLocationsData] = useState([]);
+  const [star, setStar] = useState(0);
+  const [review, setReview] = useState({
+    comment: "",
+    stars: null,
+    userId: "620c634ae13127a727d794e7",
+  });
   const [textEditorView, setTextEditorView] = useState(
     classes.textEditorHidden
   );
   const [formattedAddress, setFormatedAddress] = useState([]);
 
-  const { id } = useParams();
   const singleRoute = useQuery(["getSingleRouteData", id], getSingleRouteData);
   const getReviews = useQuery(["getSingleReview", id], getSingleReviewRoute);
 
@@ -120,6 +128,24 @@ function OneRoute() {
     }
   };
 
+  const saveReview = (e) => {
+    const newReview = { ...review };
+    newReview[e.target.id] = e.target.value;
+    setReview(newReview);
+    console.log(newReview);
+  };
+
+  const saveStar = (e) => {
+    const newReview = { ...review };
+    newReview[e.target.name] = e.target.value;
+    setReview(newReview);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    saveReviewOnRoute(review, id, userId);
+  };
+
   if (status === "loading") {
     return <p> Loading...</p>;
   }
@@ -171,15 +197,31 @@ function OneRoute() {
             />
             <div className={textEditorView}>
               <form>
-                <textarea type='text' className={classes.textArea}></textarea>
+                <textarea
+                  placeholder=' describe tu experiencia...'
+                  type='text'
+                  id='comment'
+                  className={classes.textArea}
+                  onChange={(e) => saveReview(e)}
+                  value={review.comment}
+                ></textarea>
               </form>
               <p className='ml-10'> califica el lugar :</p>
               <div className='flex '>
-                <StarRating width='25' height='25' className={classes.star} />
-                <Btncards
-                  className={classes.btnForm}
-                  buttonText={"Enviar Reseña"}
+                <StarRating
+                  width='25'
+                  height='25'
+                  setRating={setStar}
+                  className={classes.star}
+                  onChange={(e) => saveStar(e)}
+                  stars={star}
                 />
+                <button
+                  className='bg-blue-600 ml-auto px-3 py-2 font-Poppins text-white rounded-full hover:bg-blue-700 drop-shadow-lg'
+                  onClick={handleSubmit}
+                >
+                  Reseñar
+                </button>
               </div>
             </div>
             <div className={classes.commentcon}>

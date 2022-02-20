@@ -75,9 +75,9 @@ export async function saveReviewOnPlace(data, placeId, userId) {
   const service_url = `${endpoints.getReviews}/${placeId}/reviews`;
   console.log("URL ", service_url);
   console.log("JSON to POST ", data);
-  return await axios.post(service_url, {
+  /*return await axios.post(service_url, {
     comment: data.comment,
     stars: data.stars,
     userId: userId,
-  });
+  });*/
 }

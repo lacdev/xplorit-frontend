@@ -18,6 +18,7 @@ import StarRating from "components/RatingStar";
 import { useQuery } from "react-query";
 import { getSinglePlaceData } from "services/places.services";
 import { getSingleReview } from "services/places.services";
+import { saveReviewOnPlace } from "services/places.services";
 
 const classes = {
   parentcon: "font-primary overflow-x-hidden",
@@ -55,19 +56,19 @@ const classes = {
 };
 
 function OnePlace() {
+  const { id } = useParams();
+  const userId = "620c634ae13127a727d794e7";
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [star, setStar] = useState(0);
   const [review, setReview] = useState({
     comment: "",
-    stars: 0,
-    _id: "",
-    username: "",
-    avatar: "",
+    stars: null,
+    userId: "620c634ae13127a727d794e7",
   });
+
   const [textEditorView, setTextEditorView] = useState(
     classes.textEditorHidden
   );
-
-  const { id } = useParams();
 
   const singlePlace = useQuery(["getSinglePlaceData", id], getSinglePlaceData);
   const getReviews = useQuery(["getSingleReview", id], getSingleReview);
@@ -108,11 +109,23 @@ function OnePlace() {
     console.log(newReview);
   };
 
+  const saveStar = (e) => {
+    const newReview = { ...review };
+    newReview[e.target.name] = e.target.value;
+    setReview(newReview);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    saveReviewOnPlace(review, id, userId);
+  };
+
   if (status === "loading") {
     return <p> Loading...</p>;
   }
 
   if (status === "success") {
+    console.log("data ", data);
     const userToFind = data.ownerId.toString();
 
     return (
@@ -180,12 +193,20 @@ function OnePlace() {
               </form>
               <p className='ml-10'> califica el lugar :</p>
               <div className='flex '>
-                <StarRating width='25' height='25' className={classes.star} />
-                <Btncards
-                  className={classes.btnForm}
-                  buttonText={"Enviar Reseña"}
-                  onClick={saveReview}
+                <StarRating
+                  width='25'
+                  height='25'
+                  setRating={setStar}
+                  className={classes.star}
+                  onChange={(e) => saveStar(e)}
+                  stars={star}
                 />
+                <button
+                  className='bg-blue-600 ml-auto px-3 py-2 font-Poppins text-white rounded-full hover:bg-blue-700 drop-shadow-lg'
+                  onClick={handleSubmit}
+                >
+                  Reseñar
+                </button>
               </div>
             </div>
             <div className={classes.commentcon}>
