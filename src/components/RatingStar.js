@@ -12,6 +12,7 @@ const StarRating = ({ width, height, className, onChange }) => {
         return (
           <label>
             <input
+              key={i}
               type='radio'
               name='stars'
               className='hidden'

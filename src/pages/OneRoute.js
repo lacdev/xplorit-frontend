@@ -4,9 +4,6 @@ import { useState } from "react";
 import parse from "html-react-parser";
 import Geocode from "react-geocode";
 
-//Icons & Images
-import PinMap from "assets/icons/PinMap";
-
 //Components
 import Comments from "components/Common/Comments";
 import ImageSlider from "components/Common/ImageSlider";
@@ -64,6 +61,7 @@ function OneRoute() {
   const userId = "620c634ae13127a727d794e7";
   const [locationsData, setLocationsData] = useState([]);
   const [star, setStar] = useState(0);
+  const [render, setRender] = useState([]);
   const [review, setReview] = useState({
     comment: "",
     stars: null,

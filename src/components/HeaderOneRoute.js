@@ -2,14 +2,10 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "context/AuthContext";
 import { formatDate, formatCreationDate } from "utils/date";
-//useQuery & services
-import { useQuery } from "react-query";
-import { getOwnerRoute } from "services/routes.services";
 
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
 import HeartComplete from "assets/icons/HeartComplete";
-import StarComplete from "assets/icons/StarComplete";
 import ThreePoints from "assets/icons/ThreePoints";
 import StarRatingStatic from "./RatingStarStatic";
 
@@ -130,8 +126,10 @@ function HeaderOneRoute({
       </div>
       <div className={classes.tagsdiv}>
         {tags &&
-          tags.map((tag) => {
-            return <Labels LabelText={tag} className={classes.tags}></Labels>;
+          tags.map((tag, i) => {
+            return (
+              <Labels key={i} LabelText={tag} className={classes.tags}></Labels>
+            );
           })}
       </div>
     </section>

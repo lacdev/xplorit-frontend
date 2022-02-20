@@ -5,7 +5,6 @@ import { formatDate, formatCreationDate } from "utils/date";
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
 import HeartComplet from "assets/icons/HeartComplete";
-import StarComplete from "assets/icons/StarComplete";
 import ThreePoints from "assets/icons/ThreePoints";
 
 //Components
@@ -13,12 +12,6 @@ import Avatar from "components/Common/Avatar";
 import { Labels } from "components/Common/Labels";
 import Titles from "components/Common/Titles";
 import StarRatingStatic from "./RatingStarStatic";
-
-//useQuery
-import { useQuery } from "react-query";
-import { getOwnerPlace } from "services/places.services";
-import { saveLikeOnPlace } from "services/places.services";
-import axios from "axios";
 
 const classes = {
   parentcon: "font-primary overflow-x-hidden",
@@ -137,8 +130,10 @@ function HeaderOnePlace({
       </div>
       <div className={classes.tagsdiv}>
         {tags &&
-          tags.map((tag) => {
-            return <Labels LabelText={tag} className={classes.tags}></Labels>;
+          tags.map((tag, i) => {
+            return (
+              <Labels key={i} LabelText={tag} className={classes.tags}></Labels>
+            );
           })}
       </div>
     </section>

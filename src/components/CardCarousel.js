@@ -50,7 +50,6 @@ function CardCarousel({ cardsData, type }) {
       <Slider {...settings}>
         {cardsData &&
           cardsData.map((item) => {
-            console.log("item:", item);
             return (
               <Cards
                 id={item._id}

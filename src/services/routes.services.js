@@ -46,4 +46,9 @@ export async function saveReviewOnRoute(data, routeId, userId) {
   const service_url = `${endpoints.postRoute}/${routeId}/reviews`;
   console.log("URL ", service_url);
   console.log("JSON to Post ", data);
+  /*return await axios.post(service_url, {
+    comment: data.comment,
+    stars: data.stars,
+    userId: userId,
+  });*/
 }

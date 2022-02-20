@@ -1,11 +1,16 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react';
+import React, { useCallback, useRef, useState, useEffect } from "react";
 //import PropTypes from 'prop-types';
-//Google React 
-import { GoogleMap, useLoadScript, Marker, Polyline } from '@react-google-maps/api';
+//Google React
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  Polyline,
+} from "@react-google-maps/api";
 //Components
-import SearchMap from './SearchMap';
-import SearchMapOnPage from './SearchMapOnPage';
-import useCurrentLocation from 'hooks/UseCurrentLocation';
+import SearchMap from "./SearchMap";
+import SearchMapOnPage from "./SearchMapOnPage";
+import useCurrentLocation from "hooks/UseCurrentLocation";
 
 const center = {
   lat: 19.4326077,
@@ -42,7 +47,7 @@ function MapComponent({
   fullHeight = false,
   locationsData,
   useMultipleLocations = false,
-  customCenter = null
+  customCenter = null,
 }) {
   // ?--------------------------------------
   // ? Component setup
@@ -166,19 +171,19 @@ function MapComponent({
   };
   //Define map center
   const newCenter = () => {
-    if (customCenter != null){
-      return customCenter
-    } 
-    if (selectedLocation != null){ 
-      return selectedLocation
+    if (customCenter != null) {
+      return customCenter;
     }
-    if (currentUserLocation !=  null){
-      return currentUserLocation
+    if (selectedLocation != null) {
+      return selectedLocation;
     }
-    return center
-  }
+    if (currentUserLocation != null) {
+      return currentUserLocation;
+    }
+    return center;
+  };
 
-  const mapIinitialPosition = newCenter()
+  const mapIinitialPosition = newCenter();
   // const centerLocation = currentUserLocation !== null ? currentUserLocation : center;
 
   if (!isLoaded) return null;
@@ -205,9 +210,9 @@ function MapComponent({
       )}
       {locationsData &&
         useMultipleLocations == true &&
-        locationsData.map((location) => {
+        locationsData.map((location, i) => {
           console.log("This is return locations", location);
-          return <Marker position={location.coords} />;
+          return <Marker key={i} position={location.coords} />;
         })}
       {locationsData && useMultipleLocations == true && (
         <Polyline
