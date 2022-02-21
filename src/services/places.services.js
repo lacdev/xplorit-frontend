@@ -103,22 +103,14 @@ export async function deleteLikeOnPlace(placeId) {
 
 export async function saveReviewOnPlace(data, placeId) {
   const service_url = `${endpoints.getReviews}/${placeId}/reviews`;
-  const saveLike = axios
-    .post(
-      service_url,
-      {
-        comment: data.comment,
-        stars: data.stars,
-      },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
-    .then((res) => {
-      if (res.statusCode === 200) {
-      }
-    })
-    .catch((err) => {
-      console.log("AXIOS ERROR: ", err);
-    });
+  const saveLike = axios.post(
+    service_url,
+    {
+      comment: data.comment,
+      stars: data.stars,
+    },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
 }
