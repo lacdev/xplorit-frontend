@@ -57,13 +57,13 @@ const classes = {
 
 function OnePlace() {
   const { id } = useParams();
-  const userId = "620c634ae13127a727d794e7";
+  // const userId = "620c634ae13127a727d794e7";
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [star, setStar] = useState(0);
   const [review, setReview] = useState({
     comment: "",
     stars: null,
-    userId: "620c634ae13127a727d794e7",
+    userId: "",
   });
 
   const [textEditorView, setTextEditorView] = useState(
@@ -117,7 +117,7 @@ function OnePlace() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    saveReviewOnPlace(review, id, userId);
+    saveReviewOnPlace(review, id);
   };
 
   if (status === "loading") {
@@ -136,7 +136,7 @@ function OnePlace() {
           {data?.ownerId && (
             <HeaderOnePlace
               placeId={id}
-              userId={"620c634ae13127a727d794e7"}
+              userId={data.id}
               title={data.name}
               tags={data.tags}
               likes={data.likes}
