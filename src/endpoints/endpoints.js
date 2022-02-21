@@ -7,7 +7,7 @@ export const endpoints = {
 
   getFilterPlace: `${base_url}/places?`,
 
-  getFilterRoute:`${base_url}/routes?`,
+  getFilterRoute: `${base_url}/routes?`,
 
   getAllRoutes: `${base_url}/routes`,
 
@@ -33,7 +33,9 @@ export const endpoints = {
 
   signUp: `${base_url}/users`,
 
-  userMe: `${base_url}/users/me`, 
-  
+  userMe: `${base_url}/users/me`,
+
   saveLike: `${base_url}/places`,
+
+  deleteLike: `${base_url}/places`,
 };

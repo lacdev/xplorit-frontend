@@ -2,6 +2,7 @@ import axios from "axios";
 import { endpoints } from "endpoints/endpoints";
 
 const token = localStorage.getItem("token");
+console.log("token ", token);
 
 export async function getCardsPlacesHome() {
   const getAllPlacesPromise = await axios.get(endpoints.getAllPlaces);
@@ -65,29 +66,60 @@ export async function createPlace(data, images) {
   });
 }
 
-export async function saveLikeOnPlace(userId, placeId) {
-  console.log("saveLike ", placeId, userId);
+export async function saveLikeOnPlace(placeId) {
+  console.log("placeId: ", placeId);
   const service_url = `${endpoints.saveLike}/${placeId}/likes`;
+  console.log("token: ", token);
+  return await axios.post(
+    service_url,
+    {},
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+}
+
+/*export async function saveLikeOnPlace(placeId) {
+  console.log("saveLike ", placeId);  
+  const service_url = `${endpoints.saveLike}/${placeId}/likes`;
+  console.log("Token ", token);
   return await axios.post(service_url, {
-    placeId: placeId,
-    userId: userId,
+    headers: { Authorization: `Bearer ${token}` },
   });
-}
+}*/
 
-export async function deleteLikeOnPlace(userId, placeId) {
-  const service_url = `${endpoints.getAllPlaces}/${placeId}/likes`;
-  return await axios.delete(service_url, {
-    userId: userId,
-  });
-}
-
-export async function saveReviewOnPlace(data, placeId, userId) {
-  const service_url = `${endpoints.getReviews}/${placeId}/reviews`;
+export async function deleteLikeOnPlace(placeId) {
+  const service_url = `${endpoints.deleteLike}/${placeId}/likes`;
   console.log("URL ", service_url);
-  console.log("JSON to POST ", data);
-  /*return await axios.post(service_url, {
-    comment: data.comment,
-    stars: data.stars,
-    userId: userId,
-  });*/
+  //console.log("JSON to POST ", data);
+  return await axios.delete(
+    service_url,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    },
+    {}
+  );
+}
+
+export async function saveReviewOnPlace(data, placeId) {
+  const service_url = `${endpoints.getReviews}/${placeId}/reviews`;
+
+  const saveLike = axios
+    .post(
+      service_url,
+      {
+        comment: data.comment,
+        stars: data.stars,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then((res) => {
+      if (res.statusCode === 200) {
+      }
+    })
+    .catch((err) => {
+      console.log("AXIOS ERROR: ", err);
+    });
 }

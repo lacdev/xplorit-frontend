@@ -52,28 +52,6 @@ function Comments({ avatarImg, username, currentDate, stars, comment }) {
       </div>
     </div>
   );
-
-  /* return (
-    <div className={classes.container}>
-      <div className={classes.maincon}>
-        <Avatar width='38' height='38' avatarImg={avatarImg} />
-      </div>
-      <div className={classes.detailscon}>
-        <h3 className='font-bold mt-3'>{username}</h3>
-        <p className='text-xs text-gray-400'>{dateReview}</p>
-      </div>
-      <div className={classes.qualificationcon}>
-        <StarRatingStatic
-          width='10'
-          height='10'
-          className={classes.staricon}
-          ratingValue={stars}
-        />
-        <p className={classes.number}>{stars}</p>
-      </div>
-        <p className={classes.text}>{comment}</p>
-    </div>
-  );*/
 }
 
 export default Comments;
