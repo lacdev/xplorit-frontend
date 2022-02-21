@@ -173,9 +173,9 @@ function PlaceSearch() {
             <aside className={classes.asidecon}>
               <div>
                 <Inputs
-                  type="text"
+                  type='text'
                   value={q}
-                  placeholderText="¿Que deseas explorar?"
+                  placeholderText='¿Que deseas explorar?'
                   onChange={handlerKeyword}
                 />
               </div>
