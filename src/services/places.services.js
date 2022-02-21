@@ -103,7 +103,6 @@ export async function deleteLikeOnPlace(placeId) {
 
 export async function saveReviewOnPlace(data, placeId) {
   const service_url = `${endpoints.getReviews}/${placeId}/reviews`;
-
   const saveLike = axios
     .post(
       service_url,
