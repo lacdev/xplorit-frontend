@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
-//import {useSearchParams} from 'react-router-dom';
+
+import {useParams} from 'react-router-dom';
 import { useQuery } from 'react-query';
 import Geocode from 'react-geocode';
 import { endpoints } from 'endpoints/endpoints';
@@ -47,18 +48,24 @@ function PlaceSearch() {
   const [showMap, setShowMap] = useState(false);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedMunicipio, setSelectedMunicipio] = useState(null);
-  const [URLSearch, setURLSearch] = useState(endpoints.getFilterPlace);//localhost/...places?
+  
   const [locationsData, setLocationsData] = useState([]);  
   const [useRange, setUseRange] = useState([5,50]);
   const [useSort, setUseSort] = useState ([]);
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
   const { data: statesData, status: statesStatus } = useQuery( "getAllStates", getAllStates );
   //  console.log('is state for selectorMunicipio?', selectedMunicipio);
+ //const {search}= useParams();
+ const searchParam = decodeURIComponent(window.location.search);
+ const queryFromURL = searchParam?.split('=')[1].replace(' ','');
+ const [URLSearch, setURLSearch] = useState(`${endpoints.getFilterPlace}q=${queryFromURL}`);//localhost/...places?
   
 
 //Querys & service to Places
     //places
-    const { data: placesData, isLoading: loadingPlace, status } = useQuery(["getAllFilterPlaces",URLSearch],() =>  getAllFilterPlaces(URLSearch),{
+    const { data: placesData,
+       isLoading: loadingPlace,
+        status } = useQuery(["getAllFilterPlaces",URLSearch,queryFromURL],() =>  getAllFilterPlaces(URLSearch,queryFromURL),{
       onSuccess:() => console.log('is success?')
     })
 

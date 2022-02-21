@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {endpoints} from 'endpoints/endpoints';
 
 //Components
@@ -56,10 +56,10 @@ function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, onChange=
   
 
   const handleAplicar = () => {
-    console.log('Antes:', onSearch)
+    // console.log('Antes:', onSearch)
     let newURL = onSearch + 'sort=' + filtros.value;
      onStateURL(newURL)
-     console.log('Despues:', onSearch)
+    //  console.log('Despues:', onSearch)
     setShowModal(false)
    
   }
