@@ -5,6 +5,8 @@ import { useQuery } from 'react-query';
 import { getPlacesCreatedByUser } from 'services/user.services';
 import DashboardCard from './DashboardCard';
 
+const token = localStorage.getItem("token")
+
 function DashboardPlacesContainer() {
   const id = "61ff09c5f1b8eb106745942f";
 

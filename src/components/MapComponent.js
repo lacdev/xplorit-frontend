@@ -83,7 +83,6 @@ function MapComponent({
     if (selectedLocation == null) {
       return;
     }
-    console.log("asd", selectedLocation);
     goToLocation(selectedLocation);
   }, [selectedLocation]);
   // ?--------------------------------------
@@ -147,10 +146,8 @@ function MapComponent({
       return [];
     }
     const pathCoords = locationsData.map((location) => {
-      console.log("This is locationsData in MapComponent", locationsData);
       return location.coords;
     });
-    console.log("Path Coords", pathCoords);
 
     const newPathOptions = Object.assign({}, lineOptions);
     newPathOptions.paths = pathCoords;
@@ -209,10 +206,20 @@ function MapComponent({
         <Marker position={selectedLocation} />
       )}
       {locationsData &&
+        useMultipleLocations == false &&
+        locationsData.map((location) => {
+          return <Marker position={location.coords} />;
+        })}
+      {locationsData &&
         useMultipleLocations == true &&
+<<<<<<< HEAD
         locationsData.map((location, i) => {
           console.log("This is return locations", location);
           return <Marker key={i} position={location.coords} />;
+=======
+        locationsData.map((location) => {
+          return <Marker position={location.coords} />;
+>>>>>>> develop
         })}
       {locationsData && useMultipleLocations == true && (
         <Polyline
