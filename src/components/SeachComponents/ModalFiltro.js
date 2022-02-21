@@ -2,11 +2,10 @@ import { useState } from 'react';
 
 //Components
 import BtnTags from './BtnTags';
-import FiltroSelector from 'components/FiltroSelector';
+import FiltroSelector from 'components/SeachComponents/FiltroSelector';
 //Icons 
-import StarFillOut from 'assets/icons/StarFillOut';
 import { AdjustmentsIcon } from '@heroicons/react/outline';
-import StarComplete from 'assets/icons/StarComplete';
+
 
 
 const classes = {
@@ -37,10 +36,8 @@ const classes = {
   savecon:'bg-secondary text-white active:bg-blue-700 font-normal text-sm px-6 py-3 rounded-full shadow hover:shadow-testimonialShadow outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150',
   positioncon:'opacity-25 fixed inset-0 z-40 bg-black',
 };
-function ModalFiltro({onTagClick=null}) {
+function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, minValue, maxValue, setValue, onChange=null, onSortChange, selecOption }) {
   const [showModal, setShowModal] = useState(false);
-  const [useStar, setUseStar] = useState(false);
-  const [useTags, setTags] = useState('');
   const [filtros, setFiltros] = useState([]);
   const [rangeValue, setRangeValue] = useState([5,50]);
 
@@ -49,29 +46,23 @@ function ModalFiltro({onTagClick=null}) {
     console.log(event.target.value)
   }
 
-  const handleClick = () => {
-    if (useStar === false) {
-      setUseStar(true);
-    } else setUseStar(false);
-  };
+  
   const setFiltrosValues = (filtrosOptions) => {
     setFiltros(filtrosOptions);
   };
 
   const handleTagChange = (info) => {
-    let newString = ''
-     console.log('What have info', info)
-     if(useTags.includes(info)){
-       if(useTags.includes('')){
-         newString = useTags + ',' + info
-       }
-       else {
-        newString = useTags + 'tags' + info
+    let newURL = '';
+    if(onSearch.includes('q=')){
+      newURL = onSearch + info
+      if(onSearch.includes('tags')){
+        newURL = onSearch + ',' + info;
       }
-     }
-     
-     console.log('what write?', newString)
-
+    } else {
+      newURL = onSearch + '&tags=' + info; 
+    }
+    onStateURL(newURL)
+    console.log('Is my URL?', newURL)
   }
 
   return (
@@ -110,7 +101,7 @@ function ModalFiltro({onTagClick=null}) {
                     <label htmlFor="customRange1" className="form-label">
                       Distancia
                     </label>
-                    <input type="range" max={50} min={5} step={1} placeholder={rangeValue} value={rangeValue} onChange={updateRangeValue} className={classes.rangedesing} id="customRange1"
+                    <input type="range" max={50} min={5} step={1} placeholder={rangeValue} value={rangeValue} onRangeChange={updateRangeValue} className={classes.rangedesing} id="customRange1"
                     />
                   </div>
                   <div className={classes.btntagscon}>
@@ -121,7 +112,7 @@ function ModalFiltro({onTagClick=null}) {
                        <div className={classes.recientcon}>
                        <label className={classes.labels}>Buscar por:</label>
                           <div className={classes.filtroscon}>
-                            <FiltroSelector setFiltrosValues={setFiltrosValues} filtros={filtros} />
+                            <FiltroSelector onSortChange={setFiltrosValues} selecOption={filtros} />
                           </div>
                        </div>
                     </div>
