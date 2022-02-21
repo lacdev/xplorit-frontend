@@ -36,20 +36,25 @@ const classes = {
   savecon:'bg-secondary text-white active:bg-blue-700 font-normal text-sm px-6 py-3 rounded-full shadow hover:shadow-testimonialShadow outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150',
   positioncon:'opacity-25 fixed inset-0 z-40 bg-black',
 };
-function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, minValue, maxValue, setValue, onChange=null, onSortChange, selecOption }) {
+function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, onChange=null, sort }) {
   const [showModal, setShowModal] = useState(false);
-  const [filtros, setFiltros] = useState([]);
+ const [filtros, setFiltros] = useState([]);
   const [rangeValue, setRangeValue] = useState([5,50]);
 
   const updateRangeValue = (event, data) => {
     setRangeValue(event.target.value)
     console.log(event.target.value)
   }
+ 
+  const handleSortChange = (sort) => {
+    setFiltros(sort)
+     console.log(sort)
+  }
 
-  
-  const setFiltrosValues = (filtrosOptions) => {
-    setFiltros(filtrosOptions);
-  };
+  const handleAplicar = () => {
+    onStateURL('sort=');
+    console.log('What is onStateURL', onStateURL)
+  }
 
   const handleTagChange = (info) => {
     let newURL = '';
@@ -112,7 +117,7 @@ function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, minValue,
                        <div className={classes.recientcon}>
                        <label className={classes.labels}>Buscar por:</label>
                           <div className={classes.filtroscon}>
-                            <FiltroSelector onSortChange={setFiltrosValues} selecOption={filtros} />
+                            <FiltroSelector onChange={handleSortChange} sort={filtros}/>
                           </div>
                        </div>
                     </div>
@@ -131,7 +136,7 @@ function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, minValue,
                   <button
                     className={classes.savecon}
                     type="button"
-                    onClick={() => setShowModal(false)}
+                    onClick={handleAplicar}
                   >
                     Aplicar
                   </button>

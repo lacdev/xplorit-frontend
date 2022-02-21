@@ -9,14 +9,12 @@ const options = [
 ];
 
 
-function FiltroSelector({ filtros, setFiltrosValues }) {
-  console.log('what is filtros?', filtros)
-  console.log('what is setFiltrosValues?', setFiltrosValues)  
-  const handleChange = (selectedOptions) => {
+function FiltroSelector({ filtros, onChange }) { 
+   const handleChange = (selectedOptions) => {
         if (selectedOptions.length === 1) {
           return;
         }
-        setFiltrosValues(selectedOptions);
+        onChange(selectedOptions);
       };
   return (
     <Select value={filtros} onChange={handleChange} options={options} />

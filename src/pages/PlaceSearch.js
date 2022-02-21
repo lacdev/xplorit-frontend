@@ -121,15 +121,13 @@ function PlaceSearch() {
    // console.log('Acciona el evento onChange');
   }
 //Selector Sort on Modal
-  const onSortChange = (sortItem) => {
-    const newURL = endpoints.getFilterPlace + 'q=' + sortItem.value;
-    setURLSearch(newURL);
-    setUseSort(sortItem);
+  const onSortChange = (event) => {
+    setUseSort(event.target.value);
   };
 //Input Range on Modal
-  const onRangeChange = (event) => {
-    setUseRange(event.target.value);
-  }
+//  const onRangeChange = (event) => {
+ //   setUseRange(event.target.value);
+ // }
 
 //Buttons Tags on Modal & Desktop
   const onTagChange = (info) => {
@@ -168,7 +166,7 @@ function PlaceSearch() {
             <BtnTags onTagClick={onTagChange} />
           </div>
           <div className={classes.filtroposition}>
-            <ModalFiltro onSearch={URLSearch} onStateURL={setURLSearch} onSortChange={onSortChange} selectOption={useSort} />
+            <ModalFiltro onSearch={URLSearch} onStateURL={setURLSearch} onChange={onSortChange}/>
           </div>
         </div>
         <section className={classes.renderres}>
