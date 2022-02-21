@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import {endpoints} from 'endpoints/endpoints';
 
 //Components
 import BtnTags from './BtnTags';
@@ -49,11 +50,18 @@ function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, onChange=
   const handleSortChange = (sort) => {
     setFiltros(sort)
      console.log(sort)
+     onStateURL(endpoints.getFilterPlace)
   }
 
+  
+
   const handleAplicar = () => {
-    onStateURL('sort=');
-    console.log('What is onStateURL', onStateURL)
+    console.log('Antes:', onSearch)
+    let newURL = onSearch + 'sort=' + filtros.value;
+     onStateURL(newURL)
+     console.log('Despues:', onSearch)
+    setShowModal(false)
+   
   }
 
   const handleTagChange = (info) => {
@@ -67,7 +75,7 @@ function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, onChange=
       newURL = onSearch + '&tags=' + info; 
     }
     onStateURL(newURL)
-    console.log('Is my URL?', newURL)
+    //console.log('Is my URL?', newURL)
   }
 
   return (
