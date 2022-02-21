@@ -52,7 +52,7 @@ export async function getRoutesCreatedByUser({ queryKey }) {
 // }
 
 export async function getCommentsCreatedByUser({ queryKey }) {
-  const service_url = `${endpoints.getLikesFromUser}/${queryKey[1]}/reviews`;
+  const service_url = `${endpoints.userMe}/reviews`;
   const getCommentsPromise = await axios.get(service_url, {
     headers: { Authorization: `Bearer ${token}` },
   });

@@ -5,9 +5,9 @@ import { getRoutesCreatedByUser } from "services/user.services";
 import DashboardCard from "./DashboardCard";
 
 function DashboardRoutesContainer() {
-  const id = "61ef68279262e2f167700caf";
+  // const id = "61ef68279262e2f167700caf";
 
-  const getRoutes = useQuery(["getRoutes", id], getRoutesCreatedByUser);
+  const getRoutes = useQuery(["getRoutes"], getRoutesCreatedByUser);
 
   const { data, status } = getRoutes;
 

@@ -84,6 +84,9 @@ function LogIn() {
               placeholderText="Escribe tu nombre contraseña"
             />
           </div>
+          {mutationLogIn.isError ? (
+            <div className="text-center text-red-700 mb-6">El correo o la contraseña están equivocados</div>
+          ) : null}
           <Btncards onClick={logIn} className={classes.btn} buttonText="Iniciar sesión" />
           <br></br>
           <Link to="/signup">

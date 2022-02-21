@@ -45,7 +45,6 @@ export async function getPlaceLikes({ queryKey }) {
 }
 
 export async function createPlace(data, images) {
-  console.log("Habemos token", token);
   const service_url = `${endpoints.postPlace}`;
   const formData = new FormData();
   formData.append("data", JSON.stringify(data));

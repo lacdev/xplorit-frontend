@@ -8,9 +8,9 @@ import DashboardCard from './DashboardCard';
 const token = localStorage.getItem("token")
 
 function DashboardPlacesContainer() {
-  const id = "61ff09c5f1b8eb106745942f";
+  // const id = "61ff09c5f1b8eb106745942f";
 
-  const getPlaces = useQuery(["getPlaces", id], getPlacesCreatedByUser);
+  const getPlaces = useQuery(["getPlaces"], getPlacesCreatedByUser);
 
   const { data, status } = getPlaces;
 

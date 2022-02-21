@@ -1,56 +1,55 @@
-import { useEffect, useState, useContext, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
+import { useEffect, useState, useContext, Fragment } from "react";
+import { Link } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+import { useQuery } from "react-query";
+import { getUserProfilePic } from "services/user.services";
 //Plugins UI & HeroIcons
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { MenuIcon, XIcon } from '@heroicons/react/solid';
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { MenuIcon, XIcon } from "@heroicons/react/solid";
 //Components
-import Btncards from 'components/Common/Btncards';
-import { AuthContext } from 'context/AuthContext';
-
+import Btncards from "components/Common/Btncards";
+import { AuthContext } from "context/AuthContext";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function NavBarS({position='sticky'}) {
+function NavBarS({ position = "sticky" }) {
   const classes = {
-    beforeScroll:
-      `font-primary fixed ${position} w-full z-10 bg-black backdrop-filter backdrop-blur-lg bg-opacity-30 shadow`,
-    afterScroll: 'font-primary fixed w-full z-10 shadow bg-white shadow',
-    parentcon: 'max-w-7xl mx-auto px-2 sm:px-6 lg:px-8',
-    positioncon: 'relative flex justify-between h-16',
-    parentmovile: 'absolute inset-y-0 left-0 flex items-center sm:hidden',
+    beforeScroll: `font-primary fixed ${position} w-full z-10 bg-black backdrop-filter backdrop-blur-lg bg-opacity-30 shadow`,
+    afterScroll: "font-primary fixed w-full z-10 shadow bg-white shadow",
+    parentcon: "max-w-7xl mx-auto px-2 sm:px-6 lg:px-8",
+    positioncon: "relative flex justify-between h-16",
+    parentmovile: "absolute inset-y-0 left-0 flex items-center sm:hidden",
     movilebtn:
-      'inline-flex items-center justify-center p-2 rounded-md text-black hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary',
-    movileicon: 'block h-6 w-6',
-    logolinks:
-      'flex-1 flex items-center justify-center sm:items-stretch sm:justify-start',
-    logocon: 'flex-shrink-0 flex items-center',
-    logoimg: 'block h-8 w-auto',
-    linkscon: 'hidden sm:ml-6 sm:flex sm:space-x-8',
-    rightcon: 'flex items-center',
-    btncon: 'hidden md:block flex-shrink-0',
-    btn: 'relative inline-flex items-center px-4 py-2',
-    rigthposition: 'md:ml-4 md:flex-shrink-0 md:flex md:items-center',
-    dropdowncon: 'ml-3 relative',
+      "inline-flex items-center justify-center p-2 rounded-md text-black hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary",
+    movileicon: "block h-6 w-6",
+    logolinks: "flex-1 flex items-center justify-center sm:items-stretch sm:justify-start",
+    logocon: "flex-shrink-0 flex items-center",
+    logoimg: "block h-8 w-auto",
+    linkscon: "hidden sm:ml-6 sm:flex sm:space-x-8",
+    rightcon: "flex items-center",
+    btncon: "hidden md:block flex-shrink-0",
+    btn: "relative inline-flex items-center px-4 py-2",
+    rigthposition: "md:ml-4 md:flex-shrink-0 md:flex md:items-center",
+    dropdowncon: "ml-3 relative",
     avatarcon:
-      'bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary',
-    avatarclass: 'h-8 w-8 rounded-full',
+      "bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary",
+    avatarclass: "h-8 w-8 rounded-full",
     itemsdrop:
-      'origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none',
-    movilemenu: 'bg-white sm:hidden',
-    menucon: 'pt-2 pb-4 space-y-1',
+      "origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none",
+    movilemenu: "bg-white sm:hidden",
+    menucon: "pt-2 pb-4 space-y-1",
     movilelinks:
-      'active:bg-blue-200 active:border-secondary border-transparent text-black block pl-3 pr-4 py-2 border-l-4 text-base font-semibold',
+      "active:bg-blue-200 active:border-secondary border-transparent text-black block pl-3 pr-4 py-2 border-l-4 text-base font-semibold",
     textBefore:
-      'inline-flex items-center active:border-secondary border-transparent px-1 pt-1 border-b-2 text-xl font-semibold text-white',
+      "inline-flex items-center active:border-secondary border-transparent px-1 pt-1 border-b-2 text-xl font-semibold text-white",
     textAfter:
-      'inline-flex items-center active:border-secondary border-transparent px-1 pt-1 border-b-2 text-xl font-semibold text-black',
-    fillBefore: 'block h-6 w-6 fill-white',
-    fillAfter: 'block h-6 w-6 fill-black',
+      "inline-flex items-center active:border-secondary border-transparent px-1 pt-1 border-b-2 text-xl font-semibold text-black",
+    fillBefore: "block h-6 w-6 fill-white",
+    fillAfter: "block h-6 w-6 fill-black",
   };
-  
+
   const [navBarColor, setNavBarColor] = useState(classes.beforeScroll);
   const [navBarText, setNavBarText] = useState(classes.textBefore);
   const [navBarFill, setNavBarFill] = useState(classes.fillBefore);
@@ -71,6 +70,10 @@ function NavBarS({position='sticky'}) {
     query: "(min-width: 1280px) and (max-width: 1535px)",
   });
   const isBigDesktop = useMediaQuery({ query: "(min-width: 1536px)" });
+
+  const getUser = useQuery(["getUserProfilePic"], getUserProfilePic);
+  console.log(getUser);
+  const { data, status } = getUser;
 
   useEffect(() => {
     window.addEventListener("scroll", listenScrollEvent);
@@ -151,10 +154,7 @@ function NavBarS({position='sticky'}) {
                 {userState.loggedIn === false && (
                   <div className={classes.btncon}>
                     <Link to="login">
-                      <Btncards
-                        className={classes.btn}
-                        buttonText="Iniciar sesión"
-                      ></Btncards>
+                      <Btncards className={classes.btn} buttonText="Iniciar sesión"></Btncards>
                     </Link>
                   </div>
                 )}
@@ -167,11 +167,7 @@ function NavBarS({position='sticky'}) {
                           <div>
                             <Menu.Button className={classes.avatarcon}>
                               <span className="sr-only">Open user menu</span>
-                              <img
-                                className={classes.avatarclass}
-                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                alt=""
-                              />
+                              <img className={classes.avatarclass} src={data.avatar} alt="" />
                             </Menu.Button>
                           </div>
                           <Transition
