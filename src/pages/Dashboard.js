@@ -24,8 +24,8 @@ const classes = {
 const token = localStorage.getItem("token");
 
 function Dashboard() {
-  const id = '61ef68279262e2f167700caf'
-  const {userState, setUserState} = useContext(AuthContext)
+  const id = "61ef68279262e2f167700caf";
+  const { userState, setUserState } = useContext(AuthContext);
   const getUser = useQuery(["getUserProfilePic", id], getUserProfilePic);
   console.log(getUser);
   const { data, status } = getUser;
@@ -48,11 +48,14 @@ function Dashboard() {
       </div>
       <div className={classes.maincon}>
         <div>
-          <BigTitle className={classes.title} bigTitleText="Rutas creadas" />
+          <BigTitle className={classes.title} bigTitleText='Rutas creadas' />
         </div>
         <div className={classes.outletcon}>
-          {status === "loading" && userState.loggedIn === true 
-          ? <span> Loading</span> : <Outlet />}
+          {status === "loading" && userState.loggedIn === true ? (
+            <span> Loading</span>
+          ) : (
+            <Outlet />
+          )}
         </div>
       </div>
       <div className={classes.accescon}>

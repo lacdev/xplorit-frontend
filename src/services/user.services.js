@@ -7,6 +7,7 @@ export async function getUserProfilePic({ queryKey }) {
   const service_url = `${endpoints.getUserProfile}/${queryKey[1]}`;
   const getUserPromise = await axios.get(service_url, {headers: { Authorization: `Bearer ${token}` }});
   const getUser = getUserPromise.data.data;
+  console.log("getUSer ", getUser);
   return getUser;
 }
 

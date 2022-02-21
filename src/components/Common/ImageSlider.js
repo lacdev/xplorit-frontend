@@ -1,17 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 //import { SliderElements } from './SliderElements';
-import ArrowLeft from 'assets/icons/ArrowLeft';
-import ArrowRight from 'assets/icons/ArrowRight';
+import ArrowLeft from "assets/icons/ArrowLeft";
+import ArrowRight from "assets/icons/ArrowRight";
 
 const classes = {
-  secction: 'relative w-full h-full lg:w-screen lg:h-screen',
+  secction: "relative w-full h-full lg:w-screen lg:h-screen",
   iconleft:
-    'absolute right-0 bottom-bottom7.5 left-80 justify-end inline-flex items-start cursor-pointer h-9 w-12',
+    "absolute right-0 bottom-bottom7.5 left-80 justify-end inline-flex items-start cursor-pointer h-9 w-12",
   iconright:
-    'absolute bottom-bottom7.5 left-2/3 justify-end inline-flex items-center cursor-pointer h-9 w-12',
-  imgcont: 'w-full h-screen',
-  img: 'object-cover object-center w-full h-full lg:w-screen lg:h-screen',
-  animation: 'delay-05ms ease-out animate-slides',
+    "absolute bottom-bottom7.5 left-2/3 justify-end inline-flex items-center cursor-pointer h-9 w-12",
+  imgcont: "w-full h-screen",
+  img: "object-cover object-center w-3/4 h-full lg:w-screen lg:h-screen",
+  animation: "delay-05ms ease-out animate-slides",
 };
 
 let count = 0;
