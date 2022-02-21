@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "context/AuthContext";
 import { formatDate, formatCreationDate } from "utils/date";
+import { useQuery } from "react-query";
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
 import HeartComplet from "assets/icons/HeartComplete";
@@ -12,6 +13,11 @@ import Avatar from "components/Common/Avatar";
 import { Labels } from "components/Common/Labels";
 import Titles from "components/Common/Titles";
 import StarRatingStatic from "./RatingStarStatic";
+import { saveLikeOnPlace, deleteLikeOnPlace } from "services/places.services";
+
+//Axios functions
+import { saveLikeOnPlace } from "services/places.services";
+import { deleteLikeOnPlace } from "services/places.services";
 
 const classes = {
   parentcon: "font-primary overflow-x-hidden",
@@ -60,21 +66,30 @@ function HeaderOnePlace({
   const { userState, setUserState } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  // const singlePlace = useQuery(["getSinglePlaceData", id], getSinglePlaceData);
+
   const currentDate = formatDate(updatedAt);
   const creationDate = formatCreationDate(createdAt);
 
-  const handleClick = () => {
+  /*const handleClick = () => {
     if (useHeart === false && userState.loggedIn === true) {
       setUseHeart(true);
-      setUsePostLike(usePostLike + 1);
-      //saveLikeOnPlace(userId, placeId)
+      // setUsePostLike(usePostLike + 1);
+      saveLikeOnPlace(placeId)
     } else if (useHeart === false && userState.loggedIn === false) {
       navigate("/login", { replace: true });
     } else {
       setUseHeart(false);
-      setUsePostLike(usePostLike - 1);
-      //deleteLikeOnPlace(userId, placeId)
+      // setUsePostLike(usePostLike - 1);
+      deleteLikeOnPlace(placeId)
     }
+  };*/
+
+  const handleClick = async () => {
+    // await saveLikeOnPlace(placeId);
+    console.log("esto trae placeId ", saveLikeOnPlace);
+    await deleteLikeOnPlace(placeId);
+    console.log("Like borrado correctamente");
   };
 
   return (

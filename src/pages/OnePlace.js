@@ -57,13 +57,12 @@ const classes = {
 
 function OnePlace() {
   const { id } = useParams();
-  const userId = "620c634ae13127a727d794e7";
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [star, setStar] = useState(0);
   const [review, setReview] = useState({
     comment: "",
     stars: null,
-    userId: "620c634ae13127a727d794e7",
+    userId: "",
   });
 
   const [textEditorView, setTextEditorView] = useState(
@@ -85,8 +84,6 @@ function OnePlace() {
       return;
     }
 
-    if (statusReviews === "success") console.log("status ", dataReviews);
-
     const markerCoords = {
       lat: data.location.coordinates[1],
       lng: data.location.coordinates[0],
@@ -106,7 +103,6 @@ function OnePlace() {
     const newReview = { ...review };
     newReview[e.target.id] = e.target.value;
     setReview(newReview);
-    console.log(newReview);
   };
 
   const saveStar = (e) => {
@@ -115,9 +111,9 @@ function OnePlace() {
     setReview(newReview);
   };
 
-  const handleSubmit = (e) => {
+  const HandleSubmit = (e) => {
     e.preventDefault();
-    saveReviewOnPlace(review, id, userId);
+    saveReviewOnPlace(review, id);
   };
 
   if (status === "loading") {
@@ -125,9 +121,6 @@ function OnePlace() {
   }
 
   if (status === "success") {
-    console.log("data ", data);
-    const userToFind = data.ownerId.toString();
-
     return (
       <div className={classes.parentcon}>
         <ImageSlider slides={data.images} />
@@ -136,7 +129,7 @@ function OnePlace() {
           {data?.ownerId && (
             <HeaderOnePlace
               placeId={id}
-              userId={"620c634ae13127a727d794e7"}
+              //userId={data.id}
               title={data.name}
               tags={data.tags}
               likes={data.likes}
@@ -183,7 +176,7 @@ function OnePlace() {
             <div className={textEditorView}>
               <form>
                 <textarea
-                  placeholder=' describe tu experiencia...'
+                  placeholder=' Describe tu experiencia...'
                   type='text'
                   id='comment'
                   className={classes.textArea}
@@ -191,7 +184,7 @@ function OnePlace() {
                   value={review.comment}
                 ></textarea>
               </form>
-              <p className='ml-10'> califica el lugar :</p>
+              <p className='ml-10'> Califica el lugar :</p>
               <div className='flex '>
                 <StarRating
                   width='25'
@@ -203,7 +196,7 @@ function OnePlace() {
                 />
                 <button
                   className='bg-blue-600 ml-auto px-3 py-2 font-Poppins text-white rounded-full hover:bg-blue-700 drop-shadow-lg'
-                  onClick={handleSubmit}
+                  onClick={HandleSubmit}
                 >
                   Reseñar
                 </button>

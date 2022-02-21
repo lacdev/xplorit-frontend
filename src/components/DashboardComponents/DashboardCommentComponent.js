@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 //Icons
-import StarHalf from "assets/icons/StarHalf";
+import Trash from "assets/icons/Trash";
 import StarRatingStatic from "../RatingStarStatic";
 
 const classes = {
@@ -13,8 +13,9 @@ const classes = {
   user: "text-2xl font-bold w-80",
   iconcon: "my-auto  items-end mr-5 ",
   average: "text-md  text-center mt-1",
-  text: "w-80 mt-5",
+  text: "w-80 mt-1",
   staricon: "",
+  deletcon: "mt-5",
 };
 
 function DashboardCommentComponent({
@@ -30,7 +31,7 @@ function DashboardCommentComponent({
     <Link to={cardLink}>
       <div className={classes.commentcon}>
         <div className={classes.avatarcon}>
-          <img className={classes.img} src={images} alt=''></img>
+          <img className={classes.avatarimg} src={images} alt=''></img>
         </div>
         <div className=''>
           <div className={classes.infocon}>
@@ -47,6 +48,10 @@ function DashboardCommentComponent({
           </div>
           <div className={classes.text}>
             <p>{comment}</p>
+            <div className={classes.deletcon}>
+              <Trash />
+            </div>
+            <p className={classes.icontext}>Eliminar</p>
           </div>
         </div>
       </div>

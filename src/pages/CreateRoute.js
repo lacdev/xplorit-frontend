@@ -15,6 +15,7 @@ import MapComponent from "components/MapComponent";
 import UploadImage from "components/UploadImage";
 import { formatGoogleMapsAdressToNormalAdress } from "utils/utils";
 import ExtraPlaceForRoute from "components/ExtraPlaceForRoute";
+import SuccessModal from "components/SuccessModal";
 
 const classes = {
   coverimg: "w-full max-h-[300px] object-cover brightness-50",
@@ -37,10 +38,9 @@ function CreateRoute() {
   const { userState, setUserState } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const mutationPost = useMutation(
-    (data) => createRoute(data.data, data.placeImages),
-    { onSuccess: () => console.log("Todo cool en rutas") }
-  );
+  const mutationPost = useMutation((data) => createRoute(data.data, data.placeImages), {
+    onSuccess: () => console.log("Todo cool en rutas"),
+  });
 
   const setTagValues = (tagOptions) => {
     setTags(tagOptions);
@@ -63,8 +63,6 @@ function CreateRoute() {
     console.log("This is newLocation", newLocationDataArray);
   };
 
-  console.log("Aqui es para breakpoint");
-
   const Publish = async (event) => {
     event.preventDefault();
     if (address == null || selectedLocation == null) {
@@ -86,9 +84,7 @@ function CreateRoute() {
         // ownerId: ownerId,
         name,
         description,
-        address: formatGoogleMapsAdressToNormalAdress(
-          address[0].address_components
-        ),
+        address: formatGoogleMapsAdressToNormalAdress(address[0].address_components),
         tags: newTags,
         scheduleStart: "2022-02-11",
         scheduleFinish: "2022-01-27",
@@ -100,7 +96,7 @@ function CreateRoute() {
       console.log("Estamos dentro de Publish", data, placeImages);
       if (userState.loggedIn == true) {
         mutationPost.mutate({ data, placeImages });
-        navigate("/", { replace: true });
+        // navigate("/", { replace: true });
       } else {
         navigate("/login", { replace: true });
       }
@@ -128,20 +124,13 @@ function CreateRoute() {
         </div>
         <label className={classes.label}>Danos una descripción del lugar</label>
         <div className={classes.editorcon}>
-          <TextEditor
-            value={description}
-            onTextEditorChange={(value) => setDescription(value)}
-          />
+          <TextEditor value={description} onTextEditorChange={(value) => setDescription(value)} />
         </div>
-        <label className={classes.label}>
-          Elige hasta 4 tags relacionados al lugar
-        </label>
+        <label className={classes.label}>Elige hasta 4 tags relacionados al lugar</label>
         <div className={classes.editorcon}>
           <TagSelector setTagValues={setTagValues} tags={tags} />
         </div>
-        <label className={classes.label}>
-          ¿En qué dirección se ubica el lugar?
-        </label>
+        <label className={classes.label}>¿En qué dirección se ubica el lugar?</label>
         <div>
           <MapComponent
             selectedLocation={selectedLocation}
@@ -167,6 +156,21 @@ function CreateRoute() {
           <input className={classes.btn} type="submit" value="Publicar" />
           {/* <Btncards onClick={Publish} className='py-1' buttonText='Publicar' /> */}
         </div>
+        {mutationPost.isSuccess && (
+          <SuccessModal
+            status={true}
+            redirectRoute="/"
+            modalText="Ruta creada con éxito"
+            modalOtherText="Gracias por contribuir a nuestra comunidad de viajeros"
+          />
+        )}
+        {mutationPost.isError && (
+          <SuccessModal
+            status={false}
+            modalText="Hubo un error"
+            modalOtherText="Revisa que hayas llenado todos los campos"
+          />
+        )}
       </form>
     </div>
   );
