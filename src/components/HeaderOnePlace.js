@@ -15,6 +15,10 @@ import Titles from "components/Common/Titles";
 import StarRatingStatic from "./RatingStarStatic";
 import { saveLikeOnPlace, deleteLikeOnPlace } from "services/places.services";
 
+//Axios functions
+import { saveLikeOnPlace } from "services/places.services";
+import { deleteLikeOnPlace } from "services/places.services";
+
 const classes = {
   parentcon: "font-primary overflow-x-hidden",
   divsectioncon: "w-full",
@@ -67,7 +71,7 @@ function HeaderOnePlace({
   const currentDate = formatDate(updatedAt);
   const creationDate = formatCreationDate(createdAt);
 
-  const handleClick = () => {
+  /*const handleClick = () => {
     if (useHeart === false && userState.loggedIn === true) {
       setUseHeart(true);
       // setUsePostLike(usePostLike + 1);
@@ -79,6 +83,13 @@ function HeaderOnePlace({
       // setUsePostLike(usePostLike - 1);
       deleteLikeOnPlace(placeId)
     }
+  };*/
+
+  const handleClick = async () => {
+    // await saveLikeOnPlace(placeId);
+    console.log("esto trae placeId ", saveLikeOnPlace);
+    await deleteLikeOnPlace(placeId);
+    console.log("Like borrado correctamente");
   };
 
   return (
