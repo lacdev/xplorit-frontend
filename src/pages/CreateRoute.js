@@ -80,10 +80,10 @@ function CreateRoute() {
       return coordsArray;
     });
 
-    const ownerId = "6200a26e64fdb24e699493d4";
+    // const ownerId = "6200a26e64fdb24e699493d4";
     try {
       const data = {
-        ownerId: ownerId,
+        // ownerId: ownerId,
         name,
         description,
         address: formatGoogleMapsAdressToNormalAdress(

@@ -52,25 +52,16 @@ function PlaceSearch() {
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
   const [searchParams, setSearchParams] = useSearchParams();
   const q = searchParams.get("q") ?? "";
-  const { data: statesData, status: statesStatus } = useQuery(
-    "getAllStates",
-    getAllStates
-  );
-  console.log("is state for selectorMunicipio?", selectedMunicipio);
+  
+  const { data: statesData, status: statesStatus } = useQuery( "getAllStates", getAllStates );
+    console.log('is state for selectorMunicipio?', selectedMunicipio);
+  
 
-  //Querys & service to Places
-  //places
-  const {
-    data: placesData,
-    isLoading: loadingPlace,
-    status,
-  } = useQuery(
-    ["getAllFilterPlaces", URLSearch],
-    () => getAllFilterPlaces(URLSearch),
-    {
-      onSuccess: () => console.log("is success?"),
-    }
-  );
+//Querys & service to Places
+    //places
+    const { data: placesData, isLoading: loadingPlace, status } = useQuery(["getAllFilterPlaces",URLSearch],() =>  getAllFilterPlaces(URLSearch),{
+      onSuccess:() => console.log('is success?')
+    })
 
   useEffect(() => {
     if (status === "loading") {
@@ -92,13 +83,13 @@ function PlaceSearch() {
     setLocationsData(markerCoords);
   }, [placesData, status, URLSearch]);
 
-  if (status === "error") {
-    return (
-      <span className='font-bold text-center'>
-        No se encontraron lugares con ese ID
-      </span>
-    );
-  }
+  // if (status === "error") {
+  //   return (
+  //     <span className="font-bold text-center">
+  //       No se encontraron lugares con ese ID
+  //     </span>
+  //   );
+  // }
   if (status === "success") {
     console.log("what is placesData?", placesData);
   }
@@ -211,25 +202,26 @@ function PlaceSearch() {
               </div>
 
               <div className={classes.rescon}>Resultados de busqueda</div>
-              {loadingPlace === true ? (
-                <span>Loading...</span>
-              ) : (
+              {loadingPlace === true && <span>Loading...</span>}
+              {status === "error" && <span className="font-bold text-center">No se encontraron lugares</span>}
+              {loadingPlace === false && status === "success" && (
                 <div className={classes.cardscon}>
-                  {placesData.data.places.map((data, index) => {
-                    return (
-                      <SearchCards
-                        id={data._id}
-                        //typeofplace={data.type}
-                        key={data.index}
-                        name={data.name}
-                        address={data.address.street}
-                        labels={data.tags}
-                        score={data.average}
-                        ownerId={data.ownerId}
-                        images={data?.images}
-                      />
-                    );
-                  })}
+                  {placesData.data &&
+                    placesData.data.places.map((data, index) => {
+                      return (
+                        <SearchCards
+                          id={data._id}
+                          //typeofplace={data.type}
+                          key={index}
+                          name={data.name}
+                          //address={data.address.street}
+                          labels={data.tags}
+                          score={data.average}
+                          ownerId={data.ownerId}
+                          images={data?.images}
+                        />
+                      );
+                    })}
                 </div>
               )}
               <LimitCards />

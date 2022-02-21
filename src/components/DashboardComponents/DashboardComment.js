@@ -7,12 +7,11 @@ import DashboardCommentComponent from './DashboardCommentComponent';
 import { useQuery } from 'react-query';
 import { getCommentsCreatedByUser } from 'services/user.services';
 
-const token = localStorage.getItem("token")
 
 function DashboardComment() {
-  const id = "61ef68279262e2f167700caf"; //ID user
+  // const id = "61ef68279262e2f167700caf"; //ID user
 
-  const getComments = useQuery(["getComments", id], getCommentsCreatedByUser);
+  const getComments = useQuery(["getComments"], getCommentsCreatedByUser);
   const { data, status, error } = getComments;
 
   if (error === true) {

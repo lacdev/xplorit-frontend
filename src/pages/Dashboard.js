@@ -21,23 +21,18 @@ const classes = {
   accescon: "fixed bottom-0 min-w-full",
 };
 
-const token = localStorage.getItem("token");
 
 function Dashboard() {
-  const id = "61ef68279262e2f167700caf";
+  // const id = '61ef68279262e2f167700caf'
   const { userState, setUserState } = useContext(AuthContext);
-  const getUser = useQuery(["getUserProfilePic", id], getUserProfilePic);
+  const getUser = useQuery(["getUserProfilePic"], getUserProfilePic);
   console.log(getUser);
   const { data, status } = getUser;
 
   return (
     <div className={classes.parentcon}>
       <div className={classes.bannercon}>
-        {status === "loading" ? (
-          <span> Loading</span>
-        ) : (
-          <DashboardBanner coverPhoto={data.coverPhoto} />
-        )}
+        {status === "loading" ? <span> Loading</span> : <DashboardBanner coverPhoto={data.coverPhoto} />}
       </div>
       <div className={classes.aside}>
         {status === "loading" ? (
@@ -51,11 +46,7 @@ function Dashboard() {
           <BigTitle className={classes.title} bigTitleText='Rutas creadas' />
         </div>
         <div className={classes.outletcon}>
-          {status === "loading" && userState.loggedIn === true ? (
-            <span> Loading</span>
-          ) : (
-            <Outlet />
-          )}
+          {status === "loading" && userState.loggedIn === true ? <span> Loading</span> : <Outlet />}
         </div>
       </div>
       <div className={classes.accescon}>

@@ -7,9 +7,9 @@ import { getLikesCreatedByUser } from 'services/user.services';
 import DashboardLikeCard from './DashboardLikeCard';
 
 function DashboardLikeContainer() {
-  const id = "61ef68279262e2f167700caf";
+  // const id = "61ef68279262e2f167700caf";
 
-  const getLikes = useQuery(["getLikes", id], getLikesCreatedByUser);
+  const getLikes = useQuery(["getLikes"], getLikesCreatedByUser);
   const { data, status, error } = getLikes;
 
   if (error === true) {

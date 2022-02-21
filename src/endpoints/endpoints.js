@@ -33,5 +33,7 @@ export const endpoints = {
 
   signUp: `${base_url}/users`,
 
+  userMe: `${base_url}/users/me`, 
+  
   saveLike: `${base_url}/places`,
 };
