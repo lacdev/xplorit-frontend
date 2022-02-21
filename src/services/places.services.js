@@ -33,7 +33,7 @@ export async function getAllFilterPlaces(url) {
 }
 
 export async function getPlaceLikes({ queryKey }) {
-  const service_url = `${endpoints.getAllPlaces}/${queryKey[1]}/likes`;
+  const service_url = `${endpoints.saveLike}/${queryKey[1]}/likes`;
   const getOwnerPlacePromise = await axios.get(service_url);
   const getOwnerPlaceData = getOwnerPlacePromise.data;
   return getOwnerPlaceData;
@@ -78,15 +78,6 @@ export async function saveLikeOnPlace(placeId) {
     }
   );
 }
-
-/*export async function saveLikeOnPlace(placeId) {
-  console.log("saveLike ", placeId);  
-  const service_url = `${endpoints.saveLike}/${placeId}/likes`;
-  console.log("Token ", token);
-  return await axios.post(service_url, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-}*/
 
 export async function deleteLikeOnPlace(placeId) {
   const service_url = `${endpoints.deleteLike}/${placeId}/likes`;

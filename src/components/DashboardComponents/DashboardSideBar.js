@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "context/AuthContext";
 //Components
 import DashboardAvatar from "./DashboardAvatar";
 import DashboardSideButton from "./DashboardSideButton";
@@ -18,6 +19,18 @@ const classes = {
 };
 
 function DashboardSideBar({ avatar, username }) {
+  const { userState, setUserState } = useContext(AuthContext);
+
+  const logOut = () => {
+    console.log("Si cerraria la sesion");
+    const newUserState = Object.assign({}, userState, {
+      authToken: "",
+      loggedIn: false,
+    });
+    setUserState(newUserState);
+    localStorage.removeItem("token");
+  };
+
   return (
     <div className={classes.bodycon}>
       <div className={classes.avatarcon}>
@@ -25,22 +38,13 @@ function DashboardSideBar({ avatar, username }) {
       </div>
       <div className={classes.sectionscon}>
         <Link to="routes">
-          <DashboardSideButton
-            SvgIcon={Rutas}
-            DashboardButtonText="Rutas creadas"
-          />
+          <DashboardSideButton SvgIcon={Rutas} DashboardButtonText="Rutas creadas" />
         </Link>
         <Link to="places">
-          <DashboardSideButton
-            SvgIcon={Lugares}
-            DashboardButtonText="Lugares agregados"
-          />
+          <DashboardSideButton SvgIcon={Lugares} DashboardButtonText="Lugares agregados" />
         </Link>
         <Link to="comments">
-          <DashboardSideButton
-            SvgIcon={Comments}
-            DashboardButtonText="Comentarios"
-          />
+          <DashboardSideButton SvgIcon={Comments} DashboardButtonText="Comentarios" />
         </Link>
         <Link to="likes">
           <DashboardSideButton SvgIcon={Heart} DashboardButtonText="Likes" />
@@ -50,10 +54,9 @@ function DashboardSideBar({ avatar, username }) {
           //<DashboardSideButton  SvgIcon={Settings} DashboardButtonText="Editar perfil"/>
           //</Link>
         }
-        <DashboardSideButton
-          SvgIcon={LogOut}
-          DashboardButtonText="Cerrar sesión"
-        />
+        <Link to="/" onClick={logOut}>
+          <DashboardSideButton SvgIcon={LogOut} DashboardButtonText="Cerrar sesión" />
+        </Link>
       </div>
     </div>
   );
