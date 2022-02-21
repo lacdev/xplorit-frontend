@@ -4,9 +4,6 @@ import { useState } from "react";
 import parse from "html-react-parser";
 import Geocode from "react-geocode";
 
-//Icons & Images
-import PinMap from "assets/icons/PinMap";
-
 //Components
 import Comments from "components/Common/Comments";
 import ImageSlider from "components/Common/ImageSlider";
@@ -14,9 +11,13 @@ import Titles from "components/Common/Titles";
 import Btncards from "components/Common/Btncards";
 import HeaderOneRoute from "components/HeaderOneRoute";
 import MapComponent from "components/MapComponent";
+import StarRating from "components/RatingStar";
+
 //useQuery & services
 import { useQuery } from "react-query";
 import { getSingleRouteData } from "services/routes.services";
+import { getSingleReviewRoute } from "services/places.services";
+import { saveReviewOnRoute } from "services/routes.services";
 import PlaceAddress from "components/PlaceAddress";
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
@@ -47,23 +48,35 @@ const classes = {
   divubications: "flex flex-row items-center",
   ubication: "ml-15 my-2",
   commentcon: "mb-20",
-  btn: "ml-9 py-2",
+  btn: "ml-9 py-2 mt-5",
   textEditorHidden: "mt-10 hidden",
   textEditorShow: "mt-10 block",
-  btnForm: "py-2 mt-3 text-right",
+  btnForm: " mt-1 text-right ml-auto py-2",
   textArea: "border border-current rounded-md w-full min-h-[200px]",
+  star: "flex cursor-pointer ml-4 mt-2",
 };
 
 function OneRoute() {
+  const { id } = useParams();
+  const userId = "620c634ae13127a727d794e7";
   const [locationsData, setLocationsData] = useState([]);
+  const [star, setStar] = useState(0);
+  const [render, setRender] = useState([]);
+  const [review, setReview] = useState({
+    comment: "",
+    stars: null,
+    userId: "620c634ae13127a727d794e7",
+  });
   const [textEditorView, setTextEditorView] = useState(
     classes.textEditorHidden
   );
   const [formattedAddress, setFormatedAddress] = useState([]);
 
-  const { id } = useParams();
   const singleRoute = useQuery(["getSingleRouteData", id], getSingleRouteData);
-  const { data, isLoading, status } = singleRoute;
+  const getReviews = useQuery(["getSingleReview", id], getSingleReviewRoute);
+
+  const { data, status } = singleRoute;
+  const { data: dataReviews, status: statusReviews } = getReviews;
 
   useEffect(() => {
     if (status === "loading") {
@@ -73,7 +86,7 @@ function OneRoute() {
     if (data === undefined) {
       return;
     }
-    const markerCoords = data.location.coordinates.map((correctCoords) => {
+    const markerCoords = data?.location?.coordinates?.map((correctCoords) => {
       return { coords: { lat: correctCoords[1], lng: correctCoords[0] } };
     });
     const addressArrayPromises = markerCoords.map((event) => {
@@ -111,6 +124,24 @@ function OneRoute() {
     }
   };
 
+  const saveReview = (e) => {
+    const newReview = { ...review };
+    newReview[e.target.id] = e.target.value;
+    setReview(newReview);
+    console.log(newReview);
+  };
+
+  const saveStar = (e) => {
+    const newReview = { ...review };
+    newReview[e.target.name] = e.target.value;
+    setReview(newReview);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    saveReviewOnRoute(review, id, userId);
+  };
+
   if (status === "loading") {
     return <p> Loading...</p>;
   }
@@ -122,24 +153,26 @@ function OneRoute() {
       <div className={classes.parentcon}>
         <ImageSlider slides={data.images} />
 
-        <div className="w-5/6 m-auto">
+        <div className='w-5/6 m-auto'>
           {data?.ownerId && (
             <HeaderOneRoute
-              userId={userToFind}
+              userId={data.userId}
               title={data.name}
               tags={data.tags}
               likes={data.likes}
               createdAt={data.createdAt}
               updatedAt={data.updatedAt}
               average={data.average}
+              username={data.ownerId.username}
+              avatar={data.ownerId.avatar}
             />
           )}
         </div>
 
-        <div className="w-5/6 m-auto">
-          <section className="px-8">
+        <div className='w-5/6 m-auto'>
+          <section className='px-8'>
             <div className={classes.decriptioncon}>
-              <Titles tag="h4" titleText="Descripción"></Titles>
+              <Titles tag='h4' titleText='Descripción'></Titles>
               <p className={classes.text}>{parse(data.description)}</p>
             </div>
             <div className={classes.mapcon}>
@@ -158,20 +191,50 @@ function OneRoute() {
             <Btncards
               onClick={handleClick}
               className={classes.btn}
-              buttonText="Reseñar"
+              buttonText='Reseñar'
             />
             <div className={textEditorView}>
               <form>
-                <textarea type="text" className={classes.textArea}></textarea>
+                <textarea
+                  placeholder=' describe tu experiencia...'
+                  type='text'
+                  id='comment'
+                  className={classes.textArea}
+                  onChange={(e) => saveReview(e)}
+                  value={review.comment}
+                ></textarea>
               </form>
-              <Btncards
-                className={classes.btnForm}
-                buttonText={"Enviar Reseña"}
-              />
+              <p className='ml-10'> califica el lugar :</p>
+              <div className='flex '>
+                <StarRating
+                  width='25'
+                  height='25'
+                  setRating={setStar}
+                  className={classes.star}
+                  onChange={(e) => saveStar(e)}
+                  stars={star}
+                />
+                <button
+                  className='bg-blue-600 ml-auto px-3 py-2 font-Poppins text-white rounded-full hover:bg-blue-700 drop-shadow-lg'
+                  onClick={handleSubmit}
+                >
+                  Reseñar
+                </button>
+              </div>
             </div>
             <div className={classes.commentcon}>
-              <Comments />
-              <Comments />
+              {dataReviews &&
+                dataReviews.map((review) => {
+                  return (
+                    <Comments
+                      avatarImg={review.userId.avatar}
+                      username={review.userId.username}
+                      currentDate={review.createdAt}
+                      stars={review.stars}
+                      comment={review.comment}
+                    />
+                  );
+                })}
             </div>
           </section>
         </div>

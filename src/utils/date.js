@@ -16,7 +16,7 @@ const formatDate = (date) => {
 const formatCreationDate = (date) => {
   try {
     const result = new Date(date);
-    return format(result, "MMM d", { locale: es });
+    return format(result, "MM/dd/yyyy", { locale: es });
   } catch (error) {
     console.log(error);
     return "";

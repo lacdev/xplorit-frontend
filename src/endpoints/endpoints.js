@@ -25,9 +25,15 @@ export const endpoints = {
 
   getAllStates: `${base_url}/states`,
 
+  getReviews: `${base_url}/places`,
+
+  getReviewsRoute: `${base_url}/routes`,
+
   logIn: `${base_url}/login`,
 
   signUp: `${base_url}/users`,
 
-  userMe: `${base_url}/users/me`
+  userMe: `${base_url}/users/me`, 
+  
+  saveLike: `${base_url}/places`,
 };

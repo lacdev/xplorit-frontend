@@ -47,7 +47,7 @@ function PlaceSearch() {
   const [showMap, setShowMap] = useState(false);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedMunicipio, setSelectedMunicipio] = useState(null);
-  const [URLSearch, setURLSearch] = useState(endpoints.getFilterPlace)
+  const [URLSearch, setURLSearch] = useState(endpoints.getFilterPlace);
   const [locationsData, setLocationsData] = useState([]);
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
   const [searchParams, setSearchParams] = useSearchParams();
@@ -79,7 +79,7 @@ function PlaceSearch() {
         },
       };
     });
-    console.log('is ther URL?', URLSearch)
+    console.log("is ther URL?", URLSearch);
     setLocationsData(markerCoords);
   }, [placesData, status, URLSearch]);
 
@@ -113,9 +113,12 @@ function PlaceSearch() {
   };
 
   const onMunicipioChange = (municipioItem) => {
-    const newURL = endpoints.getFilterPlace + 'q=' + municipioItem.value
-    console.log("🚀 ~ file: PlaceSearch.js ~ line 96 ~ onMunicipioChange ~ newURL", newURL)
-    setURLSearch(newURL)
+    const newURL = endpoints.getFilterPlace + "q=" + municipioItem.value;
+    console.log(
+      "🚀 ~ file: PlaceSearch.js ~ line 96 ~ onMunicipioChange ~ newURL",
+      newURL
+    );
+    setURLSearch(newURL);
     setSelectedMunicipio(municipioItem);
   };
 

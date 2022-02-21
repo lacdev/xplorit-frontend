@@ -167,7 +167,7 @@ function NavBarS({ position = "sticky" }) {
                           <div>
                             <Menu.Button className={classes.avatarcon}>
                               <span className="sr-only">Open user menu</span>
-                              <img className={classes.avatarclass} src={data.avatar} alt="" />
+                              <img className={classes.avatarclass} src={data?.avatar} alt="" />
                             </Menu.Button>
                           </div>
                           <Transition

@@ -1,40 +1,49 @@
-import React from 'react';
-import Avatar from 'components/Common/Avatar';
-import StarHalf from 'assets/icons/StarHalf.jsx';
+import React from "react";
+import { useParams } from "react-router-dom";
+import Avatar from "components/Common/Avatar";
+import StarHalf from "assets/icons/StarHalf.jsx";
 import Titles from "components/Common/Titles";
-const classes={
-  container:' font-primary w-auto h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow mt-20 overflow-hidden phone:h-auto',
-  maincon:'flex flex-row m-2 pt-4',
-  avatarcon:'flex rounded-full p-2.5',
-  detailscon:'flex flex-col mt-4',
-  titleh3:'text-2xl fond-normal',
-  qualificationcon:'flex',
-  number:'mx-2',
-  text:'p-5 font-base break-words',
-}
+import { formatCreationDate, formatDate } from "utils/date";
+import StarRatingStatic from "../RatingStarStatic";
 
-function Comments() {
+//useQuery
+import { useQuery } from "react-query";
+
+const classes = {
+  container:
+    "  flex font-primary w-full pb-4 h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow mt-20 overflow-hidden phone:h-auto",
+  maincon: "w-1/2 sm:w-fit md:w-fit flex flex-row p-3 ",
+  avatarcon: " rounded-full  ",
+  detailscon: "w-1/2 sm:w-fit xl:w-fit",
+  title: "",
+  qualificationcon: "",
+  number: "text-xs text-left",
+  text: "py-2 text-xs mt-3 m-1 xl:w-full",
+};
+
+function Comments({ avatarImg, username, currentDate, stars, comment }) {
+  const dateReview = formatDate(currentDate);
+
   return (
     <div className={classes.container}>
       <div className={classes.maincon}>
-         <Avatar width="38" height="38" />
-        <div className={classes.detailscon}>
-          <Titles tag="h5" titleText='Lupita Rosales'></Titles>
-          <p>Fecha de Publicación</p>
-          <div className={classes.qualificationcon}>
-            <StarHalf width="1.375rem" height="1.375rem" />
-            <p className={classes.number}>4.8</p>
-          </div>
-        </div>
+        <Avatar width='38' height='38' avatarImg={avatarImg} />
       </div>
-      <p className={classes.text} >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum purus sit
-        gravida ullamcorper lectus sapien, massa at odio. Cursus tortor sodales
-        laoreet faucibus ullamcorper sit urna nullam porttitor. Sed at in
-        viverra purus quis. Varius suspendisse volutpat habitasse hendrerit
-        velit at in nisi, volutpat. Eu morbi in lacinia nunc, mauris vel sed
-        nunc. Vitae fermentum cras senectus netus est velit porttitor imperdiet.
-      </p>
+      <div className={classes.detailscon}>
+        <h3 className='font-bold mb-1 mt-3'>{username}</h3>
+
+        <div className={classes.qualificationcon}>
+          <StarRatingStatic
+            width='10'
+            height='10'
+            className={classes.staricon}
+            ratingValue={stars}
+          />
+          <p className={classes.number}>{stars}</p>
+        </div>
+        <p className='text-xs mt-2'>{dateReview}</p>
+      </div>
+      <p className={classes.text}>{comment}</p>
     </div>
   );
 }
