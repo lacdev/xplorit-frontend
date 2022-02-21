@@ -183,7 +183,7 @@ function OnePlace() {
             <div className={textEditorView}>
               <form>
                 <textarea
-                  placeholder=' describe tu experiencia...'
+                  placeholder=' Describe tu experiencia...'
                   type='text'
                   id='comment'
                   className={classes.textArea}
@@ -191,7 +191,7 @@ function OnePlace() {
                   value={review.comment}
                 ></textarea>
               </form>
-              <p className='ml-10'> califica el lugar :</p>
+              <p className='ml-10'> Califica el lugar :</p>
               <div className='flex '>
                 <StarRating
                   width='25'
