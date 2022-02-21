@@ -40,10 +40,11 @@ export async function createRoute(data, images) {
     formData.append("images", image);
   }
   console.log("Data desde el back", data);
-  return await axios.post(service_url, formData, {headers: { Authorization: `Bearer ${token}` }});
+  return await axios.post(service_url, formData, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 }
 
-<<<<<<< HEAD
 export async function saveReviewOnRoute(data, routeId, userId) {
   const service_url = `${endpoints.postRoute}/${routeId}/reviews`;
   console.log("URL ", service_url);
@@ -54,11 +55,9 @@ export async function saveReviewOnRoute(data, routeId, userId) {
     userId: userId,
   });*/
 }
-=======
 export async function getAllFilterRoutes(url) {
-  const getFilterRoutes = await axios.get(url)
-  console.log('is url there?', url)
- const filterRoutes = getFilterRoutes.data
- return filterRoutes
+  const getFilterRoutes = await axios.get(url);
+  console.log("is url there?", url);
+  const filterRoutes = getFilterRoutes.data;
+  return filterRoutes;
 }
->>>>>>> develop

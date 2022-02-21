@@ -1,24 +1,15 @@
-<<<<<<< HEAD
-import React from "react";
-import { Outlet } from "react-router-dom";
-import { useQuery } from "react-query";
-=======
 import React, { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { useQuery } from "react-query";
 import { AuthContext } from "context/AuthContext";
 
->>>>>>> develop
 //Services
 import { getUserProfilePic } from "services/user.services";
 import BigTitle from "components/Common/BigTitle";
 import DashboardBanner from "components/DashboardComponents/DashboardBanner";
 import DashboardSideBar from "components/DashboardComponents/DashboardSideBar";
 import DirectAccess from "components/DashboardComponents/DirectAccess";
-<<<<<<< HEAD
-=======
 import { id } from "date-fns/locale";
->>>>>>> develop
 
 const classes = {
   parentcon: "grid grid-cols-10",
@@ -30,20 +21,13 @@ const classes = {
   accescon: "fixed bottom-0 min-w-full",
 };
 
-<<<<<<< HEAD
-function Dashboard() {
-  const id = "61ef68279262e2f167700caf";
-
-  const getUser = useQuery(["getUserProfilePic", id], getUserProfilePic);
-=======
 const token = localStorage.getItem("token");
 
 function Dashboard() {
-  const id = '61ef68279262e2f167700caf'
-  const {userState, setUserState} = useContext(AuthContext)
+  const id = "61ef68279262e2f167700caf";
+  const { userState, setUserState } = useContext(AuthContext);
   const getUser = useQuery(["getUserProfilePic", id], getUserProfilePic);
   console.log(getUser);
->>>>>>> develop
   const { data, status } = getUser;
 
   return (
@@ -64,18 +48,14 @@ function Dashboard() {
       </div>
       <div className={classes.maincon}>
         <div>
-<<<<<<< HEAD
           <BigTitle className={classes.title} bigTitleText='Rutas creadas' />
         </div>
         <div className={classes.outletcon}>
-          {status === "loading" ? <span> Loading</span> : <Outlet />}
-=======
-          <BigTitle className={classes.title} bigTitleText="Rutas creadas" />
-        </div>
-        <div className={classes.outletcon}>
-          {status === "loading" && userState.loggedIn === true 
-          ? <span> Loading</span> : <Outlet />}
->>>>>>> develop
+          {status === "loading" && userState.loggedIn === true ? (
+            <span> Loading</span>
+          ) : (
+            <Outlet />
+          )}
         </div>
       </div>
       <div className={classes.accescon}>

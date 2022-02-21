@@ -89,12 +89,7 @@ function OneRoute() {
     const markerCoords = data?.location?.coordinates?.map((correctCoords) => {
       return { coords: { lat: correctCoords[1], lng: correctCoords[0] } };
     });
-<<<<<<< HEAD
-
-    const addressArrayPromises = markerCoords?.map((event) => {
-=======
     const addressArrayPromises = markerCoords.map((event) => {
->>>>>>> develop
       return getPlaceAddress(
         event.coords.lat.toString(),
         event.coords.lng.toString()
@@ -152,11 +147,8 @@ function OneRoute() {
   }
 
   if (status === "success") {
-<<<<<<< HEAD
-=======
     const userToFind = data.ownerId.toString();
 
->>>>>>> develop
     return (
       <div className={classes.parentcon}>
         <ImageSlider slides={data.images} />

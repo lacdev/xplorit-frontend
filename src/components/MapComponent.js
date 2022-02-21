@@ -212,14 +212,8 @@ function MapComponent({
         })}
       {locationsData &&
         useMultipleLocations == true &&
-<<<<<<< HEAD
-        locationsData.map((location, i) => {
-          console.log("This is return locations", location);
-          return <Marker key={i} position={location.coords} />;
-=======
         locationsData.map((location) => {
           return <Marker position={location.coords} />;
->>>>>>> develop
         })}
       {locationsData && useMultipleLocations == true && (
         <Polyline
