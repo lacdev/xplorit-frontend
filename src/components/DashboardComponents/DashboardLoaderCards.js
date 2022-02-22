@@ -5,11 +5,11 @@ const classes = {
     backgroundContainer: 'rounded-lg w-full p-2 shadow-testimonialShadow bg-white',
     imageContainer: 'flex flex-col w-full h-full justify-center',
     imageBackground:
-      'w-full h-48 bg-gradient-to-r from-violet-100 to-fuchsia-200 rounded-lg',
+      'w-full h-48 bg-gradient-to-r from-tagscolor to-tertiary rounded-lg',
     infoContainer: 'flex',
     avatarParentContainer: 'flex items-center gap-2 mt-3',
     avatarContainer: 'mr-3',
-    backgroundGradient: 'bg-gradient-to-r from-violet-100 to-fuchsia-200',
+    backgroundGradient: 'bg-gradient-to-r from-tagscolor to-tertiary',
     tags: 'w-12 h-4 rounded mb-2',
     comments: 'w-full h-6 rounded mb-2',
     image: '',

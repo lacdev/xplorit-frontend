@@ -1,22 +1,23 @@
-import { useState, useEffect } from "react";
-import { useMediaQuery } from "react-responsive";
-import { useSearchParams } from "react-router-dom";
-import { useQuery } from "react-query";
-import Geocode from "react-geocode";
-import { endpoints } from "endpoints/endpoints";
+import { useState, useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive';
+
+import {useParams} from 'react-router-dom';
+import { useQuery } from 'react-query';
+import Geocode from 'react-geocode';
+import { endpoints } from 'endpoints/endpoints';
 //Services
 import { getAllFilterPlaces } from "services/places.services";
 import { getAllStates } from "services/utils.services";
 //Components
-import Btncards from "components/Common/Btncards";
-import ModalFiltro from "components/SeachComponents/ModalFiltro";
-import MapComponent from "components/MapComponent";
-import Toggle from "components/SeachComponents/Toggle";
-import SearchCards from "components/SeachComponents/SearchCards";
-import StateSelector from "components/SeachComponents/StateSelector";
-import BtnTags from "components/SeachComponents/BtnTags";
-import LimitCards from "components/SeachComponents/LimitCards";
-import Inputs from "components/Common/Inputs";
+import Btncards from 'components/Common/Btncards';
+import ModalFiltro from 'components/SeachComponents/ModalFiltro';
+import MapComponent from 'components/MapComponent';
+import Toggle from 'components/SeachComponents/Toggle';
+import SearchCards from 'components/SeachComponents/SearchCards';
+import StateSelector from 'components/SeachComponents/StateSelector';
+import BtnTags from 'components/SeachComponents/BtnTags';
+import LimitCards from 'components/SeachComponents/LimitCards';
+//import Inputs from 'components/Common/Inputs';
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
 const classes = {
@@ -47,19 +48,24 @@ function PlaceSearch() {
   const [showMap, setShowMap] = useState(false);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedMunicipio, setSelectedMunicipio] = useState(null);
-  const [URLSearch, setURLSearch] = useState(endpoints.getFilterPlace);
-  const [locationsData, setLocationsData] = useState([]);
-  const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
-  const [searchParams, setSearchParams] = useSearchParams();
-  const q = searchParams.get("q") ?? "";
   
+  const [locationsData, setLocationsData] = useState([]);  
+  const [useRange, setUseRange] = useState([5,50]);
+  const [useSort, setUseSort] = useState ([]);
+  const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
   const { data: statesData, status: statesStatus } = useQuery( "getAllStates", getAllStates );
-    console.log('is state for selectorMunicipio?', selectedMunicipio);
+  //  console.log('is state for selectorMunicipio?', selectedMunicipio);
+ //const {search}= useParams();
+ const searchParam = decodeURIComponent(window.location.search);
+ const queryFromURL = searchParam?.split('=')[1].replace(' ','');
+ const [URLSearch, setURLSearch] = useState(`${endpoints.getFilterPlace}q=${queryFromURL}`);//localhost/...places?
   
 
 //Querys & service to Places
     //places
-    const { data: placesData, isLoading: loadingPlace, status } = useQuery(["getAllFilterPlaces",URLSearch],() =>  getAllFilterPlaces(URLSearch),{
+    const { data: placesData,
+       isLoading: loadingPlace,
+        status } = useQuery(["getAllFilterPlaces",URLSearch,queryFromURL],() =>  getAllFilterPlaces(URLSearch,queryFromURL),{
       onSuccess:() => console.log('is success?')
     })
 
@@ -79,7 +85,7 @@ function PlaceSearch() {
         },
       };
     });
-    console.log("is ther URL?", URLSearch);
+   // console.log('is there URL?', URLSearch)
     setLocationsData(markerCoords);
   }, [placesData, status, URLSearch]);
 
@@ -111,46 +117,48 @@ function PlaceSearch() {
     setSelectedState(stateItem);
     setSelectedMunicipio(null);
   };
-
   const onMunicipioChange = (municipioItem) => {
-    const newURL = endpoints.getFilterPlace + "q=" + municipioItem.value;
-    console.log(
-      "🚀 ~ file: PlaceSearch.js ~ line 96 ~ onMunicipioChange ~ newURL",
-      newURL
-    );
-    setURLSearch(newURL);
+    const newURL = endpoints.getFilterPlace + 'q=' + municipioItem.value
+   // console.log("🚀 ~ file: PlaceSearch.js ~ line 96 ~ onMunicipioChange ~ newURL", newURL)
+    setURLSearch(newURL)
     setSelectedMunicipio(municipioItem);
   };
-
+//Toggle 
   const onToggleChange = (event) => {
-    // console.log('Acciona el evento onChange');
+   // console.log('Acciona el evento onChange');
+  }
+//Selector Sort on Modal
+  const onSortChange = (event) => {
+    setUseSort(event.target.value);
   };
+//Input Range on Modal
+//  const onRangeChange = (event) => {
+ //   setUseRange(event.target.value);
+ // }
 
+//Buttons Tags on Modal & Desktop
   const onTagChange = (info) => {
-    let newURL = "";
-    console.log("Infomación de Tags", info);
-    if (URLSearch.includes("q=")) {
-      if (URLSearch.includes("tags")) {
-        newURL = URLSearch + "," + info;
+    let newURL = '';
+    console.log('Infomación de Tags', info);
+    if (URLSearch.includes('q=')) {
+      if (URLSearch.includes('tags')) {
+        newURL = URLSearch + ',' + info;
       } else {
-        newURL = URLSearch + "&tags=" + info;
+        newURL = URLSearch + '&tags=' + info;
       }
 
-      console.log("includes URLSearch");
+      console.log('includes URLSearch');
     } else {
-      if (URLSearch.includes("tags")) {
-        newURL = URLSearch + "," + info;
+      if (URLSearch.includes('tags')) {
+        newURL = URLSearch + ',' + info;
       } else {
-        newURL = URLSearch + "&tags=" + info;
+        newURL = URLSearch + '&tags=' + info;
       }
     }
     setURLSearch(newURL);
-    console.log("how is the new URL", newURL);
+    console.log('how is the new URL', newURL);
   };
 
-  const handlerKeyword = (event) => {
-    setSearchParams({ q: event.target.value });
-  };
 
   return (
     <div>
@@ -165,20 +173,16 @@ function PlaceSearch() {
             <BtnTags onTagClick={onTagChange} />
           </div>
           <div className={classes.filtroposition}>
-            <ModalFiltro />
+            <ModalFiltro onSearch={URLSearch} onStateURL={setURLSearch} onChange={onSortChange}/>
           </div>
         </div>
         <section className={classes.renderres}>
           {renderSideBar && (
             <aside className={classes.asidecon}>
-              <div>
-                <Inputs
-                  type='text'
-                  value={q}
-                  placeholderText='¿Que deseas explorar?'
-                  onChange={handlerKeyword}
-                />
-              </div>
+            { /* <div>
+                <Inputs type='text' value={q} placeholderText="¿Que deseas explorar?" onChange={handlerKeyword}/>
+            </div> */}
+              
               <div className={classes.selectorcon}>
                 <div className={classes.divselector}>
                   <label className={classes.labelselect}>Elige un Estado</label>

@@ -1,8 +1,10 @@
-import React from 'react';
+import React,{useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 //import img2 from 'assets/img/img2.jpg'
 import Inputs from './Inputs';
 import Btncards from './Btncards';
 import Titles from './Titles';
+
 
 const classes = {
   container: 'w-full h-screen max-h-[700px] bg-waterfall bg-no-repeat bg-cover',
@@ -17,6 +19,17 @@ const classes = {
   //     titlecontent:'relative '
 };
 function HeroBanner() {
+  const navigate = useNavigate();
+  const [inputText, setInputText] = useState('');
+  
+  const onFormSubmit = (event) => {
+    event.preventDefault()
+    navigate({
+      pathname:'/searchPlace',
+      search: `?query= ${inputText}`,
+    })
+   //navigate('/searchPlace', {search: `?query= ${inputText}`})
+  }
   return (
     <div className={classes.container}>
       <section className={classes.section}>
@@ -33,10 +46,12 @@ function HeroBanner() {
               className={classes.title2}
             />
           </div>
-          <Inputs placeholderText="Empieza tu búsqueda aquí" />
+          <form onSubmit={onFormSubmit}>
+          <Inputs value={inputText} placeholderText="Empieza tu búsqueda aquí" onChange={(event) => {setInputText(event.target.value)}} />
           <div className={classes.btncon}>
-            <Btncards className={classes.btn} buttonText="Buscar" />
+            <Btncards  buttonType='submit' className={classes.btn} buttonText="Buscar" />
           </div>
+          </form>
         </div>
       </section>
     </div>

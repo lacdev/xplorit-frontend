@@ -16,8 +16,8 @@ import StarRatingStatic from "./RatingStarStatic";
 import { saveLikeOnPlace, deleteLikeOnPlace } from "services/places.services";
 
 //Axios functions
-import { saveLikeOnPlace } from "services/places.services";
-import { deleteLikeOnPlace } from "services/places.services";
+//import { saveLikeOnPlace } from "services/places.services";
+//import { deleteLikeOnPlace } from "services/places.services";
 
 const classes = {
   parentcon: "font-primary overflow-x-hidden",
