@@ -1,6 +1,6 @@
 # Xplorit Frontend
 
-## Available Scripts
+## Available Scripts hi
 
 In the project directory, you can run:
 
