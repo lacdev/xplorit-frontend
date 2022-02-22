@@ -1,14 +1,16 @@
 import React from "react";
 
-//Usequery
+//Usequery & services
 import { useQuery } from "react-query";
 import { getPlacesCreatedByUser } from "services/user.services";
 import DashboardCard from "./DashboardCard";
 
-export default function DashboardPlacesContainer() {
-  const id = "61ff09c5f1b8eb106745942f";
+const token = localStorage.getItem("token");
 
-  const getPlaces = useQuery(["getPlaces", id], getPlacesCreatedByUser);
+function DashboardPlacesContainer() {
+  // const id = "61ff09c5f1b8eb106745942f";
+
+  const getPlaces = useQuery(["getPlaces"], getPlacesCreatedByUser);
 
   const { data, status } = getPlaces;
 
@@ -28,8 +30,11 @@ export default function DashboardPlacesContainer() {
     <>
       {data &&
         data.map((place) => {
-          return <DashboardCard key={place._id} cardData={place} />;
+          return (
+            <DashboardCard key={place._id} cardData={place} type={"place"} />
+          );
         })}
     </>
   );
 }
+export default DashboardPlacesContainer;

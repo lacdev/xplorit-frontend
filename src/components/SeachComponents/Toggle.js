@@ -5,17 +5,34 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
   
-function Toggle() {
+  const classes={
+    switch:'flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary',
+    span:'pointer-events-none absolute bg-white w-full h-full rounded-md',
+  }
+function Toggle({accionToggle}) {
     const [enabled, setEnabled] = useState(false)
+
+  
+   const onToggleChange = (event) => {
+     setEnabled(!enabled)
+     if (enabled) 
+     {
+       console.log('Accion de cambio a Lugares')
+     }
+     else {
+       console.log('Accion de cambio a Rutas')
+     }
+     accionToggle()
+   }
   return (
     
     <Switch
       checked={enabled}
-      onChange={setEnabled}
-      className="flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
+      onChange={onToggleChange}
+      className={classes.switch}
     >
       <span className="sr-only">Use setting</span>
-      <span aria-hidden="true" className="pointer-events-none absolute bg-white w-full h-full rounded-md" />
+      <span aria-hidden="true" className={classes.span} />
       <span
         aria-hidden="true"
         className={classNames(

@@ -1,7 +1,11 @@
 import React, { useEffect, useContext } from "react";
 import { useState } from "react";
-import { AuthContext } from "context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
+//Services & Context
+import { AuthContext } from "context/AuthContext";
+import { createRoute } from "services/routes.services";
+//Components
 import BigTile from "components/Common/BigTitle";
 import Inputs from "components/Common/Inputs";
 import TextEditor from "../components/TextEditor";
@@ -10,11 +14,20 @@ import PlaceSample from "../assets/img/playa.jpg";
 import MapComponent from "components/MapComponent";
 import UploadImage from "components/UploadImage";
 import { formatGoogleMapsAdressToNormalAdress } from "utils/utils";
-import { createRoute } from "services/routes.services";
 import ExtraPlaceForRoute from "components/ExtraPlaceForRoute";
-import { useNavigate } from "react-router-dom";
+import SuccessModal from "components/SuccessModal";
 
-export default function CreateRoute({}) {
+const classes = {
+  coverimg: "w-full max-h-[300px] object-cover brightness-50",
+  formcon: "w-2/3 mx-auto",
+  label: "text-xl font-semibold",
+  filecon: "flex w-full justify-center items-center h-96 rounded",
+  editorcon: "my-4",
+  btncon: "flex justify-end my-6 text-white",
+  btn: "bg-secondary rounded-full py-1 px-4 hover:cursor-pointer",
+};
+
+function CreateRoute() {
   const [name, setName] = useState("");
   const [tags, setTags] = useState([]);
   const [description, setDescription] = useState("");
@@ -25,10 +38,9 @@ export default function CreateRoute({}) {
   const { userState, setUserState } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const mutationPost = useMutation(
-    (data) => createRoute(data.data, data.placeImages),
-    { onSuccess: () => console.log("Todo cool en rutas") }
-  );
+  const mutationPost = useMutation((data) => createRoute(data.data, data.placeImages), {
+    onSuccess: () => console.log("Todo cool en rutas"),
+  });
 
   const setTagValues = (tagOptions) => {
     setTags(tagOptions);
@@ -39,10 +51,6 @@ export default function CreateRoute({}) {
     setPlaceImages(imagesData);
   };
 
-  // useEffect(()=>{
-  //   console.log("Estas cambiando locatiosData", locationsData)
-  // },[locationsData])
-
   const setSelectedLocationValue = (coords, address) => {
     setSelectedLocation(coords);
     setAddress(address);
@@ -52,10 +60,8 @@ export default function CreateRoute({}) {
     };
     const newLocationDataArray = [...locationsData, locationsObject];
     setLocationsData(newLocationDataArray);
-    console.log(newLocationDataArray);
+    console.log("This is newLocation", newLocationDataArray);
   };
-
-  console.log("Aqui es para breakpoint");
 
   const Publish = async (event) => {
     event.preventDefault();
@@ -72,27 +78,25 @@ export default function CreateRoute({}) {
       return coordsArray;
     });
 
-    const ownerId = "6200a26e64fdb24e699493d4";
+    // const ownerId = "6200a26e64fdb24e699493d4";
     try {
       const data = {
-        ownerId: ownerId,
+        // ownerId: ownerId,
         name,
         description,
-        address: formatGoogleMapsAdressToNormalAdress(
-          address[0].address_components
-        ),
+        address: formatGoogleMapsAdressToNormalAdress(address[0].address_components),
         tags: newTags,
         scheduleStart: "2022-02-11",
         scheduleFinish: "2022-01-27",
         location: {
-          type: "Multipoint",
+          type: "MultiPoint",
           coordinates: newCoords,
         },
       };
       console.log("Estamos dentro de Publish", data, placeImages);
       if (userState.loggedIn == true) {
         mutationPost.mutate({ data, placeImages });
-        navigate("/", { replace: true });
+        // navigate("/", { replace: true });
       } else {
         navigate("/login", { replace: true });
       }
@@ -105,42 +109,28 @@ export default function CreateRoute({}) {
 
   return (
     <div>
-      <img
-        className="w-full max-h-[300px] object-cover brightness-50"
-        src={PlaceSample}
-      ></img>
+      <img className={classes.coverimg} src={PlaceSample} alt="cover-img"></img>
       <BigTile bigTitleText="Publica un nuevo lugar para la comunidad" />
-      <form onSubmit={Publish} className="w-2/3 mx-auto">
-        <label className="text-xl font-semibold">Título</label>
+      <form onSubmit={Publish} className={classes.formcon}>
+        <label className={classes.label}>Título</label>
         <Inputs
           value={name}
           onChange={(event) => setName(event.target.value)}
           placeholderText="Escribe aquí el nombre del lugar"
         />
-        <label className="text-xl font-semibold">
-          Agrega las imágenes del lugar
-        </label>
-        <div className="flex w-full justify-center items-center h-96 rounded">
+        <label className={classes.label}>Agrega las imágenes del lugar</label>
+        <div className={classes.filecon}>
           <UploadImage value={placeImages} onImageAdd={saveImageToState} />
         </div>
-        <label className="text-xl font-semibold">
-          Danos una descripción del lugar
-        </label>
-        <div className="my-4">
-          <TextEditor
-            value={description}
-            onTextEditorChange={(value) => setDescription(value)}
-          />
+        <label className={classes.label}>Danos una descripción del lugar</label>
+        <div className={classes.editorcon}>
+          <TextEditor value={description} onTextEditorChange={(value) => setDescription(value)} />
         </div>
-        <label className="text-xl font-semibold">
-          Elige hasta 4 tags relacionados al lugar
-        </label>
-        <div className="my-4">
+        <label className={classes.label}>Elige hasta 4 tags relacionados al lugar</label>
+        <div className={classes.editorcon}>
           <TagSelector setTagValues={setTagValues} tags={tags} />
         </div>
-        <label className="text-xl font-semibold">
-          ¿En qué dirección se ubica el lugar?
-        </label>
+        <label className={classes.label}>¿En qué dirección se ubica el lugar?</label>
         <div>
           <MapComponent
             selectedLocation={selectedLocation}
@@ -162,15 +152,27 @@ export default function CreateRoute({}) {
               />
             );
           })}
-        <div className="flex justify-end my-6 text-white">
-          <input
-            className="bg-secondary rounded-xl py-1 px-4 hover:cursor-pointer"
-            type="submit"
-            value="Publicar"
-          />
+        <div className={classes.btncon}>
+          <input className={classes.btn} type="submit" value="Publicar" />
           {/* <Btncards onClick={Publish} className='py-1' buttonText='Publicar' /> */}
         </div>
+        {mutationPost.isSuccess && (
+          <SuccessModal
+            status={true}
+            redirectRoute="/"
+            modalText="Ruta creada con éxito"
+            modalOtherText="Gracias por contribuir a nuestra comunidad de viajeros"
+          />
+        )}
+        {mutationPost.isError && (
+          <SuccessModal
+            status={false}
+            modalText="Hubo un error"
+            modalOtherText="Revisa que hayas llenado todos los campos"
+          />
+        )}
       </form>
     </div>
   );
 }
+export default CreateRoute;

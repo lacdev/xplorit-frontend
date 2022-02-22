@@ -1,12 +1,15 @@
-import React from "react";
-import Slider from "react-slick";
-import Testimonials from "./LandingComponents/Testimonials";
+import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import '../customCss.css';
+//Components
+import Testimonials from './LandingComponents/Testimonials';
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "../customCss.css";
-
-export default function TestimonialCarousel() {
+const classes ={
+  container:'w-full mb-8',
+}
+function TestimonialCarousel() {
     const settings = {
         dots: true,
         infinite: false,
@@ -41,7 +44,7 @@ export default function TestimonialCarousel() {
           }
         ]
       };
-    return <div className="w-full mb-8">
+    return <div className={classes.container}>
         <Slider {...settings}>
           <Testimonials testimonialName="Lupita González" testimonialText="Gracias a Xplorit, encontré cosas que no esperaba cuando visité Pátzcuaro!" />
           <Testimonials testimonialName="Claudia Garza" testimonialText="Crear lugares está muy fácil. Se siente bien compartir experiencias"/>  
@@ -49,3 +52,4 @@ export default function TestimonialCarousel() {
         </Slider>
   </div>
 }
+export default TestimonialCarousel;

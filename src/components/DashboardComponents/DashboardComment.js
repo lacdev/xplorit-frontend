@@ -1,22 +1,24 @@
-import React from "react";
+import React from 'react';
+import { AuthContext } from 'context/AuthContext';
+//Components
+import DashboardCommentComponent from './DashboardCommentComponent';
 
-import DashboardCommentComponent from "./DashboardCommentComponent";
+//UseQuery & service
+import { useQuery } from 'react-query';
+import { getCommentsCreatedByUser } from 'services/user.services';
 
-//UseQuery
-import { useQuery } from "react-query";
-import { getCommentsCreatedByUser } from "services/user.services";
 
-export default function DashboardComment({}) {
-  const id = "61ef68279262e2f167700caf"; //ID user
+function DashboardComment() {
+  // const id = "61ef68279262e2f167700caf"; //ID user
 
-  const getComments = useQuery(["getComments", id], getCommentsCreatedByUser);
+  const getComments = useQuery(["getComments"], getCommentsCreatedByUser);
   const { data, status, error } = getComments;
 
   if (error === true) {
-    console.log("an errror had happend");
+    console.log('an errror had happend');
   }
 
-  if (status === "success") {
+  if (status === 'success') {
     console.log(data);
   }
 
@@ -57,3 +59,4 @@ export default function DashboardComment({}) {
     </div>
   );
 }
+export default DashboardComment;

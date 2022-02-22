@@ -1,7 +1,12 @@
 import React from 'react';
 
-export default function ProfileUsername({username}) {
-  return <div className='text-center'>
-      <p className='text-white text-xl font-semibold'>{username}</p>
+const classes = {
+  bodycon:'text-center',
+  text:'text-white text-xl font-semibold',
+}
+ function ProfileUsername({username}) {
+  return <div className={classes.bodycon}>
+      <p className={classes.text}>{username}</p>
   </div>
 }
+export default ProfileUsername;

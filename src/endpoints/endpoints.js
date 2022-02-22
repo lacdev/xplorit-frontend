@@ -5,6 +5,10 @@ export const endpoints = {
 
   getAllPlaces: `${base_url}/places/`,
 
+  getFilterPlace: `${base_url}/places?`,
+
+  getFilterRoute: `${base_url}/routes?`,
+
   getAllRoutes: `${base_url}/routes`,
 
   getOwnerPlace: `${base_url}/users`,
@@ -21,7 +25,17 @@ export const endpoints = {
 
   getAllStates: `${base_url}/states`,
 
+  getReviews: `${base_url}/places`,
+
+  getReviewsRoute: `${base_url}/routes`,
+
   logIn: `${base_url}/login`,
 
   signUp: `${base_url}/users`,
+
+  userMe: `${base_url}/users/me`,
+
+  saveLike: `${base_url}/places`,
+
+  deleteLike: `${base_url}/places`,
 };

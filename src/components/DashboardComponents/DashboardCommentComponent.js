@@ -1,40 +1,61 @@
 import React from "react";
 import { Link } from "react-router-dom";
+//Icons
+import Trash from "assets/icons/Trash";
+import StarRatingStatic from "../RatingStarStatic";
 
-import StarHalf from "assets/icons/StarHalf";
+const classes = {
+  commentcon: " m-auto flex w-fit mb-5 bg-white shadow-md rounded-md",
+  avatarcon: "max-w-xs mr-5",
+  avatarimg:
+    "rounded-l-lg bg-contain sm:min-h-cardHeight sm:min-w-cardWidth sm:shrink-0",
+  infocon: "w-full justify-start mt-5 content-center flex flex-wrap",
+  user: "text-2xl font-bold w-80",
+  iconcon: "my-auto  items-end mr-5 ",
+  average: "text-md  text-center mt-1",
+  text: "w-80 mt-1",
+  staricon: "",
+  deletcon: "mt-5",
+};
 
-export default function DashboardCommentComponent({
+function DashboardCommentComponent({
   images,
   name,
   comment,
-  stars,
+  average,
   type,
   id,
 }) {
   const cardLink = `/${type}/${id}`;
   return (
     <Link to={cardLink}>
-      <div className=' m-auto flex w-fit mb-5 bg-white shadow-md rounded-md'>
-        <div className='max-w-xs mr-5'>
-          <img
-            className='rounded-l-lg bg-contain sm:min-h-cardHeight sm:min-w-cardWidth sm:shrink-0'
-            src={images}
-            alt=''
-          ></img>
+      <div className={classes.commentcon}>
+        <div className={classes.avatarcon}>
+          <img className={classes.avatarimg} src={images} alt=''></img>
         </div>
         <div className=''>
-          <div className='w-full  justify-start mt-5 content-center flex flex-wrap'>
-            <h2 className='text-2xl  font-bold   w-80'>{name}</h2>
-            <div className='my-auto  items-end mr-5 '>
-              <StarHalf width='28' height='28' />
-              <p className='text-md mt-1 ml-2.5'>{stars}</p>
+          <div className={classes.infocon}>
+            <h2 className={classes.user}>{name}</h2>
+            <div className={classes.iconcon}>
+              <StarRatingStatic
+                width='28'
+                height='28'
+                className={classes.staricon}
+                ratingValue={average}
+              />
+              <p className={classes.average}>{average}</p>
             </div>
           </div>
-          <div className='w-80 mt-5'>
+          <div className={classes.text}>
             <p>{comment}</p>
+            <div className={classes.deletcon}>
+              <Trash />
+            </div>
+            <p className={classes.icontext}>Eliminar</p>
           </div>
         </div>
       </div>
     </Link>
   );
 }
+export default DashboardCommentComponent;

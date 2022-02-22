@@ -10,7 +10,7 @@ const classes = {
   iconright:
     "absolute bottom-bottom7.5 left-2/3 justify-end inline-flex items-center cursor-pointer h-9 w-12",
   imgcont: "w-full h-screen",
-  img: "object-cover object-center w-full h-full lg:w-screen lg:h-screen",
+  img: "object-cover object-center w-3/4 h-full lg:w-screen lg:h-screen",
   animation: "delay-05ms ease-out animate-slides",
 };
 

@@ -3,12 +3,12 @@ import React from 'react';
 import Inputs from 'components/Common/Inputs';
 import Btncards from 'components/Common/Btncards';
 import CardCarousel from 'components/CardCarousel';
-
+//useQuery & Services
 import { useQuery } from 'react-query';
 import { getCardsPlacesHome } from 'services/places.services'
-import { getTopPlaces } from 'services/places.services';
-import { getNearPlaces } from 'services/places.services';
-import { getRecentlySharedPlaces } from 'services/places.services';
+//import { getTopPlaces } from 'services/places.services';
+//import { getNearPlaces } from 'services/places.services';
+//import { getRecentlySharedPlaces } from 'services/places.services';
 
 const classes = {
   parentcon:' font-primary justify-center align-middle',
