@@ -124,17 +124,17 @@ function PlaceSearch() {
     setSelectedMunicipio(municipioItem);
   };
 //Toggle 
-  const onToggleChange = (event) => {
+  // const onToggleChange = (event) => {
    // console.log('Acciona el evento onChange');
-  }
+  // }
 //Selector Sort on Modal
   const onSortChange = (event) => {
     setUseSort(event.target.value);
   };
 //Input Range on Modal
-//  const onRangeChange = (event) => {
- //   setUseRange(event.target.value);
- // }
+ const onRangeChange = (event) => {
+   setUseRange(event.target.value);
+  }
 
 //Buttons Tags on Modal & Desktop
   const onTagChange = (info) => {
@@ -166,14 +166,14 @@ function PlaceSearch() {
         <div className={classes.tagsfiltroscon}>
           <div className={classes.togglecon}>
             <span className={classes.togglespanplace}>Lugares</span>
-            <Toggle accionToggle={onToggleChange} />
+            {/* <Toggle accionToggle={onToggleChange} /> */}
             <span className={classes.togglespanroute}>Rutas</span>
           </div>
           <div className={classes.btntagscon}>
             <BtnTags onTagClick={onTagChange} />
           </div>
           <div className={classes.filtroposition}>
-            <ModalFiltro onSearch={URLSearch} onStateURL={setURLSearch} onChange={onSortChange}/>
+            <ModalFiltro onSearch={URLSearch} onStateURL={setURLSearch} onChange={`${onSortChange} ${onRangeChange}`}/>
           </div>
         </div>
         <section className={classes.renderres}>
@@ -218,7 +218,7 @@ function PlaceSearch() {
                           //typeofplace={data.type}
                           key={index}
                           name={data.name}
-                          //address={data.address.street}
+                          address={data.address.street}
                           labels={data.tags}
                           score={data.average}
                           ownerId={data.ownerId}
