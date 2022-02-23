@@ -48,9 +48,9 @@ function PlaceSearch() {
   const [showMap, setShowMap] = useState(false);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedMunicipio, setSelectedMunicipio] = useState(null);
-  
   const [locationsData, setLocationsData] = useState([]);  
   const [useRange, setUseRange] = useState([5,50]);
+  const [useRadius, setUseRadius] = useState(null);
   const [useSort, setUseSort] = useState ([]);
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
   const { data: statesData, status: statesStatus } = useQuery( "getAllStates", getAllStates );
@@ -68,6 +68,8 @@ function PlaceSearch() {
         status } = useQuery(["getAllFilterPlaces",URLSearch,queryFromURL],() =>  getAllFilterPlaces(URLSearch,queryFromURL),{
       onSuccess:() => console.log('is success?')
     })
+
+
 
   useEffect(() => {
     if (status === "loading") {
@@ -131,11 +133,18 @@ function PlaceSearch() {
   const onSortChange = (event) => {
     setUseSort(event.target.value);
   };
+
 //Input Range on Modal
  const onRangeChange = (event) => {
    setUseRange(event.target.value);
   }
-
+  useEffect(() => {
+      
+  },[onRangeChange] )
+//Map Radius 
+// const onRadiusChange = (event) => {
+//   setUseRadius(event.target.value)
+// }
 //Buttons Tags on Modal & Desktop
   const onTagChange = (info) => {
     let newURL = '';
@@ -238,6 +247,8 @@ function PlaceSearch() {
               fullHeight={true}
               locationsData={locationsData}
               useMultipleLocations={false}
+              radius={useRange}
+              onChange={onRangeChange}
               // customCenter={
               //   locationsData[Math.floor(locationsData?.length / 2)]?.coords
               // }

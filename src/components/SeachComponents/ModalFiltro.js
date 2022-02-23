@@ -40,7 +40,8 @@ const classes = {
 function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, onChange=null, sort, minValue, maxValue, value }) {
   const [showModal, setShowModal] = useState(false);
  const [filtros, setFiltros] = useState([]);
-  const [rangeValue, setRangeValue] = useState([minValue,maxValue]);
+  const [rangeValue, setRangeValue] = useState(value);
+
   const updateRangeValue = (event) => {
     setRangeValue(event.target.value)
     console.log(event.target.value)
