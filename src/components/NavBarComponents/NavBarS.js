@@ -14,7 +14,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function NavBarS({ position = "sticky" }) {
+function NavBarS({ position = "" }) {
   const classes = {
     beforeScroll: `font-primary fixed ${position} w-full z-10 bg-black backdrop-filter backdrop-blur-lg bg-opacity-30 shadow`,
     afterScroll: "font-primary fixed w-full z-10 shadow bg-white shadow",
