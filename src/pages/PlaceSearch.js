@@ -238,9 +238,9 @@ function PlaceSearch() {
               fullHeight={true}
               locationsData={locationsData}
               useMultipleLocations={false}
-              customCenter={
-                locationsData[Math.floor(locationsData?.length / 2)]?.coords
-              }
+              // customCenter={
+              //   locationsData[Math.floor(locationsData?.length / 2)]?.coords
+              // }
             />
           </div>
         </section>

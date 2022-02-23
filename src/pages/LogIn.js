@@ -53,6 +53,7 @@ function LogIn() {
     console.log("token", token);
     navigate("/", { replace: true });
   };
+  
   return (
     <div className={classes.parentcon}>
       <div className={classes.container}>
