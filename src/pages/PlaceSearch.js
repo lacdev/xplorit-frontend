@@ -212,7 +212,7 @@ function PlaceSearch() {
                       return (
                         <SearchCards
                           id={data._id}
-                          //typeofplace={data.type}
+                          typeofplace={data.type}
                           key={index}
                           name={data.name}
                           //address={data.address.street}
