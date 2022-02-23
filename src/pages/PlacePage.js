@@ -4,8 +4,9 @@ import Inputs from "components/Common/Inputs";
 import Btncards from "components/Common/Btncards";
 import CardCarousel from "components/CardCarousel";
 //useQuery & Services
-import { useQuery } from "react-query";
-import { getCardsPlacesHome } from "services/places.services";
+import { useQuery } from 'react-query';
+import { getCardsPlacesHome } from 'services/places.services'
+import LoadersCards from 'components/Common/LoadersCards';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 //import { getTopPlaces } from 'services/places.services';
@@ -120,26 +121,21 @@ function PlacePage() {
           <CardCarousel type={"place"} cardsData={topPlacesData} />
         )}
       </div>
-      {/* <div className={classes.textcarru}>
-        <Titles tag="h4" titleText="Lugares cerca de ti" />
+      <div className={classes.carruselcon} >
+          {loadingTopPlaces === true?<LoadersCards/>:<CardCarousel type={'place'} cardsData={topPlacesData}/>}
+        </div>
+        <div className={classes.textcarru}>
+        <Titles tag='h4' titleText='Lugares cerca de ti' />
       </div>
-      <div className={classes.carruselcon}>
-        {loadingNearPlaces === true ? (
-          <span>Loading...</span>
-        ) : (
-          <CardCarousel type={"place"} cardsData={nearPlacesData} />
-        )}
+      {/* <div className={classes.carruselcon} >
+          {loadingNearPlaces === true?<LoadersCards/>:<CardCarousel type={'place'}  cardsData={nearPlacesData}/>}
+        </div>
+        <div className={classes.textcarru}>
+        <Titles tag='h4' titleText='Lugares compartidos recientemente' />
       </div> */}
-      <div className={classes.textcarru}>
-        <Titles tag="h4" titleText="Lugares compartidos recientemente" />
-      </div>
-      <div className={classes.carruselcon}>
-        {loadingRecentlyPlaces === true ? (
-          <span>Loading...</span>
-        ) : (
-          <CardCarousel type={"place"} cardsData={recentlyPlacesData} />
-        )}
-      </div>
+      <div className={classes.carruselcon} >
+          {loadingRecentlyPlaces === true?<LoadersCards/>:<CardCarousel type={'place'} cardsData={recentlyPlacesData}/>}
+        </div>
     </div>
   );
 }

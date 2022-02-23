@@ -58,7 +58,6 @@ export async function saveReviewOnRoute(data, routeId, userId) {
 }
 export async function getAllFilterRoutes(url) {
   const getFilterRoutes = await axios.get(url);
-  console.log("is url there?", url);
   const filterRoutes = getFilterRoutes.data;
   return filterRoutes;
 }

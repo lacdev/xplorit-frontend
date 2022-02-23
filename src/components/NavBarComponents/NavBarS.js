@@ -72,7 +72,7 @@ function NavBarS({ position = "" }) {
   const isBigDesktop = useMediaQuery({ query: "(min-width: 1536px)" });
 
   const getUser = useQuery(["getUserProfilePic"], getUserProfilePic);
-  console.log(getUser);
+ // console.log(getUser);
   const { data, status } = getUser;
 
   useEffect(() => {
