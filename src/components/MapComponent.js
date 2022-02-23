@@ -108,6 +108,7 @@ function MapComponent({
       lng: center.lng(),
     };
     setCurrentUserLocation({ ...coords });
+    console.log(coords)
     // setCurrentUserLocation({ lat: coords.lat, lng : coords.lng })
   };
 
