@@ -17,10 +17,11 @@ import MapComponent from 'components/MapComponent'
 import HeaderOnePlace from 'components/HeaderOnePlace'
 import StarRating from 'components/RatingStar'
 //useQuery
-import { useQuery } from 'react-query'
-import { getSinglePlaceData } from 'services/places.services'
-import { getSingleReview } from 'services/places.services'
-import { saveReviewOnPlace } from 'services/places.services'
+import { useQuery } from "react-query";
+import { getSinglePlaceData } from "services/places.services";
+import { getSingleReview } from "services/places.services";
+import { saveReviewOnPlace } from "services/places.services";
+import HeroLoader from "components/Common/HeroLoader";
 
 const classes = {
   parentcon: 'font-primary overflow-x-hidden',
@@ -104,24 +105,30 @@ function OnePlace() {
     } else {
       setTextEditorView(classes.textEditorHidden)
     }
-  }
+  };
 
   const saveReview = (e) => {
-    const newReview = { ...review }
-    newReview[e.target.id] = e.target.value
-    setReview(newReview)
-  }
+    const newReview = { ...review };
+    newReview[e.target.id] = e.target.value;
+    setReview(newReview);
+  };
 
   const saveStar = (e) => {
-    const newReview = { ...review }
-    newReview[e.target.name] = e.target.value
-    setReview(newReview)
-  }
+    const newReview = { ...review };
+    newReview[e.target.name] = e.target.value;
+    setReview(newReview);
+  };
 
   const HandleSubmit = (e) => {
-    e.preventDefault()
-    saveReviewOnPlace(review, id)
+    e.preventDefault();
+    saveReviewOnPlace(review, id);
+  };
+
+  if (status === "loading") {
+    return <HeroLoader/>;
   }
+
+
 
   if (status === 'loading') {
     return <p> Loading...</p>

@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState, useEffect } from "react";
 //import PropTypes from 'prop-types';
 //Google React
-import { GoogleMap, useLoadScript, Marker, Polyline } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Marker, Polyline, Circle } from "@react-google-maps/api";
 //Components
 import SearchMap from "./SearchMap";
 import SearchMapOnPage from "./SearchMapOnPage";
@@ -33,6 +33,20 @@ const lineOptions = {
   zIndex: 1,
 };
 
+const circleOptions = {
+  strokeColor: "#4377ff",
+  strokeOpacity: 0.8,
+  strokeWeight: 5,
+  // fillColor: none,
+  fillOpacity: 0,
+  clickable: false,
+  draggable: false,
+  editable: false,
+  visible: true,
+  radius: null,
+  zIndex: 1
+}
+
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 function MapComponent({
@@ -43,6 +57,8 @@ function MapComponent({
   locationsData,
   useMultipleLocations = false,
   customCenter = null,
+  onChange=null,
+  radius=null
 }) {
   // ?--------------------------------------
   // ? Component setup
@@ -176,7 +192,7 @@ function MapComponent({
 
   const mapIinitialPosition = newCenter();
   // const centerLocation = currentUserLocation !== null ? currentUserLocation : center;
-
+ console.log('what is radius?', radius)
   if (!isLoaded) return null;
   return (
     <GoogleMap
@@ -194,6 +210,7 @@ function MapComponent({
       ) : (
         <SearchMap />
       )}
+      {currentUserLocation && useMultipleLocations == false && <Circle radius={onChange} center={currentUserLocation} options={circleOptions}/>}
       {selectedLocation && useMultipleLocations == false && <Marker position={selectedLocation} />}
       {locationsData &&
         useMultipleLocations == false &&
