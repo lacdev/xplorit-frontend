@@ -1,31 +1,30 @@
-import React, { useContext, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 //Context, useQuery & services
-import { AuthContext } from 'context/AuthContext';
-import { useMutation } from 'react-query';
-import { userSignUp } from 'services/user.services';
+import { AuthContext } from "context/AuthContext";
+import { useMutation } from "react-query";
+import { userSignUp } from "services/user.services";
 
 //Components
-import Inputs from 'components/Common/Inputs';
-import BigTitle from 'components/Common/BigTitle';
-import Btncards from 'components/Common/Btncards';
-
+import Inputs from "components/Common/Inputs";
+import BigTitle from "components/Common/BigTitle";
+import Btncards from "components/Common/Btncards";
 
 const classes = {
-    parentcon:'inline-flex w-full h-screen items-center',
-    container:'w-1/2 h-full bg-img-01 bg-no-repeat bg-center',
-    textcon:'flex h-full justify-center items-center',
-    textdesing:'font-primary font-bold bg-black/50 text-white text-[36px] text-center py-24',
-    formcon:'flex w-1/2 justify-center h-screen items-center',
-    sidecon:'flex-col w-1/2 justify-center',
-    description:'text-center px-10 mb-4',
-    datacon:'flex-col w-full content-center',
-    input:'w-full h-auto',
-    btn:'flex py-2 m-auto',
-    idication:'text-sm underline text-center',
-}
- function SignUp() {
+  parentcon: "inline-flex w-full h-screen items-center",
+  container: "hidden md:block w-1/2 h-full bg-img-01 bg-no-repeat bg-center",
+  textcon: "flex h-full justify-center items-center",
+  textdesing: "font-primary font-bold bg-black/50 text-white text-[36px] text-center py-24",
+  formcon: "flex w-full md:w-1/2 justify-center h-screen items-center",
+  sidecon: "flex-col w-1/2 justify-center",
+  description: "text-center px-10 mb-4",
+  datacon: "flex-col w-full content-center",
+  input: "w-full h-auto",
+  btn: "flex py-2 m-auto",
+  idication: "text-sm underline text-center",
+};
+function SignUp() {
   const { userState, setUserState } = useContext(AuthContext);
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -33,10 +32,9 @@ const classes = {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  const mutationSignUp = useMutation(
-    (data) => userSignUp(data.userName, data.userEmail, data.userPassword),
-    { onSuccess: (data) => setToken(data.token) }
-  );
+  const mutationSignUp = useMutation((data) => userSignUp(data.userName, data.userEmail, data.userPassword), {
+    onSuccess: (data) => setToken(data.token),
+  });
 
   const signUp = () => {
     mutationSignUp.mutate({ userName, userEmail, userPassword });
@@ -56,9 +54,7 @@ const classes = {
     <div className={classes.parentcon}>
       <div className={classes.container}>
         <section className={classes.textcon}>
-          <span className={classes.textdesing}>
-            Registrate para vivir las mejores experiencias de viaje
-          </span>
+          <span className={classes.textdesing}>Registrate para vivir las mejores experiencias de viaje</span>
         </section>
       </div>
       <div className={classes.formcon}>
@@ -68,8 +64,8 @@ const classes = {
           </Link>
           <BigTitle className="" bigTitleText="Crear cuenta" />
           <p className={classes.description}>
-            Únete a nuestra comunidad de viajeros como tú que buscan planear,
-            descubrir y compartir las mejores experiencias
+            Únete a nuestra comunidad de viajeros como tú que buscan planear, descubrir y compartir las mejores
+            experiencias
           </p>
           <div className={classes.datacon}>
             <h4>Nombre de usuario</h4>
@@ -105,16 +101,10 @@ const classes = {
               placeholderText="Escribe de nuevo tu contraseña"
             />
           </div>
-          <Btncards
-            onClick={signUp}
-            className={classes.btn}
-            buttonText="Regístrate"
-          />
+          <Btncards onClick={signUp} className={classes.btn} buttonText="Regístrate" />
           <br></br>
           <Link to="/login">
-            <p className={classes.idication}>
-              Ya tienes cuenta? Inicia sesión aquí
-            </p>
+            <p className={classes.idication}>Ya tienes cuenta? Inicia sesión aquí</p>
           </Link>
         </div>
       </div>

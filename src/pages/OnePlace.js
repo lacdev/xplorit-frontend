@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import parse from 'html-react-parser'
+import { AuthContext } from 'context/AuthContext'
 
 //Icons & Images
 import PinMap from 'assets/icons/PinMap'
@@ -59,6 +60,8 @@ function OnePlace() {
   const { id } = useParams()
   const [selectedLocation, setSelectedLocation] = useState(null)
   const [star, setStar] = useState(0)
+  const { userState, setUserState } = useContext(AuthContext)
+  const navigate = useNavigate()
   const [review, setReview] = useState({
     comment: '',
     stars: null,
@@ -90,8 +93,13 @@ function OnePlace() {
   }, [data, status])
 
   const handleClick = () => {
-    if (textEditorView === classes.textEditorHidden) {
+    if (
+      userState.loggedIn === true &&
+      textEditorView === classes.textEditorHidden
+    ) {
       setTextEditorView(classes.textEditorShow)
+    } else if (userState.loggedIn === false) {
+      navigate('/login', { replace: true })
     } else {
       setTextEditorView(classes.textEditorHidden)
     }

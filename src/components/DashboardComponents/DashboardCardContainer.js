@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
 //Components
-import DashboardCard from './DashboardCard'
+import DashboardCard from "./DashboardCard";
 
- function DashboardCardContainer() {
-  return <div>
-    <DashboardCard />
-   
-  </div>;
+function DashboardCardContainer() {
+  return (
+    <div>
+      <DashboardCard />
+    </div>
+  );
 }
 export default DashboardCardContainer;
