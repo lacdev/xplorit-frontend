@@ -5,6 +5,10 @@ import { useQuery } from "react-query";
 import { getLikesCreatedByUser } from "services/user.services";
 //Components
 import DashboardLikeCard from "./DashboardLikeCard";
+<<<<<<< HEAD
+=======
+import BigTitle from "components/Common/BigTitle";
+>>>>>>> develop
 
 function DashboardLikeContainer() {
   // const id = "61ef68279262e2f167700caf";
@@ -56,6 +60,9 @@ function DashboardLikeContainer() {
 
   return (
     <div>
+      <div>
+        <BigTitle bigTitleText="Likes" />
+      </div>
       {data &&
         data.map((like) => {
           return renderCard(like);

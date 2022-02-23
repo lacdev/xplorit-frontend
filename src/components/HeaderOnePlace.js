@@ -15,12 +15,17 @@ import Titles from "components/Common/Titles";
 import StarRatingStatic from "./RatingStarStatic";
 
 //Axios functions
+<<<<<<< HEAD
 import {
   getPlaceLikes,
   saveLikeOnPlace,
   getSingleUser,
 } from "services/places.services";
 import { deleteLikeOnPlace } from "services/places.services";
+=======
+//import { saveLikeOnPlace } from "services/places.services";
+//import { deleteLikeOnPlace } from "services/places.services";
+>>>>>>> develop
 
 const classes = {
   parentcon: "font-primary overflow-x-hidden",

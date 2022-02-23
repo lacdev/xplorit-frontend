@@ -110,27 +110,27 @@ function CreateRoute() {
   return (
     <div>
       <img className={classes.coverimg} src={PlaceSample} alt="cover-img"></img>
-      <BigTile bigTitleText="Publica un nuevo lugar para la comunidad" />
+      <BigTile bigTitleText="Publica una nueva ruta para la comunidad" />
       <form onSubmit={Publish} className={classes.formcon}>
         <label className={classes.label}>Título</label>
         <Inputs
           value={name}
           onChange={(event) => setName(event.target.value)}
-          placeholderText="Escribe aquí el nombre del lugar"
+          placeholderText="Escribe aquí el nombre de la ruta"
         />
-        <label className={classes.label}>Agrega las imágenes del lugar</label>
+        <label className={classes.label}>Agrega las imágenes de la ruta</label>
         <div className={classes.filecon}>
           <UploadImage value={placeImages} onImageAdd={saveImageToState} />
         </div>
-        <label className={classes.label}>Danos una descripción del lugar</label>
+        <label className={classes.label}>Danos una descripción de la ruta</label>
         <div className={classes.editorcon}>
           <TextEditor value={description} onTextEditorChange={(value) => setDescription(value)} />
         </div>
-        <label className={classes.label}>Elige hasta 4 tags relacionados al lugar</label>
+        <label className={classes.label}>Elige hasta 4 tags relacionados con la ruta</label>
         <div className={classes.editorcon}>
           <TagSelector setTagValues={setTagValues} tags={tags} />
         </div>
-        <label className={classes.label}>¿En qué dirección se ubica el lugar?</label>
+        <label className={classes.label}>¿Qué direcciones componen la ruta?</label>
         <div>
           <MapComponent
             selectedLocation={selectedLocation}

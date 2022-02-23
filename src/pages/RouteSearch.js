@@ -22,7 +22,7 @@ Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 const classes = {
   parentcon: "pt-16",
   sectionres: "font-primary w-full h-full min-h-screen overflow-hidden",
-  tagsfiltroscon: "flex flex-row justify-between p-1 w-full bg-white my-2",
+  tagsfiltroscon: "flex flex-row justify-between p-1 w-full bg-white my-2 mt-16",
   scroll: "scroll-smooth scroll-pl-4 snap-end snap-x snap-mandatory",
   scrolltags: "snap-center snap-always scroll-mr-3.5",
   togglecon: "flex content-center items-center px-4",
@@ -31,7 +31,7 @@ const classes = {
   renderres: "grid grid-cols-1 minTablet:grid-cols-5 grid-flow-col overflow-hidden h-[90vh]",
   togglespanplace: "mr-2",
   togglespanroute: "mx-2",
-  filtroposition: "ml-auto",
+  filtroposition: "ml-auto my-auto",
   asidecon:
     "col-span-5 xl:col-span-3 minTablet:col-span-2 bg-white divide-y divide-solid border-slate-500 px-3 max-h-[90vh]",
   rescon: "py-2 pl-2",
@@ -161,7 +161,7 @@ function RouteSearch() {
             <span className={classes.togglespanroute}>Rutas</span>
           </div>
           <div className={classes.btntagscon}>
-            <BtnTags onTagClick={onTagChange} />
+            <BtnTags className="min-w-fit" onTagClick={onTagChange} />
           </div>
           <div className={classes.filtroposition}>
             <ModalFiltro />

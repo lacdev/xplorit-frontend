@@ -34,11 +34,7 @@ function Dashboard() {
   return (
     <div className={classes.parentcon}>
       <div className={classes.bannercon}>
-        {status === "loading" ? (
-          <span> Loading</span>
-        ) : (
-          <DashboardBanner coverPhoto={data.coverPhoto} />
-        )}
+        {status === "loading" ? <span> Loading</span> : <DashboardBanner coverPhoto={data.coverPhoto} />}
       </div>
       <div className={classes.aside}>
         {status === "loading" ? (
@@ -48,15 +44,8 @@ function Dashboard() {
         )}
       </div>
       <div className={classes.maincon}>
-        <div>
-          <BigTitle className={classes.title} bigTitleText='Rutas creadas' />
-        </div>
         <div className={classes.outletcon}>
-          {status === "loading" && userState.loggedIn === true ? (
-            <span> Loading</span>
-          ) : (
-            <Outlet />
-          )}
+          {status === "loading" && userState.loggedIn === true ? <span> Loading</span> : <Outlet />}
         </div>
       </div>
       <div className={classes.accescon}>

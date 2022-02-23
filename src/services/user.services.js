@@ -4,6 +4,7 @@ import { endpoints } from "endpoints/endpoints";
 const token = localStorage.getItem("token");
 
 export async function getUserProfilePic({ queryKey }) {
+  const token = localStorage.getItem("token");
   const service_url = `${endpoints.userMe}`;
   const getUserPromise = await axios.get(service_url, {
     headers: { Authorization: `Bearer ${token}` },
@@ -20,6 +21,7 @@ export async function getUserProfilePic({ queryKey }) {
 // }
 
 export async function getPlacesCreatedByUser({ queryKey }) {
+  const token = localStorage.getItem("token");
   const service_url = `${endpoints.userMe}/places`;
   const getPlacesPromise = await axios.get(service_url, {
     headers: { Authorization: `Bearer ${token}` },
@@ -36,6 +38,7 @@ export async function getPlacesCreatedByUser({ queryKey }) {
 // }
 
 export async function getRoutesCreatedByUser({ queryKey }) {
+  const token = localStorage.getItem("token");
   const service_url = `${endpoints.userMe}/routes`;
   const getRoutesPromise = await axios.get(service_url, {
     headers: { Authorization: `Bearer ${token}` },
@@ -52,6 +55,7 @@ export async function getRoutesCreatedByUser({ queryKey }) {
 // }
 
 export async function getCommentsCreatedByUser({ queryKey }) {
+  const token = localStorage.getItem("token");
   const service_url = `${endpoints.userMe}/reviews`;
   const getCommentsPromise = await axios.get(service_url, {
     headers: { Authorization: `Bearer ${token}` },
@@ -68,6 +72,7 @@ export async function getCommentsCreatedByUser({ queryKey }) {
 // }
 
 export async function getLikesCreatedByUser({ queryKey }) {
+  const token = localStorage.getItem("token");
   console.log("querykey", queryKey);
   const service_url = `${endpoints.userMe}/likes`;
   const getLikesPromise = await axios.get(service_url, {

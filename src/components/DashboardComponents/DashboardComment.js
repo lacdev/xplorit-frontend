@@ -1,12 +1,12 @@
-import React from 'react';
-import { AuthContext } from 'context/AuthContext';
+import React from "react";
+import { AuthContext } from "context/AuthContext";
 //Components
-import DashboardCommentComponent from './DashboardCommentComponent';
+import DashboardCommentComponent from "./DashboardCommentComponent";
+import BigTitle from "components/Common/BigTitle";
 
 //UseQuery & service
-import { useQuery } from 'react-query';
-import { getCommentsCreatedByUser } from 'services/user.services';
-
+import { useQuery } from "react-query";
+import { getCommentsCreatedByUser } from "services/user.services";
 
 function DashboardComment() {
   // const id = "61ef68279262e2f167700caf"; //ID user
@@ -15,10 +15,10 @@ function DashboardComment() {
   const { data, status, error } = getComments;
 
   if (error === true) {
-    console.log('an errror had happend');
+    console.log("an errror had happend");
   }
 
-  if (status === 'success') {
+  if (status === "success") {
     console.log(data);
   }
 
@@ -52,6 +52,9 @@ function DashboardComment() {
 
   return (
     <div>
+      <div>
+        <BigTitle bigTitleText="Comentarios" />
+      </div>
       {data &&
         data.map((comment) => {
           return renderCard(comment);
