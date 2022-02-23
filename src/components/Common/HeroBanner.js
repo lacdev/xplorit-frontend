@@ -13,7 +13,7 @@ const classes = {
   title1: 'text-center m-10',
   title2: 'text-center m-6 text-white',
   btncon: 'flex w-full justify-around',
-  btn: 'py-2',
+  btn: 'py-2 cursor-pointer',
   //    img:'object-cover h-1/5 min-w-full brightness-50',
   //     titlecontent:'relative '
 }

@@ -25,10 +25,9 @@ export async function getOwnerPlace({ queryKey }) {
   return getOwnerPlaceData;
 }
 
+
 export async function getAllFilterPlaces(url,initialSearch) {
-console.log("🚀 ~ file: places.services.js ~ line 29 ~ getAllFilterPlaces ~ initialSearch", initialSearch)
   const getFilterPlaces = await axios.get(url);
-  console.log("is url there?", url);
   const filterPlaces = getFilterPlaces.data;
   return filterPlaces;
 }
@@ -55,6 +54,7 @@ export async function getSingleReviewRoute({ queryKey }) {
 }
 
 export async function createPlace(data, images) {
+  const token = localStorage.getItem("token");
   const service_url = `${endpoints.postPlace}`;
   const formData = new FormData();
   formData.append("data", JSON.stringify(data));
@@ -101,7 +101,7 @@ export async function deleteLikeOnPlace(placeId) {
 
 export async function deleteLikeOnPlace(placeId) {
   const service_url = `${endpoints.deleteLike}/${placeId}/likes`;
-  console.log("URL ", service_url);
+ // console.log("URL ", service_url);
   //console.log("JSON to POST ", data);
   return await axios.delete(
     service_url,

@@ -20,6 +20,7 @@ import { useQuery } from 'react-query'
 import { getSinglePlaceData } from 'services/places.services'
 import { getSingleReview } from 'services/places.services'
 import { saveReviewOnPlace } from 'services/places.services'
+import HeroLoader from 'components/Common/HeroLoader'
 
 const classes = {
   parentcon: 'font-primary overflow-x-hidden',
@@ -120,6 +121,10 @@ function OnePlace() {
   const HandleSubmit = (e) => {
     e.preventDefault()
     saveReviewOnPlace(review, id)
+  }
+
+  if (status === 'loading') {
+    return <HeroLoader />
   }
 
   if (status === 'loading') {

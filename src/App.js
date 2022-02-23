@@ -23,6 +23,7 @@ import DashboardRoutesContainer from "components/DashboardComponents/DashboardRo
 import DashboardLoaderCards from "components/DashboardComponents/DashboardLoaderCards";
 import { AuthContextProvider } from "context/AuthContext";
 
+
 function App() {
   return (
     <AuthContextProvider>

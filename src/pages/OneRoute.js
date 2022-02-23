@@ -20,6 +20,7 @@ import { getSingleRouteData } from "services/routes.services";
 import { getSingleReviewRoute } from "services/places.services";
 import { saveReviewOnRoute } from "services/routes.services";
 import PlaceAddress from "components/PlaceAddress";
+import HeroLoader from "components/Common/HeroLoader";
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
 const classes = {
@@ -148,7 +149,7 @@ function OneRoute() {
   };
 
   if (status === "loading") {
-    return <p> Loading...</p>;
+    return <HeroLoader/>;
   }
 
   if (status === "success") {

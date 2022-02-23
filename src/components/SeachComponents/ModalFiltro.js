@@ -37,12 +37,12 @@ const classes = {
   savecon:'bg-secondary text-white active:bg-blue-700 font-normal text-sm px-6 py-3 rounded-full shadow hover:shadow-testimonialShadow outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150',
   positioncon:'opacity-25 fixed inset-0 z-40 bg-black',
 };
-function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, onChange=null, sort }) {
+function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, onChange=null, sort, minValue, maxValue, value }) {
   const [showModal, setShowModal] = useState(false);
  const [filtros, setFiltros] = useState([]);
-  const [rangeValue, setRangeValue] = useState([5,50]);
+  const [rangeValue, setRangeValue] = useState(value);
 
-  const updateRangeValue = (event, data) => {
+  const updateRangeValue = (event) => {
     setRangeValue(event.target.value)
     console.log(event.target.value)
   }
@@ -114,8 +114,14 @@ function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, onChange=
                     <label htmlFor="customRange1" className="form-label">
                       Distancia
                     </label>
-                    <input type="range" max={50} min={5} step={1} placeholder={rangeValue} value={rangeValue} onRangeChange={updateRangeValue} className={classes.rangedesing} id="customRange1"
+                    <div className='flex'>
+                      <label className='text-xxs'>{minValue}</label>  
+                      <input type="range" max={maxValue} min={minValue} step={1} value={rangeValue} 
+                    onChange={updateRangeValue} className={classes.rangedesing} id="customRange1"
                     />
+                    <label className='text-xxs'>{maxValue}</label>
+                    </div>
+                    
                   </div>
                   <div className={classes.btntagscon}>
                   <BtnTags className={classes.btnclass} onTagClick={handleTagChange} />

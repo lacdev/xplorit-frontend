@@ -33,6 +33,7 @@ export async function getRouteLikes({ queryKey }) {
 }
 
 export async function createRoute(data, images) {
+  const token = localStorage.getItem("token");
   const service_url = `${endpoints.postRoute}`;
   const formData = new FormData();
   formData.append("data", JSON.stringify(data));
@@ -57,7 +58,6 @@ export async function saveReviewOnRoute(data, routeId, userId) {
 }
 export async function getAllFilterRoutes(url) {
   const getFilterRoutes = await axios.get(url);
-  console.log("is url there?", url);
   const filterRoutes = getFilterRoutes.data;
   return filterRoutes;
 }
