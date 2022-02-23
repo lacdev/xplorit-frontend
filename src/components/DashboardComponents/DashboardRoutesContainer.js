@@ -3,6 +3,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { getRoutesCreatedByUser } from "services/user.services";
 import DashboardCard from "./DashboardCard";
+import BigTitle from "components/Common/BigTitle";
 
 function DashboardRoutesContainer() {
   const getRoutes = useQuery(["getRoutes"], getRoutesCreatedByUser);
@@ -14,21 +15,18 @@ function DashboardRoutesContainer() {
   }
 
   if (status === "error") {
-    return (
-      <span className='font-bold text-center'>
-        No se encontraron Rutas con ese ID
-      </span>
-    );
+    return <span className="font-bold text-center">No se encontraron Rutas con ese ID</span>;
   }
 
   return (
     <>
+      <div>
+        <BigTitle bigTitleText="Rutas creadas" />
+      </div>
       {data &&
         data.map((route) => {
           console.log("data: ", data);
-          return (
-            <DashboardCard key={route._id} cardData={route} type={"route"} />
-          );
+          return <DashboardCard key={route._id} cardData={route} type={"route"} />;
         })}
     </>
   );
