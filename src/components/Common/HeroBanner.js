@@ -1,34 +1,33 @@
-import React,{useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 //import img2 from 'assets/img/img2.jpg'
-import Inputs from './Inputs';
-import Btncards from './Btncards';
-import Titles from './Titles';
-
+import Inputs from './Inputs'
+import Btncards from './Btncards'
+import Titles from './Titles'
 
 const classes = {
   container: 'w-full h-screen max-h-[700px] bg-waterfall bg-no-repeat bg-cover',
   section: 'flex h-full justify-center items-center bg-black/50',
-  maincon: 'w-2/3 m-auto content-center',
+  maincon: 'w-3/4 m-auto content-center',
   titlescon: 'text-center text-white py-4 mb-8',
   title1: 'text-center m-10',
   title2: 'text-center m-6 text-white',
   btncon: 'flex w-full justify-around',
-  btn: 'py-2',
+  btn: 'py-2 cursor-pointer',
   //    img:'object-cover h-1/5 min-w-full brightness-50',
   //     titlecontent:'relative '
-};
+}
 function HeroBanner() {
-  const navigate = useNavigate();
-  const [inputText, setInputText] = useState('');
-  
+  const navigate = useNavigate()
+  const [inputText, setInputText] = useState('')
+
   const onFormSubmit = (event) => {
     event.preventDefault()
     navigate({
-      pathname:'/searchPlace',
+      pathname: '/searchPlace',
       search: `?query= ${inputText}`,
     })
-   //navigate('/searchPlace', {search: `?query= ${inputText}`})
+    //navigate('/searchPlace', {search: `?query= ${inputText}`})
   }
   return (
     <div className={classes.container}>
@@ -47,15 +46,25 @@ function HeroBanner() {
             />
           </div>
           <form onSubmit={onFormSubmit}>
-          <Inputs value={inputText} placeholderText="Empieza tu búsqueda aquí" onChange={(event) => {setInputText(event.target.value)}} />
-          <div className={classes.btncon}>
-            <Btncards  buttonType='submit' className={classes.btn} buttonText="Buscar" />
-          </div>
+            <Inputs
+              value={inputText}
+              placeholderText="Empieza tu búsqueda aquí"
+              onChange={(event) => {
+                setInputText(event.target.value)
+              }}
+            />
+            <div className={classes.btncon}>
+              <Btncards
+                buttonType="submit"
+                className={classes.btn}
+                buttonText="Buscar"
+              />
+            </div>
           </form>
         </div>
       </section>
     </div>
-  );
+  )
 }
 
-export default HeroBanner;
+export default HeroBanner
