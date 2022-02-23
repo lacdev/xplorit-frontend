@@ -31,8 +31,11 @@ export async function getOwnerPlace({ queryKey }) {
   return getOwnerPlaceData;
 }
 
-export async function getAllFilterPlaces(url,initialSearch) {
-console.log("🚀 ~ file: places.services.js ~ line 29 ~ getAllFilterPlaces ~ initialSearch", initialSearch)
+export async function getAllFilterPlaces(url, initialSearch) {
+  console.log(
+    "🚀 ~ file: places.services.js ~ line 29 ~ getAllFilterPlaces ~ initialSearch",
+    initialSearch
+  );
   const getFilterPlaces = await axios.get(url);
   const filterPlaces = getFilterPlaces.data;
   return filterPlaces;
@@ -73,10 +76,6 @@ export async function createPlace(data, images) {
 }
 
 export async function saveLikeOnPlace(placeId) {
-<<<<<<< HEAD
-=======
-  console.log("placeId: ", placeId);
->>>>>>> develop
   const service_url = `${endpoints.saveLike}/${placeId}/likes`;
   return await axios.post(
     service_url,
@@ -87,28 +86,6 @@ export async function saveLikeOnPlace(placeId) {
   );
 }
 
-<<<<<<< HEAD
-=======
-/*export async function saveLikeOnPlace(placeId) {
-  console.log("saveLike ", placeId);  
-  const service_url = `${endpoints.saveLike}/${placeId}/likes`;
-  console.log("Token ", token);
-  return await axios.post(service_url, {
-  console.log("saveLike ", placeId);
-  const service_url = `${endpoints.saveLike}/${placeId}/likes`;
-  return await axios.post(service_url, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-}
-
-export async function deleteLikeOnPlace(placeId) {
-  const service_url = `${endpoints.saveLike}/${placeId}/likes`;
-  return await axios.delete(service_url, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-}*/
-
->>>>>>> develop
 export async function deleteLikeOnPlace(placeId) {
   const service_url = `${endpoints.deleteLike}/${placeId}/likes`;
   return await axios.delete(
