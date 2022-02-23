@@ -81,7 +81,7 @@ function RoutePage() {
           </div>
         </section>
       </div>
-      <div className={classes.selectcon}>
+      {/* <div className={classes.selectcon}>
         <div className={classes.textcon}>
           <p>Ordenar por:</p>
         </div>
@@ -93,7 +93,7 @@ function RoutePage() {
             <option value="3">Popular</option>
           </select>
         </div>
-      </div>
+      </div> */}
       <div className={classes.textcarru}>
         <Titles tag="h4" titleText="Top de rutas populares" />
       </div>
@@ -104,7 +104,7 @@ function RoutePage() {
           <CardCarousel type={"route"} cardsData={dataTopRoutes} />
         )}
       </div>
-      <div className={classes.textcarru}>
+      {/* <div className={classes.textcarru}>
         <Titles tag="h4" titleText="Rutas cerca de ti" />
       </div>
       <div className={classes.carruselcon}>
@@ -113,7 +113,7 @@ function RoutePage() {
         ) : (
           <CardCarousel type={"route"} cardsData={dataNearRoutes} />
         )}
-      </div>
+      </div> */}
       <div className={classes.textcarru}>
         <Titles tag="h4" titleText="Rutas compartidas recientemente" />
       </div>
