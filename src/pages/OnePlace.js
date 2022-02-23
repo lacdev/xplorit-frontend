@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { useState } from 'react'
-import parse from 'html-react-parser'
+
+import React, { useContext, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import parse from "html-react-parser";
+import { AuthContext } from "context/AuthContext";
 
 //Icons & Images
 import PinMap from 'assets/icons/PinMap'
@@ -56,16 +58,20 @@ const classes = {
 }
 
 function OnePlace() {
-  const { id } = useParams()
-  const [selectedLocation, setSelectedLocation] = useState(null)
-  const [star, setStar] = useState(0)
+
+  const { id } = useParams();
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [star, setStar] = useState(0);
+  const { userState, setUserState } = useContext(AuthContext);
+  const navigate = useNavigate()
   const [review, setReview] = useState({
     comment: '',
     stars: null,
     userId: '',
   })
 
-  const [textEditorView, setTextEditorView] = useState(classes.textEditorHidden)
+
+  const [textEditorView, setTextEditorView] = useState(classes.textEditorHidden);
 
   const singlePlace = useQuery(['getSinglePlaceData', id], getSinglePlaceData)
   const getReviews = useQuery(['getSingleReview', id], getSingleReview)
@@ -90,8 +96,11 @@ function OnePlace() {
   }, [data, status])
 
   const handleClick = () => {
-    if (textEditorView === classes.textEditorHidden) {
-      setTextEditorView(classes.textEditorShow)
+
+    if (userState.loggedIn === true && textEditorView === classes.textEditorHidden) {
+      setTextEditorView(classes.textEditorShow);
+    } else if (userState.loggedIn === false) {
+      navigate("/login", {replace : true})
     } else {
       setTextEditorView(classes.textEditorHidden)
     }
@@ -153,24 +162,18 @@ function OnePlace() {
                 <PinMap width="50" height="50" />
                 <p>Dirección de la Ubicación</p>
               </div>
-              <div className={classes.ubication}>
-                Ciudad: {data.address.city}
-              </div>
-              <div className={classes.ubication}>
-                Estado: {data.address.state}
-              </div>
-              <div className={classes.ubication}>
-                Calle: {data.address.street}
-              </div>
-              <div className={classes.ubication}>
-                C.P: {data.address.zipcode}
-              </div>
+              <div className={classes.ubication}>Ciudad: {data.address.city}</div>
+              <div className={classes.ubication}>Estado: {data.address.state}</div>
+              <div className={classes.ubication}>Calle: {data.address.street}</div>
+              <div className={classes.ubication}>C.P: {data.address.zipcode}</div>
             </div>
+
             <Btncards
               onClick={handleClick}
               className={classes.btn}
               buttonText="Reseñar"
             />
+
             <div className={textEditorView}>
               <form>
                 <textarea

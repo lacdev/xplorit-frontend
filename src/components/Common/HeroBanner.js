@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 //import img2 from 'assets/img/img2.jpg'
@@ -21,24 +22,23 @@ function HeroBanner() {
   const navigate = useNavigate()
   const [inputText, setInputText] = useState('')
 
+
   const onFormSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     navigate({
+
       pathname: '/searchPlace',
       search: `?query= ${inputText}`,
     })
     //navigate('/searchPlace', {search: `?query= ${inputText}`})
   }
+
   return (
     <div className={classes.container}>
       <section className={classes.section}>
         <div className={classes.maincon}>
           <div className={classes.titlescon}>
-            <Titles
-              tag="h1"
-              titleText="Explora lugares cercanos a ti"
-              className={classes.title1}
-            />
+            <Titles tag="h1" titleText="Explora lugares cercanos a ti" className={classes.title1} />
             <Titles
               tag="h2"
               titleText="Conoce la experiencia que otros usuarios han tenido"
@@ -59,6 +59,7 @@ function HeroBanner() {
                 className={classes.btn}
                 buttonText="Buscar"
               />
+
             </div>
           </form>
         </div>

@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
 
 //UseQuery
-import { useQuery } from 'react-query';
-import { getLikesCreatedByUser } from 'services/user.services';
-//Components 
-import DashboardLikeCard from './DashboardLikeCard';
+import { useQuery } from "react-query";
+import { getLikesCreatedByUser } from "services/user.services";
+//Components
+import DashboardLikeCard from "./DashboardLikeCard";
+import BigTitle from "components/Common/BigTitle";
 
 function DashboardLikeContainer() {
   // const id = "61ef68279262e2f167700caf";
@@ -48,6 +49,9 @@ function DashboardLikeContainer() {
 
   return (
     <div>
+      <div>
+        <BigTitle bigTitleText="Likes" />
+      </div>
       {data &&
         data.map((like) => {
           return renderCard(like);
