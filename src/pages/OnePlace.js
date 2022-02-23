@@ -39,8 +39,8 @@ const classes = {
   liketext: "mr-14",
   qualitext: "mr-10 sphone:mr-17",
   datecon: "m-1 px-6",
-  tagsdiv: "flex justify-start mt-4",
-  tags: "mr-8",
+  tagsdiv: "flex justify-start mt-4 ",
+  tags: "mr-8 flex-wrap",
   decriptioncon: "mt-8 mb-8",
   text: "mt-8 break-words",
   // mapcon:'',
@@ -54,7 +54,6 @@ const classes = {
   btnForm: " mt-1 text-right ml-auto py-2",
   textArea: "border border-current rounded-md w-full min-h-[200px]",
   star: "flex cursor-pointer ml-4 mt-",
-  btncon: "flex justify-end my-6 text-white",
 };
 
 function OnePlace() {
@@ -198,11 +197,13 @@ function OnePlace() {
                 C.P: {data.address.zipcode}
               </div>
             </div>
+
             <Btncards
               onClick={handleClick}
               className={classes.btn}
               buttonText='Reseñar'
             />
+
             <div className={textEditorView}>
               <form onSubmit={postReview}>
                 <textarea

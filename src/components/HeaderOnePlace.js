@@ -13,6 +13,7 @@ import Avatar from "components/Common/Avatar";
 import { Labels } from "components/Common/Labels";
 import Titles from "components/Common/Titles";
 import StarRatingStatic from "./RatingStarStatic";
+import { saveLikeOnPlace, deleteLikeOnPlace } from "services/places.services";
 
 //Axios functions
 import {
@@ -28,20 +29,23 @@ const classes = {
   section: "px-8",
   titleicon: "flex flex-col md:flex-row p-2 mt-4 justify-between",
   auxiconcon: "flex flex-row ",
-  iconscon: "flex flex-col p-2 items-end ",
-  hearticon: "mr-8",
+  iconscon: "flex flex-col p-2 mt-4 sm:mt-1",
+  hearticon: "",
   staricon: "",
-  inforcon: "flex flex-col md:flex-row p-1 justify-between",
-  avausercon: "flex ",
-  usercon: "flex flex-col justify-center items-center",
-  likequalcon: "flex flex-row text-center",
+  inforcon: "flex",
+  avausercon: "",
+  // flex
+  usercon: "flex flex-col",
+  created: "text-2xl font-bold mb-2",
+  // flex flex-row text-center
+  likequalcon: "flex",
   //spanlike:'mr-14 text-center content-center phone:mr-2 phone:text-sm',
   //spanquali:'mr-2 text-center content-center phone:mr-10 phone:text-sm',
   liketext: "mr-9 mt-1",
   qualitext: "mr-22",
-  datecon: "m-1 px-6",
-  tagsdiv: "flex justify-start mt-4 ml-17",
-  tags: "mr-8",
+  datecon: "",
+  tagsdiv: "flex flex-wrap ",
+  tags: "",
   decriptioncon: "mt-8 mb-8",
   text: "mt-8 break-words",
   // mapcon:'',
@@ -50,7 +54,6 @@ const classes = {
   ubication: "ml-15 my-2",
   // commentcon:'',
   btn: "ml-9 py-2",
-  created: "text-2xl",
 };
 function HeaderOnePlace({
   placeId,
@@ -143,7 +146,8 @@ function HeaderOnePlace({
   return (
     <section className='px-8'>
       <div className={classes.titleicon}>
-        <Titles tag='h3' titleText={title || ""}></Titles>
+        <h1 className='font-extrabold text-6xl'>{title || ""}</h1>
+
         <div className={classes.iconscon}>
           <div onClick={postLike} className='flex flex-row w-fit'>
             {validate === false ? (
@@ -153,11 +157,14 @@ function HeaderOnePlace({
                 className={classes.hearticon}
               />
             ) : (
-              <HeartComplet
-                width='28'
-                height='28'
-                className={classes.hearticon}
-              />
+              <div className='flex flex-col'>
+                <HeartComplet
+                  width='28'
+                  height='28'
+                  className={classes.hearticon}
+                />
+                <p className='mt-2'>{usePostLike}</p>
+              </div>
             )}
             {/*{hasLike ? (
               <HeartComplet
@@ -189,28 +196,35 @@ function HeaderOnePlace({
               <p className='mt-1'>{average}</p>
               <p className=''>Calificación</p>
             </div>
+
+            <ThreePoints width='40' height='28' className='ml-8' />
           </div>
         </div>
       </div>
+
       <div className={classes.inforcon}>
         <div className={classes.avausercon}>
           <Avatar avatarImg={avatar} />
-          <div className={classes.usercon}>
-            <p className={classes.created}>Agregado por {username}</p>
+        </div>
+
+        <div className={classes.usercon}>
+          <p className={classes.created}>{username}</p>
+          <div className={classes.datecon}>
+            <p>{`${creationDate} (creado ${currentDate})`}</p>
+          </div>
+          <div className={classes.tagsdiv}>
+            {tags &&
+              tags.map((tag, i) => {
+                return (
+                  <Labels
+                    key={i}
+                    LabelText={tag}
+                    className={classes.tags}
+                  ></Labels>
+                );
+              })}
           </div>
         </div>
-      </div>
-      <div className={classes.datecon}>
-        <p className='ml-12 text-xl'>Fecha de publicación</p>
-        <p className='ml-12'>{`ultima actualizacion ${currentDate} (creado el ${creationDate})`}</p>
-      </div>
-      <div className={classes.tagsdiv}>
-        {tags &&
-          tags.map((tag, i) => {
-            return (
-              <Labels key={i} LabelText={tag} className={classes.tags}></Labels>
-            );
-          })}
       </div>
     </section>
   );
