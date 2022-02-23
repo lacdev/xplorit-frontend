@@ -1,53 +1,52 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from 'react'
 //import { SliderElements } from './SliderElements';
-import ArrowLeft from "assets/icons/ArrowLeft";
-import ArrowRight from "assets/icons/ArrowRight";
+import ArrowLeft from 'assets/icons/ArrowLeft'
+import ArrowRight from 'assets/icons/ArrowRight'
 
 const classes = {
-  secction: "relative w-full h-full lg:w-screen lg:h-screen",
-  iconleft:
-    "absolute right-0 bottom-bottom7.5 left-80 justify-end inline-flex items-start cursor-pointer h-9 w-12",
+  section: 'relative w-full h-1/2',
+  iconleft: 'absolute cursor-pointer bottom-10 left-20 sm:left-40 md:left-60',
   iconright:
-    "absolute bottom-bottom7.5 left-2/3 justify-end inline-flex items-center cursor-pointer h-9 w-12",
-  imgcont: "w-full h-screen",
-  img: "object-cover object-center w-3/4 h-full lg:w-screen lg:h-screen",
-  animation: "delay-05ms ease-out animate-slides",
-};
+    'absolute cursor-pointer bottom-10 right-20 sm:right-40 md:right-60',
+  imgcont: 'w-full h-1/2',
+  img: 'object-cover w-full h-full',
+  animation: 'delay-05ms ease-out animate-slides',
+}
 
-let count = 0;
+let count = 0
 function ImageSlider({ slides }) {
-  const [current, setCurrent] = useState(0);
-  const length = slides.length;
+  const [current, setCurrent] = useState(0)
+  const length = slides.length
 
-  const slideRef = useRef();
+  const slideRef = useRef()
   const removeAnimation = () => {
-    slideRef.current.classList.remove(classes.animation);
-  };
+    slideRef.current.classList.remove(classes.animation)
+  }
 
   useEffect(() => {
-    slideRef.current.addEventListener("animationend", removeAnimation);
+    slideRef.current.addEventListener('animationend', removeAnimation)
     //startSlider();
     return () => {
-      slideRef.current.removeEventListener("animationend");
-    };
-  }, []);
+      slideRef.current.removeEventListener('animationend')
+    }
+  }, [])
 
   const startSlider = () => {
     setInterval(() => {
-      nextSlide();
-    }, 4000);
-  };
+      nextSlide()
+    }, 4000)
+  }
 
   const nextSlide = () => {
-    count = (count + 1) % length;
-    setCurrent(count);
-    slideRef.current.classList.add(classes.animation);
-  };
+    count = (count + 1) % length
+    setCurrent(count)
+    slideRef.current.classList.add(classes.animation)
+  }
   const prevSlide = () => {
-    count = (current + length - 1) % length;
-    setCurrent(count);
-    slideRef.current.classList.add(classes.animation);
-  };
+    count = (current + length - 1) % length
+    setCurrent(count)
+    slideRef.current.classList.add(classes.animation)
+  }
 
   /*   const nextSlide =() => {
     console.log(current); 
@@ -71,15 +70,18 @@ function ImageSlider({ slides }) {
    }
 */
   if (!Array.isArray(slides) || slides.length <= 0) {
-    return null;
+    return null
   }
   return (
-    <section className={classes.secction} ref={slideRef}>
+    <section className={classes.section} ref={slideRef}>
       <ArrowLeft onClick={prevSlide} className={classes.iconleft} />
       <ArrowRight onClick={nextSlide} className={classes.iconright} />
-      <img src={slides[current]} alt='route images' className={classes.img} />
+
+      <div className={classes.imgcont}>
+        <img src={slides[current]} alt="route images" className={classes.img} />
+      </div>
     </section>
-  );
+  )
 }
 
-export default ImageSlider;
+export default ImageSlider
