@@ -33,6 +33,7 @@ export async function getRouteLikes({ queryKey }) {
 }
 
 export async function createRoute(data, images) {
+  const token = localStorage.getItem("token");
   const service_url = `${endpoints.postRoute}`;
   const formData = new FormData();
   formData.append("data", JSON.stringify(data));

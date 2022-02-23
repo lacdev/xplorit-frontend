@@ -47,7 +47,7 @@ function CreateRoute() {
   };
 
   const saveImageToState = (imagesData) => {
-    console.log(imagesData);
+    // console.log(imagesData);
     setPlaceImages(imagesData);
   };
 
@@ -60,7 +60,7 @@ function CreateRoute() {
     };
     const newLocationDataArray = [...locationsData, locationsObject];
     setLocationsData(newLocationDataArray);
-    console.log("This is newLocation", newLocationDataArray);
+    // console.log("This is newLocation", newLocationDataArray);
   };
 
   const Publish = async (event) => {
@@ -93,15 +93,13 @@ function CreateRoute() {
           coordinates: newCoords,
         },
       };
-      console.log("Estamos dentro de Publish", data, placeImages);
+      // console.log("Estamos dentro de Publish", data, placeImages);
       if (userState.loggedIn == true) {
         mutationPost.mutate({ data, placeImages });
         // navigate("/", { replace: true });
       } else {
         navigate("/login", { replace: true });
       }
-      // await createPlace(data, placeImages);
-      // {mutate(data)}
     } catch (error) {
       console.error(error.message);
     }

@@ -59,6 +59,7 @@ export async function getSingleReviewRoute({ queryKey }) {
 }
 
 export async function createPlace(data, images) {
+  const token = localStorage.getItem("token");
   const service_url = `${endpoints.postPlace}`;
   const formData = new FormData();
   formData.append("data", JSON.stringify(data));

@@ -84,7 +84,7 @@ function CreatePlace() {
           coordinates: [selectedLocation.lng, selectedLocation.lat],
         },
       };
-      console.log(data, placeImages);
+      // console.log(data, placeImages);
       if (userState.loggedIn == true) {
         mutationPost.mutate({ data, placeImages });
         // navigate("/", { replace: true });
