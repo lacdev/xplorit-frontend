@@ -13,7 +13,6 @@ import Avatar from "components/Common/Avatar";
 import { Labels } from "components/Common/Labels";
 import Titles from "components/Common/Titles";
 import StarRatingStatic from "./RatingStarStatic";
-import { saveLikeOnPlace, deleteLikeOnPlace } from "services/places.services";
 
 //Axios functions
 import {
@@ -102,17 +101,17 @@ function HeaderOnePlace({
     return 0;
   }
 
-  if (status === "error" && statusUser === "error") {
-    //console.log(" a ocurrido un error");
-  }
+  //if (status === "error" && statusUser === "error") {
+  //console.log(" a ocurrido un error");
+  //}
 
   if (statusUser === "success" && status === "success") {
-    //console.log("user ", dataUser);
-    //console.log("data ", data);
-    const user = getUser.data._id;
+    console.log("user ", dataUser);
+    console.log("data ", data);
+    const user = getUser.data?._id;
     console.log("user ", user);
     const validate = data.some((like) => like.userId === user);
-    //if (validate) setHasLike(true);
+    if (validate) setHasLike(true);
     //console.log("validate ", validate);
   }
 
@@ -150,7 +149,7 @@ function HeaderOnePlace({
 
         <div className={classes.iconscon}>
           <div onClick={postLike} className='flex flex-row w-fit'>
-            {validate === false ? (
+            {/*hasLike === false ? (
               <HeartFillOut
                 width='28'
                 height='28'
@@ -165,8 +164,8 @@ function HeaderOnePlace({
                 />
                 <p className='mt-2'>{usePostLike}</p>
               </div>
-            )}
-            {/*{hasLike ? (
+            )*/}
+            {hasLike ? (
               <HeartComplet
                 width='28'
                 height='28'
@@ -178,7 +177,7 @@ function HeaderOnePlace({
                 height='28'
                 className={classes.hearticon}
               />
-            )}*/}
+            )}
             <StarRatingStatic
               width='28'
               height='28'
