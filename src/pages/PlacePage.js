@@ -4,18 +4,20 @@ import Inputs from "components/Common/Inputs";
 import Btncards from "components/Common/Btncards";
 import CardCarousel from "components/CardCarousel";
 //useQuery & Services
-import { useQuery } from 'react-query';
-import { getCardsPlacesHome } from 'services/places.services'
-import LoadersCards from 'components/Common/LoadersCards';
+import { useQuery } from "react-query";
+import { getCardsPlacesHome } from "services/places.services";
+import LoadersCards from "components/Common/LoadersCards";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import LoaderHome from "components/LandingComponents/LoaderHome";
 //import { getTopPlaces } from 'services/places.services';
 //import { getNearPlaces } from 'services/places.services';
 //import { getRecentlySharedPlaces } from 'services/places.services';
 
 const classes = {
   parentcon: " font-primary justify-center align-middle",
-  container: "w-full h-screen max-h-[700px] bg-routeplaceimg bg-no-repeat bg-cover",
+  container:
+    "w-full h-screen max-h-[700px] bg-routeplaceimg bg-no-repeat bg-cover",
   section: "flex h-full justify-center items-center bg-black/50",
   titlecon: "flex break-words w-full justify-around p-4",
   maincon: "w-5/6 justify-center inline-align-top text-center",
@@ -45,18 +47,36 @@ function PlacePage() {
     });
 
     //Recently shared Places
-    const cardsRecentlySharedPlaces = useQuery("getRecentlySharedPlaces", getCardsPlacesHome, {
-      onSuccess: () => console.log("getRecentlySharedPlaces fetch with success"),
-    });
+    const cardsRecentlySharedPlaces = useQuery(
+      "getRecentlySharedPlaces",
+      getCardsPlacesHome,
+      {
+        onSuccess: () =>
+          console.log("getRecentlySharedPlaces fetch with success"),
+      }
+    );
 
     return { cardsTopPlaces, cardsNearPlaces, cardsRecentlySharedPlaces };
   };
 
-  const { cardsTopPlaces, cardsNearPlaces, cardsRecentlySharedPlaces } = useQueryMultiple();
+  const { cardsTopPlaces, cardsNearPlaces, cardsRecentlySharedPlaces } =
+    useQueryMultiple();
 
-  const { data: topPlacesData, isLoading: loadingTopPlaces, status } = cardsTopPlaces;
-  const { data: nearPlacesData, isLoading: loadingNearPlaces, status: statusP } = cardsNearPlaces;
-  const { data: recentlyPlacesData, isLoading: loadingRecentlyPlaces, status: statusR } = cardsRecentlySharedPlaces;
+  const {
+    data: topPlacesData,
+    isLoading: loadingTopPlaces,
+    status,
+  } = cardsTopPlaces;
+  const {
+    data: nearPlacesData,
+    isLoading: loadingNearPlaces,
+    status: statusP,
+  } = cardsNearPlaces;
+  const {
+    data: recentlyPlacesData,
+    isLoading: loadingRecentlyPlaces,
+    status: statusR,
+  } = cardsRecentlySharedPlaces;
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -68,15 +88,15 @@ function PlacePage() {
   };
 
   if (status === "error") {
-    <span className="font-bold text-center"> no se encontraron lugares </span>;
+    <span className='font-bold text-center'> no se encontraron lugares </span>;
   }
 
   if (statusP === "error") {
-    <span className="font-bold text-center"> no se encontraron lugares </span>;
+    <span className='font-bold text-center'> no se encontraron lugares </span>;
   }
 
   if (statusR === "error") {
-    <span className="font-bold text-center"> no se encontraron lugares </span>;
+    <span className='font-bold text-center'> no se encontraron lugares </span>;
   }
 
   return (
@@ -85,16 +105,23 @@ function PlacePage() {
         <section className={classes.section}>
           <div className={classes.maincon}>
             <div className={classes.titlescon}>
-              <Titles tag="h1" titleText="Comienza a descubir lugares creados por la comunidad" />
+              <Titles
+                tag='h1'
+                titleText='Comienza a descubir lugares creados por la comunidad'
+              />
             </div>
             <Inputs
               value={inputText}
-              placeholderText="Escribe el nombre o palabra clave"
+              placeholderText='Escribe el nombre o palabra clave'
               onChange={(event) => {
                 setInputText(event.target.value);
               }}
             />
-            <Btncards onClick={onFormSubmit} className={classes.btn} buttonText="Buscar" />
+            <Btncards
+              onClick={onFormSubmit}
+              className={classes.btn}
+              buttonText='Buscar'
+            />
           </div>
         </section>
       </div>
@@ -112,19 +139,23 @@ function PlacePage() {
         </div>
       </div> */}
       <div className={classes.textcarru}>
-        <Titles tag="h4" titleText="Top de lugares populares" />
+        <Titles tag='h4' titleText='Top de lugares populares' />
       </div>
       <div className={classes.carruselcon}>
         {loadingTopPlaces === true ? (
-          <span>Loading...</span>
+          <LoaderHome />
         ) : (
           <CardCarousel type={"place"} cardsData={topPlacesData} />
         )}
       </div>
-      <div className={classes.carruselcon} >
-          {loadingTopPlaces === true?<LoadersCards/>:<CardCarousel type={'place'} cardsData={topPlacesData}/>}
-        </div>
-        <div className={classes.textcarru}>
+      <div className={classes.carruselcon}>
+        {loadingTopPlaces === true ? (
+          <LoaderHome />
+        ) : (
+          <CardCarousel type={"place"} cardsData={topPlacesData} />
+        )}
+      </div>
+      <div className={classes.textcarru}>
         <Titles tag='h4' titleText='Lugares cerca de ti' />
       </div>
       {/* <div className={classes.carruselcon} >
@@ -133,9 +164,13 @@ function PlacePage() {
         <div className={classes.textcarru}>
         <Titles tag='h4' titleText='Lugares compartidos recientemente' />
       </div> */}
-      <div className={classes.carruselcon} >
-          {loadingRecentlyPlaces === true?<LoadersCards/>:<CardCarousel type={'place'} cardsData={recentlyPlacesData}/>}
-        </div>
+      <div className={classes.carruselcon}>
+        {loadingRecentlyPlaces === true ? (
+          <LoaderHome />
+        ) : (
+          <CardCarousel type={"place"} cardsData={recentlyPlacesData} />
+        )}
+      </div>
     </div>
   );
 }

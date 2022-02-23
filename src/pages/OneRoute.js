@@ -13,6 +13,7 @@ import Btncards from "components/Common/Btncards";
 import HeaderOneRoute from "components/HeaderOneRoute";
 import MapComponent from "components/MapComponent";
 import StarRating from "components/RatingStar";
+import HeroLoader from "components/Common/HeroLoader";
 
 //useQuery & services
 import { useQuery } from "react-query";
@@ -20,7 +21,6 @@ import { getSingleRouteData } from "services/routes.services";
 import { getSingleReviewRoute } from "services/places.services";
 import { saveReviewOnRoute } from "services/routes.services";
 import PlaceAddress from "components/PlaceAddress";
-import HeroLoader from "components/Common/HeroLoader";
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
 const classes = {
@@ -64,7 +64,7 @@ function OneRoute() {
   const [locationsData, setLocationsData] = useState([]);
   const [star, setStar] = useState(0);
   const { userState, setUserState } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [render, setRender] = useState([]);
   const [review, setReview] = useState({
     comment: "",
@@ -121,10 +121,13 @@ function OneRoute() {
   };
 
   const handleClick = () => {
-    if (userState.loggedIn === true && textEditorView === classes.textEditorHidden) {
+    if (
+      userState.loggedIn === true &&
+      textEditorView === classes.textEditorHidden
+    ) {
       setTextEditorView(classes.textEditorShow);
     } else if (userState.loggedIn === false) {
-      navigate("/login", {replace : true})
+      navigate("/login", { replace: true });
     } else {
       setTextEditorView(classes.textEditorHidden);
     }
@@ -149,7 +152,7 @@ function OneRoute() {
   };
 
   if (status === "loading") {
-    return <HeroLoader/>;
+    return <HeroLoader />;
   }
 
   if (status === "success") {

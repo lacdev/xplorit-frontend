@@ -111,7 +111,7 @@ function HeaderOnePlace({
     const user = getUser.data?._id;
     console.log("user ", user);
     const validate = data.some((like) => like.userId === user);
-    if (validate) setHasLike(true);
+    //if (validate) setHasLike(true);
     //console.log("validate ", validate);
   }
 
@@ -149,7 +149,7 @@ function HeaderOnePlace({
 
         <div className={classes.iconscon}>
           <div onClick={postLike} className='flex flex-row w-fit'>
-            {/*hasLike === false ? (
+            {useHeart === false ? (
               <HeartFillOut
                 width='28'
                 height='28'
@@ -164,20 +164,8 @@ function HeaderOnePlace({
                 />
                 <p className='mt-2'>{usePostLike}</p>
               </div>
-            )*/}
-            {hasLike ? (
-              <HeartComplet
-                width='28'
-                height='28'
-                className={classes.hearticon}
-              />
-            ) : (
-              <HeartFillOut
-                width='28'
-                height='28'
-                className={classes.hearticon}
-              />
             )}
+
             <StarRatingStatic
               width='28'
               height='28'

@@ -16,7 +16,7 @@ import MapComponent from "components/MapComponent";
 import HeaderOnePlace from "components/HeaderOnePlace";
 import StarRating from "components/RatingStar";
 //useQuery
-import { useQueryuseQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient, useMutation } from "react-query";
 import { getSinglePlaceData } from "services/places.services";
 import { getSingleReview } from "services/places.services";
 import { saveReviewOnPlace } from "services/places.services";
@@ -144,12 +144,12 @@ function OnePlace() {
     if (response.statusCode === 200) {
       console.log("todo salio bien");
     } else console.log("algo fue mal");
-  }; */
+  }; 
 
   const HandleSubmit = (e) => {
     e.preventDefault();
     saveReviewOnPlace(review, id);
-  };
+  };*/
 
   if (status === "loading") {
     return <HeroLoader />;
@@ -162,7 +162,7 @@ function OnePlace() {
   if (status === "success") {
     return (
       <div className={classes.parentcon}>
-        <ImageSlider slides={data.images} />
+        {<ImageSlider slides={data.images} />}
 
         <div className='w-5/6 m-auto'>
           {data?.ownerId && (
