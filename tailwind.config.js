@@ -21,8 +21,10 @@ module.exports = {
       width: {
         cardWidth: "26rem",
         testimonialWidth: "19rem",
+        cardsloader:"18rem",
       },
       minWidth: {
+        dashloaderside:"25rem",
         cardWidth: "200px",
         footerBannerW: "85.063rem",
         commentsW: "50rem",

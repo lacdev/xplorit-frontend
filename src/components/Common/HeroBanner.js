@@ -25,7 +25,7 @@ function HeroBanner() {
   const onFormSubmit = (event) => {
     event.preventDefault()
     navigate({
-      pathname:'/searchPlace',
+      pathname:'/searchplace',
       search: `?query= ${inputText}`,
     })
    //navigate('/searchPlace', {search: `?query= ${inputText}`})

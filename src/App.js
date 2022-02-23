@@ -20,8 +20,9 @@ import DashboardLikeContainer from 'components/DashboardComponents/DashboardLike
 import AboutUsPage from 'pages/AboutUs';
 import DashboardPlacesContainer from 'components/DashboardComponents/DashboardPlacesContainer';
 import DashboardRoutesContainer from 'components/DashboardComponents/DashboardRoutesContainer';
-import DashboardLoaderCards from 'components/DashboardComponents/DashboardLoaderCards';
+import LoaderHome from 'components/LandingComponents/LoaderHome'
 import { AuthContextProvider } from 'context/AuthContext';
+
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
 
           
             <Route path='/searchroute' element={<RouteSearch />} />
-            <Route path='/direct' element={<DashboardLoaderCards />} />
+            <Route path='/direct' element={<LoaderHome />} />
 
             <Route path="/" element={<PageLayout />}>
               <Route index element={<Home />} />

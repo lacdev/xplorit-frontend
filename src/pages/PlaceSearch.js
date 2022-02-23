@@ -96,9 +96,9 @@ function PlaceSearch() {
   //     </span>
   //   );
   // }
-  if (status === "success") {
-    console.log("what is placesData?", placesData);
-  }
+  // if (status === "success") {
+     
+  // }
 
   //Event Hide Aside Map
   const handlerClick = () => {
@@ -173,7 +173,9 @@ function PlaceSearch() {
             <BtnTags onTagClick={onTagChange} />
           </div>
           <div className={classes.filtroposition}>
-            <ModalFiltro onSearch={URLSearch} onStateURL={setURLSearch} onChange={`${onSortChange} ${onRangeChange}`}/>
+            <ModalFiltro onSearch={URLSearch} onStateURL={setURLSearch}
+             onChange={`${onSortChange} ${onRangeChange}`} minValue={5} maxValue={50} value={useRange}
+            />
           </div>
         </div>
         <section className={classes.renderres}>
@@ -215,7 +217,7 @@ function PlaceSearch() {
                       return (
                         <SearchCards
                           id={data._id}
-                          //typeofplace={data.type}
+                          typeofplace={data.type}
                           key={index}
                           name={data.name}
                           address={data.address.street}

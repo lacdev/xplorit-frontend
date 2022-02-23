@@ -14,6 +14,7 @@ import { useQuery } from "react-query";
 import { getCardsPlacesHome } from "services/places.services";
 import { getCardsRoutesHome } from "services/routes.services";
 import { AuthContext } from "context/AuthContext";
+import LoaderHome from "components/LandingComponents/LoaderHome";
 
 const classes = {
   parentcon: "justify-center align-middle",
@@ -70,7 +71,7 @@ function Home() {
       <BigTitle bigTitleText='Lugares mejor valorados' />
       <div className={classes.cardscon}>
         {loadingPlace === true ? (
-          <span>Loading...</span>
+          <LoaderHome/>
         ) : (
           <CardCarousel type={"place"} cardsData={placesData} />
         )}
@@ -84,7 +85,7 @@ function Home() {
       <BigTitle bigTitleText='Rutas más recorridas' />
       <div className={classes.cardscon}>
         {loadingRoute === true ? (
-          <span>Loading...</span>
+          <LoaderHome/>
         ) : (
           <CardCarousel type={"route"} cardsData={routesData} />
         )}

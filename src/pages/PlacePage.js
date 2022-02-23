@@ -6,6 +6,7 @@ import CardCarousel from 'components/CardCarousel';
 //useQuery & Services
 import { useQuery } from 'react-query';
 import { getCardsPlacesHome } from 'services/places.services'
+import LoadersCards from 'components/Common/LoadersCards';
 //import { getTopPlaces } from 'services/places.services';
 //import { getNearPlaces } from 'services/places.services';
 //import { getRecentlySharedPlaces } from 'services/places.services';
@@ -96,19 +97,19 @@ function PlacePage() {
         <Titles tag='h4' titleText='Top de lugares populares' />
       </div>
       <div className={classes.carruselcon} >
-          {loadingTopPlaces === true?<span>Loading...</span>:<CardCarousel type={'place'} cardsData={topPlacesData}/>}
+          {loadingTopPlaces === true?<LoadersCards/>:<CardCarousel type={'place'} cardsData={topPlacesData}/>}
         </div>
         <div className={classes.textcarru}>
         <Titles tag='h4' titleText='Lugares cerca de ti' />
       </div>
       <div className={classes.carruselcon} >
-          {loadingNearPlaces === true?<span>Loading...</span>:<CardCarousel type={'place'}  cardsData={nearPlacesData}/>}
+          {loadingNearPlaces === true?<LoadersCards/>:<CardCarousel type={'place'}  cardsData={nearPlacesData}/>}
         </div>
         <div className={classes.textcarru}>
         <Titles tag='h4' titleText='Lugares compartidos recientemente' />
       </div>
       <div className={classes.carruselcon} >
-          {loadingRecentlyPlaces === true?<span>Loading...</span>:<CardCarousel type={'place'} cardsData={recentlyPlacesData}/>}
+          {loadingRecentlyPlaces === true?<LoadersCards/>:<CardCarousel type={'place'} cardsData={recentlyPlacesData}/>}
         </div>
     </div>
   );
