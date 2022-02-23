@@ -29,7 +29,7 @@ function NavBarS({ position = "sticky" }) {
     logoimg: "block h-8 w-auto",
     linkscon: "hidden sm:ml-6 sm:flex sm:space-x-8",
     rightcon: "flex items-center",
-    btncon: "hidden md:block flex-shrink-0",
+    btncon: "md:block flex-shrink-0",
     btn: "relative inline-flex items-center px-4 py-2",
     rigthposition: "md:ml-4 md:flex-shrink-0 md:flex md:items-center",
     dropdowncon: "ml-3 relative",
@@ -83,7 +83,6 @@ function NavBarS({ position = "sticky" }) {
   }, []);
 
   const logOut = () => {
-    console.log("Si cerraria la sesion");
     const newUserState = Object.assign({}, userState, {
       authToken: "",
       loggedIn: false,
