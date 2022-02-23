@@ -120,7 +120,7 @@ function PlacePage() {
           <CardCarousel type={"place"} cardsData={topPlacesData} />
         )}
       </div>
-      <div className={classes.textcarru}>
+      {/* <div className={classes.textcarru}>
         <Titles tag="h4" titleText="Lugares cerca de ti" />
       </div>
       <div className={classes.carruselcon}>
@@ -129,7 +129,7 @@ function PlacePage() {
         ) : (
           <CardCarousel type={"place"} cardsData={nearPlacesData} />
         )}
-      </div>
+      </div> */}
       <div className={classes.textcarru}>
         <Titles tag="h4" titleText="Lugares compartidos recientemente" />
       </div>
