@@ -20,14 +20,18 @@ const classes={
     starticon:'mt-5',
     starttext:'text-xs text-center',   
  }
-function SearchCards({id, name, score, labels, key, images=[],  typeofplace , address}) {
-    const cardLink = `/${typeofplace}/${id}`
+function SearchCards({id, name, score, labels, images=[],  type, address}) {
+    const cardLink = `/${type}/${id}`
     return (
-      <article className={classes.articlecon} key={key} >
+      <article className={classes.articlecon} key={id} >
         <div className={classes.infocon}>
+        <Link to={cardLink}>
           <img src={images[0]} alt="search-img" className={classes.img} />
+          </Link>
           <div className={classes.detailscon}>
-            <Titles tag="h6" titleText={name}></Titles>
+            <Link to={cardLink}>
+               <Titles tag="h6" titleText={name}></Titles>
+            </Link>
             <div className={classes.labelscon}>
             {labels.map((label) => {
                   return <Labels LabelText={`#${label}`}/>

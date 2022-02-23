@@ -140,9 +140,9 @@ function PlaceSearch() {
  const onRangeChange = (event) => {
    setUseRange(event.target.value);
   }
-  useEffect(() => {
+  // useEffect(() => {
       
-  },[onRangeChange] )
+  // },[onRangeChange] )
 //Map Radius 
 // const onRadiusChange = (event) => {
 //   setUseRadius(event.target.value)
@@ -225,7 +225,7 @@ function PlaceSearch() {
                       return (
                         <SearchCards
                           id={data._id}
-                          typeofplace={data.type}
+                          type={'place'}
                           key={index}
                           name={data.name}
                           address={data.address.street}
