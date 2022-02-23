@@ -12,7 +12,7 @@ import { getAllStates } from "services/utils.services";
 import Btncards from "components/Common/Btncards";
 import ModalFiltro from "components/SeachComponents/ModalFiltro";
 import MapComponent from "components/MapComponent";
-import Toggle from "components/SeachComponents/Toggle";
+//import Toggle from "components/SeachComponents/Toggle";
 import SearchCards from "components/SeachComponents/SearchCards";
 import StateSelector from "components/SeachComponents/StateSelector";
 import BtnTags from "components/SeachComponents/BtnTags";
@@ -47,17 +47,19 @@ function PlaceSearch() {
   const [showMap, setShowMap] = useState(false);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedMunicipio, setSelectedMunicipio] = useState(null);
-
-  const [locationsData, setLocationsData] = useState([]);
-  const [useRange, setUseRange] = useState([5, 50]);
-  const [useSort, setUseSort] = useState([]);
+  const [locationsData, setLocationsData] = useState([]);  
+  const [useRange, setUseRange] = useState([5,50]);
+  const [useRadius, setUseRadius] = useState(null);
+  const [useSort, setUseSort] = useState ([]);
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
-  const { data: statesData, status: statesStatus } = useQuery("getAllStates", getAllStates);
+  const { data: statesData, status: statesStatus } = useQuery( "getAllStates", getAllStates );
   //  console.log('is state for selectorMunicipio?', selectedMunicipio);
-  //const {search}= useParams();
-  const searchParam = decodeURIComponent(window.location.search);
-  const queryFromURL = searchParam?.split("=")[1].replace(" ", "");
-  const [URLSearch, setURLSearch] = useState(`${endpoints.getFilterPlace}q=${queryFromURL}`); //localhost/...places?
+ //const {search}= useParams();
+ const searchParam = decodeURIComponent(window.location.search);
+ const queryFromURL = searchParam?.split('=')[1].replace(' ','');
+ const [URLSearch, setURLSearch] = useState(`${endpoints.getFilterPlace}q=${queryFromURL}`);//localhost/...places?
+  
+
 
   //Querys & service to Places
   //places
@@ -68,6 +70,8 @@ function PlaceSearch() {
   } = useQuery(["getAllFilterPlaces", URLSearch, queryFromURL], () => getAllFilterPlaces(URLSearch, queryFromURL), {
     onSuccess: () => console.log("is success?"),
   });
+
+
 
   useEffect(() => {
     if (status === "loading") {
@@ -96,9 +100,9 @@ function PlaceSearch() {
   //     </span>
   //   );
   // }
-  if (status === "success") {
-    console.log("what is placesData?", placesData);
-  }
+  // if (status === "success") {
+     
+  // }
 
   //Event Hide Aside Map
   const handlerClick = () => {
@@ -123,20 +127,27 @@ function PlaceSearch() {
     setURLSearch(newURL);
     setSelectedMunicipio(municipioItem);
   };
-  //Toggle
-  const onToggleChange = (event) => {
-    // console.log('Acciona el evento onChange');
-  };
-  //Selector Sort on Modal
+//Toggle 
+  // const onToggleChange = (event) => {
+   // console.log('Acciona el evento onChange');
+  // }
+//Selector Sort on Modal
   const onSortChange = (event) => {
     setUseSort(event.target.value);
   };
-  //Input Range on Modal
-  //  const onRangeChange = (event) => {
-  //   setUseRange(event.target.value);
-  // }
 
-  //Buttons Tags on Modal & Desktop
+//Input Range on Modal
+ const onRangeChange = (event) => {
+   setUseRange(event.target.value);
+  }
+  useEffect(() => {
+      
+  },[onRangeChange] )
+//Map Radius 
+// const onRadiusChange = (event) => {
+//   setUseRadius(event.target.value)
+// }
+//Buttons Tags on Modal & Desktop
   const onTagChange = (info) => {
     let newURL = "";
     console.log("Infomación de Tags", info);
@@ -165,14 +176,16 @@ function PlaceSearch() {
         <div className={classes.tagsfiltroscon}>
           <div className={classes.togglecon}>
             <span className={classes.togglespanplace}>Lugares</span>
-            <Toggle accionToggle={onToggleChange} />
+            {/* <Toggle accionToggle={onToggleChange} /> */}
             <span className={classes.togglespanroute}>Rutas</span>
           </div>
           <div className={classes.btntagscon}>
             <BtnTags className="min-w-fit" onTagClick={onTagChange} />
           </div>
           <div className={classes.filtroposition}>
-            <ModalFiltro onSearch={URLSearch} onStateURL={setURLSearch} onChange={onSortChange} />
+            <ModalFiltro onSearch={URLSearch} onStateURL={setURLSearch}
+             onChange={`${onSortChange} ${onRangeChange}`} minValue={5} maxValue={50} value={useRange}
+            />
           </div>
         </div>
         <section className={classes.renderres}>
@@ -212,10 +225,10 @@ function PlaceSearch() {
                       return (
                         <SearchCards
                           id={data._id}
-                          //typeofplace={data.type}
+                          typeofplace={data.type}
                           key={index}
                           name={data.name}
-                          //address={data.address.street}
+                          address={data.address.street}
                           labels={data.tags}
                           score={data.average}
                           ownerId={data.ownerId}
@@ -233,6 +246,8 @@ function PlaceSearch() {
               fullHeight={true}
               locationsData={locationsData}
               useMultipleLocations={false}
+              radius={useRange}
+              onChange={onRangeChange}
               // customCenter={
               //   locationsData[Math.floor(locationsData?.length / 2)]?.coords
               // }

@@ -16,10 +16,11 @@ import MapComponent from "components/MapComponent";
 import HeaderOnePlace from "components/HeaderOnePlace";
 import StarRating from "components/RatingStar";
 //useQuery
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useQueryuseQuery, useQueryClient } from "react-query";
 import { getSinglePlaceData } from "services/places.services";
 import { getSingleReview } from "services/places.services";
 import { saveReviewOnPlace } from "services/places.services";
+import HeroLoader from "components/Common/HeroLoader";
 
 const classes = {
   parentcon: "font-primary overflow-x-hidden",
@@ -144,6 +145,15 @@ function OnePlace() {
       console.log("todo salio bien");
     } else console.log("algo fue mal");
   }; */
+
+  const HandleSubmit = (e) => {
+    e.preventDefault();
+    saveReviewOnPlace(review, id);
+  };
+
+  if (status === "loading") {
+    return <HeroLoader />;
+  }
 
   if (status === "loading") {
     return <p> Loading...</p>;
