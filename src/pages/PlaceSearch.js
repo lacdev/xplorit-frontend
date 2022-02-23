@@ -39,7 +39,7 @@ const classes = {
   selectorcon: "flex flex-row w-full",
   divselector: "flex flex-col w-full",
   labelselect: "text-xs",
-  cardscon: "h-screen overgflow-y-scroll overflow-scroll",
+  cardscon: "h-screen overgflow-y-scroll overflow-scroll drop-shadow-testimonialShadow",
   mapcon: "minTablet:block col-span-3 bg-gray-200 h-full",
   btnshow: "py-1 block minTablet:hidden",
 };
