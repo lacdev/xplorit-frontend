@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { AuthContext } from "context/AuthContext";
 import parse from "html-react-parser";
 import Geocode from "react-geocode";
 
@@ -62,6 +63,8 @@ function OneRoute() {
   const userId = "620c634ae13127a727d794e7";
   const [locationsData, setLocationsData] = useState([]);
   const [star, setStar] = useState(0);
+  const { userState, setUserState } = useContext(AuthContext);
+  const navigate = useNavigate()
   const [render, setRender] = useState([]);
   const [review, setReview] = useState({
     comment: "",
@@ -118,8 +121,10 @@ function OneRoute() {
   };
 
   const handleClick = () => {
-    if (textEditorView === classes.textEditorHidden) {
+    if (userState.loggedIn === true && textEditorView === classes.textEditorHidden) {
       setTextEditorView(classes.textEditorShow);
+    } else if (userState.loggedIn === false) {
+      navigate("/login", {replace : true})
     } else {
       setTextEditorView(classes.textEditorHidden);
     }

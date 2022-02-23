@@ -11,11 +11,10 @@ import { data } from "autoprefixer";
 
 const classes = {
   parentcon: "inline-flex w-full h-screen items-center",
-  container: "w-1/2 h-full bg-img-01 bg-no-repeat bg-center",
+  container: " hidden md:block w-1/2 h-full bg-img-01 bg-no-repeat bg-center",
   textcon: "flex h-full justify-center items-center",
-  textdesing:
-    "font-primary font-bold bg-black/50 text-white text-[36px] text-center py-24",
-  formcon: "flex w-1/2 justify-center h-screen items-center",
+  textdesing: "font-primary font-bold bg-black/50 text-white text-[36px] text-center py-24",
+  formcon: "flex w-full md:w-1/2 justify-center h-screen items-center",
   sidecon: "flex-col w-1/2 justify-center",
   title: "p-6",
   description: "text-center px-10 mb-4",
@@ -31,12 +30,9 @@ function LogIn() {
   const [userPassword, setUserPassword] = useState("testpass1");
   const navigate = useNavigate();
 
-  const mutationLogIn = useMutation(
-    (data) => userLogin(data.userEmail, data.userPassword),
-    {
-      onSuccess: (data) => setToken(data.token),
-    }
-  );
+  const mutationLogIn = useMutation((data) => userLogin(data.userEmail, data.userPassword), {
+    onSuccess: (data) => setToken(data.token),
+  });
 
   const logIn = () => {
     mutationLogIn.mutate({ userEmail, userPassword });
@@ -53,59 +49,49 @@ function LogIn() {
     console.log("token", token);
     navigate("/", { replace: true });
   };
-  
+
   return (
     <div className={classes.parentcon}>
       <div className={classes.container}>
         <section className={classes.textcon}>
-          <span className={classes.textdesing}>
-            Registrate para vivir las mejores experiencias de viaje
-          </span>
+          <span className={classes.textdesing}>Registrate para vivir las mejores experiencias de viaje</span>
         </section>
       </div>
       <div className={classes.formcon}>
         <div className={classes.sidecon}>
-          <Link to='/'>
-            <BigTitle className={classes.title} bigTitleText='Xplorit' />
+          <Link to="/">
+            <BigTitle className={classes.title} bigTitleText="Xplorit" />
           </Link>
-          <BigTitle className='' bigTitleText='Iniciar Sesión' />
+          <BigTitle className="" bigTitleText="Iniciar Sesión" />
           <p className={classes.description}>
-            Únete a nuestra comunidad de viajeros como tú que buscan planear,
-            descubrir y compartir las mejores experiencias
+            Únete a nuestra comunidad de viajeros como tú que buscan planear, descubrir y compartir las mejores
+            experiencias
           </p>
           <div className={classes.datacon}>
             <h4>Correo electrónico</h4>
             <Inputs
-              type='email'
+              type="email"
               value={userEmail}
               onChange={(event) => setUserEmail(event.target.value)}
               className={classes.input}
-              placeholderText='Escribe tu nombre de usuario'
+              placeholderText="Escribe tu nombre de usuario"
             />
             <h4>Contraseña</h4>
             <Inputs
-              type='password'
+              type="password"
               value={userPassword}
               onChange={(event) => setUserPassword(event.target.value)}
               className={classes.input}
-              placeholderText='Escribe tu nombre contraseña'
+              placeholderText="Escribe tu nombre contraseña"
             />
           </div>
           {mutationLogIn.isError ? (
-            <div className='text-center text-red-700 mb-6'>
-              El correo o la contraseña están equivocados
-            </div>
+            <div className="text-center text-red-700 mb-6">El correo o la contraseña están equivocados</div>
           ) : null}
-          <Btncards
-            onClick={logIn}
-            className={classes.btn}
-            buttonText='Iniciar sesión'
-          />
+          <Btncards onClick={logIn} className={classes.btn} buttonText="Iniciar sesión" />
           <br></br>
-          <Link to='/signup'>
-            <p className={classes.idication}>
-              No tienes una cuenta? Regístrate
-            </p>
+          <Link to="/signup">
+            <p className={classes.idication}>No tienes una cuenta? Regístrate</p>
           </Link>
         </div>
       </div>

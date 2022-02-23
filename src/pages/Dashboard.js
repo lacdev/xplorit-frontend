@@ -47,9 +47,6 @@ function Dashboard() {
         )}
       </div>
       <div className={classes.maincon}>
-        <div>
-          <BigTitle className={classes.title} bigTitleText='Rutas creadas' />
-        </div>
         <div className={classes.outletcon}>
           {status === "loading" && userState.loggedIn === true ? (
             <DashboardLoaderCards/>
