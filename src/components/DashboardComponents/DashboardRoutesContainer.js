@@ -10,13 +10,13 @@ function DashboardRoutesContainer() {
   const { data, status } = getRoutes;
 
   if (status === "loading") {
-    return <span> Loading...</span>;
+    return <span className=' font-bold text-center'>Buscando Rutas...</span>;
   }
 
   if (status === "error") {
     return (
       <span className='font-bold text-center'>
-        No se encontraron Rutas con ese ID
+        No se encontraron Rutas creadas para este usuario
       </span>
     );
   }

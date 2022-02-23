@@ -15,7 +15,7 @@ import MapComponent from "components/MapComponent";
 import HeaderOnePlace from "components/HeaderOnePlace";
 import StarRating from "components/RatingStar";
 //useQuery
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getSinglePlaceData } from "services/places.services";
 import { getSingleReview } from "services/places.services";
 import { saveReviewOnPlace } from "services/places.services";
@@ -53,16 +53,20 @@ const classes = {
   btnForm: " mt-1 text-right ml-auto py-2",
   textArea: "border border-current rounded-md w-full min-h-[200px]",
   star: "flex cursor-pointer ml-4 mt-",
+  btncon: "flex justify-end my-6 text-white",
 };
 
 function OnePlace() {
   const { id } = useParams();
+  const queryClient = useQueryClient;
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [star, setStar] = useState(0);
   const [review, setReview] = useState({
     comment: "",
     stars: null,
   });
+
+  const [render, setRender] = useState([]);
 
   const [textEditorView, setTextEditorView] = useState(
     classes.textEditorHidden
@@ -74,6 +78,23 @@ function OnePlace() {
   const { data, status } = singlePlace;
   const { data: dataReviews, status: statusReviews } = getReviews;
 
+  const addReview = useMutation((data) => saveReviewOnPlace(data.review, id), {
+    onSuccess: (review) => {
+      queryClient.setQueryData(["review"], review);
+    },
+    onError: () => console.log("Hubo un error inesperado"),
+  });
+
+  const postReview = (e) => {
+    e.preventDefault();
+
+    const data = {
+      review,
+    };
+
+    addReview.mutate(data);
+  };
+
   useEffect(() => {
     if (status === "loading") {
       return;
@@ -82,13 +103,12 @@ function OnePlace() {
     if (data === undefined) {
       return;
     }
-
     const markerCoords = {
       lat: data.location.coordinates[1],
       lng: data.location.coordinates[0],
     };
     setSelectedLocation(markerCoords);
-  }, [data, status]);
+  }, [data]);
 
   const handleClick = () => {
     if (textEditorView === classes.textEditorHidden) {
@@ -110,10 +130,13 @@ function OnePlace() {
     setReview(newReview);
   };
 
-  const HandleSubmit = (e) => {
+  /*const HandleSubmit = (e) => {
     e.preventDefault();
-    saveReviewOnPlace(review, id);
-  };
+    const response = saveReviewOnPlace(review, id);
+    if (response.statusCode === 200) {
+      console.log("todo salio bien");
+    } else console.log("algo fue mal");
+  }; */
 
   if (status === "loading") {
     return <p> Loading...</p>;
@@ -128,6 +151,7 @@ function OnePlace() {
           {data?.ownerId && (
             <HeaderOnePlace
               placeId={id}
+              //userId={data.id}
               title={data.name}
               tags={data.tags}
               likes={data.likes}
@@ -172,7 +196,7 @@ function OnePlace() {
               buttonText='Reseñar'
             />
             <div className={textEditorView}>
-              <form>
+              <form onSubmit={postReview}>
                 <textarea
                   placeholder=' Describe tu experiencia...'
                   type='text'
@@ -181,6 +205,16 @@ function OnePlace() {
                   onChange={(e) => saveReview(e)}
                   value={review.comment}
                 ></textarea>
+                <div>
+                  <button
+                    className={
+                      "bg-blue-600 ml-auto px-3 py-2 font-Poppins text-white rounded-full hover:bg-blue-700 drop-shadow-lg"
+                    }
+                    type='submit'
+                  >
+                    Publicar
+                  </button>
+                </div>
               </form>
               <p className='ml-10'> Califica el lugar :</p>
               <div className='flex '>
@@ -192,12 +226,12 @@ function OnePlace() {
                   onChange={(e) => saveStar(e)}
                   stars={star}
                 />
-                <button
+                {/*<button
                   className='bg-blue-600 ml-auto px-3 py-2 font-Poppins text-white rounded-full hover:bg-blue-700 drop-shadow-lg'
-                  onClick={HandleSubmit}
+                  type='submit'
                 >
                   Reseñar
-                </button>
+                </button>*/}
               </div>
             </div>
             <div className={classes.commentcon}>
@@ -210,6 +244,7 @@ function OnePlace() {
                       currentDate={review.createdAt}
                       stars={review.stars}
                       comment={review.comment}
+                      state={render}
                     />
                   );
                 })}

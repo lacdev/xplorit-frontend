@@ -9,7 +9,6 @@ export async function getUserProfilePic({ queryKey }) {
     headers: { Authorization: `Bearer ${token}` },
   });
   const getUser = getUserPromise.data.data;
-  console.log("getUSer ", getUser);
   return getUser;
 }
 

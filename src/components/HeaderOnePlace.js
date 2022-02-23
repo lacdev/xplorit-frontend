@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "context/AuthContext";
 import { formatDate, formatCreationDate } from "utils/date";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
 import HeartComplet from "assets/icons/HeartComplete";
@@ -13,10 +13,13 @@ import Avatar from "components/Common/Avatar";
 import { Labels } from "components/Common/Labels";
 import Titles from "components/Common/Titles";
 import StarRatingStatic from "./RatingStarStatic";
-import { saveLikeOnPlace, deleteLikeOnPlace } from "services/places.services";
 
 //Axios functions
-import { saveLikeOnPlace } from "services/places.services";
+import {
+  getPlaceLikes,
+  saveLikeOnPlace,
+  getSingleUser,
+} from "services/places.services";
 import { deleteLikeOnPlace } from "services/places.services";
 
 const classes = {
@@ -51,7 +54,6 @@ const classes = {
 };
 function HeaderOnePlace({
   placeId,
-  userId,
   tags,
   title,
   likes = 0,
@@ -62,14 +64,60 @@ function HeaderOnePlace({
   avatar,
 }) {
   const [useHeart, setUseHeart] = useState(false);
+  const [hasLike, setHasLike] = useState(false);
   const [usePostLike, setUsePostLike] = useState(likes);
   const { userState, setUserState } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // const singlePlace = useQuery(["getSinglePlaceData", id], getSinglePlaceData);
-
   const currentDate = formatDate(updatedAt);
   const creationDate = formatCreationDate(createdAt);
+  const getLikes = useQuery(["getLikes", placeId], getPlaceLikes);
+  const getUser = useQuery(["user"], getSingleUser);
+
+  const { data, status } = getLikes;
+  const { data: dataUser, status: statusUser } = getUser;
+
+  const addLike = useMutation(() => saveLikeOnPlace(placeId), {
+    onSuccess: (like) => {
+      setUseHeart(true);
+    },
+    onError: (like) => console.log("error al postear tu like"),
+  });
+
+  const removeLike = useMutation(() => deleteLikeOnPlace(placeId), {
+    onSuccess: (like) => console.log("like borrado exitosamente"),
+    onError: (like) => console.log("Hubo un problema al eliminar tu like"),
+  });
+
+  //Validations
+
+  if (dataUser === []) {
+    return <span> No se encontro usuario </span>;
+  }
+
+  if (data === []) {
+    return 0;
+  }
+
+  if (status === "error" && statusUser === "error") {
+    //console.log(" a ocurrido un error");
+  }
+
+  if (statusUser === "success" && status === "success") {
+    //console.log("user ", dataUser);
+    //console.log("data ", data);
+    const user = getUser.data._id;
+    console.log("user ", user);
+    const validate = data.some((like) => like.userId === user);
+    if (validate) setHasLike(true);
+    //console.log("validate ", validate);
+  }
+
+  const postLike = (e) => {
+    e.preventDefault();
+    addLike.mutate();
+    //removeLike.mutate();
+  };
 
   /*const handleClick = () => {
     if (useHeart === false && userState.loggedIn === true) {
@@ -85,20 +133,20 @@ function HeaderOnePlace({
     }
   };*/
 
-  const handleClick = async () => {
+  /*const handleClick = async () => {
     // await saveLikeOnPlace(placeId);
     console.log("esto trae placeId ", saveLikeOnPlace);
     await deleteLikeOnPlace(placeId);
     console.log("Like borrado correctamente");
-  };
+  };*/
 
   return (
     <section className='px-8'>
       <div className={classes.titleicon}>
         <Titles tag='h3' titleText={title || ""}></Titles>
         <div className={classes.iconscon}>
-          <div onClick={handleClick} className='flex flex-row w-fit'>
-            {useHeart === false ? (
+          <div onClick={postLike} className='flex flex-row w-fit'>
+            {/*useHeart === false ?  (
               <HeartFillOut
                 width='28'
                 height='28'
@@ -106,6 +154,19 @@ function HeaderOnePlace({
               />
             ) : (
               <HeartComplet
+                width='28'
+                height='28'
+                className={classes.hearticon}
+              />
+            )*/}
+            {hasLike ? (
+              <HeartComplet
+                width='28'
+                height='28'
+                className={classes.hearticon}
+              />
+            ) : (
+              <HeartFillOut
                 width='28'
                 height='28'
                 className={classes.hearticon}

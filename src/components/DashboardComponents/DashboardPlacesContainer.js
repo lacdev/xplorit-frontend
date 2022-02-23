@@ -15,13 +15,13 @@ function DashboardPlacesContainer() {
   const { data, status } = getPlaces;
 
   if (status === "loading") {
-    return <span> Loading...</span>;
+    return <span className='font-bold text-center'> Buscando Lugares ...</span>;
   }
 
   if (status === "error") {
     return (
       <span className='font-bold text-center'>
-        No se encontraron lugares con ese ID
+        No se encontraron lugares creados para este usuario
       </span>
     );
   }
