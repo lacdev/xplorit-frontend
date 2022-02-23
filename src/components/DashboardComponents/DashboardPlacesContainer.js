@@ -4,6 +4,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { getPlacesCreatedByUser } from "services/user.services";
 import DashboardCard from "./DashboardCard";
+import BigTitle from "components/Common/BigTitle";
 
 const token = localStorage.getItem("token");
 
@@ -28,6 +29,9 @@ function DashboardPlacesContainer() {
   console.log("asd", data);
   return (
     <>
+          <div>
+        <BigTitle bigTitleText="Lugares agregados" />
+      </div>
       {data &&
         data.map((place) => {
           return (

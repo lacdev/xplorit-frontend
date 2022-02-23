@@ -1,27 +1,27 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import NotFoundPage from 'pages/NotFoundPage';
-import Home from 'pages/Home';
-import RoutePage from 'pages/RoutePage';
-import PlacePage from 'pages/PlacePage';
-import LogIn from 'pages/LogIn';
-import SignUp from 'pages/SignUp';
-import Dashboard from 'pages/Dashboard';
-import PageLayout from 'PageLayout';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NotFoundPage from "pages/NotFoundPage";
+import Home from "pages/Home";
+import RoutePage from "pages/RoutePage";
+import PlacePage from "pages/PlacePage";
+import LogIn from "pages/LogIn";
+import SignUp from "pages/SignUp";
+import Dashboard from "pages/Dashboard";
+import PageLayout from "PageLayout";
 //import DashboardCardContainer from 'components/DashboardComponents/DashboardCardContainer';
-import OneRoute from 'pages/OneRoute';
-import OnePlace from 'pages/OnePlace';
-import PlaceSearch from 'pages/PlaceSearch';
-import RouteSearch from 'pages/RouteSearch';
-import CreatePlace from 'pages/CreatePlace';
-import CreateRoute from 'pages/CreateRoute';
-import DashboardComment from 'components/DashboardComponents/DashboardComment';
-import DashboardLikeContainer from 'components/DashboardComponents/DashboardLikeContainer';
+import OneRoute from "pages/OneRoute";
+import OnePlace from "pages/OnePlace";
+import PlaceSearch from "pages/PlaceSearch";
+import RouteSearch from "pages/RouteSearch";
+import CreatePlace from "pages/CreatePlace";
+import CreateRoute from "pages/CreateRoute";
+import DashboardComment from "components/DashboardComponents/DashboardComment";
+import DashboardLikeContainer from "components/DashboardComponents/DashboardLikeContainer";
 //import DashboardEdit from 'components/DashboardComponents/DashboardEdit';
-import AboutUsPage from 'pages/AboutUs';
-import DashboardPlacesContainer from 'components/DashboardComponents/DashboardPlacesContainer';
-import DashboardRoutesContainer from 'components/DashboardComponents/DashboardRoutesContainer';
-import DashboardLoaderCards from 'components/DashboardComponents/DashboardLoaderCards';
-import { AuthContextProvider } from 'context/AuthContext';
+import AboutUsPage from "pages/AboutUs";
+import DashboardPlacesContainer from "components/DashboardComponents/DashboardPlacesContainer";
+import DashboardRoutesContainer from "components/DashboardComponents/DashboardRoutesContainer";
+import DashboardLoaderCards from "components/DashboardComponents/DashboardLoaderCards";
+import { AuthContextProvider } from "context/AuthContext";
 
 function App() {
   return (
@@ -32,15 +32,14 @@ function App() {
             <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<SignUp />} />
 
-          
-            <Route path='/searchroute' element={<RouteSearch />} />
-            <Route path='/direct' element={<DashboardLoaderCards />} />
+            <Route path="/direct" element={<DashboardLoaderCards />} />
 
             <Route path="/" element={<PageLayout />}>
               <Route index element={<Home />} />
               <Route path="routes" element={<RoutePage />}></Route>
               <Route path="places" element={<PlacePage />} />
               <Route path="/searchplace" element={<PlaceSearch />} />
+              <Route path="/searchroute" element={<RouteSearch />} />
               <Route path="createplace" element={<CreatePlace />} />
               <Route path="createroute" element={<CreateRoute />} />
               <Route path="/route/:id" element={<OneRoute />} />

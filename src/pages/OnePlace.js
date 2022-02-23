@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import parse from "html-react-parser";
+import { AuthContext } from "context/AuthContext";
+
 
 //Icons & Images
 import PinMap from "assets/icons/PinMap";
@@ -59,15 +61,15 @@ function OnePlace() {
   const { id } = useParams();
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [star, setStar] = useState(0);
+  const { userState, setUserState } = useContext(AuthContext);
+  const navigate = useNavigate()
   const [review, setReview] = useState({
     comment: "",
     stars: null,
     userId: "",
   });
 
-  const [textEditorView, setTextEditorView] = useState(
-    classes.textEditorHidden
-  );
+  const [textEditorView, setTextEditorView] = useState(classes.textEditorHidden);
 
   const singlePlace = useQuery(["getSinglePlaceData", id], getSinglePlaceData);
   const getReviews = useQuery(["getSingleReview", id], getSingleReview);
@@ -92,8 +94,10 @@ function OnePlace() {
   }, [data, status]);
 
   const handleClick = () => {
-    if (textEditorView === classes.textEditorHidden) {
+    if (userState.loggedIn === true && textEditorView === classes.textEditorHidden) {
       setTextEditorView(classes.textEditorShow);
+    } else if (userState.loggedIn === false) {
+      navigate("/login", {replace : true})
     } else {
       setTextEditorView(classes.textEditorHidden);
     }
@@ -125,7 +129,7 @@ function OnePlace() {
       <div className={classes.parentcon}>
         <ImageSlider slides={data.images} />
 
-        <div className='w-5/6 m-auto'>
+        <div className="w-5/6 m-auto">
           {data?.ownerId && (
             <HeaderOnePlace
               placeId={id}
@@ -141,10 +145,10 @@ function OnePlace() {
             />
           )}
         </div>
-        <div className='w-5/6 m-auto'>
-          <section className='px-8'>
+        <div className="w-5/6 m-auto">
+          <section className="px-8">
             <div className={classes.decriptioncon}>
-              <Titles tag='h4' titleText='Descripción'></Titles>
+              <Titles tag="h4" titleText="Descripción"></Titles>
               <p className={classes.text}>{parse(data.description)}</p>
             </div>
             <div className={classes.mapcon}>
@@ -152,50 +156,38 @@ function OnePlace() {
             </div>
             <div className={classes.ubicationcon}>
               <div className={classes.divubications}>
-                <PinMap width='50' height='50' />
+                <PinMap width="50" height="50" />
                 <p>Dirección de la Ubicación</p>
               </div>
-              <div className={classes.ubication}>
-                Ciudad: {data.address.city}
-              </div>
-              <div className={classes.ubication}>
-                Estado: {data.address.state}
-              </div>
-              <div className={classes.ubication}>
-                Calle: {data.address.street}
-              </div>
-              <div className={classes.ubication}>
-                C.P: {data.address.zipcode}
-              </div>
+              <div className={classes.ubication}>Ciudad: {data.address.city}</div>
+              <div className={classes.ubication}>Estado: {data.address.state}</div>
+              <div className={classes.ubication}>Calle: {data.address.street}</div>
+              <div className={classes.ubication}>C.P: {data.address.zipcode}</div>
             </div>
-            <Btncards
-              onClick={handleClick}
-              className={classes.btn}
-              buttonText='Reseñar'
-            />
+            <Btncards onClick={handleClick} className={classes.btn} buttonText="Reseñar" />
             <div className={textEditorView}>
               <form>
                 <textarea
-                  placeholder=' Describe tu experiencia...'
-                  type='text'
-                  id='comment'
+                  placeholder=" Describe tu experiencia..."
+                  type="text"
+                  id="comment"
                   className={classes.textArea}
                   onChange={(e) => saveReview(e)}
                   value={review.comment}
                 ></textarea>
               </form>
-              <p className='ml-10'> Califica el lugar :</p>
-              <div className='flex '>
+              <p className="ml-10"> Califica el lugar :</p>
+              <div className="flex ">
                 <StarRating
-                  width='25'
-                  height='25'
+                  width="25"
+                  height="25"
                   setRating={setStar}
                   className={classes.star}
                   onChange={(e) => saveStar(e)}
                   stars={star}
                 />
                 <button
-                  className='bg-blue-600 ml-auto px-3 py-2 font-Poppins text-white rounded-full hover:bg-blue-700 drop-shadow-lg'
+                  className="bg-blue-600 ml-auto px-3 py-2 font-Poppins text-white rounded-full hover:bg-blue-700 drop-shadow-lg"
                   onClick={HandleSubmit}
                 >
                   Reseñar
