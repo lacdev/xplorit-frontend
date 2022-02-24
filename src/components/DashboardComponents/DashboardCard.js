@@ -30,6 +30,7 @@ const classes = {
   staricon: "",
 };
 function DashboardCard({ cardData, type }) {
+  console.log("cardData ", cardData);
   const cardLink = `/${type}/${cardData._id}`;
   return (
     <Link to={cardLink}>

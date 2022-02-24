@@ -30,10 +30,6 @@ function Dashboard() {
  // console.log(getUser);
   const { data, status } = getUser;
 
-  if (status === "success") {
-    console.log("data", data);
-  }
-
   return (
     <div className={classes.parentcon}>
       <div className={classes.bannercon}>
