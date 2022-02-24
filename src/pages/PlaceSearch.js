@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-
-import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import Geocode from "react-geocode";
 import { endpoints } from "endpoints/endpoints";
@@ -13,7 +11,7 @@ import Btncards from "components/Common/Btncards";
 import ModalFiltro from "components/SeachComponents/ModalFiltro";
 import MapComponent from "components/MapComponent";
 //import Toggle from "components/SeachComponents/Toggle";
-import SearchCards from "components/SeachComponents/SearchCards";
+import SearchCards from "components/SeachComponents/SearchPlacesCards";
 import StateSelector from "components/SeachComponents/StateSelector";
 import BtnTags from "components/SeachComponents/BtnTags";
 import LimitCards from "components/SeachComponents/LimitCards";
@@ -28,7 +26,7 @@ const classes = {
   scrolltags: "snap-center snap-always scroll-mr-3.5",
   togglecon: "flex content-center items-center px-4",
   btnclass: "py-2 flex flex-row-reverse content-center",
-  btntagscon: "hidden lg:flex overflow-x-hidden items-center pb-2",
+  btntagscon: "hidden minTablet:flex overflow-x-hidden items-center pb-2 ml-auto",
   renderres: "grid grid-cols-1 minTablet:grid-cols-5 grid-flow-col overflow-hidden h-[90vh]",
   togglespanplace: "mr-2",
   togglespanroute: "mx-2",
@@ -39,7 +37,7 @@ const classes = {
   selectorcon: "flex flex-row w-full",
   divselector: "flex flex-col w-full",
   labelselect: "text-xs",
-  cardscon: "h-screen overgflow-y-scroll overflow-scroll drop-shadow-testimonialShadow",
+  cardscon: "h-asideSearch overgflow-y-scroll overflow-scroll overflow-x-hidden divide-y divide-solid border-slate-500",
   mapcon: "minTablet:block col-span-3 bg-gray-200 h-full",
   btnshow: "py-1 block minTablet:hidden",
 };
@@ -48,17 +46,14 @@ function PlaceSearch() {
   const [selectedState, setSelectedState] = useState(null);
   const [selectedMunicipio, setSelectedMunicipio] = useState(null);
   const [locationsData, setLocationsData] = useState([]);  
-  const [useRange, setUseRange] = useState([5,50]);
-  const [useRadius, setUseRadius] = useState(null);
+  const [useRange, setUseRange] = useState(5);
   const [useSort, setUseSort] = useState ([]);
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
   const { data: statesData, status: statesStatus } = useQuery( "getAllStates", getAllStates );
-  //  console.log('is state for selectorMunicipio?', selectedMunicipio);
- //const {search}= useParams();
  const searchParam = decodeURIComponent(window.location.search);
  const queryFromURL = searchParam?.split('=')[1].replace(' ','');
  const [URLSearch, setURLSearch] = useState(`${endpoints.getFilterPlace}q=${queryFromURL}`);//localhost/...places?
-  
+ let customDragCenter = null;  
 
 
   //Querys & service to Places
@@ -170,21 +165,41 @@ function PlaceSearch() {
     console.log("how is the new URL", newURL);
   };
 
+  const updatePlaceSearchLocation = (coords) => {
+     let newURL = '';
+     customDragCenter= coords;
+     const distanceOnMiles = (useRange*1000)/1.6
+     const filtersObject = {
+       q:URLSearch.split('?')[1].split('&')[0],
+       distance: `&distance=${distanceOnMiles}`,
+       lng:`&lng=${coords.lng}`,
+       lat:`&lat=${coords.lat}`
+     }
+     newURL = `${process.env.REACT_APP_SERVER_URL}/v1/places?${filtersObject.q}${filtersObject.distance}${filtersObject.lng}${filtersObject.lat}`
+     console.log("🚀 ~ file: PlaceSearch.js ~ line 181 ~ updatePlaceSearchLocation ~ newURL", newURL);
+    //  `${URLSearch}?lng=${coords.lng}&lat=${coords.lat} `; 
+     console.log('What is URLSearch?', URLSearch);
+     setURLSearch(newURL)
+  }
+ 
+  const MapCenter = locationsData.length > 0 ?
+   locationsData[Math.floor(locationsData?.length / 2)]?.coords
+  : customDragCenter; 
   return (
     <div>
       <section className={classes.sectionres}>
         <div className={classes.tagsfiltroscon}>
-          <div className={classes.togglecon}>
-            <span className={classes.togglespanplace}>Lugares</span>
-            {/* <Toggle accionToggle={onToggleChange} /> */}
-            <span className={classes.togglespanroute}>Rutas</span>
-          </div>
+          {/*  <div className={classes.togglecon}>
+           <span className={classes.togglespanplace}>Lugares</span>
+             <Toggle accionToggle={onToggleChange} /> 
+            <span className={classes.togglespanroute}>Rutas</span> 
+          </div>*/}
           <div className={classes.btntagscon}>
             <BtnTags className="min-w-fit" onTagClick={onTagChange} />
           </div>
           <div className={classes.filtroposition}>
             <ModalFiltro onSearch={URLSearch} onStateURL={setURLSearch}
-             onChange={`${onSortChange} ${onRangeChange}`} minValue={5} maxValue={50} value={useRange}
+             onChange={onSortChange} onRangeChange={onRangeChange} minValue={5} maxValue={50} value={useRange}
             />
           </div>
         </div>
@@ -246,11 +261,10 @@ function PlaceSearch() {
               fullHeight={true}
               locationsData={locationsData}
               useMultipleLocations={false}
+              useCircle={true}
               radius={useRange}
-              onChange={onRangeChange}
-              // customCenter={
-              //   locationsData[Math.floor(locationsData?.length / 2)]?.coords
-              // }
+              updatePlaceSearchLocation={updatePlaceSearchLocation}
+              //  customCenter={MapCenter}
             />
           </div>
         </section>

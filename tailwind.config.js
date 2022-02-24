@@ -35,6 +35,7 @@ module.exports = {
         footerBannerH: "20.5rem",
         commentsH: "18.75rem",
         sliderH: "100vh",
+        asideSearch:"80%"
       },
       margin: {
         15: "3.75rem",

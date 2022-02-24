@@ -4,8 +4,8 @@ import Titles from 'components/Common/Titles';
 import { Labels } from '../Common/Labels';
 import Btncards from '../Common/Btncards';
 //Img & Icons
-import StarComplete from 'assets/icons/StarComplete';
 import HeartFillOut from 'assets/icons/HeartFillOut';
+import StarRating from 'components/RatingStar';
 
 const classes={
     articlecon:'py-2 px-4',
@@ -18,7 +18,7 @@ const classes={
     btn:'py-1',
     iconcon:'ml-auto',
     starticon:'mt-5',
-    starttext:'text-xs text-center',   
+    starttext:'text-xs text-center aling-center ml-2',   
  }
 function SearchCards({id, name, score, labels, images=[],  type, address}) {
     const cardLink = `/${type}/${id}`
@@ -37,13 +37,18 @@ function SearchCards({id, name, score, labels, images=[],  type, address}) {
                   return <Labels LabelText={`#${label}`}/>
            })}
             </div>
+            <div className='flex items-center'>
+            <StarRating width='20px' height='20px'/>
+            <p className={classes.starttext}>{score}</p>
+            </div>
             <div className={classes.ubitextcon}>
               <p className={classes.ubitext}>{address}</p>
             </div>
             <div>
               <Link to={cardLink}>
                 <Btncards
-                  buttonText="Explorar"
+                  buttonText="Explorar" 
+                  padding='px-6'
                   className={classes.btn}
                 ></Btncards>
               </Link>
@@ -51,12 +56,6 @@ function SearchCards({id, name, score, labels, images=[],  type, address}) {
           </div>
           <div className={classes.iconcon}>
             <HeartFillOut width="30px" height="30px" />
-            <StarComplete
-              width="30px"
-              height="30px"
-              className={classes.starticon}
-            />
-            <p className={classes.starttext}>{score}</p>
           </div>
         </div>
       </article>

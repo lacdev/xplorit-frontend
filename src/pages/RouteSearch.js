@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import { useSearchParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import Geocode from "react-geocode";
 import { endpoints } from "endpoints/endpoints";
@@ -11,12 +10,12 @@ import { getAllStates } from "services/utils.services";
 import Btncards from "components/Common/Btncards";
 import ModalFiltro from "components/SeachComponents/ModalFiltro";
 import MapComponent from "components/MapComponent";
-import Toggle from "components/SeachComponents/Toggle";
-import SearchCards from "components/SeachComponents/SearchCards";
+//import Toggle from "components/SeachComponents/Toggle";
+import SearchCards from "components/SeachComponents/SearchPlacesCards";
 import StateSelector from "components/SeachComponents/StateSelector";
 import BtnTags from "components/SeachComponents/BtnTags";
 import LimitCards from "components/SeachComponents/LimitCards";
-import Inputs from "components/Common/Inputs";
+//import Inputs from "components/Common/Inputs";
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
 const classes = {
@@ -27,7 +26,7 @@ const classes = {
   scrolltags: "snap-center snap-always scroll-mr-3.5",
   togglecon: "flex content-center items-center px-4",
   btnclass: "py-2 flex flex-row-reverse content-center",
-  btntagscon: "hidden lg:flex overflow-x-hidden items-center pb-2",
+  btntagscon: "hidden minTablet:flex overflow-x-hidden items-center pb-2 ml-auto",
   renderres: "grid grid-cols-1 minTablet:grid-cols-5 grid-flow-col overflow-hidden h-[90vh]",
   togglespanplace: "mr-2",
   togglespanroute: "mx-2",
@@ -38,7 +37,7 @@ const classes = {
   selectorcon: "flex flex-row w-full",
   divselector: "flex flex-col w-full",
   labelselect: "text-xs",
-  cardscon: "h-screen overgflow-y-scroll overflow-scroll",
+  cardscon: "h-asideSearch overgflow-y-scroll overflow-scroll overflow-x-hidden divide-y divide-solid border-slate-500",
   mapcon: "minTablet:block col-span-3 bg-gray-200 h-full",
   btnshow: "py-1 block minTablet:hidden",
 };
@@ -47,21 +46,22 @@ function RouteSearch() {
   const [showMap, setShowMap] = useState(false);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedMunicipio, setSelectedMunicipio] = useState(null);
-  const [URLSearch, setURLSearch] = useState(endpoints.getFilterRoute);
-  const [locationsData, setLocationsData] = useState([]);
+  const [locationsData, setLocationsData] = useState([]); 
+  const [useRange, setUseRange] = useState(5);
+  const [useSort, setUseSort] = useState ([]);
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
-  const [searchParams, setSearchParams] = useSearchParams();
-  const q = searchParams.get("q") ?? "";
   const { data: statesData, status: statesStatus } = useQuery("getAllStates", getAllStates);
-  console.log("is state for selectorMunicipio?", selectedMunicipio);
-
+  const searchParam = decodeURIComponent(window.location.search);
+  const queryFromURL = searchParam?.split('=')[1].replace(' ','');
+  const [URLSearch, setURLSearch] = useState(`${endpoints.getFilterRoute}q=${queryFromURL}`);//localhost/...routes?
+  let customDragCenter = null;  
   //Querys & service to Places
-  //places
+  //routes
   const {
     data: routesData,
     isLoading: loadingRoute,
     status,
-  } = useQuery(["getAllFilterRoutes", URLSearch], () => getAllFilterRoutes(URLSearch), {
+  } = useQuery(["getAllFilterRoutes", URLSearch, queryFromURL], () => getAllFilterRoutes(URLSearch, queryFromURL), {
     onSuccess: () => console.log("is success?"),
   });
 
@@ -73,10 +73,8 @@ function RouteSearch() {
     if (routesData === undefined) {
       return;
     }
-    console.log("This is ROUTES DATA", routesData);
     const markerCoords = routesData.data.routes.map((correctCoords) => {
       const firstPlace = correctCoords.location.coordinates[0];
-      console.log(firstPlace);
       if (!firstPlace || firstPlace?.length === 0) return {};
       return {
         coords: {
@@ -85,16 +83,15 @@ function RouteSearch() {
         },
       };
     });
-    console.log("This is MARKER COORDS", markerCoords);
     setLocationsData(markerCoords);
   }, [routesData, status, URLSearch]);
 
   // if (status === "error") {
   //   return <span className="font-bold text-center">No se encontraron lugares con ese ID</span>;
   // }
-  if (status === "success") {
-    console.log("what is routesData?", routesData);
-  }
+  // if (status === "success") {
+  //   console.log("what is routesData?", routesData);
+  // }
 
   //Event Hide Aside Map
   const handlerClick = () => {
@@ -116,14 +113,21 @@ function RouteSearch() {
 
   const onMunicipioChange = (municipioItem) => {
     const newURL = endpoints.getFilterRoute + "q=" + municipioItem.value;
-    console.log("🚀 ~ file: PlaceSearch.js ~ line 96 ~ onMunicipioChange ~ newURL", newURL);
+   // console.log("🚀 ~ file: PlaceSearch.js ~ line 96 ~ onMunicipioChange ~ newURL", newURL);
     setURLSearch(newURL);
     setSelectedMunicipio(municipioItem);
   };
 
-  const onToggleChange = (event) => {
-    // console.log('Acciona el evento onChange');
-  };
+//Selector Sort on Modal
+const onSortChange = (event) => {
+  setUseSort(event.target.value);
+};
+
+//Input Range on Modal
+const onRangeChange = (event) => {
+ setUseRange(event.target.value);
+}
+
 
   const onTagChange = (info) => {
     let newURL = "";
@@ -146,33 +150,50 @@ function RouteSearch() {
     setURLSearch(newURL);
     console.log("how is the new URL", newURL);
   };
+// Function to Manage Circle & URLquerys distance, lng & lat
+const updateRouteSearchLocation = (coords) => {
+  let newURL = '';
+  customDragCenter= coords;
+  const distanceOnMiles = (useRange*1000)/1.6
+  const filtersObject = {
+    q:URLSearch.split('?')[1].split('&')[0],
+    distance: `&distance=${distanceOnMiles}`,
+    lng:`&lng=${coords.lng}`,
+    lat:`&lat=${coords.lat}`
+  }
+  newURL = `${process.env.REACT_APP_SERVER_URL}/v1/routes?${filtersObject.q}${filtersObject.distance}${filtersObject.lng}${filtersObject.lat}`
+  console.log('What is URLSearch?', URLSearch);
+  setURLSearch(newURL)
+}
 
-  const handlerKeyword = (event) => {
-    setSearchParams({ q: event.target.value });
-  };
+const MapCenter = locationsData.length > 0 ?
+locationsData[Math.floor(locationsData?.length / 2)]?.coords
+: customDragCenter; 
 
   return (
     <div>
       <section className={classes.sectionres}>
         <div className={classes.tagsfiltroscon}>
-          <div className={classes.togglecon}>
+          {/* <div className={classes.togglecon}>
             <span className={classes.togglespanplace}>Lugares</span>
             <Toggle accionToggle={onToggleChange} />
             <span className={classes.togglespanroute}>Rutas</span>
-          </div>
+          </div> */}
           <div className={classes.btntagscon}>
             <BtnTags className="min-w-fit" onTagClick={onTagChange} />
           </div>
           <div className={classes.filtroposition}>
-            <ModalFiltro />
+            <ModalFiltro onSearch={URLSearch} onStateURL={setURLSearch}
+             onChange={onSortChange} onRangeChange={onRangeChange} minValue={5} maxValue={50} value={useRange}
+            />
           </div>
         </div>
         <section className={classes.renderres}>
           {renderSideBar && (
             <aside className={classes.asidecon}>
-              <div>
+              {/* <div>
                 <Inputs type="text" value={q} placeholderText="¿Que deseas explorar?" onChange={handlerKeyword} />
-              </div>
+              </div> */}
               <div className={classes.selectorcon}>
                 <div className={classes.divselector}>
                   <label className={classes.labelselect}>Elige un Estado</label>
@@ -203,10 +224,10 @@ function RouteSearch() {
                       return (
                         <SearchCards
                           id={data._id}
-                          //typeofplace={data.type}
+                          type={'route'}
                           key={index}
                           name={data.name}
-                          //address={data.address.street}
+                          number={data.coordinates.length}
                           labels={data.tags}
                           score={data.average}
                           ownerId={data.ownerId}
@@ -225,6 +246,9 @@ function RouteSearch() {
               fullHeight={true}
               locationsData={locationsData}
               useMultipleLocations={false}
+              useCircle={true}
+              radius={useRange}
+              updateRouteSearchLocation={updateRouteSearchLocation}
               customCenter={locationsData[Math.floor(locationsData?.length / 2)]?.coords}
             />
           </div>
@@ -237,22 +261,4 @@ function RouteSearch() {
 }
 export default RouteSearch;
 
-// {loadingRoute === true ? (
-//   <span>Loading...</span>
-// ) : (
-//   <div className={classes.cardscon}>
-//     {routesData.data && routesData.data.routes.map((data, index) => {
-//       return (
-//         <SearchCards
-//           id={data._id}
-//           //typeofplace={data.type}
-//           key={index}
-//           name={data.name}
-//           //address={data.address.street}
-//           labels={data.tags}
-//           score={data.average}
-//           ownerId={data.ownerId}
-//           images={data?.images}
-//         />
-//       );
-//     })}
+

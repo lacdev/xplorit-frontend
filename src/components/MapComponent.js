@@ -57,8 +57,10 @@ function MapComponent({
   locationsData,
   useMultipleLocations = false,
   customCenter = null,
-  onChange=null,
-  radius=null
+  radius=null,
+  useCircle=false,
+  updatePlaceSearchLocation=null,
+  updateRouteSearchLocation=null,
 }) {
   // ?--------------------------------------
   // ? Component setup
@@ -125,6 +127,7 @@ function MapComponent({
     };
     setCurrentUserLocation({ ...coords });
     console.log(coords)
+    updatePlaceSearchLocation(coords)
     // setCurrentUserLocation({ lat: coords.lat, lng : coords.lng })
   };
 
@@ -165,12 +168,21 @@ function MapComponent({
     return { path: pathCoords, options: newPathOptions };
   };
 
+  const createCircleData = () => {
+    const options = Object.assign({},circleOptions);
+    options.radius=radius*1000;
+    return options
+  };
+
+
   // const mapIinitialPosition =
   //   selectedLocation !== null ? selectedLocation : center;
 
   const mapHeight = fullHeight ? "100vh" : "50vh";
 
   const pathOptionsData = createPathData();
+  
+  const circleOptionsData = createCircleData();
 
   const containerStyle = {
     width: "100%",
@@ -192,7 +204,7 @@ function MapComponent({
 
   const mapIinitialPosition = newCenter();
   // const centerLocation = currentUserLocation !== null ? currentUserLocation : center;
- console.log('what is radius?', radius)
+
   if (!isLoaded) return null;
   return (
     <GoogleMap
@@ -210,7 +222,7 @@ function MapComponent({
       ) : (
         <SearchMap />
       )}
-      {currentUserLocation && useMultipleLocations == false && <Circle radius={onChange} center={currentUserLocation} options={circleOptions}/>}
+      { useCircle === true && <Circle center={currentUserLocation} options={circleOptionsData}/>}
       {selectedLocation && useMultipleLocations == false && <Marker position={selectedLocation} />}
       {locationsData &&
         useMultipleLocations == false &&
