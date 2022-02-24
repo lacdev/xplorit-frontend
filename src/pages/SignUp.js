@@ -5,11 +5,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "context/AuthContext";
 import { useMutation } from "react-query";
 import { userSignUp } from "services/user.services";
+import { userLogin } from "services/user.services";
 
 //Components
 import Inputs from "components/Common/Inputs";
 import BigTitle from "components/Common/BigTitle";
 import Btncards from "components/Common/Btncards";
+import SuccessModal from "components/SuccessModal";
 
 const classes = {
   parentcon: "inline-flex w-full h-screen items-center",
@@ -33,6 +35,10 @@ function SignUp() {
   const navigate = useNavigate();
 
   const mutationSignUp = useMutation((data) => userSignUp(data.userName, data.userEmail, data.userPassword), {
+    onSuccess: () => logIn(),
+  });
+
+  const mutationLogIn = useMutation((data) => userLogin(data.userEmail, data.userPassword), {
     onSuccess: (data) => setToken(data.token),
   });
 
@@ -40,16 +46,21 @@ function SignUp() {
     mutationSignUp.mutate({ userName, userEmail, userPassword });
   };
 
+  const logIn = () => {
+    mutationLogIn.mutate({ userEmail, userPassword });
+  };
+
   const setToken = (token) => {
-    console.log(token);
+    console.log("IMPRIMO TOKEN", token);
     const newUserState = Object.assign({}, userState, {
       authToken: token,
       loggedIn: true,
     });
     setUserState(newUserState);
     localStorage.setItem("token", token);
-    navigate("/", { replace: true });
+    // navigate("/", { replace: true });
   };
+
   return (
     <div className={classes.parentcon}>
       <div className={classes.container}>
@@ -108,6 +119,21 @@ function SignUp() {
           </Link>
         </div>
       </div>
+      {mutationSignUp.isSuccess && (
+        <SuccessModal
+          status={true}
+          redirectRoute="/"
+          modalText="Usuario creado con éxito"
+          modalOtherText="Bienvenido! Sal y descubre el mundo!"
+        />
+      )}
+      {mutationSignUp.isError && (
+        <SuccessModal
+          status={false}
+          modalText="Hubo un error en la creación de usuario"
+          modalOtherText="Revisa tus datos"
+        />
+      )}
     </div>
   );
 }
