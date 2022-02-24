@@ -106,5 +106,6 @@ export async function userSignUp(userName, userEmail, userPassword) {
     password: userPassword,
   });
   console.log(`Aqui es login promise ${getSignUpPromise}`);
+  console.log("ESTO ES PROMISE DATA", getSignUpPromise.data);
   return getSignUpPromise.data;
 }
