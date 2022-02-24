@@ -1,9 +1,8 @@
-
-import React, { useContext, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
-import parse from "html-react-parser";
-import { AuthContext } from "context/AuthContext";
+import React, { useContext, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react'
+import parse from 'html-react-parser'
+import { AuthContext } from 'context/AuthContext'
 
 //Icons & Images
 import PinMap from 'assets/icons/PinMap'
@@ -17,11 +16,11 @@ import MapComponent from 'components/MapComponent'
 import HeaderOnePlace from 'components/HeaderOnePlace'
 import StarRating from 'components/RatingStar'
 //useQuery
-import { useQuery } from "react-query";
-import { getSinglePlaceData } from "services/places.services";
-import { getSingleReview } from "services/places.services";
-import { saveReviewOnPlace } from "services/places.services";
-import HeroLoader from "components/Common/HeroLoader";
+import { useQuery } from 'react-query'
+import { getSinglePlaceData } from 'services/places.services'
+import { getSingleReview } from 'services/places.services'
+import { saveReviewOnPlace } from 'services/places.services'
+import HeroLoader from 'components/Common/HeroLoader'
 
 const classes = {
   parentcon: 'font-primary overflow-x-hidden',
@@ -59,11 +58,10 @@ const classes = {
 }
 
 function OnePlace() {
-
-  const { id } = useParams();
-  const [selectedLocation, setSelectedLocation] = useState(null);
-  const [star, setStar] = useState(0);
-  const { userState, setUserState } = useContext(AuthContext);
+  const { id } = useParams()
+  const [selectedLocation, setSelectedLocation] = useState(null)
+  const [star, setStar] = useState(0)
+  const { userState, setUserState } = useContext(AuthContext)
   const navigate = useNavigate()
   const [review, setReview] = useState({
     comment: '',
@@ -71,8 +69,7 @@ function OnePlace() {
     userId: '',
   })
 
-
-  const [textEditorView, setTextEditorView] = useState(classes.textEditorHidden);
+  const [textEditorView, setTextEditorView] = useState(classes.textEditorHidden)
 
   const singlePlace = useQuery(['getSinglePlaceData', id], getSinglePlaceData)
   const getReviews = useQuery(['getSingleReview', id], getSingleReview)
@@ -97,38 +94,38 @@ function OnePlace() {
   }, [data, status])
 
   const handleClick = () => {
-
-    if (userState.loggedIn === true && textEditorView === classes.textEditorHidden) {
-      setTextEditorView(classes.textEditorShow);
+    if (
+      userState.loggedIn === true &&
+      textEditorView === classes.textEditorHidden
+    ) {
+      setTextEditorView(classes.textEditorShow)
     } else if (userState.loggedIn === false) {
-      navigate("/login", {replace : true})
+      navigate('/login', { replace: true })
     } else {
       setTextEditorView(classes.textEditorHidden)
     }
-  };
-
-  const saveReview = (e) => {
-    const newReview = { ...review };
-    newReview[e.target.id] = e.target.value;
-    setReview(newReview);
-  };
-
-  const saveStar = (e) => {
-    const newReview = { ...review };
-    newReview[e.target.name] = e.target.value;
-    setReview(newReview);
-  };
-
-  const HandleSubmit = (e) => {
-    e.preventDefault();
-    saveReviewOnPlace(review, id);
-  };
-
-  if (status === "loading") {
-    return <HeroLoader/>;
   }
 
+  const saveReview = (e) => {
+    const newReview = { ...review }
+    newReview[e.target.id] = e.target.value
+    setReview(newReview)
+  }
 
+  const saveStar = (e) => {
+    const newReview = { ...review }
+    newReview[e.target.name] = e.target.value
+    setReview(newReview)
+  }
+
+  const HandleSubmit = (e) => {
+    e.preventDefault()
+    saveReviewOnPlace(review, id)
+  }
+
+  if (status === 'loading') {
+    return <HeroLoader />
+  }
 
   if (status === 'loading') {
     return <p> Loading...</p>
@@ -169,18 +166,24 @@ function OnePlace() {
                 <PinMap width="50" height="50" />
                 <p>Dirección de la Ubicación</p>
               </div>
-              <div className={classes.ubication}>Ciudad: {data.address.city}</div>
-              <div className={classes.ubication}>Estado: {data.address.state}</div>
-              <div className={classes.ubication}>Calle: {data.address.street}</div>
-              <div className={classes.ubication}>C.P: {data.address.zipcode}</div>
+              <div className={classes.ubication}>
+                Ciudad: {data.address.city}
+              </div>
+              <div className={classes.ubication}>
+                Estado: {data.address.state}
+              </div>
+              <div className={classes.ubication}>
+                Calle: {data.address.street}
+              </div>
+              <div className={classes.ubication}>
+                C.P: {data.address.zipcode}
+              </div>
             </div>
-
             <Btncards
               onClick={handleClick}
               className={classes.btn}
               buttonText="Reseñar"
             />
-
             <div className={textEditorView}>
               <form>
                 <textarea
