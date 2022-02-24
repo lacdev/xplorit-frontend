@@ -37,7 +37,7 @@ const classes = {
   selectorcon: "flex flex-row w-full",
   divselector: "flex flex-col w-full",
   labelselect: "text-xs",
-  cardscon: "h-asideSearch overgflow-y-scroll overflow-scroll overflow-x-hidden divide-y divide-solid border-slate-500",
+  cardscon: "h-asideSearch overflow-x-hidden divide-y divide-solid border-slate-500",
   mapcon: "minTablet:block col-span-3 bg-gray-200 h-full",
   btnshow: "py-1 block minTablet:hidden",
 };
@@ -51,32 +51,54 @@ function PlaceSearch() {
   const isPhone = useMediaQuery({ query: "(max-width: 960px)" });
   const { data: statesData, status: statesStatus } = useQuery( "getAllStates", getAllStates );
  const searchParam = decodeURIComponent(window.location.search);
- const queryFromURL = searchParam?.split('=')[1].replace(' ','');
+  const queryFromURL = searchParam?.split('=')[1].replace(' ','');
+ const [page, setPage ] = useState(1);
+ const [places, setPlaces] = useState([]);
+ const limit = '&limit=4';
  const [URLSearch, setURLSearch] = useState(`${endpoints.getFilterPlace}q=${queryFromURL}`);//localhost/...places?
- let customDragCenter = null;  
+ console.log("🚀 ~ file: PlaceSearch.js ~ line 57 ~ PlaceSearch ~ URLSearch", URLSearch)
+ let customDragCenter = null; 
+ const handlerNewPlaces = (placesrender) => {
+  let newPlaces = {...places} 
+  if(Object.keys(newPlaces).length === 0 ){
+    setPlaces(placesrender)
+  }
+  else {
+    console.log("🚀 ~ file: PlaceSearch.js ~ line 62 ~ handlerNewPlaces ~ newPlaces", newPlaces)
+    console.log('What is placesrender?', placesrender)
+    console.log("🚀 ~ file: PlaceSearch.js ~ line 64 ~ handlerNewPlaces ~ newPlaces", newPlaces.places)
+    newPlaces.places.push(...placesrender.places)
+    console.log("🚀 ~ file: PlaceSearch.js ~ line 65 ~ handlerNewPlaces ~ newPlaces", newPlaces)
+    setPlaces(newPlaces)
 
+  }
+ }
 
   //Querys & service to Places
   //places
   const {
     data: placesData,
     isLoading: loadingPlace,
-    status,
-  } = useQuery(["getAllFilterPlaces", URLSearch, queryFromURL], () => getAllFilterPlaces(URLSearch, queryFromURL), {
-    onSuccess: () => console.log("is success?"),
-  });
+    status
+  } = useQuery(["getAllFilterPlaces", URLSearch, page, limit], () => getAllFilterPlaces(URLSearch, page, limit), {
+    onSuccess: (data) => handlerNewPlaces(data.data)
+  } );
 
-
+ if(status === "success") {
+   console.log('is success?')
+  //  setPlaces(placesData.data)
+  //  console.log('what is places', places)
+ }
 
   useEffect(() => {
-    if (status === "loading") {
-      return;
-    }
+    // if (status === "loading") {
+    //   return;
+    // }
 
     if (placesData === undefined) {
       return;
     }
-    const markerCoords = placesData.data.places.map((correctCoords) => {
+    const markerCoords = places.places.map((correctCoords) => {
       return {
         coords: {
           lat: correctCoords.location?.coordinates[1],
@@ -86,7 +108,11 @@ function PlaceSearch() {
     });
     // console.log('is there URL?', URLSearch)
     setLocationsData(markerCoords);
-  }, [placesData, status, URLSearch]);
+  }, [ places]);
+
+  if (status === "loading"){
+    return <p>Cargando...</p>
+  }
 
   // if (status === "error") {
   //   return (
@@ -95,9 +121,9 @@ function PlaceSearch() {
   //     </span>
   //   );
   // }
-  // if (status === "success") {
-     
-  // }
+  if (status === "success") {
+     console.log('What is PLacesData?', placesData.data)
+   }
 
   //Event Hide Aside Map
   const handlerClick = () => {
@@ -135,13 +161,13 @@ function PlaceSearch() {
  const onRangeChange = (event) => {
    setUseRange(event.target.value);
   }
-  // useEffect(() => {
-      
-  // },[onRangeChange] )
-//Map Radius 
-// const onRadiusChange = (event) => {
-//   setUseRadius(event.target.value)
-// }
+// Pagination on LIMITS 
+const handlePage = () => {
+  const newPage = page + 1; 
+  console.log('Estoy en el handle?', page)
+  setPage(newPage)
+}
+
 //Buttons Tags on Modal & Desktop
   const onTagChange = (info) => {
     let newURL = "";
@@ -165,6 +191,7 @@ function PlaceSearch() {
     console.log("how is the new URL", newURL);
   };
 
+// Map Filter Distance, Lng & Lat
   const updatePlaceSearchLocation = (coords) => {
      let newURL = '';
      customDragCenter= coords;
@@ -185,7 +212,8 @@ function PlaceSearch() {
   const MapCenter = locationsData.length > 0 ?
    locationsData[Math.floor(locationsData?.length / 2)]?.coords
   : customDragCenter; 
-  return (
+  if(status === "success") 
+ { return (
     <div>
       <section className={classes.sectionres}>
         <div className={classes.tagsfiltroscon}>
@@ -235,8 +263,8 @@ function PlaceSearch() {
               {status === "error" && <span className="font-bold text-center">No se encontraron lugares</span>}
               {loadingPlace === false && status === "success" && (
                 <div className={classes.cardscon}>
-                  {placesData.data &&
-                    placesData.data.places.map((data, index) => {
+                  {status === "success" && placesData.data && 
+                    places.places.map((data, index) => {
                       return (
                         <SearchCards
                           id={data._id}
@@ -253,7 +281,10 @@ function PlaceSearch() {
                     })}
                 </div>
               )}
-              <LimitCards />
+             {
+               placesData.data.hasNextPage && 
+               <LimitCards onClick={handlePage}/>
+             } 
             </aside>
           )}
           <div className={mapContainerClass}>
@@ -272,7 +303,7 @@ function PlaceSearch() {
         <Btncards buttonText={buttonText} className={classes.btnshow} onClick={handlerClick}></Btncards>
       </section>
     </div>
-  );
+  );}
 }
 
 export default PlaceSearch;

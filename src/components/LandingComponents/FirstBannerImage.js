@@ -6,7 +6,7 @@ const classes = {
   infocon:
     'md:flex justify-center bg-gradient-to-b from-[#B9FFF2] py-10 items-center',
   title:
-    'w-full md:w-1/4 sm:m-auto text-5xl text-[#575A89] my-24 text-center font-bold ',
+    'w-full md:w-1/4 sm:m-auto font-primary text-5xl text-[#575A89] my-24 text-center font-bold ',
   img: 'w-full md:w-1/2 m-auto',
 }
 function FirstBannerImage() {

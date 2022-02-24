@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 
 const classes = {
-  parentcon:'flex w-full justify-around p-4',
+  parentcon:'flex w-full font-primary justify-around p-4',
   title:'font-bold text-2xl',
 }
 

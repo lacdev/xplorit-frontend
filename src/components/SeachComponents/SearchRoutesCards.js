@@ -8,7 +8,7 @@ import HeartFillOut from 'assets/icons/HeartFillOut';
 import StarRating from 'components/RatingStar';
 
 const classes={
-    articlecon:'py-2 px-4',
+    articlecon:'py-2 px-4 font-primary',
     infocon:'flex',
     img:'h-32 w-44 object-cover object-center rounded-md',
     detailscon:'flex flex-col pl-2',

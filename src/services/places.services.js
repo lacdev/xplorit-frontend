@@ -26,9 +26,13 @@ export async function getOwnerPlace({ queryKey }) {
 }
 
 
-export async function getAllFilterPlaces(url,initialSearch) {
-  const getFilterPlaces = await axios.get(url);
+export async function getAllFilterPlaces(url,page, limit) {
+  console.log('what is URL?', url)
+  console.log('Wht is this?', `${url}&page=${page}`)
+  const getFilterPlaces = await axios.get(`${url}${limit}&page=${page}`);
+  console.log("🚀 ~ file: places.services.js ~ line 32 ~ getAllFilterPlaces ~  getFilterPlaces",  getFilterPlaces)
   const filterPlaces = getFilterPlaces.data;
+  console.log("🚀 ~ file: places.services.js ~ line 34 ~ getAllFilterPlaces ~ filterPlaces", filterPlaces)
   return filterPlaces;
 }
 
