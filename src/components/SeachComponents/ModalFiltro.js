@@ -37,23 +37,16 @@ const classes = {
   savecon:'bg-secondary text-white active:bg-blue-700 font-normal text-sm px-6 py-3 rounded-full shadow hover:shadow-testimonialShadow outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150',
   positioncon:'opacity-25 fixed inset-0 z-40 bg-black',
 };
-function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, onChange=null, sort, minValue, maxValue, value }) {
+function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, 
+  onChange=null,onRangeChange=null ,sort, minValue, maxValue, value }) {
   const [showModal, setShowModal] = useState(false);
  const [filtros, setFiltros] = useState([]);
-  const [rangeValue, setRangeValue] = useState(value);
 
-  const updateRangeValue = (event) => {
-    setRangeValue(event.target.value)
-    console.log(event.target.value)
-  }
- 
   const handleSortChange = (sort) => {
     setFiltros(sort)
      console.log(sort)
      onStateURL(endpoints.getFilterPlace)
   }
-
-  
 
   const handleAplicar = () => {
     // console.log('Antes:', onSearch)
@@ -116,8 +109,8 @@ function ModalFiltro({onTagClick=null, onSearch=null, onStateURL=null, onChange=
                     </label>
                     <div className='flex'>
                       <label className='text-xxs'>{minValue}</label>  
-                      <input type="range" max={maxValue} min={minValue} step={1} value={rangeValue} 
-                    onChange={updateRangeValue} className={classes.rangedesing} id="customRange1"
+                      <input type="range" max={maxValue} min={minValue} step={1} value={value}
+                    onChange={onRangeChange} className={classes.rangedesing} id="customRange1"
                     />
                     <label className='text-xxs'>{maxValue}</label>
                     </div>

@@ -18,32 +18,26 @@ function DashboardPlacesContainer() {
   const { data, status } = getPlaces;
 
   if (status === "loading") {
-    return <span className='font-bold text-center'> Buscando Lugares ...</span>;
+    return <span> Loading...</span>;
   }
 
   if (status === "error") {
-    return (
-      <span className='font-bold text-center'>
-        No se encontraron lugares con ese ID
-      </span>
-    );
+    return <span className="font-bold text-center">No se encontraron lugares con ese ID</span>;
   }
   console.log("asd", data);
   return (
     <>
       <div>
-        <BigTitle bigTitleText='Lugares agregados' />
+        <BigTitle bigTitleText="Lugares agregados" />
       </div>
-      <div className='flex justify-end mb-1'>
-        <Link to='/createplace'>
-          <Btncards className='py-1' buttonText='+ Agregar lugar'></Btncards>
+      <div className="flex justify-end mb-1">
+        <Link to="/createplace">
+          <Btncards className="py-1" buttonText="+ Agregar lugar"></Btncards>
         </Link>
       </div>
       {data &&
         data.map((place) => {
-          return (
-            <DashboardCard key={place._id} cardData={place} type={"place"} />
-          );
+          return <DashboardCard key={place._id} cardData={place} type={"place"} />;
         })}
     </>
   );

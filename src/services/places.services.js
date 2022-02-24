@@ -2,36 +2,10 @@ import axios from "axios";
 import { endpoints } from "endpoints/endpoints";
 
 const token = localStorage.getItem("token");
-
-export async function getSingleUser() {
-  const getUserPromise = await axios.get(endpoints.userMe, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  const getUser = getUserPromise.data.data;
-  return getUser;
-}
+console.log("token ", token);
 
 export async function getCardsPlacesHome() {
   const getAllPlacesPromise = await axios.get(endpoints.getAllPlaces);
-  const cardsDataPlaces = getAllPlacesPromise.data.data.places;
-  return cardsDataPlaces;
-}
-
-export async function getTopPlaces() {
-  const service_url = `${endpoints.getAllPlaces}/?sort=average`;
-  const getAllPlacesPromise = await axios.get(service_url);
-  const cardsDataPlaces = getAllPlacesPromise.data.data.places;
-  return cardsDataPlaces;
-}
-export async function getNearPlaces() {
-  const service_url = `${endpoints.getAllPlaces}/?sort=likes`;
-  const getAllPlacesPromise = await axios.get(service_url);
-  const cardsDataPlaces = getAllPlacesPromise.data.data.places;
-  return cardsDataPlaces;
-}
-export async function getRecentlySharedPlaces() {
-  const service_url = `${endpoints.getAllPlaces}/?sort=createdAt`;
-  const getAllPlacesPromise = await axios.get(service_url);
   const cardsDataPlaces = getAllPlacesPromise.data.data.places;
   return cardsDataPlaces;
 }
@@ -40,6 +14,7 @@ export async function getSinglePlaceData({ queryKey }) {
   const service_url = `${endpoints.getAllPlaces}/${queryKey[1]}`;
   const getSinglePlaceDataPromise = await axios.get(service_url);
   const singlePlaceData = getSinglePlaceDataPromise.data.data;
+  console.log("Lugar", getSinglePlaceDataPromise);
   return singlePlaceData;
 }
 
@@ -50,16 +25,21 @@ export async function getOwnerPlace({ queryKey }) {
   return getOwnerPlaceData;
 }
 
-export async function getAllFilterPlaces(url, initialSearch) {
-  const getFilterPlaces = await axios.get(url);
+
+export async function getAllFilterPlaces(url,page, limit) {
+  console.log('what is URL?', url)
+  console.log('Wht is this?', `${url}&page=${page}`)
+  const getFilterPlaces = await axios.get(`${url}${limit}&page=${page}`);
+  console.log("🚀 ~ file: places.services.js ~ line 32 ~ getAllFilterPlaces ~  getFilterPlaces",  getFilterPlaces)
   const filterPlaces = getFilterPlaces.data;
+  console.log("🚀 ~ file: places.services.js ~ line 34 ~ getAllFilterPlaces ~ filterPlaces", filterPlaces)
   return filterPlaces;
 }
 
 export async function getPlaceLikes({ queryKey }) {
   const service_url = `${endpoints.saveLike}/${queryKey[1]}/likes`;
   const getOwnerPlacePromise = await axios.get(service_url);
-  const getOwnerPlaceData = getOwnerPlacePromise.data.data;
+  const getOwnerPlaceData = getOwnerPlacePromise.data;
   return getOwnerPlaceData;
 }
 
@@ -92,7 +72,9 @@ export async function createPlace(data, images) {
 }
 
 export async function saveLikeOnPlace(placeId) {
+  console.log("placeId: ", placeId);
   const service_url = `${endpoints.saveLike}/${placeId}/likes`;
+  console.log("token: ", token);
   return await axios.post(
     service_url,
     {},
@@ -102,9 +84,28 @@ export async function saveLikeOnPlace(placeId) {
   );
 }
 
+/*export async function saveLikeOnPlace(placeId) {
+  console.log("saveLike ", placeId);  
+  const service_url = `${endpoints.saveLike}/${placeId}/likes`;
+  console.log("Token ", token);
+  return await axios.post(service_url, {
+  console.log("saveLike ", placeId);
+  const service_url = `${endpoints.saveLike}/${placeId}/likes`;
+  return await axios.post(service_url, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+export async function deleteLikeOnPlace(placeId) {
+  const service_url = `${endpoints.saveLike}/${placeId}/likes`;
+  return await axios.delete(service_url, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}*/
+
 export async function deleteLikeOnPlace(placeId) {
   const service_url = `${endpoints.deleteLike}/${placeId}/likes`;
-  // console.log("URL ", service_url);
+ // console.log("URL ", service_url);
   //console.log("JSON to POST ", data);
   return await axios.delete(
     service_url,
@@ -115,20 +116,16 @@ export async function deleteLikeOnPlace(placeId) {
   );
 }
 
-export async function saveReviewOnPlace(review, placeId) {
-  console.log("placeId ", placeId);
-  console.log("data ", review);
+export async function saveReviewOnPlace(data, placeId) {
   const service_url = `${endpoints.getReviews}/${placeId}/reviews`;
   const saveLike = axios.post(
     service_url,
     {
-      comment: review.comment,
-      stars: review.stars,
+      comment: data.comment,
+      stars: data.stars,
     },
     {
       headers: { Authorization: `Bearer ${token}` },
     }
   );
-
-  return await saveLike;
 }

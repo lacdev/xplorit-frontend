@@ -4,8 +4,8 @@ import Titles from 'components/Common/Titles';
 import { Labels } from '../Common/Labels';
 import Btncards from '../Common/Btncards';
 //Img & Icons
-import StarComplete from 'assets/icons/StarComplete';
 import HeartFillOut from 'assets/icons/HeartFillOut';
+import StarRating from 'components/RatingStar';
 
 const classes={
     articlecon:'py-2 px-4',
@@ -18,20 +18,28 @@ const classes={
     btn:'py-1',
     iconcon:'ml-auto',
     starticon:'mt-5',
-    starttext:'text-xs text-center',   
+    starttext:'text-xs text-center aling-center ml-2',   
  }
-function SearchCards({id, name, score, labels, key, images=[],  typeofplace , address}) {
-    const cardLink = `/${typeofplace}/${id}`
+function SearchCards({id, name, score, labels, images=[],  type, address}) {
+    const cardLink = `/${type}/${id}`
     return (
-      <article className={classes.articlecon} key={key} >
+      <article className={classes.articlecon} key={id} >
         <div className={classes.infocon}>
+        <Link to={cardLink}>
           <img src={images[0]} alt="search-img" className={classes.img} />
+          </Link>
           <div className={classes.detailscon}>
-            <Titles tag="h6" titleText={name}></Titles>
+            <Link to={cardLink}>
+               <Titles tag="h6" titleText={name}></Titles>
+            </Link>
             <div className={classes.labelscon}>
             {labels.map((label) => {
                   return <Labels LabelText={`#${label}`}/>
            })}
+            </div>
+            <div className='flex items-center'>
+            <StarRating width='20px' height='20px'/>
+            <p className={classes.starttext}>{score}</p>
             </div>
             <div className={classes.ubitextcon}>
               <p className={classes.ubitext}>{address}</p>
@@ -39,7 +47,8 @@ function SearchCards({id, name, score, labels, key, images=[],  typeofplace , ad
             <div>
               <Link to={cardLink}>
                 <Btncards
-                  buttonText="Explorar"
+                  buttonText="Explorar" 
+                  padding='px-6'
                   className={classes.btn}
                 ></Btncards>
               </Link>
@@ -47,12 +56,6 @@ function SearchCards({id, name, score, labels, key, images=[],  typeofplace , ad
           </div>
           <div className={classes.iconcon}>
             <HeartFillOut width="30px" height="30px" />
-            <StarComplete
-              width="30px"
-              height="30px"
-              className={classes.starticon}
-            />
-            <p className={classes.starttext}>{score}</p>
           </div>
         </div>
       </article>

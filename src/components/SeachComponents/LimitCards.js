@@ -1,14 +1,9 @@
 import {useState}from 'react'
 import Btncards from 'components/Common/Btncards';
-function LimitCards() {
-    const [paginacion,setPaginacion] = useState(false)
-
-    const listenClick = (e) => setPaginacion(e.target.value)
-  // console.log("🚀 ~ file: LimitCards.js ~ line 7 ~ LimitCards ~ paginacion", paginacion)
-    
+function LimitCards({onClick=null}) {
   return (
       <div>
-          <Btncards value={paginacion} buttonText="Mostrar más" color="bg-black" onChange={listenClick}></Btncards>
+          <Btncards buttonText="Mostrar más" color="bg-black" onClick={onClick}></Btncards>
       </div>
     
   )
