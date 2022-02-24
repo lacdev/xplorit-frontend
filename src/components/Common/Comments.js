@@ -11,14 +11,14 @@ import { useQuery } from 'react-query'
 
 const classes = {
   container:
-    'flex font-primary w-full p-2 h-commentsH bg-white rounded-3xl drop-shadow-testimonialShadow m-8 overflow-hidden phone:h-auto',
+    'flex font-primary w-full p-2  min-h-content bg-white rounded-3xl drop-shadow-testimonialShadow my-8',
   maincon: 'w-fit sm:w-fit md:w-fit',
   avatarcon: ' rounded-full  ',
   detailscon: 'w-1/2 sm:w-1/2 xl:w-1/2',
   title: '',
   qualificationcon: 'flex w-fit',
   number: 'text-lg',
-  text: 'py-2 text-xl  sm:w-full xl:w-full ',
+  text: 'pr-2 pb-2 text-xl break-all',
   staricon: 'ml-1 mt-1',
 }
 
@@ -48,9 +48,7 @@ function Comments({ avatarImg, username, currentDate, stars, comment }) {
               ratingValue={stars}
             />
           </div>
-          <div>
-            <p className={classes.text}>{comment}</p>
-          </div>
+          <p className={classes.text}>{comment}</p>
         </div>
       </div>
     </div>
