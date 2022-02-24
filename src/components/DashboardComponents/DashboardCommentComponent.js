@@ -48,10 +48,10 @@ function DashboardCommentComponent({
           </div>
           <div className={classes.text}>
             <p>{comment}</p>
-            <div className={classes.deletcon}>
+            {/* <div className={classes.deletcon}>
               <Trash />
             </div>
-            <p className={classes.icontext}>Eliminar</p>
+            <p className={classes.icontext}>Eliminar</p>*/}
           </div>
         </div>
       </div>

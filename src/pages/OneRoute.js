@@ -62,16 +62,11 @@ const classes = {
 
 function OneRoute() {
   const { id } = useParams();
-  const userId = "620c634ae13127a727d794e7";
   const [locationsData, setLocationsData] = useState([]);
   const [star, setStar] = useState(0);
   const { userState, setUserState } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [render, setRender] = useState([]);
-  const [review, setReview] = useState({
-    comment: "",
-    stars: null,
-  });
+  const [review, setReview] = useState([]);
   const [textEditorView, setTextEditorView] = useState(
     classes.textEditorHidden
   );
@@ -79,27 +74,13 @@ function OneRoute() {
 
   const singleRoute = useQuery(["getSingleRouteData", id], getSingleRouteData);
   const getReviews = useQuery(["getSingleReview", id], getSingleReviewRoute);
-  const getUser = useQuery(["getSingleUSer"], getSingleUser);
 
   const { data, status } = singleRoute;
   const { data: dataReviews, status: statusReviews } = getReviews;
-  const { data: dataUser, status: statusUser } = getUser;
 
   const [postReviews, setPostReviews] = useState([]);
 
   const addReview = useMutation((data) => saveReviewOnRoute(data.review, id), {
-    onSuccess: (data) => {
-      postReviews.push(data);
-      getSingleReviewRoute(id);
-    },
-  });
-
-  useEffect(() => {
-    if (statusReviews === "success") setPostReviews(dataReviews);
-    else return;
-  }, [postReviews]);
-
-  /*const addReview = useMutation((data) => saveReviewOnRoute(data.review, id), {
     onSuccess: (data) => {
       const newReview = {
         _id: data?.data?.data?._id || "",
@@ -107,13 +88,15 @@ function OneRoute() {
         placeId: id,
         stars: data?.data?.data?.stars || 0,
         currentDate: data?.data?.data?.createdAt,
+        usename: data?.data?.data.username,
+        avatar: data?.data?.data.avatar,
       };
       const newReviews = [...postReviews, newReview];
       setPostReviews(newReviews);
     },
 
     onError: () => console.log("Hubo un error inesperado"),
-  });*/
+  });
 
   const postReview = (e) => {
     e.preventDefault();
@@ -189,19 +172,11 @@ function OneRoute() {
     setReview(newReview);
   };
 
-  /*const handleSubmit = (e) => {
-    e.preventDefault();
-    saveReviewOnRoute(review, id, userId);
-  };*/
-
   if (status === "loading") {
     return <HeroLoader />;
   }
 
   if (status === "success") {
-    const userToFind = data.ownerId.toString();
-    console.log("postReviews ", postReviews);
-
     return (
       <div className={classes.parentcon}>
         <ImageSlider slides={data.images} />
@@ -277,7 +252,9 @@ function OneRoute() {
                       modalText='Hubo un error'
                       modalOtherText='Ocurrio un error al publicar tu reseña'
                     />
-                  )}
+                  )}{" "}
+                  const userToFind = data.ownerId.toString();
+                  console.log("postReviews ", postReviews);
                 </div>
               </form>
               <p className='ml-10'> califica el lugar :</p>

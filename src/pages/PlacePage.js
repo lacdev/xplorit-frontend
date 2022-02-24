@@ -159,12 +159,7 @@ function PlacePage() {
       <div className={classes.textcarru}>
         <Titles tag='h4' titleText='Lugares creados recientemente' />
       </div>
-      {/* <div className={classes.carruselcon} >
-          {loadingNearPlaces === true?<LoadersCards/>:<CardCarousel type={'place'}  cardsData={nearPlacesData}/>}
-        </div>
-        <div className={classes.textcarru}>
-        <Titles tag='h4' titleText='Lugares compartidos recientemente' />
-      </div> */}
+
       <div className={classes.carruselcon}>
         {loadingRecentlyPlaces === true ? (
           <LoaderHome />

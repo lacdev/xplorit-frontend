@@ -55,7 +55,7 @@ function HeaderOnePlace({
   placeId,
   tags,
   title,
-  likes = 0,
+  likes,
   createdAt,
   updatedAt,
   average,
@@ -68,24 +68,13 @@ function HeaderOnePlace({
   const { userState, setUserState } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const currentDate = formatDate(updatedAt);
+  const currentDate = formatDate(createdAt);
   const creationDate = formatCreationDate(createdAt);
   const getLikes = useQuery(["getLikes", placeId], getPlaceLikes);
   const getUser = useQuery(["user"], getSingleUser);
 
   const { data, status } = getLikes;
   const { data: dataUser, status: statusUser } = getUser;
-
-  useEffect(() => {
-    if (statusUser === "success" && status === "success") {
-      console.log("user ", dataUser);
-      console.log("data ", data);
-      const user = getUser.data?._id;
-      console.log("user ", user);
-      const validate = data.some((like) => like.userId === user);
-      if (validate) setUseHeart(true);
-    } else return;
-  }, [statusUser, status]);
 
   const addLike = useMutation(() => saveLikeOnPlace(placeId), {
     onSuccess: (like) => {
@@ -106,6 +95,15 @@ function HeaderOnePlace({
     onError: (like) => console.log("Hubo un problema al eliminar tu like"),
   });
 
+  useEffect(() => {
+    if (statusUser === "success" && status === "success") {
+      const user = getUser.data?._id;
+
+      const validate = data.some((like) => like.userId === user);
+      if (validate) setUseHeart(true);
+    } else return;
+  }, [statusUser, status]);
+
   //Validations
 
   if (dataUser === []) {
@@ -118,15 +116,17 @@ function HeaderOnePlace({
 
   const postLike = (e) => {
     e.preventDefault();
-    if (useHeart === false) addLike.mutate();
-    else removeLike.mutate();
+    if (userState.loggedIn === true && useHeart === false) addLike.mutate();
+    else if (userState.loggedIn === true && useHeart === true)
+      removeLike.mutate();
+    else if (userState.loggedIn === false)
+      navigate("/login", { replace: true });
   };
 
   return (
     <section className='px-8'>
       <div className={classes.titleicon}>
         <h1 className='font-extrabold text-6xl'>{title || ""}</h1>
-
         <div className={classes.iconscon}>
           <div onClick={postLike} className='flex flex-row w-fit'>
             {useHeart === false ? (
@@ -157,11 +157,9 @@ function HeaderOnePlace({
           <div className={classes.likequalcon}>
             <div className={classes.liketext}>
               <p>{usePostLike}</p>
-              <p>Me gusta</p>
             </div>
             <div className={classes.qualitext}>
               <p className='mt-1'>{average}</p>
-              <p className=''>Calificación</p>
             </div>
           </div>
         </div>

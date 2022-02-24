@@ -6,21 +6,27 @@ import DashboardCard from "./DashboardCard";
 import BigTitle from "components/Common/BigTitle";
 import Btncards from "components/Common/Btncards";
 import { Link } from "react-router-dom";
+import DashboardLoaderCards from "components/DashboardComponents/DashboardLoaderCards";
 
 function DashboardRoutesContainer() {
-  const getRoutes = useQuery(["getRoutes"], getRoutesCreatedByUser);
+  const getRoutes = useQuery(["getRoutes"], getRoutesCreatedByUser, {
+    retry: 0,
+  });
 
   const { data, status } = getRoutes;
 
   if (status === "loading") {
-    return <span className=' font-bold text-center'>Buscando Rutas...</span>;
+    return (
+      <span>
+        {" "}
+        <DashboardLoaderCards />{" "}
+      </span>
+    );
   }
 
   if (status === "error") {
     return (
-      <span className='font-bold text-center'>
-        No se encontraron Rutas con ese ID
-      </span>
+      <span className='font-bold text-center'>Aun no has publicado rutas</span>
     );
   }
 

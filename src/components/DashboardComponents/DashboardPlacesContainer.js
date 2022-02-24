@@ -7,24 +7,31 @@ import DashboardCard from "./DashboardCard";
 import BigTitle from "components/Common/BigTitle";
 import Btncards from "components/Common/Btncards";
 import { Link } from "react-router-dom";
+import DashboardLoaderCards from "components/DashboardComponents/DashboardLoaderCards";
 
 const token = localStorage.getItem("token");
 
 function DashboardPlacesContainer() {
   // const id = "61ff09c5f1b8eb106745942f";
 
-  const getPlaces = useQuery(["getPlaces"], getPlacesCreatedByUser);
+  const getPlaces = useQuery(["getPlaces"], getPlacesCreatedByUser, {
+    retry: 0,
+  });
 
   const { data, status } = getPlaces;
 
   if (status === "loading") {
-    return <span className='font-bold text-center'> Buscando Lugares ...</span>;
+    return (
+      <span>
+        <DashboardLoaderCards />
+      </span>
+    );
   }
 
   if (status === "error") {
     return (
       <span className='font-bold text-center'>
-        No se encontraron lugares con ese ID
+        Aun no has publicado lugares
       </span>
     );
   }

@@ -3,6 +3,8 @@ import React from "react";
 //UseQuery
 import { useQuery } from "react-query";
 import { getLikesCreatedByUser } from "services/user.services";
+import DashboardLoaderCards from "components/DashboardComponents/DashboardLoaderCards";
+
 //Components
 import DashboardLikeCard from "./DashboardLikeCard";
 import BigTitle from "components/Common/BigTitle";
@@ -14,16 +16,17 @@ function DashboardLikeContainer() {
   const { data, status, error } = getLikes;
 
   if (status === "loading") {
-    return <span className='font-bold text-center'> Buscando Likes...</span>;
+    return (
+      <span>
+        {" "}
+        <DashboardLoaderCards />{" "}
+      </span>
+    );
   }
 
   if (error === true) {
     console.log("un error ha ocurrido: ", error);
-    return (
-      <span className='font-bold text-center'>
-        Ha ocurrido un error al realizar la peticion
-      </span>
-    );
+    return <span className='font-bold text-center'>Aun no has dado Likes</span>;
   }
 
   if (status === "success") {

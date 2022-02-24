@@ -67,22 +67,19 @@ function OnePlace() {
   const { userState, setUserState } = useContext(AuthContext);
   const navigate = useNavigate();
   const [review, setReview] = useState([]);
-
   const [textEditorView, setTextEditorView] = useState(
     classes.textEditorHidden
   );
 
   const singlePlace = useQuery(["getSinglePlaceData", id], getSinglePlaceData);
   const getReviews = useQuery(["getSingleReview", id], getSingleReview);
-  const getUser = useQuery(["getSingleUSer"], getSingleUser);
 
   const { data, status } = singlePlace;
   const { data: dataReviews, status: statusReviews } = getReviews;
-  const { data: dataUser, status: statusUser } = getUser;
 
   const [postReviews, setPostReviews] = useState([]);
 
-  const addReview = useMutation((data) => saveReviewOnPlace(data.review, id), {
+  /*const addReview = useMutation((data) => saveReviewOnPlace(data.review, id), {
     onSuccess: (data) => {
       postReviews.push(data);
       getSingleReview(id);
@@ -92,9 +89,9 @@ function OnePlace() {
   useEffect(() => {
     if (statusReviews === "success") setPostReviews(dataReviews);
     else return;
-  }, [statusReviews]);
+  }, [statusReviews]);*/
 
-  /*const addReview = useMutation((data) => saveReviewOnPlace(data.review, id), {
+  const addReview = useMutation((data) => saveReviewOnPlace(data.review, id), {
     onSuccess: (data) => {
       const newReview = {
         _id: data?.data?.data?._id || "",
@@ -102,13 +99,15 @@ function OnePlace() {
         placeId: id,
         stars: data?.data?.data?.stars || 0,
         currentDate: data?.data?.data?.createdAt,
+        usename: data?.data?.data.username,
+        avatar: data?.data?.data.avatar,
       };
       const newReviews = [...postReviews, newReview];
       setPostReviews(newReviews);
     },
 
     onError: () => console.log("Hubo un error inesperado"),
-  });*/
+  });
 
   const postReview = (e) => {
     e.preventDefault();
@@ -160,36 +159,12 @@ function OnePlace() {
     setReview(newReview);
   };
 
-  /*function renderCard(e) {
-    const reseña = e.target.value;
-    console.log(review);
-    setRender([...review, reseña]);
-  }*/
-
-  /*const HandleSubmit = (e) => {
-    e.preventDefault();
-    const response = saveReviewOnPlace(review, id);
-    if (response.statusCode === 200) {
-      console.log("todo salio bien");
-    } else console.log("algo fue mal");
-  }; 
-
-  const HandleSubmit = (e) => {
-    e.preventDefault();
-    saveReviewOnPlace(review, id);
-  };*/
-
   if (status === "loading") {
     return <HeroLoader />;
   }
 
-  if (status === "loading") {
-    return <p> Loading...</p>;
-  }
-
-  console.log("dataUSer ", dataUser);
-
   if (status === "success") {
+    console.log("postReview ", postReviews);
     return (
       <div className={classes.parentcon}>
         <ImageSlider slides={data.images} />

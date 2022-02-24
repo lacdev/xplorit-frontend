@@ -3,6 +3,7 @@ import { AuthContext } from "context/AuthContext";
 //Components
 import DashboardCommentComponent from "./DashboardCommentComponent";
 import BigTitle from "components/Common/BigTitle";
+import DashboardLoaderCards from "components/DashboardComponents/DashboardLoaderCards";
 
 //UseQuery & service
 import { useQuery } from "react-query";
@@ -11,11 +12,19 @@ import { getCommentsCreatedByUser } from "services/user.services";
 function DashboardComment() {
   // const id = "61ef68279262e2f167700caf"; //ID user
 
-  const getComments = useQuery(["getComments"], getCommentsCreatedByUser);
+  const getComments = useQuery(["getComments"], getCommentsCreatedByUser, {
+    retry: 0,
+  });
   const { data, status, error } = getComments;
 
+  if (status === "loading") {
+    <span>
+      <DashboardLoaderCards />
+    </span>;
+  }
+
   if (error === true) {
-    console.log("an errror had happend");
+    <span> Aun no has dejado comentarios</span>;
   }
 
   if (status === "success") {
@@ -23,8 +32,6 @@ function DashboardComment() {
   }
 
   const renderCard = (comment) => {
-    console.log("comment ", comment);
-
     if (comment?.placeId) {
       return (
         <DashboardCommentComponent
@@ -53,7 +60,7 @@ function DashboardComment() {
   return (
     <div>
       <div>
-        <BigTitle bigTitleText="Comentarios" />
+        <BigTitle bigTitleText='Comentarios' />
       </div>
       {data &&
         data.map((comment) => {
