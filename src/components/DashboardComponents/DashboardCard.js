@@ -8,8 +8,7 @@ import StarRatingStatic from "../RatingStarStatic";
 import { Link } from "react-router-dom";
 
 const classes = {
-  parentcon:
-    "m-auto flex w-fit mb-5 bg-white shadow-md rounded-md cursor-pointer",
+  parentcon: "m-auto flex w-fit mb-5 bg-white shadow-md rounded-md ",
   imgcon: "max-w-xs mr-5",
   img: "rounded-l-lg bg-contain sm:min-h-cardHeight sm:min-w-cardWidth sm:shrink-0",
   cardinfo: "w-full  justify-start mt-5 content-center flex flex-wrap",
@@ -60,7 +59,7 @@ function DashboardCard({ cardData, type }) {
                   return <Labels LabelText={tag} />;
                 })}
             </div>
-            <div className={classes.requestcon}>
+            {/* <div className={classes.requestcon}>
               <div className={classes.editadjust}>
                 <div className={classes.editadjustcon}>
                   <div className={classes.editcon}>
@@ -77,7 +76,7 @@ function DashboardCard({ cardData, type }) {
                   <p className={classes.icontext}>Eliminar</p>
                 </div>
               </div>
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>

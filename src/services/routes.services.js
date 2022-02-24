@@ -28,7 +28,7 @@ export async function getOwnerRoute({ queryKey }) {
 export async function getRouteLikes({ queryKey }) {
   const service_url = `${endpoints.getAllRoutes}/${queryKey[1]}/likes`;
   const getOwnerPlacePromise = await axios.get(service_url);
-  const getOwnerPlaceData = getOwnerPlacePromise.data;
+  const getOwnerPlaceData = getOwnerPlacePromise.data.data;
   return getOwnerPlaceData;
 }
 
