@@ -252,14 +252,14 @@ const updateRouteSearchLocation = (coords) => {
                     routes.routes.map((data, index) => {
                       return (
                         <SearchRoutesCards
-                          id={data._id}
+                          id={data?._id}
                           type={'route'}
                           key={index}
-                          name={data.name}
-                          number={data.coordinates.length}
-                          labels={data.tags}
-                          score={data.average}
-                          ownerId={data.ownerId}
+                          name={data?.name}
+                          number={data?.location?.coordinates?.length}
+                          labels={data?.tags}
+                          score={data?.average}
+                          ownerId={data?.ownerId}
                           images={data?.images}
                         />
                       );

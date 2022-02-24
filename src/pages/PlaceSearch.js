@@ -295,7 +295,7 @@ const handlePage = () => {
               useCircle={true}
               radius={useRange}
               updatePlaceSearchLocation={updatePlaceSearchLocation}
-              //  customCenter={MapCenter}
+             customCenter={MapCenter}
             />
           </div>
         </section>

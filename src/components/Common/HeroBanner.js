@@ -72,13 +72,13 @@ function HeroBanner() {
                   buttonText='Buscar lugares'
                 />
               </div>
-              <div className={classes.btncon} onClick={onRouteSubmit}>
+              {/* <div className={classes.btncon} onClick={onRouteSubmit}>
                 <Btncards
                   buttonType='submit'
                   className={classes.btn}
                   buttonText='Buscar rutas'
                 />
-              </div>
+              </div> */}
             </div>
           </form>
         </div>

@@ -21,6 +21,7 @@ function setRenderFooter(location){
   const {pathname} = location;
   const noFooterRoute = [
     '/searchplace',
+    '/searchroute',
   ]
 
   const routeFound = noFooterRoute.indexOf(pathname?.toLowerCase()) 
