@@ -7,7 +7,7 @@ import StarRatingStatic from '../RatingStarStatic'
 
 const classes = {
   container:
-    'font-Poppins flex flex-col justify-between items-stretch bg-white rounded-lg m-4 drop-shadow-lg flex w-2xl h-[460px] rounded-t-lg flex-col',
+    'font-Poppins flex flex-col justify-between items-stretch bg-white rounded-lg m-4 drop-shadow-lg flex w-2xl h-[460px] rounded-t-lg flex-col max-w-sm ',
   imgcont: 'h-48 w-full rounded-t-lg',
   img: 'w-full h-48 object-fill rounded-t-lg',
   contcontainer: 'p-4 h-full flex flex-col justify-evenly',
