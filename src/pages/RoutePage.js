@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getCardsRoutesHome } from "services/routes.services";
 //import { getNearRoutes } from 'services/routes.services';
-//import { getSharedRoutes } from 'services/routes.services';
+import { getRecentlyCreated } from "services/routes.services";
 
 //Components
 import Titles from "components/Common/Titles";
@@ -13,10 +13,12 @@ import Inputs from "components/Common/Inputs";
 import Btncards from "components/Common/Btncards";
 import CardCarousel from "components/CardCarousel";
 import LoadersCards from "components/Common/LoadersCards";
+import LoaderHome from "components/LandingComponents/LoaderHome";
 
 const classes = {
   parentcon: "font-primary justify-center",
-  container: "w-full h-screen max-h-[700px] bg-routeplaceimg bg-no-repeat bg-cover",
+  container:
+    "w-full h-screen max-h-[700px] bg-routeplaceimg bg-no-repeat bg-cover",
   section: "flex h-full justify-center items-center bg-black/50",
   titlecon: "flex break-words w-full justify-around p-4",
   maincon: "w-5/6 justify-center inline-align-top text-center",
@@ -37,22 +39,25 @@ function RoutePage() {
 
   const useQueryMultiple = () => {
     //Top Routes
-    const cardsTopRoutes = useQuery("getTopRoutes", getCardsRoutesHome, {});
+    const cardsTopRoutes = useQuery("getTopRoutes", getCardsRoutesHome);
 
     //Near Routes
-    const cardsNearRoutes = useQuery("getNearRoutes", getCardsRoutesHome, {});
+    const cardsNearRoutes = useQuery("getNearRoutes", getCardsRoutesHome);
 
     //Shared Routes
-    const cardsSharedRoutes = useQuery("getSharedRoutes", getCardsRoutesHome, {});
+    const cardsSharedRoutes = useQuery("getSharedRoutes", getRecentlyCreated);
 
     return { cardsTopRoutes, cardsNearRoutes, cardsSharedRoutes };
   };
 
-  const { cardsTopRoutes, cardsNearRoutes, cardsSharedRoutes } = useQueryMultiple();
+  const { cardsTopRoutes, cardsNearRoutes, cardsSharedRoutes } =
+    useQueryMultiple();
 
   const { data: dataTopRoutes, isLoading: loadingTopRoutes } = cardsTopRoutes;
-  const { data: dataNearRoutes, isLoading: loadingNearRoutes } = cardsNearRoutes;
-  const { data: dataSharedRoutes, isLoading: loadingSharedRoutes } = cardsSharedRoutes;
+  const { data: dataNearRoutes, isLoading: loadingNearRoutes } =
+    cardsNearRoutes;
+  const { data: dataSharedRoutes, isLoading: loadingSharedRoutes } =
+    cardsSharedRoutes;
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -69,16 +74,23 @@ function RoutePage() {
         <section className={classes.section}>
           <div className={classes.maincon}>
             <div className={classes.titlescon}>
-              <Titles tag="h1" titleText="Comienza a descubir rutas creadas por la comunidad" />
+              <Titles
+                tag='h1'
+                titleText='Comienza a descubir rutas creadas por la comunidad'
+              />
             </div>
             <Inputs
               value={inputText}
-              placeholderText="Escribe el nombre o palabra clave"
+              placeholderText='Escribe el nombre o palabra clave'
               onChange={(event) => {
                 setInputText(event.target.value);
               }}
             />
-            <Btncards onClick={onFormSubmit} className={classes.btn} buttonText="Buscar" />
+            <Btncards
+              onClick={onFormSubmit}
+              className={classes.btn}
+              buttonText='Buscar'
+            />
           </div>
         </section>
       </div>
@@ -96,11 +108,11 @@ function RoutePage() {
         </div>
       </div> */}
       <div className={classes.textcarru}>
-        <Titles tag="h4" titleText="Top de rutas populares" />
+        <Titles tag='h4' titleText='Rutas mejores valoradas' />
       </div>
       <div className={classes.carruselcon}>
         {loadingTopRoutes === true ? (
-          <LoadersCards/>
+          <LoaderHome />
         ) : (
           <CardCarousel type={"route"} cardsData={dataTopRoutes} />
         )}
@@ -116,11 +128,11 @@ function RoutePage() {
         )}
       </div> */}
       <div className={classes.textcarru}>
-        <Titles tag="h4" titleText="Rutas compartidas recientemente" />
+        <Titles tag='h4' titleText='Rutas compartidas recientemente' />
       </div>
       <div className={classes.carruselcon}>
         {loadingSharedRoutes === true ? (
-          <LoadersCards/>
+          <LoaderHome />
         ) : (
           <CardCarousel type={"route"} cardsData={dataSharedRoutes} />
         )}
