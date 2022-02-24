@@ -12,6 +12,7 @@ import React from "react";
 import Inputs from "components/Common/Inputs";
 import Btncards from "components/Common/Btncards";
 import CardCarousel from "components/CardCarousel";
+import LoadersCards from "components/Common/LoadersCards";
 
 const classes = {
   parentcon: "font-primary justify-center",
@@ -99,7 +100,7 @@ function RoutePage() {
       </div>
       <div className={classes.carruselcon}>
         {loadingTopRoutes === true ? (
-          <span>Loading...</span>
+          <LoadersCards/>
         ) : (
           <CardCarousel type={"route"} cardsData={dataTopRoutes} />
         )}
@@ -109,7 +110,7 @@ function RoutePage() {
       </div>
       <div className={classes.carruselcon}>
         {loadingNearRoutes === true ? (
-          <span>Loading...</span>
+          <LoadersCards/>
         ) : (
           <CardCarousel type={"route"} cardsData={dataNearRoutes} />
         )}
@@ -119,7 +120,7 @@ function RoutePage() {
       </div>
       <div className={classes.carruselcon}>
         {loadingSharedRoutes === true ? (
-          <span>Loading...</span>
+          <LoadersCards/>
         ) : (
           <CardCarousel type={"route"} cardsData={dataSharedRoutes} />
         )}

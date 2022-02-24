@@ -22,6 +22,28 @@ function LoadersCards() {
         {/* //card container end */}
       </div>
       {/* //End cards container */}
+       {/* //Starts cards container */}
+       <div className={classes.infoContainer}>
+        {/* //card container starts */}
+        <div className={classes.cardContainer}>
+          <div
+            className={`${classes.backgroundGradient} ${classes.card}`}
+          ></div>
+        </div>
+        {/* //card container end */}
+      </div>
+      {/* //End cards container */}
+       {/* //Starts cards container */}
+      <div className={classes.infoContainer}>
+        {/* //card container starts */}
+        <div className={classes.cardContainer}>
+          <div
+            className={`${classes.backgroundGradient} ${classes.card}`}
+          ></div>
+        </div>
+        {/* //card container end */}
+      </div>
+      {/* //End cards container */}
     </div>
   )
 }
