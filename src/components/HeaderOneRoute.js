@@ -54,7 +54,7 @@ const classes = {
 };
 
 function HeaderOneRoute({
-  routeId,
+  userId,
   tags,
   title,
   likes,

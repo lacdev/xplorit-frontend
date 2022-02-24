@@ -1,8 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "context/AuthContext";
 import { formatDate, formatCreationDate } from "utils/date";
-import { useMutation, useQuery } from "react-query";
+import { useQuery } from "react-query";
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
 import HeartComplet from "assets/icons/HeartComplete";
@@ -11,15 +11,13 @@ import ThreePoints from "assets/icons/ThreePoints";
 //Components
 import Avatar from "components/Common/Avatar";
 import { Labels } from "components/Common/Labels";
+import Titles from "components/Common/Titles";
 import StarRatingStatic from "./RatingStarStatic";
+import { saveLikeOnPlace, deleteLikeOnPlace } from "services/places.services";
 
 //Axios functions
-import {
-  getPlaceLikes,
-  saveLikeOnPlace,
-  getSingleUser,
-} from "services/places.services";
-import { deleteLikeOnPlace } from "services/places.services";
+//import { saveLikeOnPlace } from "services/places.services";
+//import { deleteLikeOnPlace } from "services/places.services";
 
 const classes = {
   parentcon: "font-primary overflow-x-hidden",
@@ -53,6 +51,7 @@ const classes = {
 };
 function HeaderOnePlace({
   placeId,
+  userId,
   tags,
   title,
   likes,
@@ -73,8 +72,7 @@ function HeaderOnePlace({
   const getLikes = useQuery(["getLikes", placeId], getPlaceLikes);
   const getUser = useQuery(["user"], getSingleUser);
 
-  const { data, status } = getLikes;
-  const { data: dataUser, status: statusUser } = getUser;
+  // const singlePlace = useQuery(["getSinglePlaceData", id], getSinglePlaceData);
 
   const addLike = useMutation(() => saveLikeOnPlace(placeId), {
     onSuccess: (like) => {
@@ -128,13 +126,17 @@ function HeaderOnePlace({
       <div className={classes.titleicon}>
         <h1 className='font-extrabold text-6xl'>{title || ""}</h1>
         <div className={classes.iconscon}>
-          <div onClick={postLike} className='flex flex-row w-fit'>
+          <div className='flex justify-items-center space-x-4'>
             {useHeart === false ? (
-              <HeartFillOut
-                width='28'
-                height='28'
-                className={classes.hearticon}
-              />
+              <div className='flex flex-col'>
+                <HeartFillOut
+                  onClick={handleClick}
+                  width='28'
+                  height='28'
+                  className={classes.hearticon}
+                />
+                <p className='mt-2 ml-2'>{usePostLike}</p>
+              </div>
             ) : (
               <div className='flex flex-col'>
                 <HeartComplet
@@ -142,25 +144,20 @@ function HeaderOnePlace({
                   height='28'
                   className={classes.hearticon}
                 />
-                <p className='mt-2'></p>
+                <p className='mt-2'>{usePostLike}</p>
               </div>
             )}
+            <div className='flex flex-col'>
+              <StarRatingStatic
+                width='28'
+                height='28'
+                className={classes.staricon}
+                ratingValue={average}
+              />
+              <p className='mt-2 ml-14'>{average}</p>
+            </div>
 
-            <StarRatingStatic
-              width='28'
-              height='28'
-              className={classes.staricon}
-              ratingValue={average}
-            />
             <ThreePoints width='40' height='28' className='ml-8' />
-          </div>
-          <div className={classes.likequalcon}>
-            <div className={classes.liketext}>
-              <p>{usePostLike}</p>
-            </div>
-            <div className={classes.qualitext}>
-              <p className='mt-1'>{average}</p>
-            </div>
           </div>
         </div>
       </div>

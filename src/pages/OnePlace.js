@@ -15,12 +15,9 @@ import Btncards from "components/Common/Btncards";
 import MapComponent from "components/MapComponent";
 import HeaderOnePlace from "components/HeaderOnePlace";
 import StarRating from "components/RatingStar";
-import SuccessModal from "components/SuccessModal";
-import SuccessReview from "components/SuccessReview";
-
 //useQuery
-import { useQuery, useQueryClient, useMutation } from "react-query";
-import { getSinglePlaceData, getSingleUser } from "services/places.services";
+import { useQuery } from "react-query";
+import { getSinglePlaceData } from "services/places.services";
 import { getSingleReview } from "services/places.services";
 import { saveReviewOnPlace } from "services/places.services";
 import HeroLoader from "components/Common/HeroLoader";
@@ -109,15 +106,15 @@ function OnePlace() {
     onError: () => console.log("Hubo un error inesperado"),
   });*/
 
-  const postReview = (e) => {
-    e.preventDefault();
+  const [textEditorView, setTextEditorView] = useState(
+    classes.textEditorHidden
+  );
 
-    const data = {
-      review,
-    };
+  const singlePlace = useQuery(["getSinglePlaceData", id], getSinglePlaceData);
+  const getReviews = useQuery(["getSingleReview", id], getSingleReview);
 
-    addReview.mutate(data);
-  };
+  const { data, status } = singlePlace;
+  const { data: dataReviews, status: statusReviews } = getReviews;
 
   useEffect(() => {
     if (status === "loading") {
@@ -127,12 +124,13 @@ function OnePlace() {
     if (data === undefined) {
       return;
     }
+
     const markerCoords = {
       lat: data.location.coordinates[1],
       lng: data.location.coordinates[0],
     };
     setSelectedLocation(markerCoords);
-  }, [data]);
+  }, [data, status]);
 
   const handleClick = () => {
     if (
@@ -218,7 +216,7 @@ function OnePlace() {
               buttonText='Reseñar'
             />
             <div className={textEditorView}>
-              <form onSubmit={postReview}>
+              <form>
                 <textarea
                   placeholder=' Describe tu experiencia...'
                   type='text'
@@ -227,32 +225,6 @@ function OnePlace() {
                   onChange={(e) => saveReview(e)}
                   value={review.comment}
                 ></textarea>
-                <div>
-                  <button
-                    className={
-                      "bg-blue-600 ml-auto px-3 py-2 font-Poppins text-white rounded-full hover:bg-blue-700 drop-shadow-lg"
-                    }
-                    type='submit'
-                  >
-                    Publicar
-                  </button>
-                </div>
-                <div>
-                  {addReview.isSuccess && (
-                    <SuccessReview
-                      status={true}
-                      modalText='Reseña creada con éxito'
-                      modalOtherText='Gracias por contribuir a nuestra comunidad de viajeros'
-                    />
-                  )}
-                  {addReview.isError && (
-                    <SuccessModal
-                      status={false}
-                      modalText='Hubo un error'
-                      modalOtherText='Ocurrio un error al publicar tu reseña'
-                    />
-                  )}
-                </div>
               </form>
               <p className='ml-10'> Califica el lugar :</p>
               <div className='flex '>
@@ -264,18 +236,24 @@ function OnePlace() {
                   onChange={(e) => saveStar(e)}
                   stars={star}
                 />
+                <button
+                  className='bg-blue-600 ml-auto px-3 py-2 font-Poppins text-white rounded-full hover:bg-blue-700 drop-shadow-lg'
+                  onClick={HandleSubmit}
+                >
+                  Reseñar
+                </button>
               </div>
             </div>
             <div className={classes.commentcon}>
-              {postReviews &&
-                postReviews.map((review) => {
+              {dataReviews &&
+                dataReviews.map((review) => {
                   return (
                     <Comments
-                      avatarImg={review?.userId?.avatar}
-                      username={review?.userId?.username}
-                      currentDate={review?.createdAt}
-                      stars={review?.stars}
-                      comment={review?.comment}
+                      avatarImg={review.userId.avatar}
+                      username={review.userId.username}
+                      currentDate={review.createdAt}
+                      stars={review.stars}
+                      comment={review.comment}
                     />
                   );
                 })}
