@@ -56,8 +56,8 @@ export async function saveReviewOnRoute(data, routeId, userId) {
     userId: userId,
   });*/
 }
-export async function getAllFilterRoutes(url) {
-  const getFilterRoutes = await axios.get(url);
+export async function getAllFilterRoutes(url,page, limit) {
+  const getFilterRoutes = await axios.get(`${url}${limit}&page=${page}`);
   const filterRoutes = getFilterRoutes.data;
   return filterRoutes;
 }

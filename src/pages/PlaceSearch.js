@@ -39,7 +39,7 @@ const classes = {
   labelselect: "text-xs",
   cardscon: "h-asideSearch overflow-x-hidden divide-y divide-solid border-slate-500",
   mapcon: "minTablet:block col-span-3 bg-gray-200 h-full",
-  btnshow: "py-1 block minTablet:hidden",
+  btnshow: "py-1 fixed bottom-3 left-40% block minTablet:hidden",
 };
 function PlaceSearch() {
   const [showMap, setShowMap] = useState(false);
@@ -122,7 +122,7 @@ function PlaceSearch() {
   //   );
   // }
   if (status === "success") {
-     console.log('What is PLacesData?', placesData.data)
+    //  console.log('What is PLacesData?', placesData.data)
    }
 
   //Event Hide Aside Map
@@ -282,7 +282,7 @@ const handlePage = () => {
                 </div>
               )}
              {
-               places.places.hasNextPage && 
+               placesData.data.hasNextPage && 
                <LimitCards onClick={handlePage}/>
              } 
             </aside>

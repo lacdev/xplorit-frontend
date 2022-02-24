@@ -86,6 +86,9 @@ module.exports = {
         xsphone: "450px",
         minTablet: "960px",
       },
+      inset:{
+        '40%':"40%",
+      }
     },
   },
   plugins: [],

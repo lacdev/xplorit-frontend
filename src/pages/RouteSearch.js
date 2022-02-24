@@ -31,14 +31,14 @@ const classes = {
   togglespanroute: "mr-2",
   filtroposition: "ml-auto my-auto",
   asidecon:
-    "col-span-5 xl:col-span-3 minTablet:col-span-2 bg-white divide-y divide-solid border-slate-500 px-3 max-h-[90vh]",
+    "col-span-5 xl:col-span-3 minTablet:col-span-2 bg-white divide-y divide-solid border-slate-500 px-3 max-h-[100vh]",
   rescon: "py-2 pl-2",
   selectorcon: "flex flex-row w-full",
   divselector: "flex flex-col w-full",
   labelselect: "text-xs",
   cardscon: "h-asideSearch overgflow-y-scroll overflow-scroll overflow-x-hidden divide-y divide-solid border-slate-500",
   mapcon: "minTablet:block col-span-3 bg-gray-200 h-full",
-  btnshow: "py-1 block minTablet:hidden",
+  btnshow: "py-1 fixed bottom-3 left-40% block minTablet:hidden",
 };
 
 function RouteSearch() {
@@ -95,7 +95,7 @@ function RouteSearch() {
     if (routesData === undefined) {
       return;
     }
-    const markerCoords = routesData.data.routes.map((correctCoords) => {
+    const markerCoords = routes.routes.map((correctCoords) => {
       const firstPlace = correctCoords.location.coordinates[0];
       if (!firstPlace || firstPlace?.length === 0) return {};
       return {
@@ -267,7 +267,7 @@ const updateRouteSearchLocation = (coords) => {
                 </div>
               )}
 
-             {  routes.routes.hashNextPage &&
+             {  routesData.data.hashNextPage &&
              <LimitCards onClick={handlePage} />
              }
             </aside>
