@@ -11,7 +11,9 @@ import { getCommentsCreatedByUser } from "services/user.services";
 function DashboardComment() {
   // const id = "61ef68279262e2f167700caf"; //ID user
 
-  const getComments = useQuery(["getComments"], getCommentsCreatedByUser);
+  const getComments = useQuery(["getComments"], getCommentsCreatedByUser, {
+    retry: 0,
+  });
   const { data, status, error } = getComments;
 
   if (error === true) {
@@ -53,7 +55,7 @@ function DashboardComment() {
   return (
     <div>
       <div>
-        <BigTitle bigTitleText="Comentarios" />
+        <BigTitle bigTitleText='Comentarios' />
       </div>
       {data &&
         data.map((comment) => {

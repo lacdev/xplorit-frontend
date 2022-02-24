@@ -4,6 +4,14 @@ import { endpoints } from "endpoints/endpoints";
 const token = localStorage.getItem("token");
 console.log("token ", token);
 
+export async function getSingleUser() {
+  const getUserPromise = await axios.get(endpoints.userMe, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const getUser = getUserPromise.data.data;
+  return getUser;
+}
+
 export async function getCardsPlacesHome() {
   const getAllPlacesPromise = await axios.get(endpoints.getAllPlaces);
   const cardsDataPlaces = getAllPlacesPromise.data.data.places;
@@ -25,14 +33,19 @@ export async function getOwnerPlace({ queryKey }) {
   return getOwnerPlaceData;
 }
 
-
-export async function getAllFilterPlaces(url,page, limit) {
-  console.log('what is URL?', url)
-  console.log('Wht is this?', `${url}&page=${page}`)
+export async function getAllFilterPlaces(url, page, limit) {
+  console.log("what is URL?", url);
+  console.log("Wht is this?", `${url}&page=${page}`);
   const getFilterPlaces = await axios.get(`${url}${limit}&page=${page}`);
-  console.log("🚀 ~ file: places.services.js ~ line 32 ~ getAllFilterPlaces ~  getFilterPlaces",  getFilterPlaces)
+  console.log(
+    "🚀 ~ file: places.services.js ~ line 32 ~ getAllFilterPlaces ~  getFilterPlaces",
+    getFilterPlaces
+  );
   const filterPlaces = getFilterPlaces.data;
-  console.log("🚀 ~ file: places.services.js ~ line 34 ~ getAllFilterPlaces ~ filterPlaces", filterPlaces)
+  console.log(
+    "🚀 ~ file: places.services.js ~ line 34 ~ getAllFilterPlaces ~ filterPlaces",
+    filterPlaces
+  );
   return filterPlaces;
 }
 
@@ -60,12 +73,16 @@ export async function getSingleReviewRoute({ queryKey }) {
 export async function createPlace(data, images) {
   const token = localStorage.getItem("token");
   const service_url = `${endpoints.postPlace}`;
-  const formData = new FormData();
+  let formData = new FormData();
+  console.log("formData1", data);
+  console.log("images ", images);
   formData.append("data", JSON.stringify(data));
+  console.log("formData1", formData);
   for (let image of images) {
     formData.append("images", image);
   }
-  console.log("Data desde el back", data);
+  console.log("formData2", formData);
+  console.log("formData3", formData);
   return await axios.post(service_url, formData, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -105,7 +122,7 @@ export async function deleteLikeOnPlace(placeId) {
 
 export async function deleteLikeOnPlace(placeId) {
   const service_url = `${endpoints.deleteLike}/${placeId}/likes`;
- // console.log("URL ", service_url);
+  // console.log("URL ", service_url);
   //console.log("JSON to POST ", data);
   return await axios.delete(
     service_url,

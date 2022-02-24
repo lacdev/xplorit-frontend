@@ -64,7 +64,7 @@ function OneRoute() {
   const [locationsData, setLocationsData] = useState([]);
   const [star, setStar] = useState(0);
   const { userState, setUserState } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [render, setRender] = useState([]);
   const [review, setReview] = useState({
     comment: "",
@@ -121,10 +121,13 @@ function OneRoute() {
   };
 
   const handleClick = () => {
-    if (userState.loggedIn === true && textEditorView === classes.textEditorHidden) {
+    if (
+      userState.loggedIn === true &&
+      textEditorView === classes.textEditorHidden
+    ) {
       setTextEditorView(classes.textEditorShow);
     } else if (userState.loggedIn === false) {
-      navigate("/login", {replace : true})
+      navigate("/login", { replace: true });
     } else {
       setTextEditorView(classes.textEditorHidden);
     }
@@ -149,7 +152,7 @@ function OneRoute() {
   };
 
   if (status === "loading") {
-    return <HeroLoader/>;
+    return <HeroLoader />;
   }
 
   if (status === "success") {
@@ -162,7 +165,7 @@ function OneRoute() {
         <div className='w-5/6 m-auto'>
           {data?.ownerId && (
             <HeaderOneRoute
-              userId={data.userId}
+              routeId={id}
               title={data.name}
               tags={data.tags}
               likes={data.likes}
