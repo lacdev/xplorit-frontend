@@ -26,14 +26,12 @@ const classes = {
   titleicon: 'flex flex-col md:flex-row p-2 mt-4 justify-between',
   auxiconcon: 'flex flex-row ',
   iconscon: 'flex flex-col p-2 mt-4 sm:mt-1',
-  hearticon: '',
+  hearticon: 'cursor-pointer',
   staricon: '',
   inforcon: 'flex',
   avausercon: '',
-  // flex
   usercon: 'flex flex-col',
   created: 'text-2xl font-bold mb-2',
-  // flex flex-row text-center
   likequalcon: 'flex',
   //spanlike:'mr-14 text-center content-center phone:mr-2 phone:text-sm',
   //spanquali:'mr-2 text-center content-center phone:mr-10 phone:text-sm',
