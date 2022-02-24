@@ -79,7 +79,7 @@ function OnePlace() {
 
   const [postReviews, setPostReviews] = useState([]);
 
-  /*const addReview = useMutation((data) => saveReviewOnPlace(data.review, id), {
+  const addReview = useMutation((data) => saveReviewOnPlace(data.review, id), {
     onSuccess: (data) => {
       postReviews.push(data);
       getSingleReview(id);
@@ -89,9 +89,9 @@ function OnePlace() {
   useEffect(() => {
     if (statusReviews === "success") setPostReviews(dataReviews);
     else return;
-  }, [statusReviews]);*/
+  }, [statusReviews]);
 
-  const addReview = useMutation((data) => saveReviewOnPlace(data.review, id), {
+  /*const addReview = useMutation((data) => saveReviewOnPlace(data.review, id), {
     onSuccess: (data) => {
       const newReview = {
         _id: data?.data?.data?._id || "",
@@ -107,7 +107,7 @@ function OnePlace() {
     },
 
     onError: () => console.log("Hubo un error inesperado"),
-  });
+  });*/
 
   const postReview = (e) => {
     e.preventDefault();

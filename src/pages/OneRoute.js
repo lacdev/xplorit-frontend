@@ -82,6 +82,18 @@ function OneRoute() {
 
   const addReview = useMutation((data) => saveReviewOnRoute(data.review, id), {
     onSuccess: (data) => {
+      postReviews.push(data);
+      getSingleReviewRoute(id);
+    },
+  });
+
+  useEffect(() => {
+    if (statusReviews === "success") setPostReviews(dataReviews);
+    else return;
+  }, [statusReviews]);
+
+  /*const addReview = useMutation((data) => saveReviewOnRoute(data.review, id), {
+    onSuccess: (data) => {
       const newReview = {
         _id: data?.data?.data?._id || "",
         comment: data?.data?.data?.comment || "",
@@ -96,7 +108,7 @@ function OneRoute() {
     },
 
     onError: () => console.log("Hubo un error inesperado"),
-  });
+  });*/
 
   const postReview = (e) => {
     e.preventDefault();
@@ -252,9 +264,7 @@ function OneRoute() {
                       modalText='Hubo un error'
                       modalOtherText='Ocurrio un error al publicar tu reseña'
                     />
-                  )}{" "}
-                  const userToFind = data.ownerId.toString();
-                  console.log("postReviews ", postReviews);
+                  )}
                 </div>
               </form>
               <p className='ml-10'> califica el lugar :</p>
