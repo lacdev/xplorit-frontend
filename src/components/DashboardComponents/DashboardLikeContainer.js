@@ -13,17 +13,9 @@ function DashboardLikeContainer() {
   const getLikes = useQuery(["getLikes"], getLikesCreatedByUser);
   const { data, status, error } = getLikes;
 
-  if (status === "loading") {
-    return <span className='font-bold text-center'> Buscando Likes...</span>;
-  }
-
   if (error === true) {
     console.log("un error ha ocurrido: ", error);
-    return (
-      <span className='font-bold text-center'>
-        Ha ocurrido un error al realizar la peticion
-      </span>
-    );
+    return <span> Ha ocurrido un error al realizar la peticion</span>;
   }
 
   if (status === "success") {
@@ -58,7 +50,7 @@ function DashboardLikeContainer() {
   return (
     <div>
       <div>
-        <BigTitle bigTitleText='Likes' />
+        <BigTitle bigTitleText="Likes" />
       </div>
       {data &&
         data.map((like) => {
