@@ -10,9 +10,9 @@ import LoadersCards from "components/Common/LoadersCards";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LoaderHome from "components/LandingComponents/LoaderHome";
-//import { getTopPlaces } from 'services/places.services';
-//import { getNearPlaces } from 'services/places.services';
-//import { getRecentlySharedPlaces } from 'services/places.services';
+import { getTopPlaces } from "services/places.services";
+import { getNearPlaces } from "services/places.services";
+import { getRecentlySharedPlaces } from "services/places.services";
 
 const classes = {
   parentcon: " font-primary justify-center align-middle",
@@ -31,25 +31,26 @@ const classes = {
   carruselcon: "flex w-5/6 m-auto justify-center mb-20",
   textcarru: "ml-20 my-8",
 };
+
 function PlacePage() {
   const navigate = useNavigate();
   const [inputText, setInputText] = useState("");
 
   const useQueryMultiple = () => {
     //Top Places
-    const cardsTopPlaces = useQuery("getTopPlaces", getCardsPlacesHome, {
+    const cardsTopPlaces = useQuery("getTopPlaces", getTopPlaces, {
       onSuccess: () => console.log("topPlaces fetch with success"),
     });
 
     //Near Places
-    const cardsNearPlaces = useQuery("getNearPlaces", getCardsPlacesHome, {
+    const cardsNearPlaces = useQuery("getNearPlaces", getNearPlaces, {
       onSuccess: () => console.log("nearPlaces fetch with success"),
     });
 
     //Recently shared Places
     const cardsRecentlySharedPlaces = useQuery(
       "getRecentlySharedPlaces",
-      getCardsPlacesHome,
+      getRecentlySharedPlaces,
       {
         onSuccess: () =>
           console.log("getRecentlySharedPlaces fetch with success"),
@@ -152,11 +153,11 @@ function PlacePage() {
         {loadingTopPlaces === true ? (
           <LoaderHome />
         ) : (
-          <CardCarousel type={"place"} cardsData={topPlacesData} />
+          <CardCarousel type={"place"} cardsData={nearPlacesData} />
         )}
       </div>
       <div className={classes.textcarru}>
-        <Titles tag='h4' titleText='Lugares cerca de ti' />
+        <Titles tag='h4' titleText='Lugares creados recientemente' />
       </div>
       {/* <div className={classes.carruselcon} >
           {loadingNearPlaces === true?<LoadersCards/>:<CardCarousel type={'place'}  cardsData={nearPlacesData}/>}

@@ -14,12 +14,14 @@ import HeaderOneRoute from "components/HeaderOneRoute";
 import MapComponent from "components/MapComponent";
 import StarRating from "components/RatingStar";
 import HeroLoader from "components/Common/HeroLoader";
+import SuccessReview from "components/SuccessReview";
+import SuccessModal from "components/SuccessModal";
 
 //useQuery & services
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import { getSingleRouteData } from "services/routes.services";
 import { getSingleReviewRoute } from "services/places.services";
-import { saveReviewOnRoute } from "services/routes.services";
+import { saveReviewOnRoute, getSingleUser } from "services/routes.services";
 import PlaceAddress from "components/PlaceAddress";
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
@@ -69,7 +71,6 @@ function OneRoute() {
   const [review, setReview] = useState({
     comment: "",
     stars: null,
-    userId: "620c634ae13127a727d794e7",
   });
   const [textEditorView, setTextEditorView] = useState(
     classes.textEditorHidden
@@ -78,9 +79,51 @@ function OneRoute() {
 
   const singleRoute = useQuery(["getSingleRouteData", id], getSingleRouteData);
   const getReviews = useQuery(["getSingleReview", id], getSingleReviewRoute);
+  const getUser = useQuery(["getSingleUSer"], getSingleUser);
 
   const { data, status } = singleRoute;
   const { data: dataReviews, status: statusReviews } = getReviews;
+  const { data: dataUser, status: statusUser } = getUser;
+
+  const [postReviews, setPostReviews] = useState([]);
+
+  const addReview = useMutation((data) => saveReviewOnRoute(data.review, id), {
+    onSuccess: (data) => {
+      postReviews.push(data);
+      getSingleReviewRoute(id);
+    },
+  });
+
+  useEffect(() => {
+    if (statusReviews === "success") setPostReviews(dataReviews);
+    else return;
+  }, [postReviews]);
+
+  /*const addReview = useMutation((data) => saveReviewOnRoute(data.review, id), {
+    onSuccess: (data) => {
+      const newReview = {
+        _id: data?.data?.data?._id || "",
+        comment: data?.data?.data?.comment || "",
+        placeId: id,
+        stars: data?.data?.data?.stars || 0,
+        currentDate: data?.data?.data?.createdAt,
+      };
+      const newReviews = [...postReviews, newReview];
+      setPostReviews(newReviews);
+    },
+
+    onError: () => console.log("Hubo un error inesperado"),
+  });*/
+
+  const postReview = (e) => {
+    e.preventDefault();
+
+    const data = {
+      review,
+    };
+
+    addReview.mutate(data);
+  };
 
   useEffect(() => {
     if (status === "loading") {
@@ -146,10 +189,10 @@ function OneRoute() {
     setReview(newReview);
   };
 
-  const handleSubmit = (e) => {
+  /*const handleSubmit = (e) => {
     e.preventDefault();
     saveReviewOnRoute(review, id, userId);
-  };
+  };*/
 
   if (status === "loading") {
     return <HeroLoader />;
@@ -157,6 +200,7 @@ function OneRoute() {
 
   if (status === "success") {
     const userToFind = data.ownerId.toString();
+    console.log("postReviews ", postReviews);
 
     return (
       <div className={classes.parentcon}>
@@ -165,7 +209,7 @@ function OneRoute() {
         <div className='w-5/6 m-auto'>
           {data?.ownerId && (
             <HeaderOneRoute
-              userId={data.userId}
+              routeId={id}
               title={data.name}
               tags={data.tags}
               likes={data.likes}
@@ -177,7 +221,6 @@ function OneRoute() {
             />
           )}
         </div>
-
         <div className='w-5/6 m-auto'>
           <section className='px-8'>
             <div className={classes.decriptioncon}>
@@ -203,15 +246,39 @@ function OneRoute() {
               buttonText='Reseñar'
             />
             <div className={textEditorView}>
-              <form>
+              <form onSubmit={postReview}>
                 <textarea
-                  placeholder=' describe tu experiencia...'
+                  placeholder=' Describe tu experiencia...'
                   type='text'
                   id='comment'
                   className={classes.textArea}
                   onChange={(e) => saveReview(e)}
                   value={review.comment}
                 ></textarea>
+                <div>
+                  <button
+                    className='bg-blue-600 ml-auto px-3 py-2 font-Poppins text-white rounded-full hover:bg-blue-700 drop-shadow-lg'
+                    type='submit'
+                  >
+                    Publicar
+                  </button>
+                </div>
+                <div>
+                  {addReview.isSuccess && (
+                    <SuccessReview
+                      status={true}
+                      modalText='Reseña creada con éxito'
+                      modalOtherText='Gracias por contribuir a nuestra comunidad de viajeros'
+                    />
+                  )}
+                  {addReview.isError && (
+                    <SuccessModal
+                      status={false}
+                      modalText='Hubo un error'
+                      modalOtherText='Ocurrio un error al publicar tu reseña'
+                    />
+                  )}
+                </div>
               </form>
               <p className='ml-10'> califica el lugar :</p>
               <div className='flex '>
@@ -223,24 +290,18 @@ function OneRoute() {
                   onChange={(e) => saveStar(e)}
                   stars={star}
                 />
-                <button
-                  className='bg-blue-600 ml-auto px-3 py-2 font-Poppins text-white rounded-full hover:bg-blue-700 drop-shadow-lg'
-                  onClick={handleSubmit}
-                >
-                  Reseñar
-                </button>
               </div>
             </div>
             <div className={classes.commentcon}>
-              {dataReviews &&
-                dataReviews.map((review) => {
+              {postReviews &&
+                postReviews.map((review) => {
                   return (
                     <Comments
-                      avatarImg={review.userId.avatar}
-                      username={review.userId.username}
-                      currentDate={review.createdAt}
-                      stars={review.stars}
-                      comment={review.comment}
+                      avatarImg={review?.userId?.avatar}
+                      username={review.userId?.username}
+                      currentDate={review?.createdAt}
+                      stars={review?.stars}
+                      comment={review?.comment}
                     />
                   );
                 })}

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getCardsRoutesHome } from "services/routes.services";
 //import { getNearRoutes } from 'services/routes.services';
-//import { getSharedRoutes } from 'services/routes.services';
+import { getRecentlyCreated } from "services/routes.services";
 
 //Components
 import Titles from "components/Common/Titles";
@@ -39,17 +39,13 @@ function RoutePage() {
 
   const useQueryMultiple = () => {
     //Top Routes
-    const cardsTopRoutes = useQuery("getTopRoutes", getCardsRoutesHome, {});
+    const cardsTopRoutes = useQuery("getTopRoutes", getCardsRoutesHome);
 
     //Near Routes
-    const cardsNearRoutes = useQuery("getNearRoutes", getCardsRoutesHome, {});
+    const cardsNearRoutes = useQuery("getNearRoutes", getCardsRoutesHome);
 
     //Shared Routes
-    const cardsSharedRoutes = useQuery(
-      "getSharedRoutes",
-      getCardsRoutesHome,
-      {}
-    );
+    const cardsSharedRoutes = useQuery("getSharedRoutes", getRecentlyCreated);
 
     return { cardsTopRoutes, cardsNearRoutes, cardsSharedRoutes };
   };
@@ -112,7 +108,7 @@ function RoutePage() {
         </div>
       </div> */}
       <div className={classes.textcarru}>
-        <Titles tag='h4' titleText='Top de rutas populares' />
+        <Titles tag='h4' titleText='Rutas mejores valoradas' />
       </div>
       <div className={classes.carruselcon}>
         {loadingTopRoutes === true ? (

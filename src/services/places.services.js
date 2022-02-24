@@ -17,6 +17,25 @@ export async function getCardsPlacesHome() {
   return cardsDataPlaces;
 }
 
+export async function getTopPlaces() {
+  const service_url = `${endpoints.getAllPlaces}/?sort=average`;
+  const getAllPlacesPromise = await axios.get(service_url);
+  const cardsDataPlaces = getAllPlacesPromise.data.data.places;
+  return cardsDataPlaces;
+}
+export async function getNearPlaces() {
+  const service_url = `${endpoints.getAllPlaces}/?sort=likes`;
+  const getAllPlacesPromise = await axios.get(service_url);
+  const cardsDataPlaces = getAllPlacesPromise.data.data.places;
+  return cardsDataPlaces;
+}
+export async function getRecentlySharedPlaces() {
+  const service_url = `${endpoints.getAllPlaces}/?sort=createdAt`;
+  const getAllPlacesPromise = await axios.get(service_url);
+  const cardsDataPlaces = getAllPlacesPromise.data.data.places;
+  return cardsDataPlaces;
+}
+
 export async function getSinglePlaceData({ queryKey }) {
   const service_url = `${endpoints.getAllPlaces}/${queryKey[1]}`;
   const getSinglePlaceDataPromise = await axios.get(service_url);
@@ -110,6 +129,6 @@ export async function saveReviewOnPlace(review, placeId) {
       headers: { Authorization: `Bearer ${token}` },
     }
   );
-  console.log("saveLike ", saveLike);
+
   return await saveLike;
 }

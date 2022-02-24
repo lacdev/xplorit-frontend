@@ -15,9 +15,12 @@ import Btncards from "components/Common/Btncards";
 import MapComponent from "components/MapComponent";
 import HeaderOnePlace from "components/HeaderOnePlace";
 import StarRating from "components/RatingStar";
+import SuccessModal from "components/SuccessModal";
+import SuccessReview from "components/SuccessReview";
+
 //useQuery
 import { useQuery, useQueryClient, useMutation } from "react-query";
-import { getSinglePlaceData } from "services/places.services";
+import { getSinglePlaceData, getSingleUser } from "services/places.services";
 import { getSingleReview } from "services/places.services";
 import { saveReviewOnPlace } from "services/places.services";
 import HeroLoader from "components/Common/HeroLoader";
@@ -59,17 +62,11 @@ const classes = {
 
 function OnePlace() {
   const { id } = useParams();
-  const queryClient = useQueryClient;
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [star, setStar] = useState(0);
   const { userState, setUserState } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [review, setReview] = useState({
-    comment: "",
-    stars: null,
-  });
-
-  const [render, setRender] = useState([]);
+  const [review, setReview] = useState([]);
 
   const [textEditorView, setTextEditorView] = useState(
     classes.textEditorHidden
@@ -77,16 +74,41 @@ function OnePlace() {
 
   const singlePlace = useQuery(["getSinglePlaceData", id], getSinglePlaceData);
   const getReviews = useQuery(["getSingleReview", id], getSingleReview);
+  const getUser = useQuery(["getSingleUSer"], getSingleUser);
 
   const { data, status } = singlePlace;
   const { data: dataReviews, status: statusReviews } = getReviews;
+  const { data: dataUser, status: statusUser } = getUser;
+
+  const [postReviews, setPostReviews] = useState([]);
 
   const addReview = useMutation((data) => saveReviewOnPlace(data.review, id), {
-    onSuccess: (review) => {
-      queryClient.setQueryData(["review"], review);
+    onSuccess: (data) => {
+      postReviews.push(data);
+      getSingleReview(id);
     },
-    onError: () => console.log("Hubo un error inesperado"),
   });
+
+  useEffect(() => {
+    if (statusReviews === "success") setPostReviews(dataReviews);
+    else return;
+  }, [statusReviews]);
+
+  /*const addReview = useMutation((data) => saveReviewOnPlace(data.review, id), {
+    onSuccess: (data) => {
+      const newReview = {
+        _id: data?.data?.data?._id || "",
+        comment: data?.data?.data?.comment || "",
+        placeId: id,
+        stars: data?.data?.data?.stars || 0,
+        currentDate: data?.data?.data?.createdAt,
+      };
+      const newReviews = [...postReviews, newReview];
+      setPostReviews(newReviews);
+    },
+
+    onError: () => console.log("Hubo un error inesperado"),
+  });*/
 
   const postReview = (e) => {
     e.preventDefault();
@@ -138,6 +160,12 @@ function OnePlace() {
     setReview(newReview);
   };
 
+  /*function renderCard(e) {
+    const reseña = e.target.value;
+    console.log(review);
+    setRender([...review, reseña]);
+  }*/
+
   /*const HandleSubmit = (e) => {
     e.preventDefault();
     const response = saveReviewOnPlace(review, id);
@@ -159,10 +187,12 @@ function OnePlace() {
     return <p> Loading...</p>;
   }
 
+  console.log("dataUSer ", dataUser);
+
   if (status === "success") {
     return (
       <div className={classes.parentcon}>
-        {<ImageSlider slides={data.images} />}
+        <ImageSlider slides={data.images} />
 
         <div className='w-5/6 m-auto'>
           {data?.ownerId && (
@@ -207,13 +237,11 @@ function OnePlace() {
                 C.P: {data.address.zipcode}
               </div>
             </div>
-
             <Btncards
               onClick={handleClick}
               className={classes.btn}
               buttonText='Reseñar'
             />
-
             <div className={textEditorView}>
               <form onSubmit={postReview}>
                 <textarea
@@ -234,6 +262,22 @@ function OnePlace() {
                     Publicar
                   </button>
                 </div>
+                <div>
+                  {addReview.isSuccess && (
+                    <SuccessReview
+                      status={true}
+                      modalText='Reseña creada con éxito'
+                      modalOtherText='Gracias por contribuir a nuestra comunidad de viajeros'
+                    />
+                  )}
+                  {addReview.isError && (
+                    <SuccessModal
+                      status={false}
+                      modalText='Hubo un error'
+                      modalOtherText='Ocurrio un error al publicar tu reseña'
+                    />
+                  )}
+                </div>
               </form>
               <p className='ml-10'> Califica el lugar :</p>
               <div className='flex '>
@@ -245,25 +289,18 @@ function OnePlace() {
                   onChange={(e) => saveStar(e)}
                   stars={star}
                 />
-                {/*<button
-                  className='bg-blue-600 ml-auto px-3 py-2 font-Poppins text-white rounded-full hover:bg-blue-700 drop-shadow-lg'
-                  type='submit'
-                >
-                  Reseñar
-                </button>*/}
               </div>
             </div>
             <div className={classes.commentcon}>
-              {dataReviews &&
-                dataReviews.map((review) => {
+              {postReviews &&
+                postReviews.map((review) => {
                   return (
                     <Comments
-                      avatarImg={review.userId.avatar}
-                      username={review.userId.username}
-                      currentDate={review.createdAt}
-                      stars={review.stars}
-                      comment={review.comment}
-                      state={render}
+                      avatarImg={review?.userId?.avatar}
+                      username={review?.userId?.username}
+                      currentDate={review?.createdAt}
+                      stars={review?.stars}
+                      comment={review?.comment}
                     />
                   );
                 })}

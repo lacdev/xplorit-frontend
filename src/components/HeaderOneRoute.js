@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "context/AuthContext";
 import { formatDate, formatCreationDate } from "utils/date";
+import { useMutation, useQuery } from "react-query";
 
 //Icons & Images
 import HeartFillOut from "assets/icons/HeartFillOut";
@@ -13,6 +14,14 @@ import StarRatingStatic from "./RatingStarStatic";
 import Avatar from "components/Common/Avatar";
 import { Labels } from "components/Common/Labels";
 import Titles from "components/Common/Titles";
+
+//Axios Functions
+import {
+  getRouteLikes,
+  saveLikeOnRoute,
+  deleteLikeOnRoute,
+  getSingleUser,
+} from "services/routes.services";
 
 const classes = {
   parentcon: "font-primary overflow-x-hidden",
@@ -45,7 +54,7 @@ const classes = {
   created: "text-2xl  ",
 };
 function HeaderOneRoute({
-  userId,
+  routeId,
   tags,
   title,
   likes,
@@ -56,13 +65,65 @@ function HeaderOneRoute({
   avatar,
 }) {
   const [useHeart, setUseHeart] = useState(false);
+  const [usePostLike, setUsePostLike] = useState(likes);
   const { userState, setUserState } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const currentDate = formatDate(updatedAt);
   const creationDate = formatCreationDate(createdAt);
+  const getLikes = useQuery(["getLikes", routeId], getRouteLikes);
+  const getUser = useQuery(["user"], getSingleUser);
 
-  const handleClick = () => {
+  const { data, status } = getLikes;
+  const { data: dataUser, status: statusUser } = getUser;
+
+  useEffect(() => {
+    if (statusUser === "success" && status === "success") {
+      console.log("user ", dataUser);
+      console.log("data ", data);
+      const user = getUser.data?._id;
+      console.log("user ", user);
+      const validate = data.some((like) => like.userId === user);
+      if (validate) setUseHeart(true);
+    } else return;
+  }, [statusUser, status]);
+
+  const addLike = useMutation(() => saveLikeOnRoute(routeId), {
+    onSuccess: (like) => {
+      setUseHeart(true);
+      const newLikes = usePostLike + 1;
+      setUsePostLike(newLikes);
+    },
+    onError: (like) => console.log("error al postear tu like"),
+  });
+
+  const removeLike = useMutation(() => deleteLikeOnRoute(routeId), {
+    onSuccess: (like) => {
+      setUseHeart(false);
+      const newLikes = usePostLike - 1;
+      setUsePostLike(newLikes);
+    },
+
+    onError: (like) => console.log("Hubo un problema al eliminar tu like"),
+  });
+
+  //Validations
+
+  if (dataUser === []) {
+    return <span> No se encontro usuario </span>;
+  }
+
+  if (data === []) {
+    return 0;
+  }
+
+  const postLike = (e) => {
+    e.preventDefault();
+    if (useHeart === false) addLike.mutate();
+    else removeLike.mutate();
+  };
+
+  /*const handleClick = () => {
     if (useHeart === false && userState.loggedIn === true) {
       setUseHeart(true);
     } else if (useHeart === false && userState.loggedIn === false) {
@@ -70,14 +131,14 @@ function HeaderOneRoute({
     } else {
       setUseHeart(false);
     }
-  };
+  };*/
 
   return (
     <section className='px-8'>
       <div className={classes.titleicon}>
         <Titles tag='h3' titleText={title || ""}></Titles>
         <div className={classes.iconscon}>
-          <div onClick={handleClick} className='flex flex-row w-fit'>
+          <div onClick={postLike} className='flex flex-row w-fit'>
             {useHeart === false ? (
               <HeartFillOut
                 width='28'

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "context/AuthContext";
 import { formatDate, formatCreationDate } from "utils/date";
@@ -11,7 +11,6 @@ import ThreePoints from "assets/icons/ThreePoints";
 //Components
 import Avatar from "components/Common/Avatar";
 import { Labels } from "components/Common/Labels";
-import Titles from "components/Common/Titles";
 import StarRatingStatic from "./RatingStarStatic";
 
 //Axios functions
@@ -28,8 +27,8 @@ const classes = {
   section: "px-8",
   titleicon: "flex flex-col md:flex-row p-2 mt-4 justify-between",
   auxiconcon: "flex flex-row ",
-  iconscon: "flex flex-col p-2 mt-4 sm:mt-1",
-  hearticon: "",
+  iconscon: "flex flex-col p-2 items-end",
+  hearticon: "mr-8",
   staricon: "",
   inforcon: "flex",
   avausercon: "",
@@ -37,7 +36,7 @@ const classes = {
   usercon: "flex flex-col",
   created: "text-2xl font-bold mb-2",
   // flex flex-row text-center
-  likequalcon: "flex",
+  likequalcon: "flex flex-row text-center ",
   //spanlike:'mr-14 text-center content-center phone:mr-2 phone:text-sm',
   //spanquali:'mr-2 text-center content-center phone:mr-10 phone:text-sm',
   liketext: "mr-9 mt-1",
@@ -66,7 +65,7 @@ function HeaderOnePlace({
   avatar,
 }) {
   const [useHeart, setUseHeart] = useState(false);
-  const [hasLike, setHasLike] = useState(false);
+  //const [hasLike, setHasLike] = useState(false);
   const [usePostLike, setUsePostLike] = useState(likes);
   const { userState, setUserState } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -79,15 +78,33 @@ function HeaderOnePlace({
   const { data, status } = getLikes;
   const { data: dataUser, status: statusUser } = getUser;
 
+  useEffect(() => {
+    if (statusUser === "success" && status === "success") {
+      console.log("user ", dataUser);
+      console.log("data ", data);
+      const user = getUser.data?._id;
+      console.log("user ", user);
+      const validate = data.some((like) => like.userId === user);
+      if (validate) setUseHeart(true);
+    } else return;
+  }, [statusUser, status]);
+
   const addLike = useMutation(() => saveLikeOnPlace(placeId), {
     onSuccess: (like) => {
       setUseHeart(true);
+      const newLikes = usePostLike + 1;
+      setUsePostLike(newLikes);
     },
     onError: (like) => console.log("error al postear tu like"),
   });
 
   const removeLike = useMutation(() => deleteLikeOnPlace(placeId), {
-    onSuccess: (like) => console.log("like borrado exitosamente"),
+    onSuccess: (like) => {
+      setUseHeart(false);
+      const newLikes = usePostLike - 1;
+      setUsePostLike(newLikes);
+    },
+
     onError: (like) => console.log("Hubo un problema al eliminar tu like"),
   });
 
@@ -101,46 +118,11 @@ function HeaderOnePlace({
     return 0;
   }
 
-  //if (status === "error" && statusUser === "error") {
-  //console.log(" a ocurrido un error");
-  //}
-
-  if (statusUser === "success" && status === "success") {
-    console.log("user ", dataUser);
-    console.log("data ", data);
-    const user = getUser.data?._id;
-    console.log("user ", user);
-    const validate = data.some((like) => like.userId === user);
-    //if (validate) setHasLike(true);
-    //console.log("validate ", validate);
-  }
-
   const postLike = (e) => {
     e.preventDefault();
-    addLike.mutate();
-    //removeLike.mutate();
+    if (useHeart === false) addLike.mutate();
+    else removeLike.mutate();
   };
-
-  /*const handleClick = () => {
-    if (useHeart === false && userState.loggedIn === true) {
-      setUseHeart(true);
-      // setUsePostLike(usePostLike + 1);
-      saveLikeOnPlace(placeId)
-    } else if (useHeart === false && userState.loggedIn === false) {
-      navigate("/login", { replace: true });
-    } else {
-      setUseHeart(false);
-      // setUsePostLike(usePostLike - 1);
-      deleteLikeOnPlace(placeId)
-    }
-  };*/
-
-  /*const handleClick = async () => {
-    // await saveLikeOnPlace(placeId);
-    console.log("esto trae placeId ", saveLikeOnPlace);
-    await deleteLikeOnPlace(placeId);
-    console.log("Like borrado correctamente");
-  };*/
 
   return (
     <section className='px-8'>
@@ -162,7 +144,7 @@ function HeaderOnePlace({
                   height='28'
                   className={classes.hearticon}
                 />
-                <p className='mt-2'>{usePostLike}</p>
+                <p className='mt-2'></p>
               </div>
             )}
 
@@ -183,8 +165,6 @@ function HeaderOnePlace({
               <p className='mt-1'>{average}</p>
               <p className=''>Calificación</p>
             </div>
-
-            <ThreePoints width='40' height='28' className='ml-8' />
           </div>
         </div>
       </div>
