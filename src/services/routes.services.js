@@ -3,8 +3,30 @@ import { endpoints } from "endpoints/endpoints";
 
 const token = localStorage.getItem("token");
 
+export async function getSingleUser() {
+  const getUserPromise = await axios.get(endpoints.userMe, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const getUser = getUserPromise.data.data;
+  return getUser;
+}
+
 export async function getCardsRoutesHome() {
   const getAllRoutesPromise = await axios.get(endpoints.getAllRoutes);
+  const cardsDataRoutes = getAllRoutesPromise.data.data.routes;
+  return cardsDataRoutes;
+}
+
+export async function getSharedRoutes() {
+  const service_url = `${endpoints.getAllRoutes}/?sort=createdAt`;
+  const getAllRoutesPromise = await axios.get(service_url);
+  const cardsDataRoutes = getAllRoutesPromise.data.data.routes;
+  return cardsDataRoutes;
+}
+
+export async function getTopRoutes() {
+  const service_url = `${endpoints.getAllRoutes}/?sort=average`;
+  const getAllRoutesPromise = await axios.get(service_url);
   const cardsDataRoutes = getAllRoutesPromise.data.data.routes;
   return cardsDataRoutes;
 }
@@ -46,18 +68,49 @@ export async function createRoute(data, images) {
   });
 }
 
-export async function saveReviewOnRoute(data, routeId, userId) {
+export async function saveReviewOnRoute(review, routeId) {
+  console.log("routeId ", routeId);
+  console.log("data ", review);
   const service_url = `${endpoints.postRoute}/${routeId}/reviews`;
-  console.log("URL ", service_url);
-  console.log("JSON to Post ", data);
-  /*return await axios.post(service_url, {
-    comment: data.comment,
-    stars: data.stars,
-    userId: userId,
-  });*/
+  const saveLike = axios.post(
+    service_url,
+    {
+      comment: review.comment,
+      stars: review.stars,
+    },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+  return await saveLike;
 }
-export async function getAllFilterRoutes(url,page, limit) {
+
+export async function getAllFilterRoutes(url, page, limit) {
   const getFilterRoutes = await axios.get(`${url}${limit}&page=${page}`);
   const filterRoutes = getFilterRoutes.data;
   return filterRoutes;
+}
+
+export async function deleteLikeOnRoute(routeId) {
+  const service_url = `${endpoints.postRoute}/${routeId}/likes`;
+  // console.log("URL ", service_url);
+  //console.log("JSON to POST ", data);
+  return await axios.delete(
+    service_url,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    },
+    {}
+  );
+}
+
+export async function saveLikeOnRoute(routeId) {
+  const service_url = `${endpoints.postRoute}/${routeId}/likes`;
+  return await axios.post(
+    service_url,
+    {},
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
 }

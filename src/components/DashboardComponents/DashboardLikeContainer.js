@@ -10,7 +10,9 @@ import BigTitle from "components/Common/BigTitle";
 function DashboardLikeContainer() {
   // const id = "61ef68279262e2f167700caf";
 
-  const getLikes = useQuery(["getLikes"], getLikesCreatedByUser);
+  const getLikes = useQuery(["getLikes"], getLikesCreatedByUser, {
+    retry: 0,
+  });
   const { data, status, error } = getLikes;
 
   if (error === true) {
@@ -50,7 +52,7 @@ function DashboardLikeContainer() {
   return (
     <div>
       <div>
-        <BigTitle bigTitleText="Likes" />
+        <BigTitle bigTitleText='Likes' />
       </div>
       {data &&
         data.map((like) => {
