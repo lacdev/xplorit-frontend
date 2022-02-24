@@ -51,7 +51,6 @@ function SignUp() {
   };
 
   const setToken = (token) => {
-    console.log("IMPRIMO TOKEN", token);
     const newUserState = Object.assign({}, userState, {
       authToken: token,
       loggedIn: true,
