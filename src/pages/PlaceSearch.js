@@ -11,7 +11,7 @@ import Btncards from "components/Common/Btncards";
 import ModalFiltro from "components/SeachComponents/ModalFiltro";
 import MapComponent from "components/MapComponent";
 //import Toggle from "components/SeachComponents/Toggle";
-import SearchCards from "components/SeachComponents/SearchPlacesCards";
+import SearchPlacesCards from "components/SeachComponents/SearchPlacesCards";
 import StateSelector from "components/SeachComponents/StateSelector";
 import BtnTags from "components/SeachComponents/BtnTags";
 import LimitCards from "components/SeachComponents/LimitCards";
@@ -266,7 +266,7 @@ const handlePage = () => {
                   {status === "success" && placesData.data && 
                     places.places.map((data, index) => {
                       return (
-                        <SearchCards
+                        <SearchPlacesCards
                           id={data._id}
                           type={'place'}
                           key={index}
@@ -282,7 +282,7 @@ const handlePage = () => {
                 </div>
               )}
              {
-               placesData.data.hasNextPage && 
+               places.places.hasNextPage && 
                <LimitCards onClick={handlePage}/>
              } 
             </aside>

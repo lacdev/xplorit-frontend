@@ -11,7 +11,7 @@ import Btncards from "components/Common/Btncards";
 import ModalFiltro from "components/SeachComponents/ModalFiltro";
 import MapComponent from "components/MapComponent";
 //import Toggle from "components/SeachComponents/Toggle";
-import SearchCards from "components/SeachComponents/SearchPlacesCards";
+import SearchRoutesCards from "components/SeachComponents/SearchRoutesCards";
 import StateSelector from "components/SeachComponents/StateSelector";
 import BtnTags from "components/SeachComponents/BtnTags";
 import LimitCards from "components/SeachComponents/LimitCards";
@@ -28,8 +28,7 @@ const classes = {
   btnclass: "py-2 flex flex-row-reverse content-center",
   btntagscon: "hidden minTablet:flex overflow-x-hidden items-center pb-2 ml-auto",
   renderres: "grid grid-cols-1 minTablet:grid-cols-5 grid-flow-col overflow-hidden h-[90vh]",
-  togglespanplace: "mr-2",
-  togglespanroute: "mx-2",
+  togglespanroute: "mr-2",
   filtroposition: "ml-auto my-auto",
   asidecon:
     "col-span-5 xl:col-span-3 minTablet:col-span-2 bg-white divide-y divide-solid border-slate-500 px-3 max-h-[90vh]",
@@ -53,22 +52,45 @@ function RouteSearch() {
   const { data: statesData, status: statesStatus } = useQuery("getAllStates", getAllStates);
   const searchParam = decodeURIComponent(window.location.search);
   const queryFromURL = searchParam?.split('=')[1].replace(' ','');
+  const [page, setPage ] = useState(1);
+  const [routes, setRoutes] = useState([]);
+  const limit = '&limit=4';
   const [URLSearch, setURLSearch] = useState(`${endpoints.getFilterRoute}q=${queryFromURL}`);//localhost/...routes?
   let customDragCenter = null;  
-  //Querys & service to Places
+  const handlerNewRoutes = (routesrender) => {
+    let newRoutes = {...routes} 
+    if(Object.keys(newRoutes).length === 0 ){
+      setRoutes(routesrender)
+    }
+    else {
+      console.log("🚀 ~ file: RoutesSearch.js ~ line 62 ~ handlerNewroutes ~ newroutes", newRoutes)
+      console.log('What is routesrender?', routesrender)
+      console.log("🚀 ~ file: Routesearch.js ~ line 64 ~ handlerNewRoutes ~ newRoutes", newRoutes.routes)
+      newRoutes.routes.push(...routesrender.routes)
+      console.log("🚀 ~ file: Routesearch.js ~ line 65 ~ handlerNewRoutes ~ newRoutes", newRoutes)
+      setRoutes(newRoutes)
+  
+    }
+   }
+  
+  //Querys & service to routes
   //routes
   const {
     data: routesData,
     isLoading: loadingRoute,
     status,
-  } = useQuery(["getAllFilterRoutes", URLSearch, queryFromURL], () => getAllFilterRoutes(URLSearch, queryFromURL), {
-    onSuccess: () => console.log("is success?"),
+  } = useQuery(["getAllFilterRoutes", URLSearch,  page, limit], () => getAllFilterRoutes(URLSearch,  page, limit), {
+    onSuccess: (data) => handlerNewRoutes(data.data)
   });
 
+  if(status === "success"){
+    console.log('is success?')
+  }
+
   useEffect(() => {
-    if (status === "loading") {
-      return;
-    }
+    // if (status === "loading") {
+    //   return;
+    // }
 
     if (routesData === undefined) {
       return;
@@ -84,14 +106,14 @@ function RouteSearch() {
       };
     });
     setLocationsData(markerCoords);
-  }, [routesData, status, URLSearch]);
+  }, [routes]);
 
   // if (status === "error") {
   //   return <span className="font-bold text-center">No se encontraron lugares con ese ID</span>;
   // }
-  // if (status === "success") {
-  //   console.log("what is routesData?", routesData);
-  // }
+  if (status === "loading"){
+    return <p>Cargando...</p>
+  }
 
   //Event Hide Aside Map
   const handlerClick = () => {
@@ -113,7 +135,7 @@ function RouteSearch() {
 
   const onMunicipioChange = (municipioItem) => {
     const newURL = endpoints.getFilterRoute + "q=" + municipioItem.value;
-   // console.log("🚀 ~ file: PlaceSearch.js ~ line 96 ~ onMunicipioChange ~ newURL", newURL);
+   // console.log("🚀 ~ file: routeSearch.js ~ line 96 ~ onMunicipioChange ~ newURL", newURL);
     setURLSearch(newURL);
     setSelectedMunicipio(municipioItem);
   };
@@ -128,7 +150,14 @@ const onRangeChange = (event) => {
  setUseRange(event.target.value);
 }
 
+// Pagination on LIMITS 
+const handlePage = () => {
+  const newPage = page + 1; 
+  console.log('Estoy en el handle?', page)
+  setPage(newPage)
+}
 
+//Buttons Tags on Modal & Desktop
   const onTagChange = (info) => {
     let newURL = "";
     console.log("Infomación de Tags", info);
@@ -166,16 +195,16 @@ const updateRouteSearchLocation = (coords) => {
   setURLSearch(newURL)
 }
 
-const MapCenter = locationsData.length > 0 ?
-locationsData[Math.floor(locationsData?.length / 2)]?.coords
-: customDragCenter; 
-
-  return (
+  const MapCenter = locationsData.length > 0 ?
+  locationsData[Math.floor(locationsData?.length / 2)]?.coords
+  : customDragCenter; 
+  if(status === "success")
+  { return (
     <div>
       <section className={classes.sectionres}>
         <div className={classes.tagsfiltroscon}>
           {/* <div className={classes.togglecon}>
-            <span className={classes.togglespanplace}>Lugares</span>
+            <span className={classes.togglespanroute}>Lugares</span>
             <Toggle accionToggle={onToggleChange} />
             <span className={classes.togglespanroute}>Rutas</span>
           </div> */}
@@ -192,7 +221,7 @@ locationsData[Math.floor(locationsData?.length / 2)]?.coords
           {renderSideBar && (
             <aside className={classes.asidecon}>
               {/* <div>
-                <Inputs type="text" value={q} placeholderText="¿Que deseas explorar?" onChange={handlerKeyword} />
+                <Inputs type="text" value={q} routeholderText="¿Que deseas explorar?" onChange={handlerKeyword} />
               </div> */}
               <div className={classes.selectorcon}>
                 <div className={classes.divselector}>
@@ -220,9 +249,9 @@ locationsData[Math.floor(locationsData?.length / 2)]?.coords
               {loadingRoute === false && status === "success" && (
                 <div className={classes.cardscon}>
                   {routesData.data &&
-                    routesData.data.routes.map((data, index) => {
+                    routes.routes.map((data, index) => {
                       return (
-                        <SearchCards
+                        <SearchRoutesCards
                           id={data._id}
                           type={'route'}
                           key={index}
@@ -238,7 +267,9 @@ locationsData[Math.floor(locationsData?.length / 2)]?.coords
                 </div>
               )}
 
-              <LimitCards />
+             {  routes.routes.hashNextPage &&
+             <LimitCards onClick={handlePage} />
+             }
             </aside>
           )}
           <div className={mapContainerClass}>
@@ -258,6 +289,8 @@ locationsData[Math.floor(locationsData?.length / 2)]?.coords
       </section>
     </div>
   );
+}
+  
 }
 export default RouteSearch;
 
