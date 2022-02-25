@@ -1,28 +1,34 @@
-import React, { useCallback, useRef, useState, useEffect } from "react";
+import React, { useCallback, useRef, useState, useEffect } from 'react'
 //import PropTypes from 'prop-types';
 //Google React
-import { GoogleMap, useLoadScript, Marker, Polyline, Circle } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  Polyline,
+  Circle,
+} from '@react-google-maps/api'
 //Components
-import SearchMap from "./SearchMap";
-import SearchMapOnPage from "./SearchMapOnPage";
-import useCurrentLocation from "hooks/UseCurrentLocation";
+import SearchMap from './SearchMap'
+import SearchMapOnPage from './SearchMapOnPage'
+import useCurrentLocation from 'hooks/UseCurrentLocation'
 
 const center = {
   lat: 19.4326077,
   lng: -99.133208,
-};
+}
 
-const mapLibraries = ["places"];
+const mapLibraries = ['places']
 const mapOptions = {
   disableDefaultUI: true,
   zoomControl: true,
-};
+}
 
 const lineOptions = {
-  strokeColor: "#4377ff ",
+  strokeColor: '#4377ff ',
   strokeOpacity: 0.8,
   strokeWeight: 5,
-  fillColor: "#4377ff",
+  fillColor: '#4377ff',
   fillOpacity: 0.35,
   clickable: false,
   draggable: true,
@@ -31,10 +37,10 @@ const lineOptions = {
   radius: 30000,
   paths: [],
   zIndex: 1,
-};
+}
 
 const circleOptions = {
-  strokeColor: "#4377ff",
+  strokeColor: '#4377ff',
   strokeOpacity: 0.8,
   strokeWeight: 5,
   // fillColor: none,
@@ -44,10 +50,10 @@ const circleOptions = {
   editable: false,
   visible: true,
   radius: null,
-  zIndex: 1
+  zIndex: 1,
 }
 
-const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 
 function MapComponent({
   useOnePageSearch,
@@ -57,155 +63,156 @@ function MapComponent({
   locationsData,
   useMultipleLocations = false,
   customCenter = null,
-  radius=null,
-  useCircle=false,
-  updatePlaceSearchLocation=null,
-  updateRouteSearchLocation=null,
+  radius = null,
+  useCircle = false,
+  updatePlaceSearchLocation = null,
+  updateRouteSearchLocation = null,
 }) {
   // ?--------------------------------------
   // ? Component setup
   // ?--------------------------------------
-  const mapRef = useRef();
-  const [currentUserLocation, setCurrentUserLocation] = useState(null);
+  const mapRef = useRef()
+  const [currentUserLocation, setCurrentUserLocation] = useState(null)
 
   // ? use custom hook, : es alias de la variable
-  const { currentBrowserLocation, currentBrowserLocationError } = useCurrentLocation();
+  const { currentBrowserLocation, currentBrowserLocationError } =
+    useCurrentLocation()
 
   useEffect(() => {
-    if (!currentBrowserLocation || currentBrowserLocation === null) return;
+    if (!currentBrowserLocation || currentBrowserLocation === null) return
 
-    if (currentBrowserLocationError !== undefined) setCurrentUserLocation({ ...center });
+    if (currentBrowserLocationError !== undefined)
+      setCurrentUserLocation({ ...center })
 
-    setCurrentUserLocation({ ...currentBrowserLocation });
+    setCurrentUserLocation({ ...currentBrowserLocation })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentBrowserLocation, currentBrowserLocationError]);
+  }, [currentBrowserLocation, currentBrowserLocationError])
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: key,
     libraries: mapLibraries,
-  });
+  })
 
   const goToLocation = (coords) => {
-    mapRef?.current?.panTo(coords);
-  };
+    mapRef?.current?.panTo(coords)
+  }
 
   useEffect(() => {
     if (selectedLocation == null) {
-      return;
+      return
     }
-    goToLocation(selectedLocation);
-  }, [selectedLocation]);
+    goToLocation(selectedLocation)
+  }, [selectedLocation])
   // ?--------------------------------------
   // ? Create a Ref to the map when is loaded
   // ? To keep track with Google Maps API
   // ?--------------------------------------
   const onMapLoad = useCallback((map) => {
-    mapRef.current = map;
-  }, []);
+    mapRef.current = map
+  }, [])
 
   // ?--------------------------------------
   // ? Clean Memory
   // ?--------------------------------------
   const onMapLoadUnmount = useCallback((map) => {
-    mapRef.current = null;
-  }, []);
+    mapRef.current = null
+  }, [])
 
   // ?--------------------------------------
   // ? Drag Event of the map
   // ?--------------------------------------
   const onMapDrag = (event) => {
-    if (!mapRef.current.center) return;
+    if (!mapRef.current.center) return
 
-    const { center } = mapRef.current;
+    const { center } = mapRef.current
 
-    const lat = center.lat();
-    const lng = center.lng();
+    const lat = center.lat()
+    const lng = center.lng()
     const coords = {
       lat: center.lat(),
       lng: center.lng(),
-    };
-    setCurrentUserLocation({ ...coords });
+    }
+    setCurrentUserLocation({ ...coords })
     console.log(coords)
-    updatePlaceSearchLocation(coords)
+    // updatePlaceSearchLocation(coords)
     // setCurrentUserLocation({ lat: coords.lat, lng : coords.lng })
-  };
+  }
 
-  const onLineLoad = useCallback((lineContext) => {}, []);
+  const onLineLoad = useCallback((lineContext) => {}, [])
 
   // ?--------------------------------------
   // ? Click Event on all markers
   // ?--------------------------------------
   const onMarkerClick = (event) => {
-    const { latLng } = event;
+    const { latLng } = event
 
     const coords = {
       lat: latLng.lat(),
       lng: latLng.lng(),
-    };
-  };
+    }
+  }
 
   const onMapClick = (event) => {
-    const { latLng } = event;
+    const { latLng } = event
 
     const coords = {
       lat: latLng.lat(),
       lng: latLng.lng(),
-    };
-  };
+    }
+  }
 
   const createPathData = () => {
     if (!locationsData) {
-      return [];
+      return []
     }
     const pathCoords = locationsData.map((location) => {
-      return location?.coords || [];
-    });
+      return location?.coords || []
+    })
 
-    const newPathOptions = Object.assign({}, lineOptions);
-    newPathOptions.paths = pathCoords;
+    const newPathOptions = Object.assign({}, lineOptions)
+    newPathOptions.paths = pathCoords
 
-    return { path: pathCoords, options: newPathOptions };
-  };
+    return { path: pathCoords, options: newPathOptions }
+  }
 
   const createCircleData = () => {
-    const options = Object.assign({},circleOptions);
-    options.radius=radius*1000;
+    const options = Object.assign({}, circleOptions)
+    options.radius = radius * 1000
     return options
-  };
-
+  }
 
   // const mapIinitialPosition =
   //   selectedLocation !== null ? selectedLocation : center;
 
-  const mapHeight = fullHeight ? "100vh" : "50vh";
+  const mapHeight = fullHeight ? '100vh' : '50vh'
 
-  const pathOptionsData = createPathData();
-  
-  const circleOptionsData = createCircleData();
+  const pathOptionsData = createPathData()
+
+  const circleOptionsData = createCircleData()
 
   const containerStyle = {
-    width: "100%",
+    width: '100%',
     height: mapHeight,
-  };
+  }
   //Define map center
   const newCenter = () => {
     if (customCenter != null) {
-      return customCenter;
+      return customCenter
     }
     if (selectedLocation != null) {
-      return selectedLocation;
+      return selectedLocation
     }
     if (currentUserLocation != null) {
-      return currentUserLocation;
+      return currentUserLocation
     }
-    return center;
-  };
+    return center
+  }
 
-  const mapIinitialPosition = newCenter();
+  const mapIinitialPosition = newCenter()
   // const centerLocation = currentUserLocation !== null ? currentUserLocation : center;
 
-  if (!isLoaded) return null;
+  if (!isLoaded) return null
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -218,21 +225,27 @@ function MapComponent({
       onClick={onMapClick}
     >
       {useOnePageSearch ? (
-        <SearchMapOnPage setSelectedLocationOnInputSearch={setSelectedLocationOnInputSearch} />
+        <SearchMapOnPage
+          setSelectedLocationOnInputSearch={setSelectedLocationOnInputSearch}
+        />
       ) : (
         <SearchMap />
       )}
-      { useCircle === true && <Circle center={currentUserLocation} options={circleOptionsData}/>}
-      {selectedLocation && useMultipleLocations == false && <Marker position={selectedLocation} />}
+      {useCircle === true && (
+        <Circle center={currentUserLocation} options={circleOptionsData} />
+      )}
+      {selectedLocation && useMultipleLocations == false && (
+        <Marker position={selectedLocation} />
+      )}
       {locationsData &&
         useMultipleLocations == false &&
         locationsData.map((location) => {
-          return <Marker position={location?.coords} />;
+          return <Marker position={location?.coords} />
         })}
       {locationsData &&
         useMultipleLocations == true &&
         locationsData.map((location) => {
-          return <Marker position={location?.coords} />;
+          return <Marker position={location?.coords} />
         })}
       {locationsData && useMultipleLocations == true && (
         <Polyline
@@ -243,7 +256,7 @@ function MapComponent({
         />
       )}
     </GoogleMap>
-  );
+  )
 }
 
-export default MapComponent;
+export default MapComponent
