@@ -13,7 +13,9 @@ const token = localStorage.getItem("token");
 function DashboardPlacesContainer() {
   // const id = "61ff09c5f1b8eb106745942f";
 
-  const getPlaces = useQuery(["getPlaces"], getPlacesCreatedByUser);
+  const getPlaces = useQuery(["getPlaces"], getPlacesCreatedByUser, {
+    retry: 0,
+  });
 
   const { data, status } = getPlaces;
 
@@ -22,22 +24,28 @@ function DashboardPlacesContainer() {
   }
 
   if (status === "error") {
-    return <span className="font-bold text-center">No se encontraron lugares con ese ID</span>;
+    return (
+      <span className='font-bold text-center'>
+        No se encontraron lugares con ese ID
+      </span>
+    );
   }
   console.log("asd", data);
   return (
     <>
       <div>
-        <BigTitle bigTitleText="Lugares agregados" />
+        <BigTitle bigTitleText='Lugares agregados' />
       </div>
-      <div className="flex justify-end mb-1">
-        <Link to="/createplace">
-          <Btncards className="py-1" buttonText="+ Agregar lugar"></Btncards>
+      <div className='flex justify-end mb-1'>
+        <Link to='/createplace'>
+          <Btncards className='py-1' buttonText='+ Agregar lugar'></Btncards>
         </Link>
       </div>
       {data &&
         data.map((place) => {
-          return <DashboardCard key={place._id} cardData={place} type={"place"} />;
+          return (
+            <DashboardCard key={place._id} cardData={place} type={"place"} />
+          );
         })}
     </>
   );

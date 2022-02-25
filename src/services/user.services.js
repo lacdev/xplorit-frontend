@@ -3,6 +3,14 @@ import { endpoints } from "endpoints/endpoints";
 
 const token = localStorage.getItem("token");
 
+export async function getSingleUser() {
+  const getUserPromise = await axios.get(endpoints.userMe, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const getUser = getUserPromise.data.data;
+  return getUser;
+}
+
 export async function getUserProfilePic({ queryKey }) {
   const token = localStorage.getItem("token");
   const service_url = `${endpoints.userMe}`;
@@ -107,5 +115,6 @@ export async function userSignUp(userName, userEmail, userPassword) {
     password: userPassword,
   });
   console.log(`Aqui es login promise ${getSignUpPromise}`);
+  console.log("ESTO ES PROMISE DATA", getSignUpPromise.data);
   return getSignUpPromise.data;
 }

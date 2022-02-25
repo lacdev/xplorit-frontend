@@ -26,8 +26,8 @@ const classes = {
 
 function LogIn() {
   const { userState, setUserState } = useContext(AuthContext);
-  const [userEmail, setUserEmail] = useState("user1@demousers.com");
-  const [userPassword, setUserPassword] = useState("testpass1");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
   const navigate = useNavigate();
 
   const mutationLogIn = useMutation((data) => userLogin(data.userEmail, data.userPassword), {
@@ -38,7 +38,6 @@ function LogIn() {
     mutationLogIn.mutate({ userEmail, userPassword });
   };
 
-  console.log("Esto es data", data);
   const setToken = (token) => {
     const newUserState = Object.assign({}, userState, {
       authToken: token,

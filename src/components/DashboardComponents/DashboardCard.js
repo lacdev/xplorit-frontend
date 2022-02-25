@@ -63,18 +63,14 @@ function DashboardCard({ cardData, type }) {
             <div className={classes.requestcon}>
               <div className={classes.editadjust}>
                 <div className={classes.editadjustcon}>
-                  <div className={classes.editcon}>
-                    <Edit className='' width='28' height='28' />
-                  </div>
-                  <p className={classes.icontext}>Editar</p>
+                  <div className={classes.editcon}></div>
+                  <p className={classes.icontext}></p>
                 </div>
-              </div>
+              </div>{" "}
               <div className={classes.deletjust}>
                 <div className={classes.deletjustcon}>
-                  <div className={classes.deletcon}>
-                    <Trash />
-                  </div>
-                  <p className={classes.icontext}>Eliminar</p>
+                  <div className={classes.deletcon}></div>
+                  <p className={classes.icontext}></p>
                 </div>
               </div>
             </div>
